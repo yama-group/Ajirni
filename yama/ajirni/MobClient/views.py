@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .serializers import ItemsSerializer
 from .models import Items
+from .models import Users
 
 # Create your views here.
 
@@ -14,3 +15,6 @@ class CreateItem(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         """Save the post data when creating a new Item."""
         serializer.save()
+
+class signUp(generics):
+
