@@ -16,6 +16,20 @@ class CreateItem(generics.ListCreateAPIView):
         """Save the post data when creating a new Item."""
         serializer.save()
 
+
+class ItemsRud(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+
+    queryset = Items.objects.all()
+    serializer_class = ItemsSerializer
+
+
+class ItemsList(generics.ListCreateAPIView):
+    """This class defines the retrieve behavior of all instances."""
+    queryset = Items.objects.all()
+    serializer_class = ItemsSerializer
+
+    
 class signUp(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Users.objects.all()
