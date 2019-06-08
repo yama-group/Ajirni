@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Items
-from .models import Users
+from .models import Items, Likes, Users
 
 
 class ItemsSerializer(serializers.ModelSerializer):
@@ -17,10 +16,14 @@ class ItemsSerializer(serializers.ModelSerializer):
 
 
 class UsersSerializer(serializers.ModelSerializer):
-    """Serializer to map the Model instance into JSON format."""
+    class Meta:
+        model = Users
+        fields = ('first_name', 'last_name', 'email', 'phone', 'address',
+                  'location', 'password', 'image_url', 'role', 'confirm')
 
+
+class LikesSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
-        model = Users
-        fields = ('first_name', 'last_name', 'email', 'phone', 'address', 'location',
-                  'password', 'image_url', 'role', 'confirm')
+        model = Likes
+        fields = ('item_id', 'user_id')
