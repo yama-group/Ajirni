@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import ItemsSerializer, LikesSerializer
-from .models import Items, Likes
+from .serializers import ItemsSerializer, LikesSerializer, UsersSerializer
+from .models import Items, Likes, Users
 from django.http import HttpResponse
-
-# Create your views here.
 
 
 class CreateItem(generics.ListCreateAPIView):
@@ -85,3 +83,26 @@ class LikeItem(generics.ListCreateAPIView):
         item_id = self.request.query_params.get('item_id', None)
         queryset = queryset.filter(item_id__exact=item_id)
         return queryset
+
+
+class ItemsRud(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+
+    queryset = Items.objects.all()
+    serializer_class = ItemsSerializer
+
+
+class ItemsList(generics.ListCreateAPIView):
+    """This class defines the retrieve behavior of all instances."""
+    queryset = Items.objects.all()
+    serializer_class = ItemsSerializer
+
+
+class signUp(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new Item."""
+        serializer.save()
