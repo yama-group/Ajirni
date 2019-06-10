@@ -1,1 +1,2 @@
 // export const NAME_FOR_EACH_TYPE_ACTION = 'NAME_FOR_EACH_TYPE_ACTION';
+export const FETCH_ITEM = "FETCH_ITEM"
