@@ -3,6 +3,7 @@ from rest_framework import generics
 from .serializers import ItemsSerializer, LikesSerializer, UsersSerializer
 from .models import Items, Likes, Users
 from django.http import HttpResponse
+from django.http import HttpRequest
 
 
 class CreateItem(generics.ListCreateAPIView):
@@ -105,4 +106,16 @@ class signUp(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """Save the post data when creating a new Item."""
+        print(self.queryset)
         serializer.save()
+
+
+# class signIn(generics.ListCreateAPIView):
+#     queryset = Users.objects.all()
+
+#     def signInVerify(self, serializer, request):
+#         for user in queryset:
+#             if queryset[user].email == request.body.email and queryset[user].password == request.body.password:
+#                 return user
+
+#     serializer_class = UsersSerializer
