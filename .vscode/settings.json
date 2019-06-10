@@ -1,12 +1,7 @@
 {
-<<<<<<< HEAD
-    "python.pythonPath": "C:\\Users\\ammar\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
-}
-=======
-  "python.pythonPath": "yama/bin/python3.7",
+  "python.pythonPath": "C:\\Users\\ammar\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
   "python.linting.pylintEnabled": true,
   "python.linting.pep8Enabled": false,
   "python.linting.enabled": true,
   "python.formatting.provider": "autopep8"
 }
->>>>>>> 056cb2e95854b531c82b17c3fc6ae8b1a2e8605f

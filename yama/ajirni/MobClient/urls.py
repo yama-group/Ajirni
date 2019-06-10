@@ -9,3 +9,4 @@ urlpatterns = [
     path('search/', Search.as_view(), name="search"),
     path('like/', LikeItem.as_view(), name="like")
 ]
+
