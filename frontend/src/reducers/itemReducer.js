@@ -2,7 +2,9 @@ import { NEW_Item } from "../actions/types";
 
 const initialState = {
   items: [],
-  item: {}
+  oneItem: {},
+  category_id: 1,
+  user_id: 1
 };
 
 export default function(state = initialState, action) {
@@ -10,7 +12,7 @@ export default function(state = initialState, action) {
     case NEW_Item:
       return {
         ...state,
-        item: action.payload
+        oneItem: action.payload
       };
     default:
       return state;
