@@ -1,7 +1,14 @@
 import React from "react";
+import SportForm from "./components/SportForm.js";
+import { Provider } from "react-redux";
 
+import store from "./store";
 function App() {
-  return <div />;
+  return (
+    <Provider store={store}>
+      <SportForm />
+    </Provider>
+  );
 }
 
 export default App;

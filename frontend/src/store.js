@@ -3,18 +3,19 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 
 const initialState = {
-  categoryId: 1
+  // categoryId: 1
 };
 
 const middleware = [thunk];
 
 const store = createStore(
   rootReducer,
-  initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  initialState
+  // ,
+  // compose(
+  //   applyMiddleware(...middleware),
+  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // )
 );
 
 export default store;
