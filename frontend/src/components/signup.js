@@ -5,8 +5,16 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: []
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phone: "",
+      address: "",
+      location: "",
+      image: ""
     }
+    this.onchange = this.onchange.bind(this)
 
   }
 
@@ -16,6 +24,11 @@ class Signup extends React.Component {
   //   }).catch(err => console.log(err));
 
   // }
+
+  onchange(e) {
+    e.preventDefault();
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   render() {
     return (
@@ -27,15 +40,15 @@ class Signup extends React.Component {
               <div className="login">
                 <div className="login-form-container">
                   <div className="login-form">
-                    <form action="signUp/" method="post">
-                      <input type="text" name="first-name" placeholder="first name" />
-                      <input type="text" name="last-name" placeholder="last name" />
-                      <input type="email" name="user-email" placeholder="Email" />
-                      <input type="password" name="user-password" placeholder="Password" />
-                      <input type="text" name="user-phone" placeholder="Phone" />
-                      <input type="text" name="user-address" placeholder="address" />
-                      <input type="text" name="user-location" placeholder="location" />
-                      <input type="text" name="user-image" placeholder="image" />
+                    <form >
+                      <input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
+                      <input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
+                      <input type="email" name="email" placeholder="Email" onChange={this.onchange} />
+                      <input type="password" name="password" placeholder="Password" onChange={this.onchange} />
+                      <input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
+                      <input type="text" name="address" placeholder="address" onChange={this.onchange} />
+                      <input type="text" name="location" placeholder="location" onChange={this.onchange} />
+                      <input type="text" name="image" placeholder="image" onChange={this.onchange} />
                       <div class="button-box">
                         <button type="submit" class="default-btn floatright">Register</button>
                       </div>
