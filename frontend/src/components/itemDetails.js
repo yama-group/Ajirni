@@ -84,27 +84,55 @@ class ItemDetailCar extends React.Component{
                             </div>
                             <p>{this.props.item.description}</p>
                             <div className="quick-view-select">
-                            {this.props.item.category_id === 1 ?<div className="select-option-part">
+                            {this.props.item.condition?<div className="select-option-part">
                                     <label><strong>Condition:</strong></label>
                                     <p>{this.props.item.condition}</p>
                                 </div>:""}
-                                {this.props.item.category_id === 2 ?<div className="select-option-part">
+                                {this.props.item.car_make ?<div className="select-option-part">
                                     <label><strong>Car Make:</strong></label>
                                     <p>{this.props.item.car_make}</p>
                                 </div>:""}
-                                {this.props.item.category_id === 2 ?<div className="select-option-part">
+                                {this.props.item.year_manufactured ?<div className="select-option-part">
                                     <label><strong>Year Manufactured:</strong></label>
                                     <p>{this.props.item.year_manufactured}</p>
                                 </div>:""}
-                            {this.props.item.category_id === 1 ?<div className="select-option-part">
+                                {this.props.item.no_killometers ?<div className="select-option-part">
+                                    <label><strong>No.Killometers:</strong></label>
+                                    <p>{this.props.item.no_killometers}</p>
+                                </div>:""}
+                                {this.props.item.transmission ?<div className="select-option-part">
+                                    <label><strong>Transmission:</strong></label>
+                                    <p>{this.props.item.transmission}</p>
+                                </div>:""}
+                                {this.props.item.no_rooms ?<div className="select-option-part">
+                                    <label><strong>No.Rooms:</strong></label>
+                                    <p>{this.props.item.no_rooms}</p>
+                                </div>:""}
+                                {this.props.item.no_bathrooms ?<div className="select-option-part">
+                                    <label><strong>No.Bathrooms:</strong></label>
+                                    <p>{this.props.item.no_bathrooms}</p>
+                                </div>:""}
+                                {this.props.item.surface_area ?<div className="select-option-part">
+                                    <label><strong>Surface Area:</strong></label>
+                                    <p>{this.props.item.surface_area}</p>
+                                </div>:""}
+                                {this.props.item.furnished?<div className="select-option-part">
+                                    <label><strong>Furnished:</strong></label>
+                                    <p>{this.props.item.furnished}</p>
+                                </div>:""}
+                                {this.props.item.floor_no ?<div className="select-option-part">
+                                    <label><strong>Floor.No:</strong></label>
+                                    <p>{this.props.item.floor_no}</p>
+                                </div>:""}
+                            {this.props.item.location ?<div className="select-option-part">
                                     <label><strong>Location:</strong></label>
                                     <p>{this.props.item.location}</p>
                                 </div>:""}
-                                {this.props.item.category_id === 1 ?<div className="select-option-part">
+                                {this.props.item.color?<div className="select-option-part">
                                     <label><strong>Color:</strong></label>
                                     <p>{this.props.item.color}</p>
                                 </div>:""}
-                                {this.props.item.category_id?<div className="select-option-part">
+                                {this.props.item.quantity?<div className="select-option-part">
                                     <label><strong>Quantity:</strong></label>
                                     <p>{this.props.item.quantity}</p>
                                 </div>:""}

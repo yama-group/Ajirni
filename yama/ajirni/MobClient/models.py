@@ -35,14 +35,16 @@ class Items(models.Model):
     floor_no = models.IntegerField(blank=True)
     car_make = models.CharField(max_length=50, blank=True)
     year_manufactured = models.CharField(max_length=50, blank=True)
-    no_killometers = models.IntegerField()
+    no_killometers = models.IntegerField(blank=True)
     fuel = models.CharField(max_length=50, blank=True)
     color = models.CharField(max_length=50, blank=True)
     transmission = models.CharField(max_length=50, blank=True)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(blank=True)
     status = models.CharField(max_length=50)
     confirmed = models.CharField(max_length=50)
     user_id = models.IntegerField()
+    images=models.TextField(blank=True)
+    
 
 
 class Users(models.Model):
@@ -56,3 +58,4 @@ class Users(models.Model):
     image_url = models.TextField()
     role = models.CharField(max_length=50)
     confirm = models.CharField(max_length=50)
+    
