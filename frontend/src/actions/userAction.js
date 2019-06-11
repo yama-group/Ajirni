@@ -5,7 +5,10 @@ export const createUser = (user) => dispatch => {
   console.log('posting')
 
   axios.post("/signUp/", user).then((data) => {
+
     console.log(data)
+  }).catch((error) => {
+    console.log(error)
   })
 
 };

@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import { Provider } from 'react-redux'
 import store from './store'
 
 import Signup from "./components/signup";
 import ItemsList from "./components/itemsList"
+
 
 
 class App extends React.Component {
@@ -26,8 +26,5 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
-  createUser: PropTypes.func.isRequired
-}
 
 export default App;
