@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux'
 import store from './store'
 
@@ -13,15 +14,20 @@ class App extends React.Component {
   // }
 
   render() {
+    const { createUser } = this.props;
     return (
       <Provider store={store}>
         <div>
-          <Signup />
+          <Signup createUser={createUser} />
           <ItemsList />
         </div>
       </Provider>
     );
   }
+}
+
+App.propTypes = {
+  createUser: PropTypes.func.isRequired
 }
 
 export default App;

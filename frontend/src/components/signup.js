@@ -1,21 +1,25 @@
 import React from "react"
-// import axios from 'axios'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createUser } from '../actions/userAction'
 
 class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
+      firstname: "",
+      lastname: "",
       email: "",
       password: "",
       phone: "",
       address: "",
       location: "",
-      image: ""
+      image: "",
+      role: "",
+      confirm: ""
     }
     this.onchange = this.onchange.bind(this)
-
+    this.onsubmit = this.onsubmit.bind(this)
   }
 
   // componentDidMount() {
@@ -30,6 +34,25 @@ class Signup extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  onsubmit(e) {
+
+    const user = {
+      first_name: this.state.firstname,
+      last_name: this.state.lastname,
+      email: this.state.email,
+      password: this.state.password,
+      phone: this.state.phone,
+      address: this.state.address,
+      location: this.state.location,
+      image_url: this.state.image,
+      role: this.state.role,
+      confirm: this.state.confirm
+    }
+    e.preventDefault();
+    console.log(user)
+    this.props.createUser(user)
+  }
+
   render() {
     return (
       <div className="register-area ptb-100">
@@ -40,7 +63,7 @@ class Signup extends React.Component {
               <div className="login">
                 <div className="login-form-container">
                   <div className="login-form">
-                    <form >
+                    <form onSubmit={this.onsubmit} >
                       <input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
                       <input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
                       <input type="email" name="email" placeholder="Email" onChange={this.onchange} />
@@ -49,6 +72,8 @@ class Signup extends React.Component {
                       <input type="text" name="address" placeholder="address" onChange={this.onchange} />
                       <input type="text" name="location" placeholder="location" onChange={this.onchange} />
                       <input type="text" name="image" placeholder="image" onChange={this.onchange} />
+                      <input type="text" name="role" placeholder="role" onChange={this.onchange} />
+                      <input type="text" name="confirm" placeholder="confirm" onChange={this.onchange} />
                       <div class="button-box">
                         <button type="submit" class="default-btn floatright">Register</button>
                       </div>
@@ -65,4 +90,12 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+// const mapStateToProps = state => ({
+//   userData: state.userData.user
+// })
+
+Signup.propTypes = {
+  createUser: PropTypes.func.isRequired
+}
+
+export default connect(null, { createUser })(Signup)
