@@ -1,14 +1,26 @@
-import {FETCH_ITEM ,SAVE_USER_ID}from "./types"
+import {FETCH_ITEM ,SAVE_USER_ID,FETCH_IMAGES}from "./types"
 import axios from "axios";
 
-export const fetchItem = (para=6) => dispatch => {
-    axios.get(`/rud/${para}`).then(item =>{
-        console.log(item.data)
+export const fetchItem = (para=3) => dispatch => {
+    axios.get(`/rud/${para}`)
+    .then(item =>{
+        
       dispatch({
         type: FETCH_ITEM,
         itemRetrive: item.data
       })
-    });
+      return item
+    }).then((item)=>{
+      console.log(item)
+        axios.get(`/images/?id=${item.data.id}`)
+        .then((images)=>{
+          
+          dispatch({
+            type:FETCH_IMAGES,
+            images:images.data
+          })
+        })
+    })
   };
 
 
