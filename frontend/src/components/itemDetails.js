@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { connect } from 'react-redux';
-import {fetchItem,saveUserId} from "../actions/itemDetailsAction"
+import {fetchItem,saveUserId,} from "../actions/itemDetailsAction"
 import {Link } from "react-router-dom";
 import axios from "axios";
 import { Alert } from 'reactstrap'
@@ -17,6 +17,7 @@ class ItemDetailCar extends React.Component{
           visible: true,
           likeAlert:false,
           likeMessage:"",
+          images:[{item_id:1,img_url:""}]
           
         };
     
@@ -32,6 +33,17 @@ class ItemDetailCar extends React.Component{
         this.props.fetchItem()
         
     }
+   
+    componentWillReceiveProps(next){
+        console.log(next.images,"next",next)
+        if(next.images.length>0){
+            this.setState({
+                images:next.images
+            })
+        }
+    }
+
+  
 
     routeToOwner(){
      const id = this.props.item.user_id
@@ -131,7 +143,9 @@ class ItemDetailCar extends React.Component{
                             <div className="quick-view-select">
                             {this.props.item.condition?<div className="select-option-part">
                                     <label><strong>Condition:</strong></label>
-                                    <p>{this.props.item.condition}</p>
+                                    <p>{this.state.images.map((image)=>{
+                                       return <p>{image.img_url}</p>
+                                    })}</p>
                                 </div>:""}
                                 {this.props.item.car_make ?<div className="select-option-part">
                                     <label><strong>Car Make:</strong></label>
@@ -210,7 +224,8 @@ class ItemDetailCar extends React.Component{
 
 const mapStateToProps = state => ({
     item: state.itemDetails.item,
-    userId:state.itemDetails.userId
+    userId:state.itemDetails.userId,
+    images:state.itemDetails.images
     
   });
 

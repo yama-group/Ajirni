@@ -107,8 +107,11 @@ class signUp(generics.ListCreateAPIView):
         """Save the post data when creating a new Item."""
         serializer.save()
 
-class Images(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles the http GET, PUT and DELETE requests."""
+class GetImages(generics.ListAPIView):
+    serializer_class=ImageSerializer
 
-    queryset = Images.objects.all()
-    serializer_class = ImageSerializer
+
+    def get_queryset(self):
+        item_id=self.request.query_params.get("id",None)
+        queryset = Images.objects.all().filter(item_id__exact=item_id)
+        return queryset
