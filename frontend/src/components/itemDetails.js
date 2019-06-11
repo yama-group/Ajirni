@@ -3,14 +3,52 @@
 import React from "react";
 import { connect } from 'react-redux';
 import {fetchItem} from "../actions/itemDetailsAction"
+import {Link } from "react-router-dom";
+import axios from "axios";
+import { Alert } from 'reactstrap'
+
 
 
 class ItemDetailCar extends React.Component{
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          visible: true,
+          likeAlert:false,
+          likeMessage:"",
+          
+        };
+    
+        this.onDismiss = this.onDismiss.bind(this);
+      }
+
+      onDismiss() {
+        this.setState({ visible: false });
+      }
 
     componentWillMount(){
 
         this.props.fetchItem()
       console.log(this.props)  
+    }
+
+    likeItem(){
+        const that=this
+        axios.post("/like/",{
+            "item_id":that.props.item.id,
+            "user_id":that.props.item.user_id
+        }).then((response)=>{
+            that.setState({
+                likeAlert:!that.state.likeAlert,
+                likeMessage:`${that.props.item.name} saved`
+            })
+        }).catch((err)=>{
+            that.setState({
+                likeAlert:!that.state.likeAlert,
+                likeMessage:`Error..`
+            }) 
+        })
     }
 
     render(){
@@ -79,6 +117,7 @@ class ItemDetailCar extends React.Component{
                     <div className="col-md-12 col-lg-5 col-12">
                         <div className="product-details-content">
                             <h3>{this.props.item.name}</h3>
+                           
                             <div className="details-price">
                                 <span>${this.props.item.price}/day</span>
                             </div>
@@ -136,18 +175,21 @@ class ItemDetailCar extends React.Component{
                                     <label><strong>Quantity:</strong></label>
                                     <p>{this.props.item.quantity}</p>
                                 </div>:""}
+                                {this.state.likeAlert?<Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
+                                           {this.state.likeMessage} 
+                                        </Alert>  :""}
                                 
-
-                                
-                               
                             </div>
                             <div className="quickview-plus-minus">
                                 <div className="quickview-btn-cart">
                                     <a className="btn-hover-black" href="#">Contact</a>
                                 </div>
                                 <div className="quickview-btn-wishlist">
-                                    <a className="btn-hover" href="#"><i className="ion-ios-heart-outline"></i></a>
+                                    <a onClick={this.likeItem.bind(this)} className="btn-hover" href="#"><i className="ion-ios-heart-outline"></i></a>
                                 </div>
+                               <Link><div className="quickview-btn-wishlist">
+                                    <a onClick={this.routeToOwner.bind(this)} className="btn-hover" href="#"><i className="ion-ios-contact"></i></a>
+                                </div></Link> 
                             </div>
                           
                             
