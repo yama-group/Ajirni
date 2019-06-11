@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 */pyc
 *node_modules/*
+=======
+*.pyc
+>>>>>>> a68c2c3baea3457f57c8106c846dafe78d5a5030
