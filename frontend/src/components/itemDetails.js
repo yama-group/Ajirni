@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { connect } from 'react-redux';
-import {fetchItem} from "../actions/itemDetailsAction"
+import {fetchItem,saveUserId} from "../actions/itemDetailsAction"
 import {Link } from "react-router-dom";
 import axios from "axios";
 import { Alert } from 'reactstrap'
@@ -30,7 +30,13 @@ class ItemDetailCar extends React.Component{
     componentWillMount(){
 
         this.props.fetchItem()
-      console.log(this.props)  
+        
+    }
+
+    routeToOwner(){
+     const id = this.props.item.user_id
+     this.props.saveUserId(id)
+     
     }
 
     likeItem(){
@@ -182,7 +188,7 @@ class ItemDetailCar extends React.Component{
                             </div>
                             <div className="quickview-plus-minus">
                                 <div className="quickview-btn-cart">
-                                    <a className="btn-hover-black" href="#">Contact</a>
+                                    <a className="btn-hover-black" href="#">{this.props.userId}</a>
                                 </div>
                                 <div className="quickview-btn-wishlist">
                                     <a onClick={this.likeItem.bind(this)} className="btn-hover" href="#"><i className="ion-ios-heart-outline"></i></a>
@@ -203,8 +209,9 @@ class ItemDetailCar extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    item: state.itemDetails.item
+    item: state.itemDetails.item,
+    userId:state.itemDetails.userId
     
   });
 
-export default connect(mapStateToProps,{fetchItem})(ItemDetailCar)
+export default connect(mapStateToProps,{fetchItem,saveUserId})(ItemDetailCar)

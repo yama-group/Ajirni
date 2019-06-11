@@ -4,7 +4,7 @@ from django.db import models
 class Likes(models.Model):
     item_id = models.IntegerField()
     user_id = models.IntegerField()
-
+     
 
 class Confirms(models.Model):
     item_id = models.IntegerField()
@@ -15,6 +15,9 @@ class Images(models.Model):
     item_id = models.IntegerField()
     img_url = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.img_url
+     
 
 class Categories(models.Model):
     name = models.CharField(max_length=50)

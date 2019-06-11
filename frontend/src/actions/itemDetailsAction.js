@@ -1,4 +1,4 @@
-import {FETCH_ITEM }from "./types"
+import {FETCH_ITEM ,SAVE_USER_ID}from "./types"
 import axios from "axios";
 
 export const fetchItem = (para=6) => dispatch => {
@@ -10,3 +10,13 @@ export const fetchItem = (para=6) => dispatch => {
       })
     });
   };
+
+
+
+  export const saveUserId = (id) => dispatch => {
+    dispatch({
+      type:SAVE_USER_ID,
+      saveId:id
+    })
+  }
+  

@@ -1,8 +1,9 @@
-import {FETCH_ITEM} from "../actions/types"
+import {FETCH_ITEM,SAVE_USER_ID} from "../actions/types"
 
 const initialState = {
 
-    item: {}
+    item: {},
+    userId:null
   };
   
   export default function(state = initialState, action) {
@@ -12,5 +13,11 @@ const initialState = {
             item:action.itemRetrive
         }
     }
+    if(action.type === SAVE_USER_ID){
+      return{
+          ...state,
+          userId:action.saveId
+      }
+  }
     return state
   }

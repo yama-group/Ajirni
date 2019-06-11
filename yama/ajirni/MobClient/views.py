@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import ItemsSerializer, LikesSerializer, UsersSerializer
-from .models import Items, Likes, Users
+from .serializers import ItemsSerializer, LikesSerializer, UsersSerializer,ImageSerializer
+from .models import Items, Likes, Users,Images
 from django.http import HttpResponse
 
 
@@ -106,3 +106,9 @@ class signUp(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         """Save the post data when creating a new Item."""
         serializer.save()
+
+class Images(generics.RetrieveUpdateDestroyAPIView):
+    """This class handles the http GET, PUT and DELETE requests."""
+
+    queryset = Images.objects.all()
+    serializer_class = ImageSerializer

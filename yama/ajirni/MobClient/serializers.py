@@ -22,9 +22,12 @@ class ItemsSerializer(serializers.ModelSerializer):
                   'status', 'confirmed', 'user_id','images')
     def create(self, validated_data):
         images_data = validated_data.pop('images')
+        print(images_data)
         items = Items.objects.create(**validated_data)
+        print(type(items))
         for image_data in images_data:
-          Images.objects.create(items=items, **image_data)
+          Images.objects.create(**image_data)
+        items.update({"image":image_data})
         return items
 
 
@@ -40,5 +43,8 @@ class LikesSerializer(serializers.ModelSerializer):
         """Meta class to map serializer's fields with the model fields."""
         model = Likes
         fields = ('item_id', 'user_id')
+
+
+
 
 
