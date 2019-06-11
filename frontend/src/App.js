@@ -4,7 +4,7 @@ import store from './store'
 
 import Signup from "./components/signup";
 import ItemsList from "./components/itemsList"
-
+import SportForm from "./components/SportForm.js";
 
 
 class App extends React.Component {
@@ -20,6 +20,7 @@ class App extends React.Component {
         <div>
           <Signup createUser={createUser} />
           <ItemsList />
+          <SportForm />
         </div>
       </Provider>
     );
