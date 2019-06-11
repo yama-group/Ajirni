@@ -84,22 +84,34 @@ class ItemDetailCar extends React.Component{
                             </div>
                             <p>{this.props.item.description}</p>
                             <div className="quick-view-select">
-                                <div className="select-option-part">
+                            {this.props.item.category_id === 1 ?<div className="select-option-part">
+                                    <label><strong>Condition:</strong></label>
+                                    <p>{this.props.item.condition}</p>
+                                </div>:""}
+                                {this.props.item.category_id === 2 ?<div className="select-option-part">
                                     <label><strong>Car Make:</strong></label>
                                     <p>{this.props.item.car_make}</p>
-                                </div>
-                                <div className="select-option-part">
+                                </div>:""}
+                                {this.props.item.category_id === 2 ?<div className="select-option-part">
+                                    <label><strong>Year Manufactured:</strong></label>
+                                    <p>{this.props.item.year_manufactured}</p>
+                                </div>:""}
+                            {this.props.item.category_id === 1 ?<div className="select-option-part">
+                                    <label><strong>Location:</strong></label>
+                                    <p>{this.props.item.location}</p>
+                                </div>:""}
+                                {this.props.item.category_id === 1 ?<div className="select-option-part">
                                     <label><strong>Color:</strong></label>
                                     <p>{this.props.item.color}</p>
-                                </div>
-                                <div className="select-option-part">
-                                    <label><strong>Transmission:</strong></label>
-                                    <p>{this.props.item.transmission}</p>
-                                </div>
-                                <div className="select-option-part">
-                                    <label><strong>Year:</strong></label>
-                                    <p>{this.props.item.year_manufactured}</p>
-                                </div>
+                                </div>:""}
+                                {this.props.item.category_id?<div className="select-option-part">
+                                    <label><strong>Quantity:</strong></label>
+                                    <p>{this.props.item.quantity}</p>
+                                </div>:""}
+                                
+
+                                
+                               
                             </div>
                             <div className="quickview-plus-minus">
                                 <div className="quickview-btn-cart">
