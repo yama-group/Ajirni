@@ -1,6 +1,9 @@
 import { combineReducers } from "redux";
+// import nameOfReducer from './nameOfReducer';
+import itemDetails from "./itemDetail"
 import itemReducer from "./itemReducer";
-
 export default combineReducers({
-  item: itemReducer
+  //   nameRelated: nameOfReducer
+  itemDetails:itemDetails,
+   item: itemReducer 
 });
