@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Items, Likes, Users,Images
+from .models import Items, Likes, Images
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -19,23 +19,24 @@ class ItemsSerializer(serializers.ModelSerializer):
                   'no_bathrooms', 'surface_area', 'furnished',
                   'location', 'price', 'floor_no', 'car_make', 'year_manufactured',
                   'no_killometers', 'fuel', 'color', 'transmission', 'quantity',
-                  'status', 'confirmed', 'user_id','images')
+                  'status', 'confirmed', 'user_id', 'images')
+
     def create(self, validated_data):
         images_data = validated_data.pop('images')
         print(images_data)
         items = Items.objects.create(**validated_data)
         print(type(items))
         for image_data in images_data:
-          Images.objects.create(**image_data)
-        items.update({"image":image_data})
+            Images.objects.create(**image_data)
+        items.update({"image": image_data})
         return items
 
 
-class UsersSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Users
-        fields = ('id', 'first_name', 'last_name', 'email', 'phone', 'address',
-                  'location', 'password', 'image_url', 'role', 'confirm')
+# class UsersSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Users
+#         fields = ('id', 'first_name', 'last_name', 'email', 'phone', 'address',
+#                   'location', 'password', 'image_url', 'role', 'confirm')
 
 
 class LikesSerializer(serializers.ModelSerializer):
@@ -43,8 +44,3 @@ class LikesSerializer(serializers.ModelSerializer):
         """Meta class to map serializer's fields with the model fields."""
         model = Likes
         fields = ('item_id', 'user_id')
-
-
-
-
-

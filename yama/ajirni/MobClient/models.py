@@ -1,34 +1,26 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
-class Likes(models.Model):
-    item_id = models.IntegerField()
-    user_id = models.IntegerField()
-     
+class CustomUser(AbstractUser):
+    pass
+    phone = models.CharField(max_length=50)
+    image_url = models.TextField()
 
-class Confirms(models.Model):
-    item_id = models.IntegerField()
-    category_id = models.IntegerField()
-
-
-class Images(models.Model):
-    item_id = models.IntegerField()
-    img_url = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.img_url
-     
 
 class Categories(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Items(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     condition = models.CharField(max_length=50)
-    category_id = models.IntegerField()
+    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
     no_rooms = models.IntegerField(blank=True, default=0)
     no_bathrooms = models.IntegerField(blank=True, default=0)
     surface_area = models.IntegerField(blank=True, default=0)
@@ -45,20 +37,26 @@ class Items(models.Model):
     quantity = models.IntegerField(blank=True)
     status = models.CharField(max_length=50)
     confirmed = models.CharField(max_length=50)
-    user_id = models.IntegerField()
-    images=models.TextField(blank=True)
-    
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    # images = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
 
 
-class Users(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    phone = models.CharField(max_length=50)
-    address = models.TextField()
-    location = models.TextField()
-    password = models.TextField()
-    image_url = models.TextField()
-    role = models.CharField(max_length=50)
-    confirm = models.CharField(max_length=50)
-    
+class Likes(models.Model):
+    item_id = models.ForeignKey(Items, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+
+# class Confirms(models.Model):
+#     item_id = models.IntegerField()
+#     category_id = models.IntegerField()
+
+
+class Images(models.Model):
+    item_id = models.ForeignKey(Items, on_delete=models.CASCADE)
+    img_url = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.img_url
