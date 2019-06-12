@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import ItemsSerializer, LikesSerializer, UsersSerializer,ImageSerializer
-from .models import Items, Likes, Users,Images
+from .serializers import ItemsSerializer, LikesSerializer, ImageSerializer
+from .models import Items, Likes, Images
 from django.http import HttpResponse
 
 
@@ -98,20 +98,20 @@ class ItemsList(generics.ListCreateAPIView):
     serializer_class = ItemsSerializer
 
 
-class signUp(generics.ListCreateAPIView):
-    """This class defines the create behavior of our rest api."""
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
+# class signUp(generics.ListCreateAPIView):
+#     """This class defines the create behavior of our rest api."""
+#     queryset = Users.objects.all()
+#     serializer_class = UsersSerializer
 
-    def perform_create(self, serializer):
-        """Save the post data when creating a new Item."""
-        serializer.save()
+#     def perform_create(self, serializer):
+#         """Save the post data when creating a new Item."""
+#         serializer.save()
+
 
 class GetImages(generics.ListAPIView):
-    serializer_class=ImageSerializer
-
+    serializer_class = ImageSerializer
 
     def get_queryset(self):
-        item_id=self.request.query_params.get("id",None)
+        item_id = self.request.query_params.get("id", None)
         queryset = Images.objects.all().filter(item_id__exact=item_id)
         return queryset
