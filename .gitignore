@@ -8,6 +8,7 @@ __pycache__
 /.pnp
 .pnp.js
 .pyc
+temp_command.txt
 # testing
 /coverage
 
