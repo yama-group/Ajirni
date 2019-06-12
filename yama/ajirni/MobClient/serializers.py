@@ -11,6 +11,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class ItemsSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
     images = ImageSerializer(many=True)
+    # images = serializers.RelatedField(many=True)
 
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
@@ -25,10 +26,10 @@ class ItemsSerializer(serializers.ModelSerializer):
         images_data = validated_data.pop('images')
         print(images_data)
         items = Items.objects.create(**validated_data)
-        print(type(items))
+        print(items.id, "tttttttttttttrrrrrrtrtrtrtrtrtrtrtrtrtrt")
         for image_data in images_data:
-            Images.objects.create(**image_data)
-        items.update({"image": image_data})
+            items.images_data.add(image_data)
+            # items.objects.create(item_id=items.id, **image_data)
         return items
 
 

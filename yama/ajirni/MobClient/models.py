@@ -45,7 +45,8 @@ class Items(models.Model):
 
 
 class Likes(models.Model):
-    item_id = models.ForeignKey(Items, on_delete=models.CASCADE)
+    item_id = models.ForeignKey(
+        Items, on_delete=models.CASCADE)
     user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
@@ -55,7 +56,9 @@ class Likes(models.Model):
 
 
 class Images(models.Model):
-    item_id = models.ForeignKey(Items, on_delete=models.CASCADE)
+    item_id = models.IntegerField(blank=True, default=0)
+    # models.ForeignKey(
+    #     Items, related_name='images', on_delete=models.CASCADE)
     img_url = models.TextField(blank=True)
 
     def __str__(self):

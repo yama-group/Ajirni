@@ -3,24 +3,31 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { postItem } from "../actions/itemAction";
 import { storage } from "../firebase";
-
-class SportForm extends Component {
+import { Alert } from "reactstrap";
+class CarsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      category_id: "",
+      user_id: "",
       name: "",
       description: "",
       condition: "New",
-      category_id: "",
       location: "",
       price: "0",
       color: "",
       quantity: "1",
-      status: "",
+      status: "available",
       confirmed: "False",
-      user_id: "",
       image: null,
-      imgUrl: []
+      imgUrl: [],
+      alert: false,
+      message: "",
+      car_make: "",
+      year_manufactured: "",
+      no_killometers: "0",
+      fuel: "",
+      transmission: ""
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -41,31 +48,35 @@ class SportForm extends Component {
 
   handleImgUpload() {
     const { image } = this.state;
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        //progress function ....
-        // const progress = Math.round(
-        //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        // );
-        // this.setState({ progress });
-      },
-      error => {
-        // error function ....
-        console.log(error);
-      },
-      () => {
-        // complete function ....
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then(imgUrl => {
-            this.setState({ imgUrl: [...this.state.imgUrl, imgUrl] });
-          });
-      }
-    );
+    if (image !== null) {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {},
+        error => {
+          console.log(error);
+        },
+        () => {
+          // complete function ....
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(imgUrl => {
+              console.log("okk");
+              this.setState({
+                imgUrl: [...this.state.imgUrl, imgUrl],
+                alert: true,
+                message: "uploaded"
+              });
+              setTimeout(
+                () => this.setState({ alert: false, message: "" }),
+                3000
+              );
+            });
+        }
+      );
+    }
   }
 
   onChange(e) {
@@ -82,12 +93,16 @@ class SportForm extends Component {
       category_id: this.state.category_id,
       location: this.state.location,
       price: this.state.price,
+      car_make: this.state.car_make,
+      year_manufactured: this.state.year_manufactured,
+      no_killometers: this.state.no_killometers,
+      fuel: this.state.fuel,
       color: this.state.color,
+      transmission: this.state.transmission,
       quantity: this.state.quantity,
       status: this.state.status,
       confirmed: this.state.confirmed,
-      user_id: this.state.user_id,
-      imgUrl: this.state.imgUrl
+      user_id: this.stateuser_id
     };
     this.setState({
       name: "",
@@ -98,19 +113,29 @@ class SportForm extends Component {
       color: "",
       quantity: "1",
       status: "available",
+      confirmed: "False",
+      image: null,
       imgUrl: [],
-      image: null
+      car_make: "",
+      year_manufactured: "",
+      no_killometers: "0",
+      fuel: "",
+      transmission: ""
     });
     console.log(item);
     this.props.postItem(item);
   }
   render() {
+    const years = ["Older than 1980"];
+    for (let i = 1980; i < 2021; i++) {
+      years.unshift(i);
+    }
     return (
       <div>
         <div className="col-lg-6 col-md-12 col-12">
           <form>
             <div className="checkbox-form">
-              <h3>Sport Form</h3>
+              <h3>Cars Form</h3>
               <div className="row">
                 <div className="col-md-6">
                   <div className="checkout-form-list">
@@ -120,7 +145,7 @@ class SportForm extends Component {
                     <input
                       type="text"
                       name="name"
-                      placeholder="bm bicycle"
+                      placeholder="toytoa car"
                       onChange={this.onChange}
                       value={this.state.name}
                     />
@@ -205,6 +230,106 @@ class SportForm extends Component {
                   </div>
                 </div>
 
+                <div className="col-md-6">
+                  <div className="checkout-form-list">
+                    <label>
+                      Car Make <span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="car_make"
+                      placeholder="Toyota"
+                      onChange={this.onChange}
+                      value={this.state.car_make}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="checkout-form-list">
+                    <label>
+                      Kilometers
+                      <span className="required">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      name="no_killometers"
+                      min="0"
+                      placeholder="1000"
+                      onChange={this.onChange}
+                      value={this.state.no_killometers}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="country-select">
+                    <label>
+                      Type of Fuel <span className="required">*</span>
+                    </label>
+                    <select
+                      name="fuel"
+                      onChange={this.onChange}
+                      value={this.state.fuel}
+                    >
+                      <option value="New">Diesel</option>
+                      <option value="Used">Gasoline</option>
+                      <option value="Used">Hybrid</option>
+                      <option value="Used">Electric</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="country-select">
+                    <label>
+                      Transmission <span className="required">*</span>
+                    </label>
+                    <select
+                      name="transmission"
+                      onChange={this.onChange}
+                      value={this.state.transmission}
+                    >
+                      <option value="New">Automatic</option>
+                      <option value="Used">Manual</option>
+                      <option value="Used">other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="country-select">
+                    <label>
+                      year of manufactured <span className="required">*</span>
+                    </label>
+                    <select
+                      name="year_manufactured"
+                      onChange={this.onChange}
+                      value={this.state.year_manufactured}
+                    >
+                      {years.map((year, i) => (
+                        <option key={i} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  {this.state.alert ? (
+                    <Alert
+                      color="info"
+                      isOpen={this.state.alert}
+                      toggle={() => console.log("ok")}
+                    >
+                      {this.state.message}
+                    </Alert>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
                 <div className="col-md-12">
                   <div className="checkout-form-list">
                     <label>
@@ -233,7 +358,7 @@ class SportForm extends Component {
                 {/* <label>Choose file</label> */}
                 <input
                   className="col-md-4"
-                  aria-describedby="inputGroupFileAddon01"
+                  aria-describedby="btn"
                   type="file"
                   accept="image/*"
                   data-max-size="5000"
@@ -277,7 +402,7 @@ class SportForm extends Component {
     );
   }
 }
-SportForm.propTypes = {
+CarsForm.propTypes = {
   postItem: PropTypes.func.isRequired
 };
 ////// should changed to category_id from other component
@@ -290,4 +415,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { postItem }
-)(SportForm);
+)(CarsForm);
