@@ -1,5 +1,56 @@
 from rest_framework import serializers
-from .models import Items, Likes, Images
+# from django.contrib.auth.models import User
+from .models import Items, Likes, Images, CustomUser
+from django.contrib.auth import authenticate
+
+
+# class UsersSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Users
+#         fields = ('id', 'first_name', 'last_name', 'email', 'phone', 'address',
+#                   'location', 'password', 'image_url', 'role', 'confirm')
+
+
+# User Serializer
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'email', 'first_name',
+                  'last_name', 'phone', 'image_url')
+
+
+# Register Serializer
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'email', 'first_name',
+                  'last_name', 'phone', 'image_url', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = CustomUser.objects.create_user(
+            validated_data['username'],
+            validated_data['email'],
+            validated_data['first_name'],
+            validated_data['last_name'],
+            validated_data['phone'],
+            validated_data['image_url'],
+            validated_data['password']
+        )
+
+        return user
+
+
+# Login Serializer
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Incorrect Credentials")
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -30,13 +81,6 @@ class ItemsSerializer(serializers.ModelSerializer):
             Images.objects.create(**image_data)
         items.update({"image": image_data})
         return items
-
-
-# class UsersSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Users
-#         fields = ('id', 'first_name', 'last_name', 'email', 'phone', 'address',
-#                   'location', 'password', 'image_url', 'role', 'confirm')
 
 
 class LikesSerializer(serializers.ModelSerializer):
