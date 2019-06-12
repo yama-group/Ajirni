@@ -1,9 +1,64 @@
 from django.shortcuts import render
-from rest_framework import generics
-from .serializers import ItemsSerializer, LikesSerializer, UsersSerializer
+from rest_framework import generics, permissions
+from .serializers import ItemsSerializer, LikesSerializer, UserSerializer, RegisterSerializer, LoginSerializer
 from .models import Items, Likes, Users
 from django.http import HttpResponse
 from django.http import HttpRequest
+from knox.models import AuthToken
+from rest_framework.response import Response
+
+
+
+# Register API
+class RegisterAPI(generics.GenericAPIView):
+  serializer_class = RegisterSerializer
+
+  def post(self, request, *args, **kwargs):
+    serializer = self.get_serializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = serializer.save()
+    return Response({
+      "user": UserSerializer(user, context=self.get_serializer_context()).data,
+      "token": AuthToken.objects.create(user)
+    })
+
+# Login API
+class LoginAPI(generics.GenericAPIView):
+  serializer_class = LoginSerializer
+
+  def post(self, request, *args, **kwargs):
+    serializer = self.get_serializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    user = serializer.validated_data
+    return Response({
+      "user": UserSerializer(user, context=self.get_serializer_context()).data,
+      "token": AuthToken.objects.create(user)
+    })
+
+
+# class signUp(generics.ListCreateAPIView):
+#     """This class defines the create behavior of our rest api."""
+#     queryset = Users.objects.all()
+#     serializer_class = UsersSerializer
+
+#     def perform_create(self, serializer):
+#         #Create New User
+#         print(self.queryset)
+#         user = serializer.save()
+
+        # #Generate Token for User
+        # token = Token.objects.create(user)
+        # return Response({'detail':'User has been created with token: ' + token.key})
+        
+# class signIn(generics.GenericAPIView):
+#     serializer_class = LoginSerializer
+
+#     def perform_create(self, serializer):
+#         #Create New User
+#         user = serializer.validated_data
+#         #Generate Token for User
+#         token = Token.objects.create(user)
+#         return Response({'detail':'User has been created with token: ' + token.key})
 
 
 class CreateItem(generics.ListCreateAPIView):
@@ -98,24 +153,3 @@ class ItemsList(generics.ListCreateAPIView):
     queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
-
-class signUp(generics.ListCreateAPIView):
-    """This class defines the create behavior of our rest api."""
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
-
-    def perform_create(self, serializer):
-        """Save the post data when creating a new Item."""
-        print(self.queryset)
-        serializer.save()
-
-
-# class signIn(generics.ListCreateAPIView):
-#     queryset = Users.objects.all()
-
-#     def signInVerify(self, serializer, request):
-#         for user in queryset:
-#             if queryset[user].email == request.body.email and queryset[user].password == request.body.password:
-#                 return user
-
-#     serializer_class = UsersSerializer
