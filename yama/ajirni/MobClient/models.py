@@ -4,7 +4,7 @@ from django.db import models
 class Likes(models.Model):
     item_id = models.IntegerField()
     user_id = models.IntegerField()
-
+     
 
 class Confirms(models.Model):
     item_id = models.IntegerField()
@@ -15,6 +15,9 @@ class Images(models.Model):
     item_id = models.IntegerField()
     img_url = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.img_url
+     
 
 class Categories(models.Model):
     name = models.CharField(max_length=50)
@@ -35,14 +38,16 @@ class Items(models.Model):
     floor_no = models.IntegerField(blank=True, default=0)
     car_make = models.CharField(max_length=50, blank=True)
     year_manufactured = models.CharField(max_length=50, blank=True)
-    no_killometers = models.IntegerField(blank=True, default=0)
+    no_killometers = models.IntegerField(blank=True)
     fuel = models.CharField(max_length=50, blank=True)
     color = models.CharField(max_length=50, blank=True)
     transmission = models.CharField(max_length=50, blank=True)
-    quantity = models.IntegerField(blank=True, default=0)
+    quantity = models.IntegerField(blank=True)
     status = models.CharField(max_length=50)
     confirmed = models.CharField(max_length=50)
     user_id = models.IntegerField()
+    images=models.TextField(blank=True)
+    
 
 
 class Users(models.Model):
@@ -56,3 +61,4 @@ class Users(models.Model):
     image_url = models.TextField()
     role = models.CharField(max_length=50)
     confirm = models.CharField(max_length=50)
+    

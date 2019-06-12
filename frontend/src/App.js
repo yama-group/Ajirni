@@ -1,14 +1,19 @@
 import React from "react";
-import SportForm from "./components/SportForm.js";
-import { Provider } from "react-redux";
-
-import store from "./store";
-function App() {
-  return (
-    <Provider store={store}>
-      <SportForm />
-    </Provider>
-  );
+import ItemDetailCar from "./components/itemDetails"
+import { Provider } from 'react-redux'
+import store from "./store"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+class  App extends  React.Component {
+  render(){
+    return (
+      <Provider store={store}><Router>
+        <ItemDetailCar/>
+        </Router></Provider>
+      
+      
+    );
+  }
+  
 }
 
 export default App;
