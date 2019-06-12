@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'ajirni.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'ajrini',
-        'USER': 'root',
-        'PASSWORD': '1111',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tSfCCLaIkh',
+        'USER': 'tSfCCLaIkh',
+        'PASSWORD': 'h3qbhJEq9c',
+        'HOST': 'remotemysql.com',
         'PORT': '3306',
     }
 }
