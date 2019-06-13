@@ -145,10 +145,16 @@ class ItemsRud(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ItemsSerializer
 
 
-class ItemsList(generics.ListCreateAPIView):
+class ItemsList(generics.ListAPIView):
     """This class defines the retrieve behavior of all instances."""
-    queryset = Items.objects.all()
     serializer_class = ItemsSerializer
+
+    def get_queryset(self):
+        queryset = Items.objects.all()
+        category_id = self.request.query_params.get('category', '')
+        return queryset.filter(category_id__exact= category_id)
+        
+        
 
 
 class GetImages(generics.ListAPIView):
@@ -156,7 +162,7 @@ class GetImages(generics.ListAPIView):
 
     def get_queryset(self):
         item_id = self.request.query_params.get("id", None)
-        queryset = Images.objects.all().filter(item_id__exact=item_id)
+        queryset = Images.objects.filter(item_id__exact=item_id)
         return queryset
 
 
@@ -165,7 +171,7 @@ class getUserItems(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
-        queryset = Items.objects.all().filter(user_id__exact=user_id)
+        queryset = Items.objects.filter(user_id__exact=user_id)
 
 
 class getUserInfo(generics.ListAPIView):
