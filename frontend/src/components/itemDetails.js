@@ -86,42 +86,44 @@ class ItemDetailCar extends React.Component{
                         <div className="product-details-img-content">
                             <div className="product-details-tab mr-70">
                                 <div className="product-details-large tab-content">
-                                    <div className="tab-pane active show fade" id="pro-details1" role="tabpanel">
-                                        <div className="easyzoom easyzoom--overlay">
-                                            <a href="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg">
-                                                <img src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg" alt=""/>
-                                            </a>
-                                        </div>
-                                    </div>
                                     
-                                    <div className="tab-pane fade" id="pro-details3" role="tabpanel">
-                                        <div className="easyzoom easyzoom--overlay">
-                                            <a href="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg">
-                                                <img src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg" alt=""/>
-                                            </a>
+                                    {this.state.images.map((image,index)=>{
+                                        if(index===0){
+                                            return  <div className="tab-pane active show fade" id="pro-details1" role="tabpanel">
+                                            <div className="easyzoom easyzoom--overlay">
+                                                <a href={image.img_url}>
+                                                    <img src={image.img_url} alt=""/>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="tab-pane fade" id="pro-details4" role="tabpanel">
-                                        <div className="easyzoom easyzoom--overlay">
-                                            <a href="assets/img/product-details/bl4.jpg">
-                                                <img src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg" alt=""/>
-                                            </a>
+                                        }else{
+                                            return  <div className="tab-pane fade" id={`pro-details${1+index}`} role="tabpanel">
+                                            <div className="easyzoom easyzoom--overlay">
+                                                <a href={image.img_url}>
+                                                    <img src={image.img_url} alt=""/>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                        }
+                                    })}
+                                   
                                 </div>
+                                
                                 <div className="product-details-small nav mt-12 main-product-details" >
-                                    <a className="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
-                                        <img src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg" alt=""/>
-                                    </a>
-                                    <a className="mr-12" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
-                                        <img src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg" alt=""/>
-                                    </a>
-                                    <a className="mr-12" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
-                                        <img src="assets/img/product-details/s3.jpg" alt=""/>
-                                    </a>
-                                    <a className="mr-12" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
-                                        <img src="assets/img/product-details/s4.jpg" alt=""/>
-                                    </a>
+                                {
+                                        this.state.images.map((image,index)=>{
+                                            if(index === 0 ){
+                                                return  <a className="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
+                                                <img src={image.img_url} alt=""/>
+                                            </a>
+                                            }else{
+                                                return  <a className="mr-12" href={`#pro-details${1+index}`} data-toggle="tab" role="tab" aria-selected="true">
+                                                <img src={image.img_url} alt=""/>
+                                            </a>
+                                            }
+                                        })
+                                }
+                                   
                                 </div>
                             </div>
                         </div>

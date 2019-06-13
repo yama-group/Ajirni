@@ -1,7 +1,7 @@
 import {FETCH_ITEM ,SAVE_USER_ID,FETCH_IMAGES}from "./types"
 import axios from "axios";
 
-export const fetchItem = (para=3) => dispatch => {
+export const fetchItem = (para=1) => dispatch => {
     axios.get(`/rud/${para}`)
     .then(item =>{
         
