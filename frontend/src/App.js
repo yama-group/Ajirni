@@ -5,13 +5,28 @@ import store from "./store";
 import SportForm from "./components/SportForm.js";
 import CarsForm from "./components/CarsForm.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import Signup from "./components/signup";
+import Signin from "./components/signin";
+import ItemsList from "./components/itemsList";
+import SportForm from "./components/SportForm.js";
+
 class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+
+  // }
+
   render() {
+    const { createUser } = this.props;
     return (
       <Provider store={store}>
         <Router>
-          {/* <ItemDetailCar /> */}
-          {/* <SportForm /> */}
+          <ItemDetailCar />
+          <Signup createUser={createUser} />
+          <ItemsList />
+          <SportForm />
+          <Signin />
           <CarsForm />
         </Router>
       </Provider>
