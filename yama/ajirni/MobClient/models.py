@@ -20,7 +20,7 @@ class Items(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     condition = models.CharField(max_length=50)
-    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     no_rooms = models.CharField(max_length=50, blank=True)
     no_bathrooms = models.CharField(max_length=50, blank=True)
     surface_area = models.CharField(max_length=50, blank=True)
@@ -37,7 +37,7 @@ class Items(models.Model):
     quantity = models.CharField(max_length=50, blank=True)
     status = models.CharField(max_length=50)
     confirmed = models.CharField(max_length=50)
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # images = models.TextField(blank=True)
 
     def __str__(self):
@@ -45,9 +45,9 @@ class Items(models.Model):
 
 
 class Likes(models.Model):
-    item_id = models.ForeignKey(
+    item = models.ForeignKey(
         Items, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
 # class Confirms(models.Model):
@@ -56,7 +56,8 @@ class Likes(models.Model):
 
 
 class Images(models.Model):
-    item_id = models.IntegerField(blank=True, default=0)
+    item = models.ForeignKey(
+        Items, on_delete=models.CASCADE,  default=None)
     img_url = models.TextField(blank=True)
 
     def __str__(self):

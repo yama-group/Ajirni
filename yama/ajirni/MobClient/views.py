@@ -125,6 +125,7 @@ class Search(generics.ListAPIView):
 class LikeItem(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Likes.objects.all()
+
     serializer_class = LikesSerializer
 
     def perform_create(self, serializer):
@@ -132,9 +133,8 @@ class LikeItem(generics.ListCreateAPIView):
         serializer.save()
 
     def get_queryset(self):
-        queryset = Likes.objects.all()
-        item_id = self.request.query_params.get('item_id', None)
-        queryset = queryset.filter(item_id__exact=item_id)
+        user_id = self.request.query_params.get('user_id', None)
+        queryset = Likes.objects.filter(user_id__exact=user_id)
         return queryset
 
 
@@ -155,8 +155,8 @@ class GetImages(generics.ListAPIView):
     serializer_class = ImageSerializer
 
     def get_queryset(self):
-        item_id = self.request.query_params.get("id", None)
-        queryset = Images.objects.all().filter(item_id__exact=item_id)
+        item_id = self.request.query_params.get("item_id", None)
+        queryset = Images.objects.filter(item__exact=item_id)
         return queryset
 
 
@@ -165,7 +165,8 @@ class getUserItems(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
-        queryset = Items.objects.all().filter(user_id__exact=user_id)
+        queryset = Items.objects.filter(user_id__exact=user_id)
+        return queryset
 
 
 class getUserInfo(generics.ListAPIView):
@@ -173,4 +174,5 @@ class getUserInfo(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
-        queryset = Items.objects.all().filter(user_id__exact=user_id)
+        queryset = CustomUser.objects.filter(id__exact=user_id)
+        return queryset
