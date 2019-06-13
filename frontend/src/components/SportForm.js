@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { postItem } from "../actions/itemAction";
+import { storage } from "../firebase";
 
 class SportForm extends Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class SportForm extends Component {
       quantity: "1",
       status: "",
       confirmed: "False",
-      user_id: ""
+      user_id: "",
+      image: null,
+      imgUrl: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -28,6 +31,41 @@ class SportForm extends Component {
       category_id: this.props.category_id,
       user_id: this.props.user_id
     });
+  }
+  handleImgChange(e) {
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+      this.setState(() => ({ image }));
+    }
+  }
+
+  handleImgUpload() {
+    const { image } = this.state;
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        //progress function ....
+        // const progress = Math.round(
+        //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        // );
+        // this.setState({ progress });
+      },
+      error => {
+        // error function ....
+        console.log(error);
+      },
+      () => {
+        // complete function ....
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(imgUrl => {
+            this.setState({ imgUrl: [...this.state.imgUrl, imgUrl] });
+          });
+      }
+    );
   }
 
   onChange(e) {
@@ -188,6 +226,41 @@ class SportForm extends Component {
                     value={this.state.status}
                   />
                   <label> Avilable Directly</label>
+                </div>
+                {/* <label>Choose file</label> */}
+                <input
+                  className="col-md-4"
+                  aria-describedby="inputGroupFileAddon01"
+                  type="file"
+                  accept="image/*"
+                  data-max-size="5000"
+                  onChange={this.handleImgChange.bind(this)}
+                />
+
+                <button type="button" onClick={this.handleImgUpload.bind(this)}>
+                  Upload
+                </button>
+                <div className="col-md-12" />
+                {/* <img
+                  src={
+                    this.state.imgUrl[0] ||
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSd6J9YsKM3PyT9fNDGqbt3cJA90-Hi6KvKtj2DKK7SAYJoY1S"
+                  }
+                  alt="uploaded images"
+                  height="100"
+                  width="100"
+                /> */}
+
+                <div role="tablist">
+                  {this.state.imgUrl.map((image, i) => (
+                    <img
+                      role="tab"
+                      key={i}
+                      src={image}
+                      alt=""
+                      className="mt-12"
+                    />
+                  ))}
                 </div>
               </div>
             </div>

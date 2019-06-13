@@ -1,6 +1,7 @@
 import React from "react";
 import { Provider } from 'react-redux'
 import store from './store'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Signup from "./components/signup";
 import Signin from './components/signin'
@@ -18,12 +19,13 @@ class App extends React.Component {
     const { createUser } = this.props;
     return (
       <Provider store={store}>
-        <div>
+        <Router>
+          <ItemDetailCar />
           <Signup createUser={createUser} />
           <ItemsList />
           <SportForm />
           <Signin />
-        </div>
+        </Router>
       </Provider>
     );
   }
