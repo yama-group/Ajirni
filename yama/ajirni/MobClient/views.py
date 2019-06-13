@@ -24,12 +24,12 @@ class Search(generics.ListAPIView):
         by filtering against query parameters in the URL.
         """
         queryset = Items.objects.all()
-        status = self.request.query_params.get('status', 'Avilable')
+        status = self.request.query_params.get('status', 'available')
         confirmed = self.request.query_params.get('confirmed', 'True')
         name = self.request.query_params.get('name', '')
         description = self.request.query_params.get('description', '')
         condition = self.request.query_params.get('condition', '')
-        category_id = self.request.query_params.get('category_id', '')
+        category_id = self.request.query_params.get('category_id', 2)
         no_rooms = self.request.query_params.get('no_rooms', '')
         no_bathrooms = self.request.query_params.get('no_bathrooms', '')
         surface_area = self.request.query_params.get('surface_area', '')
@@ -40,7 +40,6 @@ class Search(generics.ListAPIView):
         car_make = self.request.query_params.get('car_make', '')
         year_manufactured = self.request.query_params.get(
             'year_manufactured', '')
-        no_killometers = self.request.query_params.get('no_killometers', '')
         fuel = self.request.query_params.get('fuel', '')
         color = self.request.query_params.get('color', '')
         transmission = self.request.query_params.get('transmission', '')
@@ -51,7 +50,7 @@ class Search(generics.ListAPIView):
             name__icontains=name,
             description__icontains=description,
             condition__icontains=condition,
-            category_id__icontains=category_id,
+            category_id__exact=category_id,
             no_rooms__icontains=no_rooms,
             no_bathrooms__icontains=no_bathrooms,
             surface_area__icontains=surface_area,
@@ -61,7 +60,6 @@ class Search(generics.ListAPIView):
             floor_no__icontains=floor_no,
             car_make__icontains=car_make,
             year_manufactured__icontains=year_manufactured,
-            no_killometers__icontains=no_killometers,
             fuel__icontains=fuel,
             color__icontains=color,
             transmission__icontains=transmission
@@ -115,3 +113,19 @@ class GetImages(generics.ListAPIView):
         item_id = self.request.query_params.get("id", None)
         queryset = Images.objects.all().filter(item_id__exact=item_id)
         return queryset
+
+
+class getUserItems(generics.ListAPIView):
+    serializer_class = ItemsSerializer
+
+    def get_queryset(self):
+        user_id = self.request.query_params.get('user_id', None)
+        queryset = Items.objects.all().filter(user_id__exact=user_id)
+
+
+class getUserInfo(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        user_id = self.request.query_params.get('user_id', None)
+        queryset = Items.objects.all().filter(user_id__exact=user_id)
