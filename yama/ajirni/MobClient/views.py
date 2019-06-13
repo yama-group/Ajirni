@@ -155,7 +155,7 @@ class GetImages(generics.ListAPIView):
     serializer_class = ImageSerializer
 
     def get_queryset(self):
-        item_id = self.request.query_params.get("item_id", None)
+        item_id = self.request.query_params.get("id", None)
         queryset = Images.objects.filter(item__exact=item_id)
         return queryset
 
