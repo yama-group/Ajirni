@@ -63,6 +63,22 @@ class itemsList extends Component {
 
       <div>
         <h1> all items </h1>
+
+        <div class="product-details-small nav mt-12 main-product-details" role="tablist">
+          <a class="active mr-12" href="https://www.google.com/" data-toggle="tab" role="tab" aria-selected="true">
+            <img src="https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2018/08/01-1953-bmw-isetta.jpg?itok=xy0USI9H&fc=50,50" alt="" />CARS
+          </a>
+          <a class="mr-12" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
+            <img src="assets/img/product-details/s2.jpg" alt="" />SPORTS
+          </a>
+          <a class="mr-12" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
+            <img src="assets/img/product-details/s3.jpg" alt="" />HOUSES
+          </a>
+          <a class="mr-12" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
+            <img src="assets/img/product-details/s4.jpg" alt="" />OTHERS
+          </a>
+        </div>
+
         {allItems}
       </div>
     )
