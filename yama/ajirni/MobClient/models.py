@@ -20,24 +20,24 @@ class Items(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     condition = models.CharField(max_length=50)
-    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
-    no_rooms = models.IntegerField(blank=True, default=0)
-    no_bathrooms = models.IntegerField(blank=True, default=0)
-    surface_area = models.IntegerField(blank=True, default=0)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    no_rooms = models.CharField(max_length=50, blank=True)
+    no_bathrooms = models.CharField(max_length=50, blank=True)
+    surface_area = models.CharField(max_length=50, blank=True)
     furnished = models.CharField(max_length=50, blank=True)
     location = models.TextField(blank=True)
-    price = models.IntegerField()
-    floor_no = models.IntegerField(blank=True, default=0)
+    price = models.CharField(max_length=50, blank=True)
+    floor_no = models.CharField(max_length=50, blank=True)
     car_make = models.CharField(max_length=50, blank=True)
     year_manufactured = models.CharField(max_length=50, blank=True)
-    no_killometers = models.IntegerField(blank=True)
+    no_killometers = models.CharField(max_length=50, blank=True)
     fuel = models.CharField(max_length=50, blank=True)
     color = models.CharField(max_length=50, blank=True)
     transmission = models.CharField(max_length=50, blank=True)
-    quantity = models.IntegerField(blank=True)
+    quantity = models.CharField(max_length=50, blank=True)
     status = models.CharField(max_length=50)
     confirmed = models.CharField(max_length=50)
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # images = models.TextField(blank=True)
 
     def __str__(self):
@@ -45,8 +45,9 @@ class Items(models.Model):
 
 
 class Likes(models.Model):
-    item_id = models.ForeignKey(Items, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    item = models.ForeignKey(
+        Items, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
 
 # class Confirms(models.Model):
@@ -55,7 +56,8 @@ class Likes(models.Model):
 
 
 class Images(models.Model):
-    item_id = models.ForeignKey(Items, on_delete=models.CASCADE)
+    item = models.ForeignKey(
+        Items, on_delete=models.CASCADE,  default=None)
     img_url = models.TextField(blank=True)
 
     def __str__(self):
