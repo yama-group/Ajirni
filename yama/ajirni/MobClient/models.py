@@ -57,7 +57,12 @@ class Likes(models.Model):
 
 
 class Images(models.Model):
+<<<<<<< HEAD
     item = models.IntegerField(blank=True, default=0)
+=======
+    item = models.ForeignKey(
+        Items, on_delete=models.CASCADE,  default=None)
+>>>>>>> 1c732c99617a23d7bbf66ec6bc10129ef4910c25
     img_url = models.TextField(blank=True)
 
     def __str__(self):

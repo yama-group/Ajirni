@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import Signup from "./components/signup";
+// import Signup from "./components/signup";
 // import SignIn from "./components/signIn";
 import ItemsList from "./components/itemsList";
 import SportForm from "./components/SportForm.js";
@@ -25,7 +25,7 @@ class App extends React.Component {
           <Signup createUser={createUser} />
           <ItemsList />
           <SportForm />
-          {/* <SignIn /> */}
+          {/* <Signin /> */}
           <CarsForm />
         </Router>
       </Provider>

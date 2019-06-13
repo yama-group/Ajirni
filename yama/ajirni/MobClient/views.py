@@ -151,7 +151,7 @@ class ItemsList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Items.objects.all()
-        category_id = self.request.query_params.get('category', '')
+        category_id = self.request.query_params.get('category_id', '')
         return queryset.filter(category_id__exact= category_id)
         
         
