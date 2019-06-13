@@ -7,7 +7,8 @@ export const fetchItem = (para=1) => dispatch => {
         
       dispatch({
         type: FETCH_ITEM,
-        itemRetrive: item.data
+        itemRetrive: item.data,
+        
       })
       return item
     }).then((item)=>{

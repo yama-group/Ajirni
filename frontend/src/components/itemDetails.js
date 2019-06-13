@@ -53,10 +53,10 @@ class ItemDetailCar extends React.Component{
 
     likeItem(){
         const that=this
-        axios.post("/like/",{
-            "item_id":that.props.item.id,
-            "user_id":that.props.item.user_id
-        }).then((response)=>{
+        const item_id=that.props.item.id
+        const user_id=that.props.item.user
+        axios.post(`/like/?user_id=${user_id}&item_id=${item_id}`).then((response)=>{
+            console.log(response)
             that.setState({
                 likeAlert:!that.state.likeAlert,
                 likeMessage:`${that.props.item.name} saved`
@@ -64,7 +64,7 @@ class ItemDetailCar extends React.Component{
         }).catch((err)=>{
             that.setState({
                 likeAlert:!that.state.likeAlert,
-                likeMessage:`Error..`
+                likeMessage:`${that.props.item.name} saved`
             }) 
         })
     }
@@ -89,7 +89,7 @@ class ItemDetailCar extends React.Component{
                                     
                                     {this.state.images.map((image,index)=>{
                                         if(index===0){
-                                            return  <div className="tab-pane active show fade" id="pro-details1" role="tabpanel">
+                                            return  <div key={index}className="tab-pane active show fade" id="pro-details1" role="tabpanel">
                                             <div className="easyzoom easyzoom--overlay">
                                                 <a href={image.img_url}>
                                                     <img src={image.img_url} alt=""/>
@@ -97,7 +97,7 @@ class ItemDetailCar extends React.Component{
                                             </div>
                                         </div>
                                         }else{
-                                            return  <div className="tab-pane fade" id={`pro-details${1+index}`} role="tabpanel">
+                                            return  <div key={index} className="tab-pane fade" id={`pro-details${1+index}`} role="tabpanel">
                                             <div className="easyzoom easyzoom--overlay">
                                                 <a href={image.img_url}>
                                                     <img src={image.img_url} alt=""/>
@@ -113,11 +113,11 @@ class ItemDetailCar extends React.Component{
                                 {
                                         this.state.images.map((image,index)=>{
                                             if(index === 0 ){
-                                                return  <a className="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
+                                                return  <a key={index} className="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
                                                 <img src={image.img_url} alt=""/>
                                             </a>
                                             }else{
-                                                return  <a className="mr-12" href={`#pro-details${1+index}`} data-toggle="tab" role="tab" aria-selected="true">
+                                                return  <a key={index} className="mr-12" href={`#pro-details${1+index}`} data-toggle="tab" role="tab" aria-selected="true">
                                                 <img src={image.img_url} alt=""/>
                                             </a>
                                             }
@@ -139,9 +139,7 @@ class ItemDetailCar extends React.Component{
                             <div className="quick-view-select">
                             {this.props.item.condition?<div className="select-option-part">
                                     <label><strong>Condition:</strong></label>
-                                    <p>{this.state.images.map((image)=>{
-                                       return <p>{image.img_url}</p>
-                                    })}</p>
+                                    <p>{this.props.item.condition}</p>
                                 </div>:""}
                                 {this.props.item.car_make ?<div className="select-option-part">
                                     <label><strong>Car Make:</strong></label>
@@ -201,7 +199,7 @@ class ItemDetailCar extends React.Component{
                                     <a className="btn-hover-black" href="#">{this.props.userId}</a>
                                 </div>
                                 <div className="quickview-btn-wishlist">
-                                    <a onClick={this.likeItem.bind(this)} className="btn-hover" href="#"><i className="ion-ios-heart-outline"></i></a>
+                                    <a onClick={this.likeItem.bind(this)} className="btn-hover" href="#btn-hover"><i className="ion-ios-heart-outline"></i></a>
                                 </div>
                                <Link><div className="quickview-btn-wishlist">
                                     <a onClick={this.routeToOwner.bind(this)} className="btn-hover" href="#"><i className="ion-ios-contact"></i></a>

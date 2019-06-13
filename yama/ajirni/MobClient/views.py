@@ -128,12 +128,15 @@ class LikeItem(generics.ListCreateAPIView):
 
     serializer_class = LikesSerializer
 
-    def perform_create(self, serializer):
-        """add like for item"""
-        serializer.save()
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
+        item_id = self.request.query_params.get('item_id', None)
+
+        item=Items.objects.get(id=item_id)
+        user=CustomUser.objects.get(id=user_id)
+        like=Likes(item=item,user=user)
+        like.save()
         queryset = Likes.objects.filter(user_id__exact=user_id)
         return queryset
 

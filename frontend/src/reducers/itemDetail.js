@@ -4,14 +4,16 @@ const initialState = {
 
     item: {},
     userId:null,
-    images:[]
+    images:[],
+    
   };
   
   export default function(state = initialState, action) {
     if(action.type === FETCH_ITEM){
         return{
             ...state,
-            item:action.itemRetrive
+            item:action.itemRetrive,
+            
         }
     }
     if(action.type === SAVE_USER_ID){
