@@ -37,7 +37,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             validated_data['image_url'],
             validated_data['password']
         )
-
         return user
 
 
