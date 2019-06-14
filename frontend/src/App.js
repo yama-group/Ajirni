@@ -5,6 +5,7 @@ import store from "./store";
 import SportForm from "./components/SportForm.js";
 import CarsForm from "./components/CarsForm.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import UserProfile from "./components/userProfile"
 
 import Signup from "./components/signup";
 // import Signin from "./components/signin";
@@ -21,12 +22,14 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
+          <UserProfile/>
           <ItemDetailCar />
           <Signup createUser={createUser} />
           <ItemsList />
           <SportForm />
           {/* <Signin /> */}
           <CarsForm />
+          
         </Router>
       </Provider>
     );
