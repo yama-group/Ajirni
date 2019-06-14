@@ -58,12 +58,6 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = ('item_id', 'img_url')
 
 
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = CustomUser
-#         fields = ('id', 'email', 'phone' )
-
-
 class ItemsSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
     # images = ImageSerializer(many=True)

@@ -1,5 +1,7 @@
 import axios from "axios";
-import { NEW_USER } from './types';
+import {
+  NEW_USER
+} from './types';
 
 // export const createUser = (user) => dispatch => {
 //   console.log('posting')
