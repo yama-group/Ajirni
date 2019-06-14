@@ -3,7 +3,7 @@ import { NEW_Item } from "../actions/types";
 const initialState = {
   items: [],
   oneItem: {},
-  category_id: 1,
+  category_id: 2,
   user_id: 1
 };
 
