@@ -13,7 +13,7 @@ const initialState = {
         return{
             ...state,
             item:action.itemRetrive,
-            
+            userId:action.user_id
         }
     }
     if(action.type === SAVE_USER_ID){

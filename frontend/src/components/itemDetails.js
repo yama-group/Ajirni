@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { connect } from 'react-redux';
-import {fetchItem,saveUserId,} from "../actions/itemDetailsAction"
+import {fetchItem} from "../actions/itemDetailsAction"
 import {Link } from "react-router-dom";
 import axios from "axios";
 import { Alert } from 'reactstrap'
@@ -45,11 +45,7 @@ class ItemDetailCar extends React.Component{
 
   
 
-    routeToOwner(){
-     const id = this.props.item.user_id
-     this.props.saveUserId(id)
-     
-    }
+    
 
     likeItem(){
         const that=this
@@ -64,7 +60,7 @@ class ItemDetailCar extends React.Component{
         }).catch((err)=>{
             that.setState({
                 likeAlert:!that.state.likeAlert,
-                likeMessage:`${that.props.item.name} saved`
+                likeMessage:`Error...`
             }) 
         })
     }
@@ -133,7 +129,7 @@ class ItemDetailCar extends React.Component{
                             <h3>{this.props.item.name}</h3>
                            
                             <div className="details-price">
-                                <span>${this.props.item.price}/day</span>
+                                <span>${this.props.item.price}/month</span>
                             </div>
                             <p>{this.props.item.description}</p>
                             <div className="quick-view-select">
@@ -167,11 +163,11 @@ class ItemDetailCar extends React.Component{
                                 </div>:""}
                                 {this.props.item.surface_area ?<div className="select-option-part">
                                     <label><strong>Surface Area:</strong></label>
-                                    <p>{this.props.item.surface_area}</p>
+                                    <p>{this.props.item.surface_area}m</p>
                                 </div>:""}
                                 {this.props.item.furnished?<div className="select-option-part">
                                     <label><strong>Furnished:</strong></label>
-                                    <p>{this.props.item.furnished}</p>
+                                    <p>Yes</p>
                                 </div>:""}
                                 {this.props.item.floor_no ?<div className="select-option-part">
                                     <label><strong>Floor.No:</strong></label>
@@ -196,13 +192,13 @@ class ItemDetailCar extends React.Component{
                             </div>
                             <div className="quickview-plus-minus">
                                 <div className="quickview-btn-cart">
-                                    <a className="btn-hover-black" href="#">{this.props.userId}</a>
+                                    <a className="btn-hover-black" href="#">Contact</a>
                                 </div>
                                 <div className="quickview-btn-wishlist">
                                     <a onClick={this.likeItem.bind(this)} className="btn-hover" href="#btn-hover"><i className="ion-ios-heart-outline"></i></a>
                                 </div>
-                               <Link><div className="quickview-btn-wishlist">
-                                    <a onClick={this.routeToOwner.bind(this)} className="btn-hover" href="#"><i className="ion-ios-contact"></i></a>
+                               <Link to="/itemOwner"><div className="quickview-btn-wishlist">
+                                    <a className="btn-hover" href="#"><i className="ion-ios-contact"></i></a>
                                 </div></Link> 
                             </div>
                           
@@ -223,4 +219,4 @@ const mapStateToProps = state => ({
     
   });
 
-export default connect(mapStateToProps,{fetchItem,saveUserId})(ItemDetailCar)
+export default connect(mapStateToProps,{fetchItem})(ItemDetailCar)

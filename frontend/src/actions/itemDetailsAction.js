@@ -8,6 +8,7 @@ export const fetchItem = (para=1) => dispatch => {
       dispatch({
         type: FETCH_ITEM,
         itemRetrive: item.data,
+        user_id:item.data.user
         
       })
       return item
@@ -25,11 +26,4 @@ export const fetchItem = (para=1) => dispatch => {
   };
 
 
-
-  export const saveUserId = (id) => dispatch => {
-    dispatch({
-      type:SAVE_USER_ID,
-      saveId:id
-    })
-  }
   

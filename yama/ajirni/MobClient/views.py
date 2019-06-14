@@ -125,11 +125,13 @@ class Search(generics.ListAPIView):
 class LikeItem(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Likes.objects.all()
-
     serializer_class = LikesSerializer
 
 
-    def get_queryset(self):
+    
+
+
+    def perform_create(self, serializer):
         user_id = self.request.query_params.get('user_id', None)
         item_id = self.request.query_params.get('item_id', None)
 
