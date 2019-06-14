@@ -5,3 +5,5 @@ export const FETCH_ITEM = "FETCH_ITEM";
 export const SAVE_USER_ID = "SAVE_USER_ID";
 export const FETCH_IMAGES = "FETCH_IMAGES";
 export const NewItemImages = "NewItemImages";
+export const FETCH_USER ="FETCH_USER"
+export const FETCH_USER_ITEMS="FETCH_USER_ITEMS"

@@ -24,7 +24,8 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
-          <UserProfile/>
+        <Route path="/user" exact component={UserProfile} />
+         
           <ItemDetailCar />
           <Signup createUser={createUser} />
           <ItemsList />

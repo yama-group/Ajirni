@@ -1,4 +1,4 @@
-import {FETCH_ITEM ,SAVE_USER_ID,FETCH_IMAGES}from "./types"
+import {FETCH_ITEM ,FETCH_IMAGES}from "./types"
 import axios from "axios";
 
 export const fetchItem = (para=1) => dispatch => {
