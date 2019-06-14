@@ -64,7 +64,7 @@ class LoginAPI(generics.GenericAPIView):
 
 class CreateItem(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
-    # queryset = Items.objects.all()
+    queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
     # def perform_create(self, serializer):
