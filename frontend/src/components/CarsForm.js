@@ -24,10 +24,10 @@ class CarsForm extends Component {
       alert: false,
       message: "",
       car_make: "",
-      year_manufactured: "",
+      year_manufactured: "2020",
       no_killometers: "0",
-      fuel: "",
-      transmission: ""
+      fuel: "Diesel",
+      transmission: "Automatic"
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -42,11 +42,12 @@ class CarsForm extends Component {
   handleImgChange(e) {
     if (e.target.files[0]) {
       const image = e.target.files[0];
-      this.setState(() => ({ image }));
+      this.setState({ image }, () => this.handleImgUpload());
     }
   }
 
   handleImgUpload() {
+    console.log("ffff");
     const { image } = this.state;
     if (image !== null) {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -87,22 +88,25 @@ class CarsForm extends Component {
     e.preventDefault();
 
     const item = {
-      name: this.state.name,
-      description: this.state.description,
-      condition: this.state.condition,
-      category_id: this.state.category_id,
-      location: this.state.location,
-      price: this.state.price,
-      car_make: this.state.car_make,
-      year_manufactured: this.state.year_manufactured,
-      no_killometers: this.state.no_killometers,
-      fuel: this.state.fuel,
-      color: this.state.color,
-      transmission: this.state.transmission,
-      quantity: this.state.quantity,
-      status: this.state.status,
-      confirmed: this.state.confirmed,
-      user_id: this.stateuser_id
+      itemInfo: {
+        name: this.state.name,
+        description: this.state.description,
+        condition: this.state.condition,
+        category: this.state.category_id,
+        location: this.state.location,
+        price: this.state.price,
+        car_make: this.state.car_make,
+        year_manufactured: this.state.year_manufactured,
+        no_killometers: this.state.no_killometers,
+        fuel: this.state.fuel,
+        color: this.state.color,
+        transmission: this.state.transmission,
+        quantity: this.state.quantity,
+        status: this.state.status,
+        confirmed: this.state.confirmed,
+        user: this.state.user_id
+      },
+      images: this.state.imgUrl
     };
     this.setState({
       name: "",
@@ -117,12 +121,12 @@ class CarsForm extends Component {
       image: null,
       imgUrl: [],
       car_make: "",
-      year_manufactured: "",
+      year_manufactured: "2020",
       no_killometers: "0",
-      fuel: "",
-      transmission: ""
+      fuel: "Diesel",
+      transmission: "Automatic"
     });
-    console.log(item);
+    // console.log(item);
     this.props.postItem(item);
   }
   render() {
@@ -365,9 +369,9 @@ class CarsForm extends Component {
                   onChange={this.handleImgChange.bind(this)}
                 />
 
-                <button type="button" onClick={this.handleImgUpload.bind(this)}>
+                {/* <button type="button" onClick={this.handleImgUpload.bind(this)}>
                   Upload
-                </button>
+                </button> */}
                 <div className="col-md-12" />
                 {/* <img
                   src={
@@ -408,8 +412,8 @@ CarsForm.propTypes = {
 ////// should changed to category_id from other component
 ////// should changed to user_id from login component
 const mapStateToProps = state => ({
-  category_id: state.item.category_id,
-  user_id: state.item.user_id
+  user_id: state.item.user_id,
+  category_id: state.item.category_id
 });
 
 export default connect(
