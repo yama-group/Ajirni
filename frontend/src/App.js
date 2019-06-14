@@ -2,8 +2,10 @@ import React from "react";
 import ItemDetailCar from "./components/itemDetails";
 import { Provider } from "react-redux";
 import store from "./store";
-import SportForm from "./components/SportForm.js";
-import CarsForm from "./components/CarsForm.js";
+import SportForm from "./components/sportForm.js";
+import CarsForm from "./components/carsForm.js";
+import RealEstate from "./components/realEstate.js";
+import Tools from "./components/tools.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import UserProfile from "./components/userProfile"
 
@@ -29,7 +31,8 @@ class App extends React.Component {
           <SportForm />
           {/* <Signin /> */}
           <CarsForm />
-          
+          <RealEstate />
+          <Tools />
         </Router>
       </Provider>
     );

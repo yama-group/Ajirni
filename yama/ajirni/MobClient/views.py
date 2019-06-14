@@ -64,9 +64,16 @@ class LoginAPI(generics.GenericAPIView):
 
 class CreateItem(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
-    queryset = Items.objects.all()
+    # queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
+    # def perform_create(self, serializer):
+    #     """Save the post data when creating a new Image."""
+        # iteminfo = self.request.data.get("itemInfo", None)
+        # img_urls = self.request.data.get("images", None)
+        # item = Items.objects.get(id=item_id)
+        # image = Images(item=item, img_url=img_url)
+        # image.save()
     def perform_create(self, serializer):
         """Save the post data when creating a new Item."""
         serializer.save()
@@ -158,8 +165,16 @@ class ItemsList(generics.ListCreateAPIView):
     serializer_class = ItemsSerializer
 
 
-class GetImages(generics.ListAPIView):
+class GetImages(generics.ListCreateAPIView):
     serializer_class = ImageSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new Image."""
+        item_id = self.request.data.get("item_id", None)
+        img_url = self.request.data.get("img_url", None)
+        item = Items.objects.get(id=item_id)
+        image = Images(item=item, img_url=img_url)
+        image.save()
 
     def get_queryset(self):
         item_id = self.request.query_params.get("id", None)
