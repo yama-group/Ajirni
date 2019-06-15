@@ -29,7 +29,6 @@ class App extends React.Component {
             <Route path="/user" exact component={UserProfile} />
             <Route path="/Category" component={ItemsList} />
             <Route path="/itemDetail" exact component={ItemDetail} />
-            <Route path="/UserItems" exact component={UserItems} />
             <Route path="/carsForm" exact component={CarsForm} />
             <Route path="/itemsList" exact component={ItemsList} />
             <Route path="/userItems" exact component={UserItems} />

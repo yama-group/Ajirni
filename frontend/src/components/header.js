@@ -32,10 +32,10 @@ class Header extends Component {
 
   search(e, c) {
     e.preventDefault();
-    console.log(c);
+    // console.log(c);
 
     if (["1", "2", "3", "4", "5", "6", "7"].includes(c)) {
-      console.log("e.target.name");
+      // console.log("e.target.name");
       this.props.search("category_id=" + c);
     } else {
       console.log("name");

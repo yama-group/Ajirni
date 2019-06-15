@@ -13,7 +13,7 @@ export const fetchItem = para => dispatch => {
       return item;
     })
     .then(item => {
-      console.log(item);
+      // console.log(item);
       axios.get(`/images/?id=${item.data.id}`).then(images => {
         dispatch({
           type: FETCH_IMAGES,

@@ -3,7 +3,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchItem } from "../actions/itemDetailsAction";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
 
@@ -316,13 +316,11 @@ class ItemDetail extends React.Component {
                       <i className="ion-ios-heart-outline" />
                     </a>
                   </div>
-                  <Link to="/itemOwner">
-                    <div className="quickview-btn-wishlist">
-                      <a className="btn-hover" href="#">
-                        <i className="ion-ios-contact" />
-                      </a>
-                    </div>
-                  </Link>
+                  <div className="quickview-btn-wishlist">
+                    <NavLink to="/userItems" className="btn-hover">
+                      <i className="ion-ios-contact" />
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>

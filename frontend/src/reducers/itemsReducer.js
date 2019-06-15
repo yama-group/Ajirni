@@ -15,7 +15,7 @@ export default function(state = initialState, actions) {
         items: actions.payload
       };
     case Item_id:
-      console.log(actions.payload);
+      // console.log(actions.payload);
       return {
         ...state,
         item_id: actions.payload

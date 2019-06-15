@@ -22,7 +22,7 @@ export const postItem = item => dispatch => {
 };
 
 export const search = query => dispatch => {
-  console.log(query);
+  // console.log(query);
   dispatch({
     type: FETCH_ITEMS,
     payload: []
@@ -30,13 +30,13 @@ export const search = query => dispatch => {
   axios
     .get("/search/?" + query)
     .then(response => {
-      console.log(response);
+      // console.log(response);
       dispatch({
         type: FETCH_ITEMS,
         payload: response.data
       });
     })
     .catch(error => {
-      console.log(error);
+      // console.log(error);
     });
 };
