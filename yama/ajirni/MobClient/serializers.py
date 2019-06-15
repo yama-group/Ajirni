@@ -28,15 +28,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        
+        # username, email, password,first_name, last_name, phone, image_url
         user = CustomUser.objects.create_user(
             validated_data['username'],
-            first_name=validated_data['first_name'],
-            email=validated_data['email'],
-            last_name=validated_data['last_name'],
-            phone=validated_data['phone'],
-            image_url=validated_data['image_url'],
-            password= validated_data['password']
+            validated_data['email'],
+            validated_data['password'],
+            validated_data['first_name'],
+            validated_data['last_name'],
+            validated_data['phone'],
+            validated_data['image_url']
         )
         return user
 
@@ -47,7 +47,9 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
+        print(111111111,data)
         user = authenticate(**data)
+        print(user)
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Incorrect Credentials")

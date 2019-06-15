@@ -31,9 +31,10 @@ class LoginAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
+        token = AuthToken.objects.create(user)[1]
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)
+            "token": token
         })
 
 
@@ -188,11 +189,12 @@ class getUserItems(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
         queryset = Items.objects.filter(user_id__exact=user_id)
-
+        return queryset
 
 class getUserInfo(generics.ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        user_id = self.request.query_params.get('user_id', None)
+        user_id = self.request.query_params.get('user_  id', None)
         queryset = Items.objects.all().filter(user_id__exact=user_id)
+        return queryset

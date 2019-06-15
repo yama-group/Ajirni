@@ -29,9 +29,8 @@ class itemsList extends Component {
   }
   componentDidMount() {
     //var c = this.props.category;
-    // console.log(this.state.category)
-    // this.props.getAllItems();
-    // this.setState({ category: this.props.location.pathname[this.props.location.pathname.length - 1] })
+    console.log(this.state.category)
+    this.props.getAllItems();
   }
 
   render() {
