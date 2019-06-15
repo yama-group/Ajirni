@@ -41,7 +41,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             
            
         )
-
         return user
 
 
@@ -61,12 +60,6 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
         fields = ('item_id', 'img_url')
-
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = CustomUser
-#         fields = ('id', 'email', 'phone' )
 
 
 class ItemsSerializer(serializers.ModelSerializer):

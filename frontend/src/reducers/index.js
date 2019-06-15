@@ -6,6 +6,7 @@ import itemReducer from "./itemReducer";
 import signin from "./signIn";
 import useritems from "./userItems";
 import user from "./userinfo"
+import useritems from "./userItemsReducer";
 export default combineReducers({
   itemsData: itemsReducer,
   item: itemReducer,
@@ -13,5 +14,7 @@ export default combineReducers({
   signIn: signin,
   userItems: useritems,
   itemDetails: itemDetails,
-  userInfo:user
+  userInfo:user,
+  userItemsReducer: useritems,
+  itemDetails: itemDetails
 });

@@ -16,4 +16,4 @@ export default function (state = initialState, actions) {
     default:
       return state
   }
-} 
+}
