@@ -6,6 +6,7 @@ import SportForm from "./components/sportForm.js";
 import CarsForm from "./components/carsForm.js";
 import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
+import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Signup from "./components/signup";
@@ -13,24 +14,21 @@ import Signup from "./components/signup";
 import ItemsList from "./components/itemsList";
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  // }
 
   render() {
     const { createUser } = this.props;
     return (
       <Provider store={store}>
         <Router>
+          <UserItems />
           <ItemDetailCar />
           <Signup createUser={createUser} />
           <ItemsList />
-          <SportForm />
+          <SportForm /> 
           {/* <Signin /> */}
-          <CarsForm />
-          <RealEstate />
-          <Tools />
+           <CarsForm />
+            <RealEstate />
+            <Tools />
         </Router>
       </Provider>
     );
