@@ -9,6 +9,7 @@ import Tools from "./components/tools.js";
 import Header from "./components/header.js";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
+import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Signup from "./components/signup";
@@ -16,11 +17,6 @@ import Signup from "./components/signup";
 import ItemsList from "./components/itemsList";
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  // }
-
   render() {
     // const { createUser } = this.props;
     return (
@@ -39,6 +35,7 @@ class App extends React.Component {
             {/* <CarsForm />
           <RealEstate /> */}
             {/* <Tools /> */}
+            {/* <UserItems /> */}
           </div>
           <Footer />
         </Router>

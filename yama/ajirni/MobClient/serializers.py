@@ -37,7 +37,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             image_url=validated_data['image_url'],
             password=validated_data['password']
         )
-
         return user
 
 
@@ -57,12 +56,6 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
         fields = ('item_id', 'img_url')
-
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = CustomUser
-#         fields = ('id', 'email', 'phone' )
 
 
 class ItemsSerializer(serializers.ModelSerializer):
