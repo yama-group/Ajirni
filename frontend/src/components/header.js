@@ -30,81 +30,23 @@ class Header extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  search(e) {
+  search(e, c) {
     e.preventDefault();
-    console.log(this.state.query);
+    console.log(c);
 
-    console.log(e.target.name);
-    if ([1, 2, 3, 4, 5, 6, 7].includes(e.target.name)) {
-      this.props.search("category=" + e.target.name);
+    if (["1", "2", "3", "4", "5", "6", "7"].includes(c)) {
+      console.log("e.target.name");
+      this.props.search("category_id=" + c);
     } else {
+      console.log("name");
       this.props.search("name=" + this.state.query);
     }
     this.setState({ query: "" });
-    // return <Redirect to="/itemsList" />;
   }
   render() {
     return (
       <div>
         <div className="wrapper">
-          {/* <div className="popup_wrapper hidden-sm hidden-xs">
-            <div className="test">
-              <span className="popup_off">Close</span>
-              <div className="subscribe_area text-center">
-                <h2>Newsletter</h2>
-                <p>
-                  Subscribe to the Neha mailing list to receive updates on new
-                  arrivals, special offers and other discount information.
-                </p>
-                <div id="mc_embed_signup" className="subscribe-bottom">
-                  <form
-                    action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
-                    method="post"
-                    id="mc-embedded-subscribe-form"
-                    name="mc-embedded-subscribe-form"
-                    className="validate"
-                    target="_blank"
-                    novalidate
-                  >
-                    <div id="mc_embed_signup_scroll" className="mc-form">
-                      <input
-                        type="email"
-                        value=""
-                        name="EMAIL"
-                        className="email"
-                        placeholder="Enter your email address"
-                        required
-                      />
-                      <div className="mc-news" aria-hidden="true">
-                        <input
-                          type="text"
-                          name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef"
-                          tabindex="-1"
-                          value=""
-                        />
-                      </div>
-                      <div className="clear-2">
-                        <input
-                          type="submit"
-                          value="subscribe"
-                          name="subscribe"
-                          id="mc-embedded-subscribe"
-                          className="button"
-                        />
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div className="subscribe-bottom mt-15">
-                  <input type="checkbox" id="newsletter-permission" />
-                  <label for="newsletter-permission">
-                    Don't show this popup again
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
           <header className="pl-155 pr-155 intelligent-header">
             <div className="header-area header-area-2">
               <div className="container-fluid p-0">
@@ -131,26 +73,54 @@ class Header extends Component {
                           <li>
                             Category
                             <ul className="dropdown">
-                              <li name="1" onClick={this.search.bind(this)}>
+                              <li
+                                onClick={e => {
+                                  this.search(e, "1");
+                                }}
+                              >
                                 <Link to="/itemsList">Sport</Link>
                               </li>
-                              <li>
+                              <li
+                                onClick={e => {
+                                  this.search(e, "2");
+                                }}
+                              >
                                 <Link to="/itemsList">Cars</Link>
                               </li>
 
-                              <li>
+                              <li
+                                onClick={e => {
+                                  this.search(e, "3");
+                                }}
+                              >
                                 <Link to="/itemsList">Real Estate</Link>
                               </li>
-                              <li>
+                              <li
+                                onClick={e => {
+                                  this.search(e, "4");
+                                }}
+                              >
                                 <Link to="/itemsList">Home Tools</Link>
                               </li>
-                              <li>
+                              <li
+                                onClick={e => {
+                                  this.search(e, "5");
+                                }}
+                              >
                                 <Link to="/itemsList">Industrial Tools</Link>
                               </li>
-                              <li>
+                              <li
+                                onClick={e => {
+                                  this.search(e, "6");
+                                }}
+                              >
                                 <Link to="/itemsList">Event Tools</Link>
                               </li>
-                              <li>
+                              <li
+                                onClick={e => {
+                                  this.search(e, "7");
+                                }}
+                              >
                                 <Link to="/itemsList">Others</Link>
                               </li>
                             </ul>

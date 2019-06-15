@@ -698,11 +698,14 @@ textarea:focus {
 .mt-10 {
   margin-top: 10px;
 }
-.mt-12 {
+mtoo-12 {
   margin-top: 12px;
   margin-left: 12px;
   border: 1px solid red;
   height: 120px;
+}
+.mt-12 {
+  margin-top: 12px;
 }
 .mt-15 {
   margin-top: 15px;

@@ -188,6 +188,7 @@ class getUserItems(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
         queryset = Items.objects.filter(user_id__exact=user_id)
+        return queryset
 
 
 class getUserInfo(generics.ListAPIView):
@@ -196,3 +197,4 @@ class getUserInfo(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
         queryset = Items.objects.all().filter(user_id__exact=user_id)
+        return queryset

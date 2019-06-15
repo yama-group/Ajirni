@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_ITEMS, NEW_ITEM } from "./types";
+import { FETCH_ITEMS, NEW_ITEM, Item_id } from "./types";
 
 export const getAllItems = category => dispatch => {
   axios.get(`/all/?category=${category}`).then(data => {
@@ -11,5 +11,13 @@ export const getAllItems = category => dispatch => {
       },
       console.log(data.data)
     );
+  });
+};
+
+export const itemId = id => dispatch => {
+  console.log(id, "dfdfdfsdfsdfsdf");
+  dispatch({
+    type: Item_id,
+    payload: id
   });
 };

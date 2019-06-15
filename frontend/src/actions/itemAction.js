@@ -23,8 +23,12 @@ export const postItem = item => dispatch => {
 
 export const search = query => dispatch => {
   console.log(query);
+  dispatch({
+    type: FETCH_ITEMS,
+    payload: []
+  });
   axios
-    .get("/search/?" + query, query)
+    .get("/search/?" + query)
     .then(response => {
       console.log(response);
       dispatch({
