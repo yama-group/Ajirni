@@ -6,6 +6,8 @@ import SportForm from "./components/sportForm.js";
 import CarsForm from "./components/carsForm.js";
 import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
+import Header from "./components/header.js";
+import Home from "./components/home.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Signup from "./components/signup";
@@ -19,18 +21,22 @@ class App extends React.Component {
   // }
 
   render() {
-    const { createUser } = this.props;
+    // const { createUser } = this.props;
     return (
       <Provider store={store}>
         <Router>
-          <ItemDetailCar />
+          <Header />
+          <Route path="/" exact component={Home} />
+          <Route path="/Category" component={ItemsList} />
+          {/* <Route path="/Tools" exact component={Tools} /> */}
+          {/* <ItemDetailCar />
           <Signup createUser={createUser} />
           <ItemsList />
-          <SportForm />
+          <SportForm /> */}
           {/* <Signin /> */}
-          <CarsForm />
-          <RealEstate />
-          <Tools />
+          {/* <CarsForm />
+          <RealEstate /> */}
+          {/* <Tools /> */}
         </Router>
       </Provider>
     );
