@@ -24,7 +24,7 @@ export const postItem = item => dispatch => {
 export const search = query => dispatch => {
   console.log(query);
   axios
-    .get("/search/?name=" + query, query)
+    .get("/search/?" + query, query)
     .then(response => {
       console.log(response);
       dispatch({

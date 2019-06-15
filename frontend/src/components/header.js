@@ -17,7 +17,6 @@ class Header extends Component {
       query: ""
     };
     this.onChanges = this.onChanges.bind(this);
-    this.search = this.search.bind(this);
   }
 
   componentWillMount() {
@@ -34,7 +33,13 @@ class Header extends Component {
   search(e) {
     e.preventDefault();
     console.log(this.state.query);
-    this.props.search(this.state.query);
+
+    console.log(e.target.name);
+    if ([1, 2, 3, 4, 5, 6, 7].includes(e.target.name)) {
+      this.props.search("category=" + e.target.name);
+    } else {
+      this.props.search("name=" + this.state.query);
+    }
     this.setState({ query: "" });
     // return <Redirect to="/itemsList" />;
   }
@@ -126,27 +131,27 @@ class Header extends Component {
                           <li>
                             Category
                             <ul className="dropdown">
-                              <li>
-                                <Link to="/Category/1">Sport</Link>
+                              <li name="1" onClick={this.search.bind(this)}>
+                                <Link to="/itemsList">Sport</Link>
                               </li>
                               <li>
-                                <Link to="/Category/2">Cars</Link>
+                                <Link to="/itemsList">Cars</Link>
                               </li>
 
                               <li>
-                                <Link to="/Category/3">Real Estate</Link>
+                                <Link to="/itemsList">Real Estate</Link>
                               </li>
                               <li>
-                                <Link to="/Category/4">Home Tools</Link>
+                                <Link to="/itemsList">Home Tools</Link>
                               </li>
                               <li>
-                                <Link to="/Category/5">Industrial Tools</Link>
+                                <Link to="/itemsList">Industrial Tools</Link>
                               </li>
                               <li>
-                                <Link to="/Category/6">Event Tools</Link>
+                                <Link to="/itemsList">Event Tools</Link>
                               </li>
                               <li>
-                                <Link to="/Category/7">Others</Link>
+                                <Link to="/itemsList">Others</Link>
                               </li>
                             </ul>
                           </li>
@@ -174,7 +179,7 @@ class Header extends Component {
                         {" "}
                         <button
                           className="sidebar-trigger-search"
-                          onClick={this.search}
+                          onClick={this.search.bind(this)}
                         >
                           <Link to="/itemsList">
                             <span className="ion-ios-search-strong" />
