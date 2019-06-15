@@ -38,7 +38,7 @@ class Home extends Component {
           className="breadcrumb-area pt-205 pb-210"
           id="navnav" //   style={"background-image: url(assets/img/bg/breadcrumb.jpg)"}
         />
-        <div className="container">dddd</div>
+        <div className="container" />
       </div>
     );
   }
