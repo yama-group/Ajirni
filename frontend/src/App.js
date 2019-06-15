@@ -10,7 +10,7 @@ import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Signup from "./components/signup";
-import SignIn from "./components/signIn";
+import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
 
 class App extends React.Component {
