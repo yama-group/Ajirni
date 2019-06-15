@@ -69,8 +69,5 @@ PostForm.propTypes = {
   createPost: PropTypes.func.isRequired
 };
 
-<<<<<<< HEAD
 export default connect(null, { createPost })(PostForm);
-=======
 // export default connect(null, { createPost })(PostForm);
->>>>>>> 471649feb2f68ad33739f34125852afd05b747fd
