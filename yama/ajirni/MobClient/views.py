@@ -160,7 +160,7 @@ class ItemsList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Items.objects.all()
-        category_id = self.request.query_params.get('category', None)
+        category_id = self.request.query_params.get('Category', None)
         return queryset.filter(category_id__exact= category_id)
         
         
@@ -178,11 +178,7 @@ class GetImages(generics.ListCreateAPIView):
         image.save()
 
     def get_queryset(self):
-<<<<<<< HEAD
-        item_id = self.request.query_params.get("id", None)
-=======
         item_id = self.request.query_params.get("item_id", None)
->>>>>>> 471649feb2f68ad33739f34125852afd05b747fd
         queryset = Images.objects.filter(item_id__exact=item_id)
         return queryset
 

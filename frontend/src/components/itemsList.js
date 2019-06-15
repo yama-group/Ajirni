@@ -13,16 +13,14 @@ class itemsList extends Component {
     category: ""
   }
   componentDidMount() {
-    var c = this.props.category;
-    console.log(c)
-    this.props.getAllItems(c);
-
+    //var c = this.props.category;
     console.log(this.state.category)
+    this.props.getAllItems();
+    this.setState({ category: this.props.location.pathname[this.props.location.pathname.length - 1] })
   }
 
 
   render() {
-
     // const allItems = this.props.itemsData.map((item) => {
     //   return (
 
@@ -129,7 +127,7 @@ class itemsList extends Component {
 
 const mapStateToProps = state => ({
   itemsData: state.itemsData.items,
-  category: state.itemsData.category,
+  category: state.item.category_id,
 
 })
 
