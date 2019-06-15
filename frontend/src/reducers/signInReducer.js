@@ -1,19 +1,18 @@
 import {
-  USER_ITEMS
+  SIGN_IN
 } from '../actions/types'
 
 const initialState = {
-  userItems: [],
   userId: 1
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case USER_ITEMS:
+    case SIGN_IN:
       console.log(action.payload)
       return {
         ...state,
-        userItems: action.payload
+        userId: action.payload
       }
       default:
         return state

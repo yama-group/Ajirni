@@ -3,20 +3,19 @@ import ItemDetail from "./components/itemDetails";
 import { Provider } from "react-redux";
 import store from "./store";
 import SportForm from "./components/sportForm.js";
-import CarsForm from "./components/carsForm.js";
 import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
 import Header from "./components/header.js";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
 import UserItems from "./components/userItems.js";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import UserProfile from "./components/userProfile";
 
 import Signup from "./components/signup";
-// import SignIn from "./components/signIn";
+import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
-
+import CarsForm from "./components/carsForm";
 
 class App extends React.Component {
   render() {
@@ -33,16 +32,16 @@ class App extends React.Component {
             <Route path="/UserItems" exact component={UserItems} />
             <Route path="/carsForm" exact component={CarsForm} />
             <Route path="/itemsList" exact component={ItemsList} />
+            <Route path="/userItems" exact component={UserItems} />
 
-            {/* <ItemDetailCar />
-          <Signup createUser={createUser} />
-          <ItemsList />
-          <SportForm /> */}
-            {/* <Signin /> */}
-            {/* <CarsForm />
-          <RealEstate /> */}
-            {/* <Tools /> */}
+            {/* <Signup createUser={Signup} /> */}
+            {/* <SignIn /> */}
             {/* <UserItems /> */}
+            {/* <ItemsList /> */}
+            {/* <SportForm /> */}
+            {/* <CarsForm /> */}
+            {/* <RealEstate /> */}
+            {/* <Tools /> */}
           </div>
           <Footer />
         </Router>

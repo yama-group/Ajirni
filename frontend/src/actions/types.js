@@ -10,3 +10,4 @@ export const FETCH_USER_ITEMS = "FETCH_USER_ITEMS";
 export const UPDATE_ITEM = "UPDATE_ITEM";
 export const USER_ITEMS = "USER_ITEMS";
 export const Item_id = "Item_id";
+export const SIGN_IN = "SIGN_IN";
