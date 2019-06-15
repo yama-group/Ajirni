@@ -66,7 +66,7 @@ class UserItems extends Component {
           </div>
       </div>)
       
-// console.log(this.props.itemsData.length,"nvjjhjgjhg")
+console.log(this.props.itemsData.length,"nvjjhjgjhg")
     return (
 
       <div>
