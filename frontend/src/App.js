@@ -35,15 +35,15 @@ class App extends React.Component {
             <Route path="/itemsList" exact component={ItemsList} />
 
           {/* <Signup createUser={Signup} /> */}
-            {/* <SignIn /> */}
+            <SignIn />
             <UserItems />
-          {/* <ItemsList /> */}
-          {/* <SportForm /> */}
-            {/* <CarsForm /> */}
-          {/* <RealEstate /> */}
-            {/* <Tools /> */}
+          <ItemsList />
+          <SportForm />
+            <CarsForm />
+          <RealEstate />
+            <Tools />
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </Router>
       </Provider>
     );
