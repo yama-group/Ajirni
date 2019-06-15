@@ -36,6 +36,7 @@ class Header extends Component {
     console.log(this.state.query);
     this.props.search(this.state.query);
     this.setState({ query: "" });
+    // return <Redirect to="/itemsList" />;
   }
   render() {
     return (
@@ -170,11 +171,14 @@ class Header extends Component {
                         />
                       </div>
                       <div className="header-search common-style">
+                        {" "}
                         <button
                           className="sidebar-trigger-search"
                           onClick={this.search}
                         >
-                          <span className="ion-ios-search-strong" />
+                          <Link to="/itemsList">
+                            <span className="ion-ios-search-strong" />
+                          </Link>
                         </button>
                       </div>
 
