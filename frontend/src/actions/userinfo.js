@@ -1,4 +1,4 @@
-import {FETCH_USER,FETCH_USER_ITEMS}from "./types"
+import {FETCH_USER,FETCH_USER_ITEMS,UPDATE_ITEM}from "./types"
 import axios from "axios";
 
 export const fetchUser = (para=1) => dispatch => {
@@ -27,4 +27,29 @@ export const fetchUser = (para=1) => dispatch => {
   };
 
 
+
+  export const updateItem = (item,id) => dispatch => {
+    
+    axios.put(`/rud/${id}`,{...item})
+    .then(update =>{
+      fetchUser(1)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  };
+
+
   
+
+
+  export const deleteItem = (id) => dispatch => {
+    
+    axios.delete(`/rud/${id}`)
+    .then(deleted =>{
+      fetchUser(1)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  };

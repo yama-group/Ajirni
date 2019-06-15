@@ -1,8 +1,8 @@
 import React from "react"
 import {connect} from "react-redux"
-import {fetchUser} from "../actions/userinfo"
+import {fetchUser,updateItem,deleteItem} from "../actions/userinfo"
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
-
+import {Modal,Button} from "react-bootstrap"
 
 
 
@@ -11,7 +11,34 @@ class UserProfile extends React.Component{
     state={
         items:[],
         itemSelected:{},
-        modal: false
+        modal2: false,
+        modal3: false,
+        modal4: false,
+        modal5: false,
+        show1: false,
+        show2:false,
+        show2:false,
+        // id:this.state.itemSelected.id,
+        // description:this.state.itemSelected.description,
+        // condition:this.state.itemSelected.condition,
+        // category_id:this.state.itemSelected.category_id,
+        // no_rooms:this.state.itemSelected.no_rooms,
+        // no_bathrooms:this.state.itemSelected.no_bathrooms,
+        // surface_area:this.state.itemSelected.surface_area,
+        // furnished:this.state.itemSelected.furnished,
+        // location:this.state.itemSelected.location,
+        // price:this.state.itemSelected.price, 
+        // floor_no:this.state.itemSelected.floor_no,
+        // car_make:this.state.itemSelected.car_make, 
+        // year_manufactured:this.state.itemSelected.year_manufactured,
+        // no_killometers:this.state.itemSelected.no_killometers,
+        // fuel:this.state.itemSelected.fuel,
+        // color:this.state.itemSelected.color,
+        // transmission:this.state.itemSelected.transmission,
+        // quantity:this.state.itemSelected.quantity,
+        // status:this.state.itemSelected.status,
+        // confirmed:this.state.itemSelected.confirmed, 
+        // user_id:this.state.itemSelected.user_id
     }
 
     componentWillMount(){
@@ -19,21 +46,91 @@ class UserProfile extends React.Component{
         this.props.fetchUser()
         
     }
-    toggle (index){
-        
-        this.setState({
-            itemSelected:this.state.items.slice(index,index+1)[0],
-          modal: !this.state.modal
-        });
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+    
+        this.setState(prevState => ({
+            itemSelected:{...prevState.itemSelected,
+              [name]: value  
+            }
+          
+        }));
       }
 
-      toggleClose (){
+      
+
+      handleClose() {
+        var id=this.state.itemSelected.id
+         delete this.state.itemSelected.id
+        console.log(id)
+        this.props.updateItem(this.state.itemSelected,id)
         
+         if(this.state.itemSelected.category ===1){
+              this.setState({ show1: false,
+             });
+          }else if(this.state.itemSelected.category ===2){
+            this.setState({ show2: false,
+          
+       });
+        } else{
+            this.setState({ show3: false,
+          
+       });
+        }
+        
+      }
+
+
+      handleCloseDelete() {
+        var id=this.state.itemSelected.id
+        
+        
+        this.props.deleteItem(id)
+        
+         if(this.state.itemSelected.category ===1){
+              this.setState({ show1: false,
+             });
+          }else if(this.state.itemSelected.category ===2){
+            this.setState({ show2: false,
+          
+       });
+        } else{
+            this.setState({ show3: false,
+          
+       });
+        }
+        
+      }
+    
+      handleShow(index) {
+          var that=this
         this.setState({
-           
-          modal: !this.state.modal
+            itemSelected:this.state.items.slice(index,index+1)[0], 
+            
+        },()=>{
+            if(that.state.itemSelected.category ===1){
+                that.setState({ show1: true,
+            
+                });
+            }else if(that.state.itemSelected.category ===2){
+                that.setState({ show2: true,
+            
+                });
+            }else{
+                that.setState({ show3: true,
+            
+                });
+            }
         });
       }
+    
+
+    
+
+      
 
 
     componentWillReceiveProps(next){
@@ -50,21 +147,176 @@ class UserProfile extends React.Component{
 render(){
     return(
         <div>
-            
-    <MDBContainer>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-        <MDBModalHeader toggle={this.toggle.bind(this)}>MDBModal title</MDBModalHeader>
-        <MDBModalBody>
-        <div className="leave-form">
-         <input  value={this.state.itemSelected.name} type="text"/>
+            <>
+        
+
+        <Modal show={this.state.show3} >
+          <Modal.Header >
+            <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body><div className="row">
+               <div className="col-lg-4" >
+        Name: <input onChange={this.handleInputChange.bind(this)} name="name"  value={this.state.itemSelected.name} type="text"/>
+        </div> 
+        
+        
+      <div className="col-lg-4" >
+        Description: <input onChange={this.handleInputChange.bind(this)} name="description" value={this.state.itemSelected.description} type="text"/>
         </div>
-        </MDBModalBody>
-        <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={this.toggleClose.bind(this)}>Close</MDBBtn>
-          <MDBBtn color="primary">Save changes</MDBBtn>
-        </MDBModalFooter>
-      </MDBModal>
-    </MDBContainer>
+         <div className="col-lg-4" >
+        Condition: <input  value={this.state.itemSelected.condition} onChange={this.handleInputChange.bind(this)} name="condition" type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Location: <input onChange={this.handleInputChange.bind(this)} name="location" value={this.state.itemSelected.location} type="text"/>
+        </div>
+        <div className="col-lg-4" >
+        Color: <input onChange={this.handleInputChange.bind(this)} name="color" value={this.state.itemSelected.color} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Quantity: <input onChange={this.handleInputChange.bind(this)} name="quantity"  value={this.state.itemSelected.quantity} type="text"/>
+        </div>
+        <div className="col-lg-4">
+        <select value={this.state.itemSelected.status} onChange={this.handleInputChange.bind(this)}>
+            <option value="grapefruit">Grapefruit</option>
+            <option value="lime">Lime</option>
+            <option value="coconut">Coconut</option>
+            <option value="mango">Mango</option>
+          </select>
+        </div>
+         </div></Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={this.handleClose.bind(this)}>
+              Save Changes
+            </Button>
+            <Button variant="danger" onClick={this.handleCloseDelete.bind(this)}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+      <>
+        
+
+        <Modal show={this.state.show2} >
+          <Modal.Header >
+            <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body><div className="row">
+          <div className="col-lg-4" >
+        Name: <input onChange={this.handleInputChange.bind(this)} name="name"  value={this.state.itemSelected.name} type="text"/>
+        </div> 
+          <div className="col-lg-4" >
+        Description: <input onChange={this.handleInputChange.bind(this)} name="description" value={this.state.itemSelected.description} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Condition: <input  onChange={this.handleInputChange.bind(this)} name="condition" value={this.state.itemSelected.condition} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Car Make: <input onChange={this.handleInputChange.bind(this)} name="car_make" value={this.state.itemSelected.car_make} type="text"/>
+        </div>
+        <div className="col-lg-4" >
+        Year Manufactured: <input onChange={this.handleInputChange.bind(this)} name="year_manufactured" value={this.state.itemSelected.year_manufactured} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        No.Killometers: <input onChange={this.handleInputChange.bind(this)} name="no_killometers" value={this.state.itemSelected.no_killometers} type="text"/>
+        </div>
+       <div className="col-lg-4" >
+        Transmission: <input onChange={this.handleInputChange.bind(this)} name="transmission" value={this.state.itemSelected.transmission} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Location: <input onChange={this.handleInputChange.bind(this)} name="location" value={this.state.itemSelected.location} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Color: <input onChange={this.handleInputChange.bind(this)} name="color" value={this.state.itemSelected.color} type="text"/>
+        </div>
+        <div className="col-lg-4" >
+        Quantity: <input onChange={this.handleInputChange.bind(this)} name="quantity" value={this.state.itemSelected.quantity} type="text"/>
+        </div>
+        <div className="col-lg-4">
+            Status:
+        <select name="status" value={this.state.itemSelected.status} onChange={this.handleInputChange.bind(this)}>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+        </div>
+        </div></Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={this.handleClose.bind(this)}>
+              Save Changes
+            </Button>
+            <Button variant="danger" onClick={this.handleCloseDelete.bind(this)}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+      <>
+        
+
+        <Modal show={this.state.show1} >
+          <Modal.Header >
+            <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body><div className="row">
+                <div className="col-lg-4" >
+        Name: <input onChange={this.handleInputChange.bind(this)} name="name"  value={this.state.itemSelected.name} type="text"/>
+        </div>
+          <div className="col-lg-4" >
+        Description: <input onChange={this.handleInputChange.bind(this)} name="description" value={this.state.itemSelected.description} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Condition: <input  onChange={this.handleInputChange.bind(this)} name="condition" value={this.state.itemSelected.condition} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        No.Rooms: <input onChange={this.handleInputChange.bind(this)} name="no_rooms"  value={this.state.itemSelected.no_rooms} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        No.Bathrooms: <input onChange={this.handleInputChange.bind(this)} name="no_bathrooms"  value={this.state.itemSelected.no_bathrooms} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Surface Area: <input onChange={this.handleInputChange.bind(this)} name="surface_area"  value={this.state.itemSelected.surface_area} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Furnished: <input onChange={this.handleInputChange.bind(this)} name="furnished" value={this.state.itemSelected.furnished} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Floor.No: <input onChange={this.handleInputChange.bind(this)} name="floor_no" value={this.state.itemSelected.floor_no} type="text"/>
+        </div>
+         <div className="col-lg-4" >
+        Location: <input onChange={this.handleInputChange.bind(this)} name="location" value={this.state.itemSelected.location} type="text"/>
+        </div>
+         
+         <div className="col-lg-4" >
+        Quantity: <input onChange={this.handleInputChange.bind(this)} name="quantity" value={this.state.itemSelected.quantity} type="text"/>
+        </div>
+        <div className="col-lg-4">
+            Status:
+        <select name="status" value={this.state.itemSelected.status} onChange={this.handleInputChange.bind(this)}>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+        </div> </div></Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={this.handleClose.bind(this)}>
+              Save Changes
+            </Button>
+            <Button variant="danger" onClick={this.handleCloseDelete.bind(this)}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    
+    
             <div className="blog-area pt-100 pb-100">
                 <div className="container">
                     <div className="row">
@@ -128,7 +380,7 @@ render(){
                                         return <div key={index}>
                                         <div className="single-top-rated">
                                                 <div className="top-rated-img">
-                                                    <a href="#"><img onClick={this.toggle.bind(this,index)} src="data:image/png;base64,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" alt=""/></a>
+                                                    <a href="#"><img onClick={this.handleShow.bind(this,index)} src="./assets/img/ava.png" alt=""/></a>
                                                 </div>
                                                 <div className="top-rated-text">
                                                 <span>{item.name}</span>
@@ -140,7 +392,7 @@ render(){
                                         return <div key={index}>
                                         <div className="single-top-rated">
                                                 <div className="top-rated-img">
-                                                    <a href="#"><img onClick={this.toggle.bind(this,index)} src="data:image/png;base64,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" alt=""/></a>
+                                                    <a href="#"><img onClick={this.handleShow.bind(this,index)} src="./assets/img/unava.png" alt=""/></a>
                                                 </div>
                                                 <div className="top-rated-text">
                                                 <span>{item.name}</span>
@@ -158,29 +410,6 @@ render(){
                                     
                                 </div>
                                 
-                                <div className="leave-comment">
-                                    <h3 className="leave-comment-text">Write a comment</h3>
-                                    <form action="#">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="leave-form">
-                                                    <input placeholder="Name*" type="text"/>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="leave-form">
-                                                    <input placeholder="Email*" type="text"/>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-12">
-                                                <div className="text-leave">
-                                                    <textarea placeholder="Comment*"></textarea>
-                                                    <button className="submit btn-hover" type="submit">Send Commant</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -200,6 +429,6 @@ const mapStateToProps = state => ({
     
   });
 
-export default connect(mapStateToProps,{fetchUser})(UserProfile)
+export default connect(mapStateToProps,{fetchUser,updateItem,deleteItem})(UserProfile)
 
 

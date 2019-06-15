@@ -7,3 +7,4 @@ export const FETCH_IMAGES = "FETCH_IMAGES";
 export const NewItemImages = "NewItemImages";
 export const FETCH_USER ="FETCH_USER"
 export const FETCH_USER_ITEMS="FETCH_USER_ITEMS"
+export const UPDATE_ITEM="UPDATE_ITEM"
