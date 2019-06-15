@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.contrib.auth.models import User
 
 class CustomUser(AbstractUser):
     pass
-    phone = models.CharField(max_length=50)
+    phone = models.CharField(max_length=250)
     image_url = models.TextField()
+    
 
 
 class Categories(models.Model):

@@ -30,36 +30,71 @@ class PostForm extends Component {
     this.props.signIn(logIn);
   }
 
+
+  //   render() {
+  //     return (
+  //       <div>
+  //         <h1>Sign In</h1>
+  //         <div className="register-area ptb-100">
+  //                 <div className="container">
+  //                     <div className="row">
+  //                         <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+  //                             <div className="login">
+  //                                 <div className="login-form-container">
+  //                                     <div className="login-form">
+  //                                         <form action="#" method="post">
+  //                                             <input type="text" name="user-name" placeholder="Username"/>>
+  //                                             <input type="password" name="user-password" placeholder="Password"/>>
+  //                                             <div className="button-box">
+  //                                                 <div className="login-toggle-btn">
+  //                                                     <input type="checkbox"/>>
+  //                                                     <label>Remember me</label>
+  //                                                     {/* <a>Forgot Password?</a> */}
+  //                                                 </div>
+  //                                                 <button type="submit" className="default-btn floatright">Login</button>
+  //                                             </div>
+  //                                         </form>
+  //                                     </div>
+  //                                 </div>
+  //                             </div>
+  //                         </div>
+  //                     </div>
+  //                 </div>
+  //             </div>
+  //       </div>
+  //     );
+  //   }
+  // }
   render() {
     return (
       <div>
         <h1>Sign In</h1>
         <div className="register-area ptb-100">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
-                            <div className="login">
-                                <div className="login-form-container">
-                                    <div className="login-form">
-                                        <form action="#" method="post">
-                                            <input type="text" name="user-name" placeholder="Username"/>>
-                                            <input type="password" name="user-password" placeholder="Password"/>>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+                <div className="login">
+                  <div className="login-form-container">
+                    <div className="login-form">
+                      <form action="#" method="post">
+                        <input type="text" name="user-name" placeholder="Username" />>
+                                            <input type="password" name="user-password" placeholder="Password" />>
                                             <div className="button-box">
-                                                <div className="login-toggle-btn">
-                                                    <input type="checkbox"/>>
+                          <div className="login-toggle-btn">
+                            <input type="checkbox" />>
                                                     <label>Remember me</label>
-                                                    {/* <a>Forgot Password?</a> */}
-                                                </div>
-                                                <button type="submit" className="default-btn floatright">Login</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            {/* <a>Forgot Password?</a> */}
+                          </div>
+                          <button type="submit" className="default-btn floatright">Login</button>
                         </div>
+                      </form>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -68,6 +103,19 @@ class PostForm extends Component {
 PostForm.propTypes = {
   createPost: PropTypes.func.isRequired
 };
+
+
+// export default connect(null, { createPost })(PostForm);
+
+
+// PostForm.propTypes = {
+//   createPost: PropTypes.func.isRequired
+// };
+
+
+// export default connect(null, { createPost })(PostForm);
+
+// export default connect(null, { createPost })(PostForm);
 
 export default connect(null, { createPost })(PostForm);
 // export default connect(null, { createPost })(PostForm);

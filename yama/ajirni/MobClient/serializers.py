@@ -36,10 +36,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
             phone=validated_data['phone'],
             image_url=validated_data['image_url'],
-
-            
-            
-           
+            password= validated_data['password']
         )
         return user
 

@@ -1,33 +1,31 @@
-import {FETCH_ITEM,SAVE_USER_ID,FETCH_IMAGES} from "../actions/types"
+import { FETCH_ITEM, SAVE_USER_ID, FETCH_IMAGES } from "../actions/types"
 
 const initialState = {
 
-    item: {},
-    userId:null,
-    images:[],
-    
-  };
-  
-  export default function(state = initialState, action) {
-    if(action.type === FETCH_ITEM){
-        return{
-            ...state,
-            item:action.itemRetrive,
-            userId:action.user_id
-        }
-    }
-    if(action.type === SAVE_USER_ID){
-      return{
-          ...state,
-          userId:action.saveId
-      }
-  }
-  if(action.type === FETCH_IMAGES){
-    
-    return{
-        ...state,
-        images:action.images
+  item: {},
+  userId: null,
+  images: []
+};
+
+export default function (state = initialState, action) {
+  if (action.type === FETCH_ITEM) {
+    return {
+      ...state,
+      item: action.itemRetrive
     }
   }
-    return state
+  if (action.type === SAVE_USER_ID) {
+    return {
+      ...state,
+      userId: action.saveId
+    }
   }
+  if (action.type === FETCH_IMAGES) {
+
+    return {
+      ...state,
+      images: action.images
+    }
+  }
+  return state
+}
