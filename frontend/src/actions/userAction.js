@@ -17,7 +17,7 @@ import { NEW_USER } from './types';
 export const createUser = (user) => dispatch => {
   console.log(user);
   axios
-    .post("/signUp/", user)
+    .post("api/auth/register", user)
     .then(response => {
       console.log(response);
       dispatch({
@@ -34,24 +34,24 @@ export const createUser = (user) => dispatch => {
 };
 
 
-export const userSignIn = (user) => dispatch => {
-  console.log(user);
-  axios
-    .post("/signUp/", user)
-    .then(response => {
-      console.log(response);
-      dispatch({
-        type: NEW_USER,
-        payload: ' successfully sign up '
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: NEW_USER,
-        payload: ' please try agian '
-      });
-    });
-};
+// export const userSignIn = (user) => dispatch => {
+//   console.log(user);
+//   axios
+//     .post("", user)
+//     .then(response => {
+//       console.log(response);
+//       dispatch({
+//         type: NEW_USER,
+//         payload: ' successfully sign up '
+//       });
+//     })
+//     .catch(error => {
+//       dispatch({
+//         type: NEW_USER,
+//         payload: ' please try agian '
+//       });
+//     });
+// };
 
 // export const getAllItems = () => dispatch => {
 //   axios.get("/all/")

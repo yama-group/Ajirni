@@ -21,12 +21,12 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
-          <ItemDetailCar />
-          <Signup createUser={createUser} />
+          {/* <ItemDetailCar />
+          <Signup createUser={createUser} /> */}
           <ItemsList />
-          <SportForm />
+          {/* <SportForm /> */}
           {/* <Signin /> */}
-          <CarsForm />
+          {/* <CarsForm /> */}
         </Router>
       </Provider>
     );

@@ -15,9 +15,11 @@ class RegisterAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        token = AuthToken.objects.create(user)[1]
+        print(token)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)
+            "token": token
         })
 
 
@@ -151,7 +153,7 @@ class ItemsList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Items.objects.all()
-        category_id = self.request.query_params.get('category', '')
+        category_id = self.request.query_params.get('category', None)
         return queryset.filter(category_id__exact= category_id)
         
         
