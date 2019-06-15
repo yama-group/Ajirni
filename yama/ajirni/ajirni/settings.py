@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'knox',
+    # 'users.apps.UsersConfig',
 ]
+AUTH_USER_MODEL = 'MobClient.CustomUser'
 
 AUTH_USER_MODEL = 'MobClient.CustomUser'
 
@@ -131,4 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 471649feb2f68ad33739f34125852afd05b747fd

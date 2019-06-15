@@ -35,7 +35,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             last_name=validated_data['last_name'],
             phone=validated_data['phone'],
             image_url=validated_data['image_url'],
+<<<<<<< HEAD
             password= validated_data['password']
+=======
+            password=validated_data['password']
+>>>>>>> 471649feb2f68ad33739f34125852afd05b747fd
         )
         return user
 
@@ -56,12 +60,6 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
         fields = ('item_id', 'img_url')
-
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = CustomUser
-#         fields = ('id', 'email', 'phone' )
 
 
 class ItemsSerializer(serializers.ModelSerializer):

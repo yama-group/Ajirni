@@ -77,5 +77,9 @@
 //   createPost: PropTypes.func.isRequired
 // };
 
+<<<<<<< HEAD
 // export default connect(null, { createPost })(PostForm);
 >>>>>>> 1c732c99617a23d7bbf66ec6bc10129ef4910c25
+=======
+// export default connect(null, { createPost })(PostForm);
+>>>>>>> 471649feb2f68ad33739f34125852afd05b747fd
