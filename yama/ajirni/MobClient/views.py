@@ -191,6 +191,7 @@ class getUserItems(generics.ListAPIView):
         queryset = Items.objects.filter(user_id__exact=user_id)
         return queryset
 
+
 class getUserInfo(generics.ListAPIView):
     serializer_class = UserSerializer
 

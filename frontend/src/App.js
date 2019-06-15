@@ -17,7 +17,6 @@ import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
 import CarsForm from "./components/carsForm";
 
-
 class App extends React.Component {
   render() {
     // const { createUser } = this.props;
@@ -30,20 +29,20 @@ class App extends React.Component {
             <Route path="/user" exact component={UserProfile} />
             <Route path="/Category" component={ItemsList} />
             <Route path="/itemDetail" exact component={ItemDetail} />
-            <Route path="/UserItems" exact component={UserItems} />
             <Route path="/carsForm" exact component={CarsForm} />
             <Route path="/itemsList" exact component={ItemsList} />
+            <Route path="/userItems" exact component={UserItems} />
 
-          {/* <Signup createUser={Signup} /> */}
+            {/* <Signup createUser={Signup} /> */}
             {/* <SignIn /> */}
-            <UserItems />
-          {/* <ItemsList /> */}
-          {/* <SportForm /> */}
+            {/* <UserItems /> */}
+            {/* <ItemsList /> */}
+            {/* <SportForm /> */}
             {/* <CarsForm /> */}
-          {/* <RealEstate /> */}
+            {/* <RealEstate /> */}
             {/* <Tools /> */}
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </Router>
       </Provider>
     );
