@@ -4,9 +4,8 @@ import userReducer from "./userReducer";
 import itemDetails from "./itemDetail";
 import itemReducer from "./itemReducer";
 import signin from "./signIn";
-import useritems from "./userItems";
-import user from "./userinfo"
 import useritems from "./userItemsReducer";
+import user from "./userinfo"
 export default combineReducers({
   itemsData: itemsReducer,
   item: itemReducer,

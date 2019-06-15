@@ -9,7 +9,7 @@ import { Alert } from 'reactstrap'
 
 
 
-class ItemDetailCar extends React.Component{
+class ItemDetail extends React.Component{
     constructor(props) {
         super(props);
     
@@ -219,4 +219,4 @@ const mapStateToProps = state => ({
     
   });
 
-export default connect(mapStateToProps,{fetchItem})(ItemDetailCar)
+export default connect(mapStateToProps,{fetchItem})(ItemDetail)

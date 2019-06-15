@@ -1,5 +1,5 @@
 import React from "react";
-import ItemDetailCar from "./components/itemDetails";
+import ItemDetail from "./components/itemDetails";
 import { Provider } from "react-redux";
 import store from "./store";
 import SportForm from "./components/SportForm.js";
@@ -25,7 +25,7 @@ class App extends React.Component {
         <Router>
         <Route path="/user" exact component={UserProfile} />
          
-          <ItemDetailCar />
+          <ItemDetail />
           <Header />
           <div className="maincontainer">
             <Route path="/" exact component={Home} />
