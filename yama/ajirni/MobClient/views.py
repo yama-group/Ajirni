@@ -16,6 +16,7 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         token = AuthToken.objects.create(user)[1]
+        print(token)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": token
@@ -30,10 +31,9 @@ class LoginAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
-
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            # "token": AuthToken.objects.create(user)
+            "token": AuthToken.objects.create(user)
         })
 
 
@@ -136,10 +136,6 @@ class LikeItem(generics.ListCreateAPIView):
     queryset = Likes.objects.all()
     serializer_class = LikesSerializer
 
-
-    
-
-
     def perform_create(self, serializer):
         user_id = self.request.query_params.get('user_id', None)
         item_id = self.request.query_params.get('item_id', None)
@@ -159,10 +155,16 @@ class ItemsRud(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ItemsSerializer
 
 
-class ItemsList(generics.ListCreateAPIView):
+class ItemsList(generics.ListAPIView):
     """This class defines the retrieve behavior of all instances."""
-    queryset = Items.objects.all()
     serializer_class = ItemsSerializer
+
+    def get_queryset(self):
+        queryset = Items.objects.all()
+        category_id = self.request.query_params.get('Category', None)
+        return queryset.filter(category_id__exact= category_id)
+        
+        
 
 
 class GetImages(generics.ListCreateAPIView):
@@ -188,7 +190,6 @@ class getUserItems(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
         queryset = Items.objects.filter(user_id__exact=user_id)
-        return queryset
 
 
 class getUserInfo(generics.ListAPIView):
@@ -196,5 +197,4 @@ class getUserInfo(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
-        queryset = CustomUser.objects.filter(id__exact=user_id)
-        return queryset
+        queryset = Items.objects.all().filter(user_id__exact=user_id)

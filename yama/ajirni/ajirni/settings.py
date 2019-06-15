@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 ]
 AUTH_USER_MODEL = 'MobClient.CustomUser'
 
+AUTH_USER_MODEL = 'MobClient.CustomUser'
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
 }
