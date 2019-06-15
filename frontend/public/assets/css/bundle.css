@@ -528,6 +528,9 @@ a.button-small:hover::after {
   display: inline-block;
   list-style: none;
 }
+.maincontainer {
+  min-height: 500px;
+}
 #navnav {
   background-image: url("../../assets/img/bg/breadcrumb.jpg");
 }

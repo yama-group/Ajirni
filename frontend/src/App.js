@@ -8,6 +8,7 @@ import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
 import Header from "./components/header.js";
 import Home from "./components/home.js";
+import Footer from "./components/footer.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Signup from "./components/signup";
@@ -26,17 +27,20 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <Header />
-          <Route path="/" exact component={Home} />
-          <Route path="/Category" component={ItemsList} />
-          {/* <Route path="/Tools" exact component={Tools} /> */}
-          {/* <ItemDetailCar />
+          <div className="maincontainer">
+            <Route path="/" exact component={Home} />
+            <Route path="/Category" component={ItemsList} />
+            {/* <Route path="/Tools" exact component={Tools} /> */}
+            {/* <ItemDetailCar />
           <Signup createUser={createUser} />
           <ItemsList />
           <SportForm /> */}
-          {/* <Signin /> */}
-          {/* <CarsForm />
+            {/* <Signin /> */}
+            {/* <CarsForm />
           <RealEstate /> */}
-          {/* <Tools /> */}
+            {/* <Tools /> */}
+          </div>
+          <Footer />
         </Router>
       </Provider>
     );

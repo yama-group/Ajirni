@@ -102,9 +102,13 @@ class Header extends Component {
                 <div className="row no-gutters">
                   <div className="col-lg-3 col-md-6 col-6">
                     <div className="logo">
-                      <a href="index.html">
-                        <img src="assets/img/logo/logo.png" alt="" />
-                      </a>
+                      <Link to="/">
+                        <a>
+                          <h1>
+                            <b>AJIRNI. </b>
+                          </h1>
+                        </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="col-lg-6 menu-none-block menu-center">
@@ -166,24 +170,50 @@ class Header extends Component {
                     </div>
                   </div>
                   <div className="col-lg-3 col-md-6 col-6">
-                    <div className="header-search-cart">
+                    {/* <div className="header-search-cart">
                       <div className="header-search common-style">
                         <button className="sidebar-trigger-search">
                           <span className="ion-ios-search-strong" />
                         </button>
                       </div>
-                      <div className="header-cart common-style">
+                      {/* <div className="header-cart common-style">
                         <button className="sidebar-trigger">
                           <span className="ion-bag" />
                         </button>
-                      </div>
+                      </div> 
+
                       <div className="header-sidebar common-style">
                         <button className="header-navbar-active">
                           <span className="ion-navicon" />
                         </button>
                       </div>
+                    </div> */}
+
+                    <div class="main-search-active">
+                      <div class="sidebar-search-icon">
+                        <button class="search-close">
+                          <span class="ion-android-close" />
+                        </button>
+                      </div>
+                      <div class="sidebar-search-input">
+                        <form>
+                          <div class="form-search">
+                            <input
+                              id="search"
+                              class="input-text"
+                              value=""
+                              placeholder="Search Entire Store"
+                              type="search"
+                            />
+                            <button>
+                              <i class="ion-ios-search-strong" />
+                            </button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                   </div>
+
                   <div className="mobile-menu-area d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
                     <div className="mobile-menu">
                       <nav id="mobile-menu-active">
@@ -192,43 +222,13 @@ class Header extends Component {
                             <a href="#">HOME</a>
                             <ul>
                               <li>
-                                <a href="index.html">furniture</a>
-                              </li>
-                              <li>
-                                <a href="index-electronics.html">electronics</a>
-                              </li>
-                              <li>
-                                <a href="index-fashion.html">fashion</a>
-                              </li>
-                              <li>
-                                <a href="index-jewellery.html">jewellery</a>
-                              </li>
-                              <li>
-                                <a href="index-food-drink.html">food & drink</a>
-                              </li>
-                              <li>
-                                <a href="index-toys.html">Toys & Games</a>
+                                <a href="index-toys.html">Tools</a>
                               </li>
                             </ul>
                           </li>
                           <li>
-                            <a href="#">pages</a>
+                            <a href="#">Category</a>
                             <ul>
-                              <li>
-                                <a href="about-us.html">about us</a>
-                              </li>
-                              <li>
-                                <a href="cart.html">cart</a>
-                              </li>
-                              <li>
-                                <a href="checkout.html">checkout</a>
-                              </li>
-                              <li>
-                                <a href="wishlist.html">wishlist</a>
-                              </li>
-                              <li>
-                                <a href="contact.html">contact</a>
-                              </li>
                               <li>
                                 <a href="login.html">login</a>
                               </li>
@@ -241,35 +241,17 @@ class Header extends Component {
                             <a href="#">shop</a>
                             <ul>
                               <li>
-                                <a href="shop-grid-view-3-col.html">
-                                  grid 3 column
-                                </a>
-                              </li>
-                              <li>
                                 <a href="shop-grid-view-5-col.html">
                                   grid 5 column
                                 </a>
                               </li>
-                              <li>
-                                <a href="shop-grid-view-sidebar.html">
-                                  grid with sidebar
-                                </a>
-                              </li>
-                              <li>
-                                <a href="shop-list-view-1-col.html">
-                                  list 1 column
-                                </a>
-                              </li>
+
                               <li>
                                 <a href="shop-list-view-2-col.html">
                                   list 2 column
                                 </a>
                               </li>
-                              <li>
-                                <a href="shop-list-view-sidebar.html">
-                                  list with sidebar
-                                </a>
-                              </li>
+
                               <li>
                                 <a href="shop-list-view-1-col-container.html">
                                   list 1 column box
