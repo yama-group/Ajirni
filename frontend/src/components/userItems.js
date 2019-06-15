@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, Redirect, NavLink } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Link, Redirect, NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getAllUserItems } from '../actions/UserItemsAction.js'
 
@@ -47,7 +47,7 @@ class UserItems extends Component {
                                    return (
 
                                       <tr key ={item.id}>
-                                        <td className="product-thumbnail">{item.category}</td>
+                                        <td className="product-thumbnail">{item.category == 1 ? 'Sports' : item.category == 2 ? 'Cars' : item.category == 3 ? 'Real Estate' :  item.category == 4 ? 'Home Tools' :  item.category == 5 ? 'Industrial Tools' :  item.category == 6 ? 'Event Tools' :  item.category == 7 ? 'Others' : null }</td>
                                           <td className="product-name"><a onClick={this.itemClicked.bind(this)}>{item.name}</a></td>
                                           <td className="product-price"><span className="amount">${item.price}/day</span></td>
                                           <td className="product-quantity">{item.quantity}</td>

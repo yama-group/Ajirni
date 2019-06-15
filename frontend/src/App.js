@@ -10,7 +10,7 @@ import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Signup from "./components/signup";
-// import Signin from "./components/signin";
+import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
 
 class App extends React.Component {
@@ -20,15 +20,15 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
+          <SignIn />
           <UserItems />
           <ItemDetailCar />
           <Signup createUser={createUser} />
           <ItemsList />
           <SportForm /> 
-          {/* <Signin /> */}
-           <CarsForm />
-            <RealEstate />
-            <Tools />
+          <CarsForm />
+          <RealEstate />
+          <Tools />
         </Router>
       </Provider>
     );

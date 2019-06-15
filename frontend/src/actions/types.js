@@ -6,3 +6,4 @@ export const SAVE_USER_ID = "SAVE_USER_ID";
 export const FETCH_IMAGES = "FETCH_IMAGES";
 export const NewItemImages = "NewItemImages";
 export const USER_ITEMS = "USER_ITEMS";
+export const SIGN_IN = "SIGN_IN";
