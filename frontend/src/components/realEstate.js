@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { postItem } from "../actions/itemAction";
 import { storage } from "../firebase";
 import { Alert } from "reactstrap";
-class CarsForm extends Component {
+class RealEstate extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,6 @@ class CarsForm extends Component {
       condition: "New",
       location: "",
       price: "0",
-      color: "",
       quantity: "1",
       status: "available",
       confirmed: "True",
@@ -23,11 +22,11 @@ class CarsForm extends Component {
       imgUrl: [],
       alert: false,
       message: "",
-      car_make: "",
-      year_manufactured: "2020",
-      no_killometers: "0",
-      fuel: "Diesel",
-      transmission: "Automatic"
+      no_rooms: "1",
+      no_bathrooms: "1",
+      surface_area: "1",
+      furnished: "Yes",
+      floor_no: "1"
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -95,16 +94,15 @@ class CarsForm extends Component {
         category: this.state.category_id,
         location: this.state.location,
         price: this.state.price,
-        car_make: this.state.car_make,
-        year_manufactured: this.state.year_manufactured,
-        no_killometers: this.state.no_killometers,
-        fuel: this.state.fuel,
-        color: this.state.color,
-        transmission: this.state.transmission,
         quantity: this.state.quantity,
         status: this.state.status,
         confirmed: this.state.confirmed,
-        user: this.state.user_id
+        user: this.state.user_id,
+        no_rooms: this.state.no_rooms,
+        no_bathrooms: this.state.no_bathrooms,
+        surface_area: this.state.surface_area,
+        furnished: this.state.furnished,
+        floor_no: this.state.floor_no
       },
       images: this.state.imgUrl
     };
@@ -114,42 +112,39 @@ class CarsForm extends Component {
       condition: "New",
       location: "",
       price: "0",
-      color: "",
       quantity: "1",
       status: "available",
-      confirmed: "False",
+      confirmed: "True",
       image: null,
       imgUrl: [],
-      car_make: "",
-      year_manufactured: "2020",
-      no_killometers: "0",
-      fuel: "Diesel",
-      transmission: "Automatic"
+      alert: false,
+      message: "",
+      no_rooms: "1",
+      no_bathrooms: "1",
+      surface_area: "1",
+      furnished: "1",
+      floor_no: "Yes"
     });
     // console.log(item);
     this.props.postItem(item);
   }
   render() {
-    const years = ["Older than 1980"];
-    for (let i = 1980; i < 2021; i++) {
-      years.unshift(i);
-    }
     return (
       <div>
         <div className="col-lg-6 col-md-12 col-12">
           <form>
             <div className="checkbox-form">
-              <h3>Cars Form</h3>
+              <h3>Real Estate Form</h3>
               <div className="row">
                 <div className="col-md-6">
                   <div className="checkout-form-list">
                     <label>
-                      Item Name <span className="required">*</span>
+                      Name <span className="required">*</span>
                     </label>
                     <input
                       type="text"
                       name="name"
-                      placeholder="toytoa car"
+                      placeholder="Yama buildings"
                       onChange={this.onChange}
                       value={this.state.name}
                     />
@@ -159,7 +154,7 @@ class CarsForm extends Component {
                 <div className="col-md-6">
                   <div className="checkout-form-list">
                     <label>
-                      Renting Price per day<span className="required">*</span>
+                      Renting Price per Month<span className="required">*</span>
                     </label>
                     <input
                       type="number"
@@ -206,14 +201,47 @@ class CarsForm extends Component {
                 <div className="col-md-6">
                   <div className="checkout-form-list">
                     <label>
-                      Color <span className="required">*</span>
+                      Rooms <span className="required">*</span>
                     </label>
                     <input
-                      type="text"
-                      name="color"
-                      placeholder="Blue"
+                      type="number"
+                      min="0"
+                      name="no_rooms"
+                      placeholder="1"
                       onChange={this.onChange}
-                      value={this.state.color}
+                      value={this.state.no_rooms}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="checkout-form-list">
+                    <label>
+                      Bathrooms <span className="required">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      name="no_bathrooms"
+                      placeholder="1"
+                      onChange={this.onChange}
+                      value={this.state.no_bathrooms}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="checkout-form-list">
+                    <label>
+                      Floor Number <span className="required">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      name="floor_no"
+                      placeholder="1"
+                      onChange={this.onChange}
+                      value={this.state.floor_no}
                     />
                   </div>
                 </div>
@@ -235,87 +263,17 @@ class CarsForm extends Component {
                 </div>
 
                 <div className="col-md-6">
-                  <div className="checkout-form-list">
-                    <label>
-                      Car Make <span className="required">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="car_make"
-                      placeholder="Toyota"
-                      onChange={this.onChange}
-                      value={this.state.car_make}
-                    />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="checkout-form-list">
-                    <label>
-                      Kilometers
-                      <span className="required">*</span>
-                    </label>
-                    <input
-                      type="number"
-                      name="no_killometers"
-                      min="0"
-                      placeholder="1000"
-                      onChange={this.onChange}
-                      value={this.state.no_killometers}
-                    />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
                   <div className="country-select">
                     <label>
-                      Type of Fuel <span className="required">*</span>
+                      furnished <span className="required">*</span>
                     </label>
                     <select
-                      name="fuel"
+                      name="furnished"
                       onChange={this.onChange}
-                      value={this.state.fuel}
+                      value={this.state.furnished}
                     >
-                      <option value="New">Diesel</option>
-                      <option value="Used">Gasoline</option>
-                      <option value="Used">Hybrid</option>
-                      <option value="Used">Electric</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="country-select">
-                    <label>
-                      Transmission <span className="required">*</span>
-                    </label>
-                    <select
-                      name="transmission"
-                      onChange={this.onChange}
-                      value={this.state.transmission}
-                    >
-                      <option value="New">Automatic</option>
-                      <option value="Used">Manual</option>
-                      <option value="Used">other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="country-select">
-                    <label>
-                      year of manufactured <span className="required">*</span>
-                    </label>
-                    <select
-                      name="year_manufactured"
-                      onChange={this.onChange}
-                      value={this.state.year_manufactured}
-                    >
-                      {years.map((year, i) => (
-                        <option key={i} value={year}>
-                          {year}
-                        </option>
-                      ))}
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
                     </select>
                   </div>
                 </div>
@@ -406,7 +364,7 @@ class CarsForm extends Component {
     );
   }
 }
-CarsForm.propTypes = {
+RealEstate.propTypes = {
   postItem: PropTypes.func.isRequired
 };
 ////// should changed to category_id from other component
@@ -419,4 +377,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { postItem }
-)(CarsForm);
+)(RealEstate);

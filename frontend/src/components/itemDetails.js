@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { connect } from "react-redux";
-import { fetchItem, saveUserId } from "../actions/itemDetailsAction";
-import { Link } from "react-router-dom";
+import { fetchItem } from "../actions/itemDetailsAction";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
 
-class ItemDetailCar extends React.Component {
+class ItemDetail extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +26,8 @@ class ItemDetailCar extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchItem();
+    // this.setState({item_id:this.props.item_id})
+    this.props.fetchItem(this.props.item_id);
   }
 
   componentWillReceiveProps(next) {
@@ -38,19 +39,14 @@ class ItemDetailCar extends React.Component {
     }
   }
 
-  routeToOwner() {
-    const id = this.props.item.user_id;
-    this.props.saveUserId(id);
-  }
-
   likeItem() {
     const that = this;
+    const item_id = that.props.item.id;
+    const user_id = that.props.item.user;
     axios
-      .post("/like/", {
-        item_id: that.props.item.id,
-        user_id: that.props.item.user_id
-      })
+      .post(`/like/?user_id=${user_id}&item_id=${item_id}`)
       .then(response => {
+        console.log(response);
         that.setState({
           likeAlert: !that.state.likeAlert,
           likeMessage: `${that.props.item.name} saved`
@@ -59,7 +55,7 @@ class ItemDetailCar extends React.Component {
       .catch(err => {
         that.setState({
           likeAlert: !that.state.likeAlert,
-          likeMessage: `Error..`
+          likeMessage: `Error...`
         });
       });
   }
@@ -85,93 +81,71 @@ class ItemDetailCar extends React.Component {
               <div className="product-details-img-content">
                 <div className="product-details-tab mr-70">
                   <div className="product-details-large tab-content">
-                    <div
-                      className="tab-pane active show fade"
-                      id="pro-details1"
-                      role="tabpanel"
-                    >
-                      <div className="easyzoom easyzoom--overlay">
-                        <a href="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg">
-                          <img
-                            src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-                    </div>
-
-                    <div
-                      className="tab-pane fade"
-                      id="pro-details3"
-                      role="tabpanel"
-                    >
-                      <div className="easyzoom easyzoom--overlay">
-                        <a href="assets/img/product-details/bl3.jpg">
-                          <img
-                            src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-                    </div>
-                    <div
-                      className="tab-pane fade"
-                      id="pro-details4"
-                      role="tabpanel"
-                    >
-                      <div className="easyzoom easyzoom--overlay">
-                        <a href="assets/img/product-details/bl4.jpg">
-                          <img
-                            src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-                    </div>
+                    {this.state.images.map((image, index) => {
+                      if (index === 0) {
+                        return (
+                          <div
+                            key={index}
+                            className="tab-pane active show fade"
+                            id="pro-details1"
+                            role="tabpanel"
+                          >
+                            <div className="easyzoom easyzoom--overlay">
+                              <a href={image.img_url}>
+                                <img src={image.img_url} alt="" />
+                              </a>
+                            </div>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            key={index}
+                            className="tab-pane fade"
+                            id={`pro-details${1 + index}`}
+                            role="tabpanel"
+                          >
+                            <div className="easyzoom easyzoom--overlay">
+                              <a href={image.img_url}>
+                                <img src={image.img_url} alt="" />
+                              </a>
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
+
                   <div className="product-details-small nav mt-12 main-product-details">
-                    <a
-                      className="active mr-12"
-                      href="#pro-details1"
-                      data-toggle="tab"
-                      role="tab"
-                      aria-selected="true"
-                    >
-                      <img
-                        src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <a
-                      className="mr-12"
-                      href="#pro-details2"
-                      data-toggle="tab"
-                      role="tab"
-                      aria-selected="true"
-                    >
-                      <img
-                        src="https://media.wired.com/photos/5b86fce8900cb57bbfd1e7ee/master/pass/Jaguar_I-PACE_S_Indus-Silver_065.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <a
-                      className="mr-12"
-                      href="#pro-details3"
-                      data-toggle="tab"
-                      role="tab"
-                      aria-selected="true"
-                    >
-                      <img src="assets/img/product-details/s3.jpg" alt="" />
-                    </a>
-                    <a
-                      className="mr-12"
-                      href="#pro-details4"
-                      data-toggle="tab"
-                      role="tab"
-                      aria-selected="true"
-                    >
-                      <img src="assets/img/product-details/s4.jpg" alt="" />
-                    </a>
+                    {this.state.images.map((image, index) => {
+                      if (index === 0) {
+                        return (
+                          <a
+                            key={index}
+                            className="active mr-12"
+                            href="#pro-details1"
+                            data-toggle="tab"
+                            role="tab"
+                            aria-selected="true"
+                          >
+                            <img src={image.img_url} alt="" />
+                          </a>
+                        );
+                      } else {
+                        return (
+                          <a
+                            key={index}
+                            className="mr-12"
+                            href={`#pro-details${1 + index}`}
+                            data-toggle="tab"
+                            role="tab"
+                            aria-selected="true"
+                          >
+                            <img src={image.img_url} alt="" />
+                          </a>
+                        );
+                      }
+                    })}
                   </div>
                 </div>
               </div>
@@ -181,7 +155,7 @@ class ItemDetailCar extends React.Component {
                 <h3>{this.props.item.name}</h3>
 
                 <div className="details-price">
-                  <span>${this.props.item.price}/day</span>
+                  <span>${this.props.item.price}/month</span>
                 </div>
                 <p>{this.props.item.description}</p>
                 <div className="quick-view-select">
@@ -190,11 +164,7 @@ class ItemDetailCar extends React.Component {
                       <label>
                         <strong>Condition:</strong>
                       </label>
-                      <p>
-                        {this.state.images.map(image => {
-                          return <p>{image.img_url}</p>;
-                        })}
-                      </p>
+                      <p>{this.props.item.condition}</p>
                     </div>
                   ) : (
                     ""
@@ -264,7 +234,7 @@ class ItemDetailCar extends React.Component {
                       <label>
                         <strong>Surface Area:</strong>
                       </label>
-                      <p>{this.props.item.surface_area}</p>
+                      <p>{this.props.item.surface_area}m</p>
                     </div>
                   ) : (
                     ""
@@ -274,7 +244,7 @@ class ItemDetailCar extends React.Component {
                       <label>
                         <strong>Furnished:</strong>
                       </label>
-                      <p>{this.props.item.furnished}</p>
+                      <p>Yes</p>
                     </div>
                   ) : (
                     ""
@@ -334,29 +304,23 @@ class ItemDetailCar extends React.Component {
                 <div className="quickview-plus-minus">
                   <div className="quickview-btn-cart">
                     <a className="btn-hover-black" href="#">
-                      {this.props.userId}
+                      Contact
                     </a>
                   </div>
                   <div className="quickview-btn-wishlist">
                     <a
                       onClick={this.likeItem.bind(this)}
                       className="btn-hover"
-                      href="#"
+                      href="#btn-hover"
                     >
                       <i className="ion-ios-heart-outline" />
                     </a>
                   </div>
-                  <Link>
-                    <div className="quickview-btn-wishlist">
-                      <a
-                        onClick={this.routeToOwner.bind(this)}
-                        className="btn-hover"
-                        href="#"
-                      >
-                        <i className="ion-ios-contact" />
-                      </a>
-                    </div>
-                  </Link>
+                  <div className="quickview-btn-wishlist">
+                    <NavLink to="/userItems" className="btn-hover">
+                      <i className="ion-ios-contact" />
+                    </NavLink>
+                  </div>
                 </div>
               </div>
             </div>
@@ -369,11 +333,12 @@ class ItemDetailCar extends React.Component {
 
 const mapStateToProps = state => ({
   item: state.itemDetails.item,
+  item_id: state.itemsData.item_id,
   userId: state.itemDetails.userId,
   images: state.itemDetails.images
 });
 
 export default connect(
   mapStateToProps,
-  { fetchItem, saveUserId }
-)(ItemDetailCar);
+  { fetchItem }
+)(ItemDetail);

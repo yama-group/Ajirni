@@ -1,18 +1,17 @@
-import { NEW_Item } from "../actions/types";
+import { USER_ITEMS } from "../actions/types";
 
 const initialState = {
-  items: [],
-  oneItem: {},
-  category_id: 2,
-  user_id: 1
+  userItems: [],
+  userId: 1
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case NEW_Item:
+    case USER_ITEMS:
+      // console.log(action.payload)
       return {
         ...state,
-        oneItem: action.payload
+        userItems: action.payload
       };
     default:
       return state;

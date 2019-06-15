@@ -16,6 +16,7 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         token = AuthToken.objects.create(user)[1]
+        print(token)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": token
@@ -30,10 +31,10 @@ class LoginAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
-
+        token = AuthToken.objects.create(user)[1]
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            # "token": AuthToken.objects.create(user)
+            "token": token
         })
 
 
@@ -67,6 +68,13 @@ class CreateItem(generics.ListCreateAPIView):
     queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
+    # def perform_create(self, serializer):
+    #     """Save the post data when creating a new Image."""
+    # iteminfo = self.request.data.get("itemInfo", None)
+    # img_urls = self.request.data.get("images", None)
+    # item = Items.objects.get(id=item_id)
+    # image = Images(item=item, img_url=img_url)
+    # image.save()
     def perform_create(self, serializer):
         """Save the post data when creating a new Item."""
         serializer.save()
@@ -127,15 +135,16 @@ class Search(generics.ListAPIView):
 class LikeItem(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Likes.objects.all()
-
     serializer_class = LikesSerializer
 
     def perform_create(self, serializer):
-        """add like for item"""
-        serializer.save()
-
-    def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
+        item_id = self.request.query_params.get('item_id', None)
+
+        item = Items.objects.get(id=item_id)
+        user = CustomUser.objects.get(id=user_id)
+        like = Likes(item=item, user=user)
+        like.save()
         queryset = Likes.objects.filter(user_id__exact=user_id)
         return queryset
 
@@ -147,17 +156,29 @@ class ItemsRud(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ItemsSerializer
 
 
-class ItemsList(generics.ListCreateAPIView):
+class ItemsList(generics.ListAPIView):
     """This class defines the retrieve behavior of all instances."""
-    queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
+    def get_queryset(self):
+        queryset = Items.objects.all()
+        category_id = self.request.query_params.get('category', None)
+        return queryset.filter(category_id__exact=category_id)
 
-class GetImages(generics.ListAPIView):
+
+class GetImages(generics.ListCreateAPIView):
     serializer_class = ImageSerializer
 
+    def perform_create(self, serializer):
+        """Save the post data when creating a new Image."""
+        item_id = self.request.data.get("item_id", None)
+        img_url = self.request.data.get("img_url", None)
+        item = Items.objects.get(id=item_id)
+        image = Images(item=item, img_url=img_url)
+        image.save()
+
     def get_queryset(self):
-        item_id = self.request.query_params.get("item_id", None)
+        item_id = self.request.query_params.get("id", None)
         queryset = Images.objects.filter(item__exact=item_id)
         return queryset
 
@@ -175,6 +196,6 @@ class getUserInfo(generics.ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        user_id = self.request.query_params.get('user_id', None)
-        queryset = CustomUser.objects.filter(id__exact=user_id)
+        user_id = self.request.query_params.get('user_  id', None)
+        queryset = Items.objects.all().filter(user_id__exact=user_id)
         return queryset
