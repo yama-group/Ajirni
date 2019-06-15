@@ -69,11 +69,11 @@ class CreateItem(generics.ListCreateAPIView):
 
     # def perform_create(self, serializer):
     #     """Save the post data when creating a new Image."""
-        # iteminfo = self.request.data.get("itemInfo", None)
-        # img_urls = self.request.data.get("images", None)
-        # item = Items.objects.get(id=item_id)
-        # image = Images(item=item, img_url=img_url)
-        # image.save()
+    # iteminfo = self.request.data.get("itemInfo", None)
+    # img_urls = self.request.data.get("images", None)
+    # item = Items.objects.get(id=item_id)
+    # image = Images(item=item, img_url=img_url)
+    # image.save()
     def perform_create(self, serializer):
         """Save the post data when creating a new Item."""
         serializer.save()
@@ -140,9 +140,9 @@ class LikeItem(generics.ListCreateAPIView):
         user_id = self.request.query_params.get('user_id', None)
         item_id = self.request.query_params.get('item_id', None)
 
-        item=Items.objects.get(id=item_id)
-        user=CustomUser.objects.get(id=user_id)
-        like=Likes(item=item,user=user)
+        item = Items.objects.get(id=item_id)
+        user = CustomUser.objects.get(id=user_id)
+        like = Likes(item=item, user=user)
         like.save()
         queryset = Likes.objects.filter(user_id__exact=user_id)
         return queryset
@@ -161,10 +161,8 @@ class ItemsList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Items.objects.all()
-        category_id = self.request.query_params.get('Category', None)
-        return queryset.filter(category_id__exact= category_id)
-        
-        
+        category_id = self.request.query_params.get('category', None)
+        return queryset.filter(category_id__exact=category_id)
 
 
 class GetImages(generics.ListCreateAPIView):

@@ -40,72 +40,56 @@ class Footer extends Component {
   render() {
     return (
       <div>
-        <footer class="footer-area gray-bg pt-100 pb-95">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-3 col-md-5 col-12">
-                <div class="footer-widget">
-                  <div class="footer-widget-l-content">
-                    <h4>20 Years Experience</h4>
+        <footer className="footer-area gray-bg pt-100 pb-95">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-3 col-md-5 col-12">
+                <div className="footer-widget">
+                  <div className="footer-widget-l-content">
+                    <h4> Years Experience</h4>
                     <ul>
                       <li>
-                        <a>
-                          <i class="ion-social-twitter" />
-                        </a>
+                        <i className="ion-social-twitter" />
                       </li>
                       <li>
-                        <a>
-                          <i class="ion-social-tumblr" />
-                        </a>
+                        <i className="ion-social-tumblr" />
                       </li>
                       <li>
-                        <a>
-                          <i class="ion-social-facebook" />
-                        </a>
+                        <i className="ion-social-facebook" />
                       </li>
                       <li>
-                        <a>
-                          <i class="ion-social-instagram-outline" />
-                        </a>
+                        <i className="ion-social-instagram-outline" />
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-7 col-12">
-                <div class="footer-widget">
-                  <div class="footer-widget-m-content text-center">
-                    <div class="footer-logo">
-                      <a>
-                        <h1>
-                          <b>AJIRNI.</b>
-                        </h1>
-                      </a>
+              <div className="col-lg-6 col-md-7 col-12">
+                <div className="footer-widget">
+                  <div className="footer-widget-m-content text-center">
+                    <div className="footer-logo">
+                      <h1>
+                        <b>AJIRNI.</b>
+                      </h1>
                     </div>
-                    <div class="footer-nav">
+                    <div className="footer-nav">
                       <nav>
                         <ul>
                           <li>
-                            <Link to="/">
-                              <a>home</a>
-                            </Link>
+                            <Link to="/">home</Link>
                           </li>
                           <li>
-                            <Link to="/about">
-                              <a>about us</a>
-                            </Link>
+                            <Link to="/about">about us</Link>
                           </li>
 
                           <li>
-                            <Link to="/contact">
-                              <a>contact</a>
-                            </Link>
+                            <Link to="/contact">contact</Link>
                           </li>
                         </ul>
                       </nav>
                     </div>
                     <p>
-                      Copyright <i class="fa fa-copyright" /> 2018{" "}
+                      Copyright <i className="fa fa-copyright" /> 2018{" "}
                       <a
                         href="https://github.com/yama-group/Ajirni"
                         target="_blank"
@@ -117,15 +101,15 @@ class Footer extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-12 col-12">
-                <div class="footer-widget f-right">
-                  <div class="footer-widget-r-content">
+              <div className="col-lg-3 col-md-12 col-12">
+                <div className="footer-widget f-right">
+                  <div className="footer-widget-r-content">
                     <ul>
                       <li>
                         <span>Phone :</span> +00 962 777 888 999
                       </li>
                       <li>
-                        <span>Email : </span> <a>yama@yama.com</a>
+                        <span>Email : </span>yama@yama.com
                       </li>
                       <li>
                         <span>Address :</span> RBK - Khalda - Amman

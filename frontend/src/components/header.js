@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { postItem } from "../actions/itemAction";
+import { search } from "../actions/itemAction";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,10 +13,10 @@ class Header extends Component {
     super(props);
     this.state = {
       category_id: "",
-      user_id: ""
+      user_id: "",
+      query: ""
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onChanges = this.onChanges.bind(this);
   }
 
   componentWillMount() {
@@ -26,13 +26,22 @@ class Header extends Component {
     });
   }
 
-  onChange(e) {
+  onChanges(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e) {
+  search(e) {
     e.preventDefault();
-    // this.props.postItem(item);
+    console.log(this.state.query);
+
+    console.log(e.target.name);
+    if ([1, 2, 3, 4, 5, 6, 7].includes(e.target.name)) {
+      this.props.search("category=" + e.target.name);
+    } else {
+      this.props.search("name=" + this.state.query);
+    }
+    this.setState({ query: "" });
+    // return <Redirect to="/itemsList" />;
   }
   render() {
     return (
@@ -103,11 +112,9 @@ class Header extends Component {
                   <div className="col-lg-3 col-md-6 col-6">
                     <div className="logo">
                       <Link to="/">
-                        <a>
-                          <h1>
-                            <b>AJIRNI. </b>
-                          </h1>
-                        </a>
+                        <h1>
+                          <b>AJIRNI. </b>
+                        </h1>
                       </Link>
                     </div>
                   </div>
@@ -116,100 +123,74 @@ class Header extends Component {
                       <nav>
                         <ul>
                           <li>
-                            <Link to="/">
-                              <a>home</a>
-                            </Link>
+                            <Link to="/">home</Link>
                           </li>
                           <li>
-                            <Link to="/about">
-                              <a>about us</a>
-                            </Link>
+                            <Link to="/about">about us</Link>
                           </li>
                           <li>
-                            <a>Category</a>
+                            Category
                             <ul className="dropdown">
-                              <li>
-                                <a />
-                                <Link to="/Category/1">Sport</Link>
+                              <li name="1" onClick={this.search.bind(this)}>
+                                <Link to="/itemsList">Sport</Link>
                               </li>
                               <li>
-                                <a />
-                                <Link to="/Category/2">Cars</Link>
+                                <Link to="/itemsList">Cars</Link>
                               </li>
 
                               <li>
-                                <a />
-                                <Link to="/Category/3">Real Estate</Link>
+                                <Link to="/itemsList">Real Estate</Link>
                               </li>
                               <li>
-                                <a />
-                                <Link to="/Category/4">Home Tools</Link>
+                                <Link to="/itemsList">Home Tools</Link>
                               </li>
                               <li>
-                                <a />
-                                <Link to="/Category/5">Industrial Tools</Link>
+                                <Link to="/itemsList">Industrial Tools</Link>
                               </li>
                               <li>
-                                <a />
-                                <Link to="/Category/6">Event Tools</Link>
+                                <Link to="/itemsList">Event Tools</Link>
                               </li>
                               <li>
-                                <a />
-                                <Link to="/Category/7">Others</Link>
+                                <Link to="/itemsList">Others</Link>
                               </li>
                             </ul>
                           </li>
 
                           <li>
-                            <Link to="/contact">
-                              <a>contact</a>
-                            </Link>
+                            <Link to="/contact">contact</Link>
                           </li>
                         </ul>
                       </nav>
                     </div>
                   </div>
+
                   <div className="col-lg-3 col-md-6 col-6">
-                    {/* <div className="header-search-cart">
+                    <div className="header-search-cart">
+                      <div className="header-sidebar common-style">
+                        <input
+                          className="header-navbar-active"
+                          name="query"
+                          type="text"
+                          value={this.state.query}
+                          onChange={this.onChanges}
+                        />
+                      </div>
                       <div className="header-search common-style">
-                        <button className="sidebar-trigger-search">
-                          <span className="ion-ios-search-strong" />
+                        {" "}
+                        <button
+                          className="sidebar-trigger-search"
+                          onClick={this.search.bind(this)}
+                        >
+                          <Link to="/itemsList">
+                            <span className="ion-ios-search-strong" />
+                          </Link>
                         </button>
                       </div>
-                      {/* <div className="header-cart common-style">
-                        <button className="sidebar-trigger">
-                          <span className="ion-bag" />
-                        </button>
-                      </div> 
 
                       <div className="header-sidebar common-style">
                         <button className="header-navbar-active">
                           <span className="ion-navicon" />
                         </button>
-                      </div>
-                    </div> */}
-
-                    <div class="main-search-active">
-                      <div class="sidebar-search-icon">
-                        <button class="search-close">
-                          <span class="ion-android-close" />
-                        </button>
-                      </div>
-                      <div class="sidebar-search-input">
-                        <form>
-                          <div class="form-search">
-                            <input
-                              id="search"
-                              class="input-text"
-                              value=""
-                              placeholder="Search Entire Store"
-                              type="search"
-                            />
-                            <button>
-                              <i class="ion-ios-search-strong" />
-                            </button>
-                          </div>
-                        </form>
                       </div>
                     </div>
                   </div>
@@ -335,7 +316,7 @@ class Header extends Component {
   }
 }
 Header.propTypes = {
-  postItem: PropTypes.func.isRequired
+  search: PropTypes.func.isRequired
 };
 ////// should changed to category_id from other component
 ////// should changed to user_id from login component
@@ -346,5 +327,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { postItem }
+  { search }
 )(Header);

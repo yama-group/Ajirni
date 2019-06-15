@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NEW_Item, NewItemImages } from "./types";
+import { NEW_Item, NewItemImages, FETCH_ITEMS } from "./types";
 export const postItem = item => dispatch => {
   // console.log(item);
   axios
@@ -19,16 +19,20 @@ export const postItem = item => dispatch => {
     .catch(error => {
       console.log(error);
     });
-  // axios
-  //   .post("/images/", item.images)
-  //   .then(response => {
-  //     console.log(response);
-  //     dispatch({
-  //       type: NewItemImages,
-  //       payload: response.data
-  //     });
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
+};
+
+export const search = query => dispatch => {
+  console.log(query);
+  axios
+    .get("/search/?" + query, query)
+    .then(response => {
+      console.log(response);
+      dispatch({
+        type: FETCH_ITEMS,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };
