@@ -7,11 +7,15 @@ import itemDetails from "./itemDetail";
 import itemReducer from "./itemReducer";
 import signin from "./signInReducer";
 import useritems from "./userItemsReducer";
+import user from "./userinfo"
 export default combineReducers({
   itemsData: itemsReducer,
   item: itemReducer,
   user: userReducer,
   signin: signin,
   userItemsReducer: useritems,
-  itemDetails: itemDetails
+  itemDetails: itemDetails,
+  userItems: useritems,
+  itemDetails: itemDetails,
+  userInfo:user
 });

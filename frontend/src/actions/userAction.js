@@ -7,7 +7,7 @@ import {
 export const createUser = (user) => dispatch => {
   console.log(user);
   axios
-    .post("/signUp/", user)
+    .post("api/auth/register", user)
     .then(response => {
       console.log(response);
       dispatch({

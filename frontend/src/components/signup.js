@@ -7,16 +7,13 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: "",
       firstname: "",
       lastname: "",
       email: "",
       password: "",
       phone: "",
-      address: "",
-      location: "",
       image: "",
-      role: "",
-      confirm: ""
     }
     this.onchange = this.onchange.bind(this)
     this.onsubmit = this.onsubmit.bind(this)
@@ -37,16 +34,13 @@ class Signup extends React.Component {
   onsubmit(e) {
 
     const user = {
+      username: this.state.username,
       first_name: this.state.firstname,
       last_name: this.state.lastname,
       email: this.state.email,
       password: this.state.password,
       phone: this.state.phone,
-      address: this.state.address,
-      location: this.state.location,
       image_url: this.state.image,
-      role: this.state.role,
-      confirm: this.state.confirm
     }
     e.preventDefault();
     this.props.createUser(user)
@@ -67,16 +61,13 @@ class Signup extends React.Component {
                 <div className="login-form-container">
                   <div className="login-form">
                     <form onSubmit={this.onsubmit} >
+                      <strong>user name</strong><input type="text" name="username" placeholder="user name" onChange={this.onchange} />
                       <strong>first name</strong><input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
                       <strong>last name</strong><input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
                       <strong>email</strong><input type="email" name="email" placeholder="Email" onChange={this.onchange} />
                       <strong>password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange} />
                       <strong>phone</strong><input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
-                      <strong>address</strong><input type="text" name="address" placeholder="address" onChange={this.onchange} />
-                      <strong>location</strong><input type="text" name="location" placeholder="location" onChange={this.onchange} />
                       <strong>image</strong><input type="text" name="image" placeholder="image" onChange={this.onchange} />
-                      <strong>role</strong><input type="text" name="role" placeholder="role" onChange={this.onchange} />
-                      <strong>confirm</strong><input type="text" name="confirm" placeholder="confirm" onChange={this.onchange} />
                       <div class="button-box">
                         <button type="submit" class="default-btn floatright">Sign Up</button>
                       </div>
