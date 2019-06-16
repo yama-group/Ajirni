@@ -1,15 +1,16 @@
 import { NEW_USER } from "../actions/types";
 
 const initialState = {
-  user: ''
+  Msg: ''
 };
 
-export default function (state = initialState, action) {
-  switch (action.type) {
+export default function (state = initialState, actions) {
+  switch (actions.type) {
     case NEW_USER:
       return {
         ...state,
-        user: action.payload
+        Msg: actions.payload,
+
       };
     default:
       return state;

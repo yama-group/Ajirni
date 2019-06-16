@@ -11,11 +11,11 @@ import user from "./userinfo"
 export default combineReducers({
   itemsData: itemsReducer,
   item: itemReducer,
-  user: userReducer,
+  userSignUp: userReducer,
   signin: signin,
   userItemsReducer: useritems,
   itemDetails: itemDetails,
   userItems: useritems,
   itemDetails: itemDetails,
-  userInfo:user
+  userInfo: user
 });

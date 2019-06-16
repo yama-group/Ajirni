@@ -7,31 +7,31 @@ import { createUser } from '../actions/userAction'
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
-      phone: "",
-      image: null,
-      image_url: "",
-      alert: false,
-      message: "",
-      userData: ""
-    }
+
     this.onchange = this.onchange.bind(this)
     this.onsubmit = this.onsubmit.bind(this)
     this.handleImgChange = this.handleImgChange.bind(this)
     this.handleImgUpload = this.handleImgUpload.bind(this)
   }
 
-  // componentDidMount() {
-  //   axios.post("signUp/").then((res) => {
-  //     console.log(res.data)
-  //   }).catch(err => console.log(err));
+  state = {
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    phone: "",
+    image: null,
+    image_url: "",
+    alert: false,
+    message: "",
+    msg: ""
+  }
 
-  // }
+  componentDidMount() {
+    console.log(this.state.msg)
+
+  }
   handleImgChange(e) {
     if (e.target.files[0]) {
       const image = e.target.files[0];
@@ -79,7 +79,7 @@ class Signup extends React.Component {
   }
 
   onsubmit(e) {
-    console.log(this.state.userData)
+    console.log(this.state.msg)
     const user = {
       username: this.state.username,
       first_name: this.state.firstname,
@@ -154,13 +154,13 @@ class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  userData: state.user.user
 
-})
-
-Signup.propTypes = {
-  createUser: PropTypes.func.isRequired
-}
+  Signup.propTypes = {
+    createUser: PropTypes.func.isRequired
+  }
+  const mapStateToProps = state => ({
+    msg: state.userSignUp.Msg
+  
+  })
 
 export default connect(mapStateToProps, { createUser })(Signup)
