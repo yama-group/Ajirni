@@ -18,6 +18,7 @@ class UserItems extends Component {
     this.setState({ userId: this.props.userId }, () => {
       console.log(this.state.user);
       this.props.getAllUserItems(this.state.userId);
+      this.props.getUserInfo(this.state.userId);
     });
   }
 
@@ -31,9 +32,13 @@ class UserItems extends Component {
       {this.props.user.map(info => {
         return (
             <div>
+              <h1 class="h1">
+              {info.first_name}'s Profile
+              </h1>
               <div className="sidebar-widget mb-50">
-                <h1>hiii</h1>
-                    <img src={info.image_url} alt=""/>
+                <div className = "mt002">
+                <img src={info.image_url} alt=""/>
+                </div>
                     <div className="sidebar-img-content">
                         <h3>{info.first_name} {info.last_name}</h3>
                         <p>{info.email}</p>
@@ -65,6 +70,9 @@ class UserItems extends Component {
                         </div>
                     </div>
                 </div>
+                <h1 class="h1">
+              {info.first_name}'s Items
+              </h1>
             </div>
           )
         })}
@@ -75,10 +83,9 @@ class UserItems extends Component {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <h1 className="cart-heading">Cart</h1>
               <form action="#">
                 <div className="table-content table-responsive">
-                  <table>
+                  <table class="table table-hover"> 
                     <thead>
                       <tr>
                         <th className="product-price">Category</th>
@@ -110,16 +117,16 @@ class UserItems extends Component {
                                 : null}
                             </td>
 
+                            <Link to="itemDetail">
                             <td
                               className="product-name"
                               onClick={() => {
                                 this.itemClicked(item.id);
                               }}
                             >
-                              <Link to="itemDetail">
                                 <b>{item.name}</b>
-                              </Link>
                             </td>
+                              </Link>
                             <td className="product-price">
                               <span className="amount">${item.price}/day</span>
                             </td>
@@ -145,9 +152,7 @@ class UserItems extends Component {
     // console.log(this.props.itemsData.length,"nvjjhjgjhg")
     return (
       <div>
-        <h1>User Profile</h1>
         {userInfo}
-        <h1>User Items</h1>
         {userItems}
       </div>
     );
