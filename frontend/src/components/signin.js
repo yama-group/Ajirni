@@ -7,7 +7,7 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      username: "",
       password: ""
     }
   }
@@ -25,7 +25,7 @@ onSubmit(e){
   e.preventDefault();
 
   const signIn_Info = {
-    email: this.state.email,
+    username: this.state.username,
     password: this.state.password
   }
 
@@ -45,7 +45,7 @@ render(){
                             <div class="login-form-container">
                                 <div class="login-form">
                                     <form action="#" method="post" onSubmit = {this.onSubmit.bind(this)}>
-                                        <input type="text" name="email" placeholder="Username" onChange = {this.onChange.bind(this)}/>
+                                        <input type="text" name="username" placeholder="Username" onChange = {this.onChange.bind(this)}/>
                                         <input type="password" name="password" placeholder="Password" onChange = {this.onChange.bind(this)}/>
                                         <div class="button-box">
                                             <div class="login-toggle-btn">

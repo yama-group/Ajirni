@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 ]
 AUTH_USER_MODEL = 'MobClient.CustomUser'
 
-AUTH_USER_MODEL = 'MobClient.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
@@ -86,11 +85,11 @@ WSGI_APPLICATION = 'ajirni.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tSfCCLaIkh',
-        'USER': 'tSfCCLaIkh',
-        'PASSWORD': 'h3qbhJEq9c',
-        'HOST': 'remotemysql.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'newajrini',
+        'USER': 'root',
+        'PASSWORD': '1111',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }

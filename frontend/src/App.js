@@ -32,6 +32,9 @@ class App extends React.Component {
             <Route path="/carsForm" exact component={CarsForm} />
             <Route path="/itemsList" exact component={ItemsList} />
             <Route path="/userItems" exact component={UserItems} />
+            <Route path="/signin" exact component={SignIn} />
+
+
 
             {/* <Signup createUser={Signup} /> */}
             {/* <SignIn /> */}

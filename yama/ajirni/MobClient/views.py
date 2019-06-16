@@ -5,12 +5,13 @@ from .models import Items, Likes, Images, CustomUser
 from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
+from django.contrib.auth import authenticate, login, logout
+
 
 
 # Register API
-class RegisterAPI(generics.GenericAPIView):
+class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
-
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -24,9 +25,10 @@ class RegisterAPI(generics.GenericAPIView):
 
 
 # Login API
-class LoginAPI(generics.GenericAPIView):
+class LoginAPI(generics.CreateAPIView):
     serializer_class = LoginSerializer
-
+    
+    
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -162,8 +164,15 @@ class ItemsList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Items.objects.all()
-        category_id = self.request.query_params.get('category', None)
-        return queryset.filter(category_id__exact=category_id)
+        
+        return queryset
+
+
+
+        
+         
+
+        
 
 
 class GetImages(generics.ListCreateAPIView):
@@ -196,6 +205,8 @@ class getUserInfo(generics.ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        user_id = self.request.query_params.get('user_  id', None)
-        queryset = Items.objects.all().filter(user_id__exact=user_id)
+        user_id = self.request.query_params.get('user_id', None)
+        queryset = CustomUser.objects.filter(id=user_id)
         return queryset
+
+        
