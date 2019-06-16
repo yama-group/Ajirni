@@ -191,10 +191,11 @@ class getUserItems(generics.ListAPIView):
         queryset = Items.objects.filter(user_id__exact=user_id)
         return queryset
 
+
 class getUserInfo(generics.ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        user_id = self.request.query_params.get('user_  id', None)
-        queryset = Items.objects.all().filter(user_id__exact=user_id)
+        user_id = self.request.query_params.get('user_id', None)
+        queryset = CustomUser.objects.filter(id__exact=user_id)
         return queryset

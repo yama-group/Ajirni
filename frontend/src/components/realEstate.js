@@ -348,7 +348,7 @@ class RealEstate extends Component {
                       key={i}
                       src={image}
                       alt=""
-                      className="mt-12"
+                      className="mtoo-12"
                     />
                   ))}
                 </div>
