@@ -2,7 +2,7 @@ import React from "react";
 import ItemDetail from "./components/itemDetails";
 import { Provider } from "react-redux";
 import store from "./store";
-import SportForm from "./components/sportForm.js";
+import SportForm from "./components/SportForm.js";
 import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
 import Header from "./components/header.js";
@@ -15,7 +15,7 @@ import UserProfile from "./components/userProfile";
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
-import CarsForm from "./components/carsForm";
+import CarsForm from "./components/CarsForm";
 
 class App extends React.Component {
   render() {
@@ -32,7 +32,7 @@ class App extends React.Component {
             <Route path="/carsForm" exact component={CarsForm} />
             <Route path="/itemsList" exact component={ItemsList} />
             <Route path="/userItems" exact component={UserItems} />
-
+            <Route path="/signup" exact component={Signup} />
             {/* <Signup createUser={Signup} /> */}
             {/* <SignIn /> */}
             {/* <UserItems /> */}

@@ -1,7 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {fetchUser,updateItem,deleteItem} from "../actions/userinfo"
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+// import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import {Modal,Button} from "react-bootstrap"
 
 
