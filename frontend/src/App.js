@@ -9,10 +9,9 @@ import Header from "./components/header.js";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
 import UserItems from "./components/userItems.js";
-import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserProfile from "./components/userProfile";
-import { connect } from 'react-redux';
-
+import { connect } from "react-redux";
 
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
@@ -23,7 +22,7 @@ import  ProtectedRoute  from "./components/protect";
 
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
@@ -34,7 +33,13 @@ class App extends React.Component {
           <Header />
           <div className="maincontainer">
             <Route path="/" exact component={Home} />
-            <ProtectedRoute token={this.props.token} userId={this.props.user_id}  path="/user" exact component={UserProfile} />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/user"
+              exact
+              component={UserProfile}
+            />
             <Route path="/Category" component={ItemsList} />
             <Route path="/itemDetail" exact component={ItemDetail} />
             <Route path="/carsForm" exact component={CarsForm} />
@@ -56,15 +61,14 @@ class App extends React.Component {
           </div>
           <Footer />
         </Router>
-        
       </Provider>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  user_id:state.signin.userId,
-  token:state.signin.token
-})
+  user_id: state.signin.userId,
+  token: state.signin.token
+});
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);
