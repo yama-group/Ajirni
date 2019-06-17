@@ -2,10 +2,10 @@ import React from "react";
 import ItemDetail from "./components/itemDetails";
 import { Provider } from "react-redux";
 import store from "./store";
-import SportForm from "./components/sportForm.js";
+import SportForm from "./components/SportForm";
 import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
-import Header from "./components/header.js";
+import Header from "./components/newheader";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
 import UserItems from "./components/userItems.js";
@@ -39,6 +39,27 @@ class App extends React.Component {
               path="/user"
               exact
               component={UserProfile}
+            />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/addcar"
+              exact
+              component={CarsForm}
+            />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/addrealestate"
+              exact
+              component={RealEstate}
+            />
+             <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/others"
+              exact
+              component={Tools}
             />
             <Route path="/Category" component={ItemsList} />
             <Route path="/itemDetail" exact component={ItemDetail} />
