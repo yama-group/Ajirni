@@ -30,12 +30,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         # username, email, password,first_name, last_name, phone, image_url
         user = CustomUser.objects.create_user(
             validated_data['username'],
-            validated_data['email'],
-            validated_data['password'],
-            validated_data['first_name'],
-            validated_data['last_name'],
-            validated_data['phone'],
-            validated_data['image_url']
+           email=validated_data['email'],
+           password= validated_data['password'],
+           first_name= validated_data['first_name'],
+           last_name= validated_data['last_name'],
+           phone= validated_data['phone'],
+           image_url= validated_data['image_url']
         )
         return user
 
@@ -45,9 +45,9 @@ class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
 
-    def validate(self, data):
-        print(111111111,data)
-        user = authenticate(**data)
+    def validate(self,request):
+        print(111111111,request['username'])
+        user = authenticate(request,username=request['username'],password=request['password'])
         print(user)
         if user and user.is_active:
             return user

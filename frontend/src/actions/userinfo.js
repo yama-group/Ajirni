@@ -1,7 +1,7 @@
 import {FETCH_USER,FETCH_USER_ITEMS,UPDATE_ITEM}from "./types"
 import axios from "axios";
 
-export const fetchUser = (para=1) => dispatch => {
+export const fetchUser = (para) => dispatch => {
     axios.get(`/userInfo/?user_id=${para}`)
     .then(users =>{
        let user =users.data[0]

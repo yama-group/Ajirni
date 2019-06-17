@@ -3,16 +3,22 @@ import {
 } from '../actions/types'
 
 const initialState = {
-  userId: 1
+  userId:null,
+  token:null,
+  visible:null,
+  error:""
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case SIGN_IN:
-      console.log(action.payload)
+      
       return {
         ...state,
-        userId: action.payload
+        token: action.payload,
+        userId:action.userId,
+        visible:action.visible,
+        error:action.error
       }
       default:
         return state
