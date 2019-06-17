@@ -23,15 +23,11 @@ class Signup extends React.Component {
     phone: "",
     image: null,
     image_url: "",
-    alert: false,
-    message: "",
-    msg: ""
+    alert: false
   }
 
-  componentDidMount() {
-    console.log(this.state.msg)
 
-  }
+
   handleImgChange(e) {
     if (e.target.files[0]) {
       const image = e.target.files[0];
@@ -79,7 +75,6 @@ class Signup extends React.Component {
   }
 
   onsubmit(e) {
-    console.log(this.state.msg)
     const user = {
       username: this.state.username,
       first_name: this.state.firstname,
@@ -91,13 +86,13 @@ class Signup extends React.Component {
     }
     e.preventDefault();
     this.props.createUser(user)
+
   }
 
-  // goToSigninPage(e) {
-
-  // }
+  
 
   render() {
+   
     return (
       <div className="register-area ptb-100">
         <div className="container-fluid">
@@ -135,8 +130,8 @@ class Signup extends React.Component {
 
                       </div>
                       {/* <strong>image</strong><input type="text" name="image" placeholder="image" onChange={this.onchange} /> */}
-                      <div class="button-box">
-                        <button type="submit" onClick={this.onsubmit} class="default-btn floatright">Sign Up</button>
+                      <div className="button-box">
+                        <button type="submit" onClick={this.onsubmit} className="default-btn floatright">Sign Up</button>
                       </div>
                       {/* <div class="button-box">
                         <button type="button" class="default-btn floatright" onClick={this.goSigninPage.bind(this)} >Sign In</button>
@@ -155,12 +150,12 @@ class Signup extends React.Component {
 }
 
 
-  Signup.propTypes = {
-    createUser: PropTypes.func.isRequired
-  }
-  const mapStateToProps = state => ({
-    msg: state.userSignUp.Msg
-  
-  })
+Signup.propTypes = {
+  createUser: PropTypes.func.isRequired
+}
+const mapStateToProps = state => ({
+  msg: state.userSignUp.Msg
+
+})
 
 export default connect(mapStateToProps, { createUser })(Signup)

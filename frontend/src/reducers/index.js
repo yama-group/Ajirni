@@ -8,6 +8,8 @@ import itemReducer from "./itemReducer";
 import signin from "./signInReducer";
 import useritems from "./userItemsReducer";
 import user from "./userinfo"
+import errors from "./errors"
+
 export default combineReducers({
   itemsData: itemsReducer,
   item: itemReducer,
@@ -17,5 +19,6 @@ export default combineReducers({
   itemDetails: itemDetails,
   userItems: useritems,
   itemDetails: itemDetails,
-  userInfo: user
+  userInfo: user,
+  errorMsg: errors
 });
