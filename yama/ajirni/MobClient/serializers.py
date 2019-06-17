@@ -3,7 +3,6 @@ from rest_framework import serializers
 from .models import Items, Likes, Images, CustomUser
 from django.contrib.auth import authenticate
 
-
 # class UsersSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Users

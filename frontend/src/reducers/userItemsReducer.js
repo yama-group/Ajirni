@@ -1,8 +1,9 @@
-import { USER_ITEMS } from "../actions/types";
+import { USER_ITEMS, USER_INFO } from "../actions/types";
 
 const initialState = {
   userItems: [],
-  userId: 1
+  userId: 1,
+  userInfo: []
 };
 
 export default function(state = initialState, action) {
@@ -12,7 +13,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userItems: action.payload
-      };
+      }
+      case USER_INFO:
+        console.log(action.payload)
+        return {
+          ...state,
+          userInfo: action.payload
+        }
     default:
       return state;
   }

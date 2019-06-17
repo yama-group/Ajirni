@@ -206,7 +206,11 @@ class getUserInfo(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
+<<<<<<< HEAD
         queryset = CustomUser.objects.filter(id=user_id)
+=======
+        queryset = CustomUser.objects.filter(id__exact=user_id)
+>>>>>>> 72f6e789f66442dbd97f709e01bdca5099b39028
         return queryset
 
         
