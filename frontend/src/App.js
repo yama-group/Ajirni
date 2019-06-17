@@ -11,11 +11,10 @@ import Footer from "./components/footer.js";
 import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import UserProfile from "./components/userProfile";
-
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
-import CarsForm from "./components/carsForm";
+import CarsForm from "./components/CarsForm";
 
 class App extends React.Component {
   render() {
@@ -31,16 +30,17 @@ class App extends React.Component {
             <Route path="/itemDetail" exact component={ItemDetail} />
             <Route path="/carsForm" exact component={CarsForm} />
             <Route path="/itemsList" exact component={ItemsList} />
+            <Route path="/RealEstate" exact component={RealEstate} />
             <Route path="/userItems" exact component={UserItems} />
 
-            {/* <Signup createUser={Signup} /> */}
-            {/* <SignIn /> */}
-            {/* <UserItems /> */}
-            {/* <ItemsList /> */}
-            {/* <SportForm /> */}
-            {/* <CarsForm /> */}
-            {/* <RealEstate /> */}
-            {/* <Tools /> */}
+            {/* <Signup createUser={Signup} />
+            <SignIn />
+            <UserItems />
+            <ItemsList />
+            <SportForm />
+            <CarsForm />
+            <RealEstate />
+            <Tools /> */}
           </div>
           <Footer />
         </Router>

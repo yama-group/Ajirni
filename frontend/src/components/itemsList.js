@@ -13,7 +13,7 @@ class itemsList extends Component {
   };
 
   componentWillReceiveProps(next) {
-    console.log(next);
+    // console.log(next);
     if (next.itemsData.length >= 0) {
       this.setState({
         itemsData: next.itemsData

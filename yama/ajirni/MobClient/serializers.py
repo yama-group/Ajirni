@@ -3,7 +3,6 @@ from rest_framework import serializers
 from .models import Items, Likes, Images, CustomUser
 from django.contrib.auth import authenticate
 
-
 # class UsersSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Users
@@ -43,7 +42,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 # Login Serializer
 class LoginSerializer(serializers.Serializer):
-    email = serializers.CharField()
+    username = serializers.CharField()
     password = serializers.CharField()
 
     def validate(self, data):
