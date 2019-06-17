@@ -7,14 +7,17 @@ import signin from "./signInReducer";
 import useritems from "./userItemsReducer";
 import user from "./userinfo";
 import likes from "./likesReducer";
+import errors from "./errors"
+
 export default combineReducers({
   itemsData: itemsReducer,
   item: itemReducer,
-  user: userReducer,
+  userSignUp: userReducer,
   signin: signin,
   userItemsReducer: useritems,
   userItems: useritems,
   itemDetails: itemDetails,
   userInfo: user,
+  errorMsg: errors,
   likes: likes
 });

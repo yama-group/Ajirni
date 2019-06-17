@@ -15,6 +15,7 @@ pipenv="==2018.11.26"
 pylint="==2.3.1"
 virtualenv="==16.6.0"
 django-rest-knox = "==4.1.0"
+django-rest-multiple-models = "*"
 
 [requires]
 python_version = "3.7"
