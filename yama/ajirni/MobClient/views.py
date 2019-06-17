@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from .serializers import ItemsSerializer, LikesSerializer, UserSerializer, RegisterSerializer, LoginSerializer, ImageSerializer
+from django.views.generic.detail import DetailView
+from .serializers import (ItemsImagesSerializer, ItemsSerializer, LikesSerializer,
+                          itemslikedSerializer, UserSerializer, RegisterSerializer,
+                          LoginSerializer, ImageSerializer, userlikesSerializer)
 from .models import Items, Likes, Images, CustomUser
 from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
-
+from drf_multiple_model.views import FlatMultipleModelAPIView
 
 # Register API
+
+
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
@@ -178,8 +183,9 @@ class GetImages(generics.ListCreateAPIView):
         image.save()
 
     def get_queryset(self):
-        item_id = self.request.query_params.get("id", None)
-        queryset = Images.objects.filter(item__exact=item_id)
+        # item_id = self.request.query_params.get("id", None)
+        # queryset = Images.objects.filter(item__exact=item_id)
+        queryset = Images.objects.all()
         return queryset
 
 
@@ -196,6 +202,34 @@ class getUserInfo(generics.ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        user_id = self.request.query_params.get('user_  id', None)
-        queryset = Items.objects.all().filter(user_id__exact=user_id)
+        user_id = self.request.query_params.get('user_id', None)
+        queryset = CustomUser.objects.filter(id__exact=user_id)
         return queryset
+
+
+class listItemImages(FlatMultipleModelAPIView):
+    def get_querylist(self):
+        item_id = self.request.query_params.get("id", None)
+        querylist = [
+            {
+                'queryset': Items.objects.filter(id__exact=item_id),
+                'serializer_class': ItemsSerializer,
+            },
+            {
+                'queryset': Images.objects.filter(item_id__exact=item_id),
+                'serializer_class': ImageSerializer,
+            }
+        ]
+        return querylist
+
+
+class ItemsTest(generics.ListCreateAPIView):
+    """This class defines the retrieve behavior of all instances."""
+    serializer_class = ItemsImagesSerializer
+    queryset = Items.objects.all()
+
+
+class UserLikesTest(generics.ListCreateAPIView):
+    """This class defines the retrieve behavior of all instances."""
+    serializer_class = itemslikedSerializer
+    queryset = Likes.objects.all()

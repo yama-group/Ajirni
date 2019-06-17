@@ -1,14 +1,9 @@
 from rest_framework import serializers
+from rest_framework.serializers import SerializerMethodField
+
 # from django.contrib.auth.models import User
 from .models import Items, Likes, Images, CustomUser
 from django.contrib.auth import authenticate
-
-
-# class UsersSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Users
-#         fields = ('id', 'first_name', 'last_name', 'email', 'phone', 'address',
-#                   'location', 'password', 'image_url', 'role', 'confirm')
 
 
 # User Serializer
@@ -47,7 +42,7 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
-        print(111111111,data)
+        print(111111111, data)
         user = authenticate(**data)
         print(user)
         if user and user.is_active:
@@ -70,21 +65,6 @@ class ItemsSerializer(serializers.ModelSerializer):
         """Meta class to map serializer's fields with the model fields."""
         model = Items
         fields = '__all__'
-        # ('id', 'name', 'description', 'condition', 'category_id', 'no_rooms',
-        #           'no_bathrooms', 'surface_area', 'furnished',
-        #           'location', 'price', 'floor_no', 'car_make', 'year_manufactured',
-        #           'no_killometers', 'fuel', 'color', 'transmission', 'quantity',
-        #           'status', 'confirmed', 'user_id')
-
-    # def create(self, validated_data):
-    #     images_data = validated_data.pop('images')
-    #     print(images_data)
-    #     items = Items.objects.create(**validated_data)
-    #     print(items.id, "tttttttttttttrrrrrrtrtrtrtrtrtrtrtrtrtrt")
-    #     for image_data in images_data:
-    #         # items.images_data.add(image_data)
-    #         items.objects.create(**image_data)
-    #     return items
 
 
 class LikesSerializer(serializers.ModelSerializer):
@@ -92,3 +72,61 @@ class LikesSerializer(serializers.ModelSerializer):
         """Meta class to map serializer's fields with the model fields."""
         model = Likes
         fields = ('item_id', 'user_id')
+
+
+class ItemsImagesSerializer(serializers.ModelSerializer):
+    images = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Items
+        fields = (
+            'name',
+            'description',
+            'condition',
+            'category',
+            'no_rooms',
+            'no_bathrooms',
+            'surface_area',
+            'furnished',
+            'location',
+            'price',
+            'floor_no',
+            'car_make',
+            'year_manufactured',
+            'no_killometers',
+            'fuel',
+            'color',
+            'transmission',
+            'quantity',
+            'status',
+            'confirmed',
+            'user',
+            'images'
+        )
+
+    def get_images(self, obj):
+        print(obj)
+        return ImageSerializer(Images.objects.filter(item=obj.id), many=True).data
+
+
+class itemslikedSerializer(serializers.ModelSerializer):
+    itemss = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Likes
+        fields = ('user_id', 'itemss')
+
+    def get_itemss(self, obj):
+        return ItemsSerializer(Items.objects.filter(id=obj.item), many=True).data
+
+
+class userlikesSerializer(serializers.ModelSerializer):
+    likes = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        fields = ('phone',
+                  'image_url', 'email', 'phone', 'likes')
+
+    def get_likes(self, obj):
+        return LikesSerializer(Likes.objects.filter(user_id=obj.id), many=True).data
