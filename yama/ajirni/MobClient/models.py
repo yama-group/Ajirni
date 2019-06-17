@@ -2,11 +2,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 
+
 class CustomUser(AbstractUser):
     pass
     phone = models.CharField(max_length=250)
     image_url = models.TextField()
-    
 
 
 class Categories(models.Model):
@@ -47,19 +47,17 @@ class Items(models.Model):
 
 class Likes(models.Model):
     item = models.ForeignKey(
-        Items, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
-
-# class Confirms(models.Model):
-#     item_id = models.IntegerField()
-#     category_id = models.IntegerField()
+        Items, related_name="itemss", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        CustomUser, related_name="likes", on_delete=models.CASCADE)
 
 
 class Images(models.Model):
     item = models.ForeignKey(
-        Items, on_delete=models.CASCADE,  default=None)
+        Items, related_name="images", on_delete=models.CASCADE)
     img_url = models.TextField(blank=True)
 
     def __str__(self):
         return self.img_url
+
+

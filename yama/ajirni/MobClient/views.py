@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from .serializers import ItemsSerializer, LikesSerializer, UserSerializer, RegisterSerializer, LoginSerializer, ImageSerializer
+from django.views.generic.detail import DetailView
+from .serializers import (ItemsImagesSerializer, ItemsSerializer, LikesSerializer,
+                          itemslikedSerializer, UserSerializer, RegisterSerializer,
+                          LoginSerializer, ImageSerializer, userlikesSerializer)
 from .models import Items, Likes, Images, CustomUser
 from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
+from django.contrib.auth import authenticate, login, logout
 
 
 # Register API
-class RegisterAPI(generics.GenericAPIView):
+class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
@@ -24,7 +28,7 @@ class RegisterAPI(generics.GenericAPIView):
 
 
 # Login API
-class LoginAPI(generics.GenericAPIView):
+class LoginAPI(generics.CreateAPIView):
     serializer_class = LoginSerializer
 
     def post(self, request, *args, **kwargs):
@@ -38,43 +42,11 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 
-# class signUp(generics.ListCreateAPIView):
-#     """This class defines the create behavior of our rest api."""
-#     queryset = Users.objects.all()
-#     serializer_class = UsersSerializer
-
-#     def perform_create(self, serializer):
-#         #Create New User
-#         print(self.queryset)
-#         user = serializer.save()
-
-        # #Generate Token for User
-        # token = Token.objects.create(user)
-        # return Response({'detail':'User has been created with token: ' + token.key})
-
-# class signIn(generics.GenericAPIView):
-#     serializer_class = LoginSerializer
-
-#     def perform_create(self, serializer):
-#         #Create New User
-#         user = serializer.validated_data
-#         #Generate Token for User
-#         token = Token.objects.create(user)
-#         return Response({'detail':'User has been created with token: ' + token.key})
-
-
 class CreateItem(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Items.objects.all()
     serializer_class = ItemsSerializer
 
-    # def perform_create(self, serializer):
-    #     """Save the post data when creating a new Image."""
-    # iteminfo = self.request.data.get("itemInfo", None)
-    # img_urls = self.request.data.get("images", None)
-    # item = Items.objects.get(id=item_id)
-    # image = Images(item=item, img_url=img_url)
-    # image.save()
     def perform_create(self, serializer):
         """Save the post data when creating a new Item."""
         serializer.save()
@@ -162,8 +134,8 @@ class ItemsList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Items.objects.all()
-        category_id = self.request.query_params.get('category', None)
-        return queryset.filter(category_id__exact=category_id)
+
+        return queryset
 
 
 class GetImages(generics.ListCreateAPIView):
@@ -178,8 +150,9 @@ class GetImages(generics.ListCreateAPIView):
         image.save()
 
     def get_queryset(self):
-        item_id = self.request.query_params.get("id", None)
-        queryset = Images.objects.filter(item__exact=item_id)
+        # item_id = self.request.query_params.get("id", None)
+        # queryset = Images.objects.filter(item__exact=item_id)
+        queryset = Images.objects.all()
         return queryset
 
 
@@ -196,6 +169,21 @@ class getUserInfo(generics.ListAPIView):
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        user_id = self.request.query_params.get('user_  id', None)
-        queryset = Items.objects.all().filter(user_id__exact=user_id)
+        user_id = self.request.query_params.get('user_id', None)
+        queryset = CustomUser.objects.filter(id__exact=user_id)
         return queryset
+
+
+class ItemsWithImages(generics.ListCreateAPIView):
+    """This class defines the retrieve behavior of all instances."""
+    serializer_class = ItemsImagesSerializer
+    queryset = Items.objects.all()
+
+
+class UserLikesTest(generics.ListCreateAPIView):
+    """This class defines the retrieve behavior of all instances."""
+    serializer_class = itemslikedSerializer
+    queryset = Likes.objects.all()
+
+    # queryset = CustomUser.objects.filter(id=user_id)
+    # return queryset

@@ -9,7 +9,7 @@ const initialState = {
 export default function(state = initialState, actions) {
   switch (actions.type) {
     case FETCH_ITEMS:
-      console.log(actions.payload);
+      // console.log(actions.payload);
       return {
         ...state,
         items: actions.payload

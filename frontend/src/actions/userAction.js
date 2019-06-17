@@ -2,7 +2,7 @@ import axios from "axios";
 import { NEW_USER, GET_ERRORS } from "./types";
 
 export const createUser = user => dispatch => {
-  // console.log(user);
+  console.log(user);
   axios
     .post("api/auth/register", user)
       

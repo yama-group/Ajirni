@@ -1,7 +1,7 @@
 import axios from "axios";
-import { NEW_Item, NewItemImages, FETCH_ITEMS } from "./types";
+import { NEW_Item, FETCH_ITEMS } from "./types";
 export const postItem = item => dispatch => {
-  // console.log(item);
+  // console.log(item.images);
   axios
     .post("/additem/", item.itemInfo)
     .then(response => {

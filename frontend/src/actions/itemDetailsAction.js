@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchItem = para => dispatch => {
   axios
-    .get(`/rud/${para}`)
+    .get(`/uu/?id=${para}`)
     .then(item => {
       dispatch({
         type: FETCH_ITEM,

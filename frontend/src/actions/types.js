@@ -11,4 +11,6 @@ export const UPDATE_ITEM = "UPDATE_ITEM";
 export const USER_ITEMS = "USER_ITEMS";
 export const Item_id = "Item_id";
 export const SIGN_IN = "SIGN_IN";
-export const GET_ERRORS = "GET_ERRORS";
+export const USER_INFO = "USER_INFO";
+export const LIKES_PAGE = "LIKES_PAGE";
+export const GET_ERRORS = "GET_ERRORS"

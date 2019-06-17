@@ -31,7 +31,7 @@ class ItemDetail extends React.Component {
   }
 
   componentWillReceiveProps(next) {
-    console.log(next.images, "next", next);
+    // console.log(next.images, "next", next);
     if (next.images.length > 0) {
       this.setState({
         images: next.images
