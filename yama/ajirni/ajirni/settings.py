@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'knox',
+    'drf_multiple_model',
     # 'users.apps.UsersConfig',
 ]
 AUTH_USER_MODEL = 'MobClient.CustomUser'
