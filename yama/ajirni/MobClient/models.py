@@ -59,3 +59,5 @@ class Images(models.Model):
 
     def __str__(self):
         return self.img_url
+
+

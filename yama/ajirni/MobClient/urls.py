@@ -1,9 +1,9 @@
 from django.urls import path, include
-from .views import listItemImages, CreateItem, Search, LikeItem, ItemsRud
-from .views import ItemsList, RegisterAPI, LoginAPI, GetImages
-from .views import getUserItems, getUserInfo, ItemsTest, UserLikesTest
+from .views import (CreateItem, Search, LikeItem, ItemsRud, ItemsList, RegisterAPI,
+                    LoginAPI, GetImages, getUserItems, getUserInfo, ItemsWithImages, UserLikesTest)
 
 urlpatterns = [
+
     path('api/auth', include('knox.urls')),
     path('api/auth/register', RegisterAPI.as_view()),
     path('api/auth/login', LoginAPI.as_view()),
@@ -16,7 +16,7 @@ urlpatterns = [
     path("images/", GetImages.as_view(), name="images"),
     path("userItems/", getUserItems.as_view(), name="userItems"),
     path("userInfo/", getUserInfo.as_view(), name="userInfo"),
-    path("uu/", ItemsTest.as_view(), name="ItemsTest"),
-    path("vv/", UserLikesTest.as_view(), name="UserLikesTest"),
+    path("uu/", ItemsWithImages .as_view(), name="ItemsWithImages "),
+    # path("vv/", UserLikesTest.as_view(), name="UserLikesTest"),
 
 ]

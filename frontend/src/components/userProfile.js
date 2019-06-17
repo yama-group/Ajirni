@@ -22,31 +22,10 @@ class UserProfile extends React.Component {
     show1: false,
     show2: false,
     show2: false
-    // id:this.state.itemSelected.id,
-    // description:this.state.itemSelected.description,
-    // condition:this.state.itemSelected.condition,
-    // category_id:this.state.itemSelected.category_id,
-    // no_rooms:this.state.itemSelected.no_rooms,
-    // no_bathrooms:this.state.itemSelected.no_bathrooms,
-    // surface_area:this.state.itemSelected.surface_area,
-    // furnished:this.state.itemSelected.furnished,
-    // location:this.state.itemSelected.location,
-    // price:this.state.itemSelected.price,
-    // floor_no:this.state.itemSelected.floor_no,
-    // car_make:this.state.itemSelected.car_make,
-    // year_manufactured:this.state.itemSelected.year_manufactured,
-    // no_killometers:this.state.itemSelected.no_killometers,
-    // fuel:this.state.itemSelected.fuel,
-    // color:this.state.itemSelected.color,
-    // transmission:this.state.itemSelected.transmission,
-    // quantity:this.state.itemSelected.quantity,
-    // status:this.state.itemSelected.status,
-    // confirmed:this.state.itemSelected.confirmed,
-    // user_id:this.state.itemSelected.user_id
   };
 
   componentWillMount() {
-    this.props.fetchUser();
+    this.props.fetchUser(this.props.userId);
   }
 
   handleInputChange(event) {
@@ -470,7 +449,7 @@ class UserProfile extends React.Component {
                     <img src={this.props.user.image_url} alt="" />
                     <div className="sidebar-img-content">
                       <h3>
-                        {this.props.user.first_name} {this.props.user.last_name}
+                        {this.props.user.username} {this.props.user.last_name}
                       </h3>
                       <p>{this.props.user.email}</p>
                       <p>{this.props.user.phone}</p>
