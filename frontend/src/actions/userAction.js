@@ -1,10 +1,11 @@
 import axios from "axios";
-import { NEW_USER } from "./types";
+import { NEW_USER, GET_ERRORS } from "./types";
 
 export const createUser = user => dispatch => {
   console.log(user);
   axios
     .post("api/auth/register", user)
+      
     .then(response => {
       console.log(response);
       dispatch({
@@ -12,10 +13,18 @@ export const createUser = user => dispatch => {
         payload: "successfully sign up"
       });
     })
-    .catch(error => {
+    .catch(err => {
+      
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status
+      }
+
       dispatch({
-        type: NEW_USER,
-        payload: " please try agian "
+        type: GET_ERRORS,
+        payload: errors
       });
     });
+  
 };
+
