@@ -5,6 +5,7 @@ export const fetchItem = para => dispatch => {
   axios
     .get(`/uu/?id=${para}`)
     .then(item => {
+      console.log(item)
       dispatch({
         type: FETCH_ITEM,
         itemRetrive: item.data,

@@ -89,6 +89,12 @@ class Signup extends React.Component {
 
   }
 
+  componentWillReceiveProps(props){
+   if(props.done){
+     this.props.history.push("/signin")
+   }
+  }
+
   
 
   render() {
@@ -98,17 +104,17 @@ class Signup extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
-              <h1> signup page </h1>
+              <h2> Signup  </h2>
               <div className="login">
                 <div className="login-form-container">
                   <div className="login-form">
                     <form  >
-                      <strong>user name</strong><input type="text" name="username" placeholder="user name" onChange={this.onchange} />
-                      <strong>first name</strong><input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
-                      <strong>last name</strong><input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
-                      <strong>email</strong><input type="email" name="email" placeholder="Email" onChange={this.onchange} />
-                      <strong>password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange} />
-                      <strong>phone</strong><input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
+                      <strong>Username</strong><input type="text" name="username" placeholder="user name" onChange={this.onchange} />
+                      <strong>First Name</strong><input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
+                      <strong>Last Name</strong><input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
+                      <strong>Email</strong><input type="email" name="email" placeholder="Email" onChange={this.onchange} />
+                      <strong>Password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange}  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
+                      <strong>Phone</strong><input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
                       <input
                         className="col-md-4"
                         aria-describedby="btn"
@@ -123,9 +129,10 @@ class Signup extends React.Component {
 
                         <img
                           role="tab"
-                          src={this.state.image}
+                          src={this.state.image_url}
                           alt=""
-                          className="mtoo-12"
+                          style={{width:"100px",
+                        height:"100px"}}
                         />
 
                       </div>
@@ -154,7 +161,8 @@ Signup.propTypes = {
   createUser: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
-  msg: state.userSignUp.Msg
+  msg: state.userSignUp.Msg,
+  done:state.userSignUp.done
 
 })
 

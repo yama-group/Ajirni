@@ -209,7 +209,7 @@ class Header extends Component {
                             
                             <div className="cur-lang-acc-dropdown">
                                 <ul>  
-                                    {!token ? <li><a href="">register</a></li>:""}
+                                    {!token ? <li><a href="/signup">register</a></li>:""}
                                     {token ? <li><a onClick={this.logOut.bind(this)} href="/signin">Log Out</a></li>:""}
                                    {!token ? <li><a href="/signin">Sign In </a></li>:<li><a href="/user">Profile</a></li>}
                                 </ul>

@@ -8,7 +8,7 @@ class CarsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category_id: "",
+      
       user_id: "",
       name: "",
       description: "",
@@ -35,8 +35,8 @@ class CarsForm extends Component {
 
   componentWillMount() {
     this.setState({
-      category_id: this.props.category_id,
-      user_id: this.props.user_id
+     
+      user_id: this.props.userId
     });
   }
   handleImgChange(e) {
@@ -92,7 +92,7 @@ class CarsForm extends Component {
         name: this.state.name,
         description: this.state.description,
         condition: this.state.condition,
-        category: this.state.category_id,
+        category: 2,
         location: this.state.location,
         price: this.state.price,
         car_make: this.state.car_make,
@@ -259,6 +259,7 @@ class CarsForm extends Component {
                 <div className="col-md-6">
                   <div className="checkout-form-list">
                     <label>
+                      
                       Kilometers
                       <span className="required">*</span>
                     </label>
@@ -314,6 +315,7 @@ class CarsForm extends Component {
                 <div className="col-md-6">
                   <div className="country-select">
                     <label>
+                      
                       year of manufactured <span className="required">*</span>
                     </label>
                     <select
@@ -421,8 +423,8 @@ CarsForm.propTypes = {
 ////// should changed to category_id from other component
 ////// should changed to user_id from login component
 const mapStateToProps = state => ({
-  user_id: state.item.user_id,
-  category_id: state.item.category_id
+  user_id: state.signin.userId,
+  
 });
 
 export default connect(
