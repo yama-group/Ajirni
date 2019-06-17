@@ -15,6 +15,7 @@ import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
 import CarsForm from "./components/CarsForm";
+import Likes from "./components/likes";
 
 class App extends React.Component {
   render() {
@@ -32,9 +33,11 @@ class App extends React.Component {
             <Route path="/itemsList" exact component={ItemsList} />
             <Route path="/RealEstate" exact component={RealEstate} />
             <Route path="/userItems" exact component={UserItems} />
+            <Route path="/likes" exact component={Likes} />
 
             {/* <Signup createUser={Signup} />
             <SignIn />
+            <Likes />
             <UserItems />
             <ItemsList />
             <SportForm />
