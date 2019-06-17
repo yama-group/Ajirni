@@ -5,8 +5,8 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import store from "./store";
 // import SportForm from "./components/SportForm.js";
-// import RealEstate from "./components/realEstate.js";
-// import Tools from "./components/tools.js";
+import RealEstate from "./components/realEstate.js";
+import Tools from "./components/tools.js";
 import Header from "./components/header.js";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
@@ -16,9 +16,9 @@ import UserProfile from "./components/userProfile";
 import { connect } from "react-redux";
 
 import Signup from "./components/signup";
-// import SignIn from "./components/signin";
+import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
-import CarsForm from "./components/carsForm";
+import CarsForm from "./components/CarsForm";
 import Likes from "./components/likes";
 import ProtectedRoute from "./components/protect";
 import Alerts from './components/alerts'
@@ -64,6 +64,7 @@ class App extends React.Component {
               <Route path="/likes" exact component={Likes} />
               <Route path="/signin" exact component={SignIn} />
               <Route path="/tools" exact component={Tools} />
+              <Route path="/signup" exact component={Signup} />
             </div>
             <Footer />
           </Router>
