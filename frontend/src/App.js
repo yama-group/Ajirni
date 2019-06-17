@@ -16,9 +16,9 @@ import { connect } from "react-redux";
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
-import CarsForm from "./components/CarsForm";
+import CarsForm from "./components/carsForm";
 import Likes from "./components/likes";
-import  ProtectedRoute  from "./components/protect";
+import ProtectedRoute from "./components/protect";
 
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
@@ -69,16 +69,7 @@ class App extends React.Component {
             <Route path="/userItems" exact component={UserItems} />
             <Route path="/likes" exact component={Likes} />
             <Route path="/signin" exact component={SignIn} />
-
-            {/* <Signup createUser={Signup} />
-            <SignIn />
-            <Likes />
-            <UserItems />
-            <ItemsList />
-            <SportForm />
-            <CarsForm />
-            <RealEstate />
-            <Tools /> */}
+            <Route path="/tools" exact component={Tools} />
           </div>
           <Footer />
         </Router>
