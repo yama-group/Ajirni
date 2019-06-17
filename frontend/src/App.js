@@ -2,7 +2,7 @@ import React from "react";
 import ItemDetail from "./components/itemDetails";
 import { Provider } from "react-redux";
 import store from "./store";
-import SportForm from "./components/SportForm.js";
+import SportForm from "./components/sportForm.js";
 import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
 import Header from "./components/header.js";
@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
-import CarsForm from "./components/CarsForm";
+import CarsForm from "./components/carsForm";
 import ProtectedRoute from "./components/protect";
 
 class App extends React.Component {
@@ -47,6 +47,7 @@ class App extends React.Component {
             <Route path="/userItems" exact component={UserItems} />
             {/* <Route path="/userProfile" exact component={UserProfile} /> */}
             <Route path="/signin" exact component={SignIn} />
+            <Route path="/tools" exact component={Tools} />
           </div>
           <Footer />
         </Router>
