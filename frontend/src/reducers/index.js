@@ -1,6 +1,4 @@
-import {
-  combineReducers
-} from "redux";
+import { combineReducers } from "redux";
 import itemsReducer from "./itemsReducer";
 import userReducer from "./userReducer";
 import itemDetails from "./itemDetail";
@@ -15,9 +13,8 @@ export default combineReducers({
   user: userReducer,
   signin: signin,
   userItemsReducer: useritems,
-  itemDetails: itemDetails,
   userItems: useritems,
   itemDetails: itemDetails,
-  userInfo:user,
+  userInfo: user,
   likes: likes
 });
