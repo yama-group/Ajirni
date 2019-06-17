@@ -17,6 +17,7 @@ import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
 import CarsForm from "./components/carsForm";
+import Likes from "./components/likes";
 import ProtectedRoute from "./components/protect";
 
 class App extends React.Component {
@@ -45,7 +46,7 @@ class App extends React.Component {
             <Route path="/itemsList" exact component={ItemsList} />
             <Route path="/RealEstate" exact component={RealEstate} />
             <Route path="/userItems" exact component={UserItems} />
-            {/* <Route path="/userProfile" exact component={UserProfile} /> */}
+            <Route path="/likes" exact component={Likes} />
             <Route path="/signin" exact component={SignIn} />
             <Route path="/tools" exact component={Tools} />
           </div>
