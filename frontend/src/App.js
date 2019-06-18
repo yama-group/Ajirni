@@ -26,7 +26,7 @@ import Alerts from './components/alerts'
 
 const alertOptions = {
   position: positions.UP_CENTER,
-  timeout: 50000,
+  timeout: 5000,
   offset: '30px',
   // you can also just use 'scale'
   transition: transitions.SCALE
