@@ -53,7 +53,7 @@ class CreateItem(generics.ListCreateAPIView):
 
 
 class Search(generics.ListAPIView):
-    serializer_class = ItemsSerializer
+    serializer_class = ItemsImagesSerializer
 
     def get_queryset(self):
         """
