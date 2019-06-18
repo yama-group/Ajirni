@@ -12,14 +12,14 @@ export class Alerts extends Component {
   componentDidUpdate(prevProps) {
     const { error, alert } = this.props;
     if(error !== prevProps.error){
+        if(error.msg.phone){
+          alert.error(`phone: ${error.msg.phone.join()}`)
+        }
       if(error.msg.username){
-        alert.error(`username: ${error.msg.username}`)
+        alert.error(`username: ${error.msg.username.join()}`)
       }
       if(error.msg.password){
-        alert.error(`password: ${error.msg.password}`)
-      }
-      if(error.msg.phone){
-        alert.error(`phone: ${error.msg.phone}`)
+        alert.error(`password: ${error.msg.password.join()}`)
       }
       if(error.msg.image_url){
         alert.error(`image: ${error.msg.image_url}`)

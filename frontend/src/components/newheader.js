@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { search } from "../actions/itemAction";
+import {fetchUser} from "../actions/userinfo"
 import {
   BrowserRouter as Router,
   Route,
@@ -33,6 +34,8 @@ class Header extends Component {
         category_id: this.props.category_id,
         user_id: this.props.user_id
       });
+      this.props.fetchUser(this.props.userId);
+
     }
   
     onChanges(e) {
@@ -230,12 +233,13 @@ class Header extends Component {
 
 const mapStateToProps = state => ({
     category_id: state.item.category_id,
-    user_id: state.item.user_id,
+    user_id: state.item.user_id ,
     user: state.userInfo.user,
+    userId:window.localStorage.getItem("userId")
   });
   
 
 export default connect(
     mapStateToProps,
-    { search }
+    { search,fetchUser }
   )(Header);

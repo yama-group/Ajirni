@@ -423,7 +423,7 @@ CarsForm.propTypes = {
 ////// should changed to category_id from other component
 ////// should changed to user_id from login component
 const mapStateToProps = state => ({
-  user_id: state.signin.userId,
+  user_id: state.signin.userId || window.localStorage.getItem("userId"),
   
 });
 
