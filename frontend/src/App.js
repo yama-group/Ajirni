@@ -20,7 +20,8 @@ import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
 import CarsForm from "./components/CarsForm";
 import Likes from "./components/likes";
-import ProtectedRoute from "./components/protect";
+import  ProtectedRoute  from "./components/protect";
+// import  Carousel  from "./components/categorySlides";
 import Alerts from './components/alerts'
 
 
@@ -77,16 +78,17 @@ class App extends React.Component {
               exact
               component={Tools}
             />
-              <Route path="/Category" component={ItemsList} />
-              <Route path="/itemDetail" exact component={ItemDetail} />
-              <Route path="/carsForm" exact component={CarsForm} />
-              <Route path="/itemsList" exact component={ItemsList} />
-              <Route path="/RealEstate" exact component={RealEstate} />
-              <Route path="/userItems" exact component={UserItems} />
-              <Route path="/likes" exact component={Likes} />
-              <Route path="/signin" exact component={SignIn} />
-              <Route path="/tools" exact component={Tools} />
-              <Route path="/signup" exact component={Signup} />
+            <Route path="/Category" component={ItemsList} />
+            <Route path="/itemDetail" exact component={ItemDetail} />
+            <Route path="/carsForm" exact component={CarsForm} />
+            <Route path="/itemsList" exact component={ItemsList} />
+            <Route path="/RealEstate" exact component={RealEstate} />
+            <Route path="/userItems" exact component={UserItems} />
+            <Route path="/likes" exact component={Likes} />
+            <Route path="/signin" exact component={SignIn} />
+            {/* <Route path="/categorySlides" exact component={Carousel} /> */}
+            <Route path="/tools" exact component={Tools} />
+            <Route path="/signup" exact component={Signup} />
             </div>
             <Footer />
           </Router>
