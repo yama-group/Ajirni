@@ -177,7 +177,15 @@ class getUserInfo(generics.ListAPIView):
 class ItemsWithImages(generics.ListCreateAPIView):
     """This class defines the retrieve behavior of all instances."""
     serializer_class = ItemsImagesSerializer
-    queryset = Items.objects.all()
+
+    def get_queryset(self):
+        item_id = self.request.query_params.get('item_id', None)
+        if (item_id):
+            queryset = Items.objects.filter(id=item_id)
+            return queryset
+        else:
+            queryset = Items.objects.all()
+            return queryset
 
 
 class UserLikesTest(generics.ListCreateAPIView):
