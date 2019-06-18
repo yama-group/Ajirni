@@ -8,7 +8,6 @@ class Tools extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category_id: "",
       user_id: "",
       name: "",
       description: "",
@@ -30,7 +29,6 @@ class Tools extends Component {
 
   componentWillMount() {
     this.setState({
-      category_id: this.props.category_id,
       user_id: this.props.user_id
     });
   }
