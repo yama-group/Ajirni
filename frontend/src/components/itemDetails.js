@@ -155,7 +155,7 @@ class ItemDetail extends React.Component {
                 <h3>{this.props.item.name}</h3>
 
                 <div className="details-price">
-                  <span>${this.props.item.price}/month</span>
+                  <span>${this.props.item.price}/day</span>
                 </div>
                 <p>{this.props.item.description}</p>
                 <div className="quick-view-select">
