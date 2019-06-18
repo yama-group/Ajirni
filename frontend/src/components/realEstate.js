@@ -8,7 +8,6 @@ class RealEstate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category_id: "",
       user_id: "",
       name: "",
       description: "",
@@ -34,7 +33,6 @@ class RealEstate extends Component {
 
   componentWillMount() {
     this.setState({
-      category_id: this.props.category_id,
       user_id: this.props.user_id
     });
   }
@@ -91,7 +89,7 @@ class RealEstate extends Component {
         name: this.state.name,
         description: this.state.description,
         condition: this.state.condition,
-        category: this.state.category_id,
+        category: 3,
         location: this.state.location,
         price: this.state.price,
         quantity: this.state.quantity,
@@ -376,8 +374,8 @@ RealEstate.propTypes = {
 ////// should changed to category_id from other component
 ////// should changed to user_id from login component
 const mapStateToProps = state => ({
-  user_id: state.item.user_id,
-  category_id: state.item.category_id
+  user_id: state.signin.user_id || window.localStorage.getItem("userId"),
+  
 });
 
 export default connect(

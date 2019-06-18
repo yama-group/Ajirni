@@ -15,7 +15,7 @@ export const getAllItems = category => dispatch => {
 };
 
 export const itemId = id => dispatch => {
-  // console.log(id, "dfdfdfsdfsdfsdf");
+  
   dispatch({
     type: Item_id,
     payload: id

@@ -1,27 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUser, updateItem, deleteItem } from "../actions/userinfo";
-import {
-  MDBContainer,
-  MDBBtn,
-  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBModalFooter
-} from "mdbreact";
+import Car from "./CarsForm";
+import {Link} from "react-router-dom"
+
 import { Modal, Button } from "react-bootstrap";
 
 class UserProfile extends React.Component {
   state = {
     items: [],
     itemSelected: {},
-    modal2: false,
-    modal3: false,
-    modal4: false,
-    modal5: false,
+    
     show1: false,
     show2: false,
-    show2: false
+    show3: false,
+    show4:false
   };
 
   componentWillMount() {
@@ -93,6 +86,19 @@ class UserProfile extends React.Component {
     }
   }
 
+
+  handleAddItem(){
+    this.setState({
+      show4:true
+    })
+  }
+
+  handleAddItemClose(){
+    this.setState({
+      show4:false
+    })
+  }
+
   render() {
     return (
       <div>
@@ -102,6 +108,7 @@ class UserProfile extends React.Component {
               <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              
               <div className="row">
                 <div className="col-lg-4">
                   Name:{" "}
@@ -193,6 +200,7 @@ class UserProfile extends React.Component {
               <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              
               <div className="row">
                 <div className="col-lg-4">
                   Name:{" "}
@@ -439,7 +447,25 @@ class UserProfile extends React.Component {
             </Modal.Footer>
           </Modal>
         </>
-
+        <Modal show={this.state.show4}>
+            <Modal.Header>
+              <Modal.Title>Choose Catagory:</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div style={{paddingLeft:"28%"}}>    
+            <Link to="/addcar"><img style={{width:"100px",height:"100px",marginRight:"30px"}} src="https://images.vexels.com/media/users/3/128870/isolated/preview/ec11c8b5ce0c388cc96a95edb95cb0c5-taxi-circle-icon-by-vexels.png"/></Link> 
+             <Link to="addrealestate"><img style={{width:"92px",height:"92px",marginRight:"30px"}} src="http://www.practicepanther.com/wp-content/uploads/2015/02/Law-Practice-Management-Software-for-Real-Estate-Attorneys-400x400.png"/></Link> 
+            <Link to="/others"><img style={{width:"100px",height:"100px"}} src="https://cdn3.iconfinder.com/data/icons/flat-circle-content/512/flat-style-circle-add-2-512.png"/></Link>  
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleAddItemClose.bind(this)}>
+                Close
+              </Button>
+              
+              
+            </Modal.Footer>
+          </Modal>
         <div className="blog-area pt-100 pb-100">
           <div className="container">
             <div className="row">
@@ -494,7 +520,14 @@ class UserProfile extends React.Component {
                 </div>
               </div>
               <div className="col-lg-8">
+                <div style={{marginLeft:"-2px",marginTop:"-15px"}} className="quickview-btn-cart">
+                    <a onClick={this.handleAddItem.bind(this)} className="btn-hover-black" href="#">
+                      Add Item
+                    </a>
+                  </div>
+                  <br/>
                 <div className="blog-details-style">
+                
                   <div className="blog-part">
                     <h4>Products List:</h4>
                     <br />

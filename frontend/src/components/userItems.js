@@ -32,9 +32,9 @@ class UserItems extends Component {
       {this.props.user.map(info => {
         return (
             <div>
-              <h1 className="h1">
-              {info.first_name}'s Profile
-              </h1>
+              <h3 className="h1">
+              {info.first_name}
+              </h3>
               <div className="sidebar-widget mb-50">
                 <div className = "mt002">
                 <img src={info.image_url} alt="" style = {{width:"250px"}}/>
