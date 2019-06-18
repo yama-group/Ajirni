@@ -1,8 +1,7 @@
 import axios from "axios";
-import { NEW_Item, NewItemImages, FETCH_ITEMS } from "./types";
-
+import { NEW_Item, FETCH_ITEMS } from "./types";
 export const postItem = item => dispatch => {
-  // console.log(item);
+  // console.log(item.images);
   axios
     .post("/additem/", item.itemInfo)
     .then(response => {
@@ -24,14 +23,11 @@ export const postItem = item => dispatch => {
 
 export const search = query => dispatch => {
   // console.log(query);
-  dispatch({
-    type: FETCH_ITEMS,
-    payload: []
-  });
+  
   axios
     .get("/search/?" + query)
     .then(response => {
-      // console.log(response);
+       console.log(response);
       dispatch({
         type: FETCH_ITEMS,
         payload: response.data

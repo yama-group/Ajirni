@@ -53,7 +53,7 @@ class CreateItem(generics.ListCreateAPIView):
 
 
 class Search(generics.ListAPIView):
-    serializer_class = ItemsSerializer
+    serializer_class = ItemsImagesSerializer
 
     def get_queryset(self):
         """
@@ -150,9 +150,9 @@ class GetImages(generics.ListCreateAPIView):
         image.save()
 
     def get_queryset(self):
-        # item_id = self.request.query_params.get("id", None)
-        # queryset = Images.objects.filter(item__exact=item_id)
-        queryset = Images.objects.all()
+        item_id = self.request.query_params.get("id", None)
+        queryset = Images.objects.filter(item__exact=item_id)
+        # queryset = Images.objects.all()
         return queryset
 
 
@@ -177,7 +177,15 @@ class getUserInfo(generics.ListAPIView):
 class ItemsWithImages(generics.ListCreateAPIView):
     """This class defines the retrieve behavior of all instances."""
     serializer_class = ItemsImagesSerializer
-    queryset = Items.objects.all()
+
+    def get_queryset(self):
+        item_id = self.request.query_params.get('item_id', None)
+        if (item_id):
+            queryset = Items.objects.filter(id=item_id)
+            return queryset
+        else:
+            queryset = Items.objects.all()
+            return queryset
 
 
 class UserLikesTest(generics.ListCreateAPIView):

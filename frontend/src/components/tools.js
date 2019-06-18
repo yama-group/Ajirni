@@ -8,7 +8,6 @@ class Tools extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category_id: "",
       user_id: "",
       name: "",
       description: "",
@@ -30,7 +29,6 @@ class Tools extends Component {
 
   componentWillMount() {
     this.setState({
-      category_id: this.props.category_id,
       user_id: this.props.user_id
     });
   }
@@ -118,7 +116,7 @@ class Tools extends Component {
     return (
       <div>
         <div className="col-lg-6 col-md-12 col-12">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="checkbox-form">
               <h3>Tools Form</h3>
               <div className="row">
@@ -133,6 +131,7 @@ class Tools extends Component {
                       placeholder="tool"
                       onChange={this.onChange}
                       value={this.state.name}
+                      required
                     />
                   </div>
                 </div>
@@ -149,6 +148,7 @@ class Tools extends Component {
                       placeholder="50"
                       onChange={this.onChange}
                       value={this.state.price}
+                      required
                     />
                   </div>
                 </div>
@@ -164,6 +164,7 @@ class Tools extends Component {
                       placeholder="Amman"
                       onChange={this.onChange}
                       value={this.state.location}
+                      required
                     />
                   </div>
                 </div>
@@ -180,6 +181,7 @@ class Tools extends Component {
                       placeholder="1"
                       onChange={this.onChange}
                       value={this.state.quantity}
+                      required
                     />
                   </div>
                 </div>
@@ -195,6 +197,7 @@ class Tools extends Component {
                       placeholder="Blue"
                       onChange={this.onChange}
                       value={this.state.color}
+                      required
                     />
                   </div>
                 </div>
@@ -208,11 +211,56 @@ class Tools extends Component {
                       name="condition"
                       onChange={this.onChange}
                       value={this.state.condition}
+                      required
                     >
                       <option value="New">New</option>
                       <option value="Used">Used</option>
                     </select>
                   </div>
+                </div>
+
+                <div className="col-md-6">
+                  <label> Avilable Directly</label>:
+                  <select
+                    name="status"
+                    value={this.state.status}
+                    onChange={this.onChange}
+                    required
+                  >
+                    <option value="available">Available</option>
+                    <option value="unavailable">Unavailable</option>
+                  </select>
+                </div>
+
+                <div className="col-md-12">
+                  <div className="checkout-form-list">
+                    <label>
+                      Description <span className="required">*</span>
+                    </label>
+                    <textarea
+                      cols="30"
+                      rows="2"
+                      name="description"
+                      placeholder="description"
+                      onChange={this.onChange}
+                      value={this.state.description}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <label> Upload your images (maximum 5)</label>
+                  <input
+                    // className="col-md-6"
+                    aria-describedby="btn"
+                    type="file"
+                    accept="image/*"
+                    data-max-size="5000"
+                    onChange={this.handleImgChange.bind(this)}
+                    required
+                    disabled={this.state.imgUrl.length >= 5 ? true : false}
+                  />
                 </div>
 
                 <div className="col-md-6">
@@ -229,55 +277,6 @@ class Tools extends Component {
                   )}
                 </div>
 
-                <div className="col-md-12">
-                  <div className="checkout-form-list">
-                    <label>
-                      Description <span className="required">*</span>
-                    </label>
-                    <textarea
-                      cols="30"
-                      rows="2"
-                      name="description"
-                      placeholder="description"
-                      onChange={this.onChange}
-                      value={this.state.description}
-                    />
-                  </div>
-                </div>
-
-                <div className="col-md-12">
-                  <input
-                    type="checkbox"
-                    id="newsletter-permission"
-                    name="status"
-                    value={this.state.status}
-                  />
-                  <label> Avilable Directly</label>
-                </div>
-                {/* <label>Choose file</label> */}
-                <input
-                  className="col-md-4"
-                  aria-describedby="btn"
-                  type="file"
-                  accept="image/*"
-                  data-max-size="5000"
-                  onChange={this.handleImgChange.bind(this)}
-                />
-
-                {/* <button type="button" onClick={this.handleImgUpload.bind(this)}>
-                  Upload
-                </button> */}
-                <div className="col-md-12" />
-                {/* <img
-                  src={
-                    this.state.imgUrl[0] ||
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSd6J9YsKM3PyT9fNDGqbt3cJA90-Hi6KvKtj2DKK7SAYJoY1S"
-                  }
-                  alt="uploaded images"
-                  height="100"
-                  width="100"
-                /> */}
-
                 <div role="tablist">
                   {this.state.imgUrl.map((image, i) => (
                     <img
@@ -293,7 +292,7 @@ class Tools extends Component {
             </div>
 
             <div className="order-button-payment">
-              <input type="submit" value="Add" onClick={this.onSubmit} />
+              <input type="submit" value="Add" />
             </div>
           </form>
         </div>

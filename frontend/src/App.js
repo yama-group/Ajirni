@@ -1,11 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ItemDetail from "./components/itemDetails";
 import { Provider } from "react-redux";
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 import store from "./store";
-import SportForm from "./components/sportForm.js";
+// import SportForm from "./components/SportForm.js";
 import RealEstate from "./components/realEstate.js";
 import Tools from "./components/tools.js";
-import Header from "./components/header.js";
+import Header from "./components/newheader";
 import Home from "./components/home.js";
 import Footer from "./components/footer.js";
 import UserItems from "./components/userItems.js";
@@ -19,7 +21,17 @@ import ItemsList from "./components/itemsList";
 import CarsForm from "./components/CarsForm";
 import Likes from "./components/likes";
 import  ProtectedRoute  from "./components/protect";
-import  Carousel  from "./components/categorySlides";
+// import  Carousel  from "./components/categorySlides";
+import Alerts from './components/alerts'
+
+
+const alertOptions = {
+  position: positions.UP_CENTER,
+  timeout: 50000,
+  offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.SCALE
+}
 
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
@@ -30,16 +42,41 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <Header />
-          <div className="maincontainer">
-            <Route path="/" exact component={Home} />
+        
+        <AlertProvider template={AlertTemplate} {...alertOptions} >
+
+          <Router>
+            <Header />
+            <Alerts />
+            <div className="maincontainer">
+              <Route path="/" exact component={Home} />
+              <ProtectedRoute
+                token={this.props.token}
+                userId={this.props.user_id}
+                path="/user"
+                exact
+                component={UserProfile}
+              />
+               <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/addcar"
+              exact
+              component={CarsForm}
+            />
             <ProtectedRoute
               token={this.props.token}
               userId={this.props.user_id}
-              path="/user"
+              path="/addrealestate"
               exact
-              component={UserProfile}
+              component={RealEstate}
+            />
+             <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/others"
+              exact
+              component={Tools}
             />
             <Route path="/Category" component={ItemsList} />
             <Route path="/itemDetail" exact component={ItemDetail} />
@@ -50,19 +87,13 @@ class App extends React.Component {
             <Route path="/likes" exact component={Likes} />
             <Route path="/signin" exact component={SignIn} />
             {/* <Route path="/categorySlides" exact component={Carousel} /> */}
+            <Route path="/tools" exact component={Tools} />
+            <Route path="/signup" exact component={Signup} />
+            </div>
+            <Footer />
+          </Router>
 
-            {/* <Signup createUser={Signup} />
-            <SignIn />
-            <Likes />
-            <UserItems />
-            <ItemsList />
-            <SportForm />
-            <CarsForm />
-            <RealEstate />
-            <Tools /> */}
-          </div>
-          <Footer />
-        </Router>
+        </AlertProvider>
       </Provider>
     );
   }

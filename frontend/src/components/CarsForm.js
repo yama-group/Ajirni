@@ -8,7 +8,7 @@ class CarsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category_id: "",
+      
       user_id: "",
       name: "",
       description: "",
@@ -35,8 +35,8 @@ class CarsForm extends Component {
 
   componentWillMount() {
     this.setState({
-      category_id: this.props.category_id,
-      user_id: this.props.user_id
+     
+      user_id: this.props.userId
     });
   }
   handleImgChange(e) {
@@ -92,7 +92,7 @@ class CarsForm extends Component {
         name: this.state.name,
         description: this.state.description,
         condition: this.state.condition,
-        category: this.state.category_id,
+        category: 2,
         location: this.state.location,
         price: this.state.price,
         car_make: this.state.car_make,
@@ -137,7 +137,7 @@ class CarsForm extends Component {
     return (
       <div>
         <div className="col-lg-6 col-md-12 col-12">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="checkbox-form">
               <h3>Cars Form</h3>
               <div className="row">
@@ -152,6 +152,7 @@ class CarsForm extends Component {
                       placeholder="toytoa car"
                       onChange={this.onChange}
                       value={this.state.name}
+                      required
                     />
                   </div>
                 </div>
@@ -168,6 +169,7 @@ class CarsForm extends Component {
                       placeholder="50"
                       onChange={this.onChange}
                       value={this.state.price}
+                      required
                     />
                   </div>
                 </div>
@@ -183,6 +185,7 @@ class CarsForm extends Component {
                       placeholder="Amman"
                       onChange={this.onChange}
                       value={this.state.location}
+                      required
                     />
                   </div>
                 </div>
@@ -199,6 +202,7 @@ class CarsForm extends Component {
                       placeholder="1"
                       onChange={this.onChange}
                       value={this.state.quantity}
+                      required
                     />
                   </div>
                 </div>
@@ -214,6 +218,7 @@ class CarsForm extends Component {
                       placeholder="Blue"
                       onChange={this.onChange}
                       value={this.state.color}
+                      required
                     />
                   </div>
                 </div>
@@ -227,6 +232,7 @@ class CarsForm extends Component {
                       name="condition"
                       onChange={this.onChange}
                       value={this.state.condition}
+                      required
                     >
                       <option value="New">New</option>
                       <option value="Used">Used</option>
@@ -245,6 +251,7 @@ class CarsForm extends Component {
                       placeholder="Toyota"
                       onChange={this.onChange}
                       value={this.state.car_make}
+                      required
                     />
                   </div>
                 </div>
@@ -252,6 +259,7 @@ class CarsForm extends Component {
                 <div className="col-md-6">
                   <div className="checkout-form-list">
                     <label>
+                      
                       Kilometers
                       <span className="required">*</span>
                     </label>
@@ -262,6 +270,7 @@ class CarsForm extends Component {
                       placeholder="1000"
                       onChange={this.onChange}
                       value={this.state.no_killometers}
+                      required
                     />
                   </div>
                 </div>
@@ -275,6 +284,7 @@ class CarsForm extends Component {
                       name="fuel"
                       onChange={this.onChange}
                       value={this.state.fuel}
+                      required
                     >
                       <option value="New">Diesel</option>
                       <option value="Used">Gasoline</option>
@@ -293,6 +303,7 @@ class CarsForm extends Component {
                       name="transmission"
                       onChange={this.onChange}
                       value={this.state.transmission}
+                      required
                     >
                       <option value="New">Automatic</option>
                       <option value="Used">Manual</option>
@@ -304,12 +315,14 @@ class CarsForm extends Component {
                 <div className="col-md-6">
                   <div className="country-select">
                     <label>
+                      
                       year of manufactured <span className="required">*</span>
                     </label>
                     <select
                       name="year_manufactured"
                       onChange={this.onChange}
                       value={this.state.year_manufactured}
+                      required
                     >
                       {years.map((year, i) => (
                         <option key={i} value={year}>
@@ -319,19 +332,17 @@ class CarsForm extends Component {
                     </select>
                   </div>
                 </div>
-
                 <div className="col-md-6">
-                  {this.state.alert ? (
-                    <Alert
-                      color="info"
-                      isOpen={this.state.alert}
-                      toggle={() => console.log("ok")}
-                    >
-                      {this.state.message}
-                    </Alert>
-                  ) : (
-                    ""
-                  )}
+                  <label> Avilable Directly</label>:
+                  <select
+                    name="status"
+                    value={this.state.status}
+                    onChange={this.onChange}
+                    required
+                  >
+                    <option value="available">Available</option>
+                    <option value="unavailable">Unavailable</option>
+                  </select>
                 </div>
 
                 <div className="col-md-12">
@@ -346,42 +357,42 @@ class CarsForm extends Component {
                       placeholder="description"
                       onChange={this.onChange}
                       value={this.state.description}
+                      required
                     />
                   </div>
                 </div>
 
-                <div className="col-md-12">
+                <div className="col-md-6">
+                  <label> Upload your images (maximum 5)</label>
                   <input
-                    type="checkbox"
-                    id="newsletter-permission"
-                    name="status"
-                    value={this.state.status}
+                    // className="col-md-6"
+                    aria-describedby="btn"
+                    type="file"
+                    accept="image/*"
+                    data-max-size="5000"
+                    onChange={this.handleImgChange.bind(this)}
+                    required
+                    disabled={this.state.imgUrl.length >= 5 ? true : false}
                   />
-                  <label> Avilable Directly</label>
                 </div>
-                {/* <label>Choose file</label> */}
-                <input
-                  className="col-md-4"
-                  aria-describedby="btn"
-                  type="file"
-                  accept="image/*"
-                  data-max-size="5000"
-                  onChange={this.handleImgChange.bind(this)}
-                />
-
                 {/* <button type="button" onClick={this.handleImgUpload.bind(this)}>
                   Upload
                 </button> */}
+                <div className="col-md-6">
+                  {this.state.alert ? (
+                    <Alert
+                      color="info"
+                      isOpen={this.state.alert}
+                      toggle={() => console.log("ok")}
+                    >
+                      {this.state.message}
+                    </Alert>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
                 <div className="col-md-12" />
-                {/* <img
-                  src={
-                    this.state.imgUrl[0] ||
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSd6J9YsKM3PyT9fNDGqbt3cJA90-Hi6KvKtj2DKK7SAYJoY1S"
-                  }
-                  alt="uploaded images"
-                  height="100"
-                  width="100"
-                /> */}
 
                 <div role="tablist">
                   {this.state.imgUrl.map((image, i) => (
@@ -398,7 +409,7 @@ class CarsForm extends Component {
             </div>
 
             <div className="order-button-payment">
-              <input type="submit" value="Add" onClick={this.onSubmit} />
+              <input type="submit" value="Add" />
             </div>
           </form>
         </div>
@@ -412,8 +423,8 @@ CarsForm.propTypes = {
 ////// should changed to category_id from other component
 ////// should changed to user_id from login component
 const mapStateToProps = state => ({
-  user_id: state.item.user_id,
-  category_id: state.item.category_id
+  user_id: state.signin.userId || window.localStorage.getItem("userId"),
+  
 });
 
 export default connect(

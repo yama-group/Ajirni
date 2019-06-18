@@ -11,7 +11,9 @@ export default function (state = initialState, action) {
   if (action.type === FETCH_ITEM) {
     return {
       ...state,
-      item: action.itemRetrive
+      item: action.itemRetrive,
+      images:action.images,
+      userId:action.userId
     }
   }
   if (action.type === SAVE_USER_ID) {

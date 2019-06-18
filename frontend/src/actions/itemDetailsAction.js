@@ -1,24 +1,19 @@
-import { FETCH_ITEM, FETCH_IMAGES } from "./types";
+import { FETCH_ITEM,} from "./types";
 import axios from "axios";
 
 export const fetchItem = para => dispatch => {
   axios
-    .get(`/uu/?id=${para}`)
+    .get(`/items/?item_id=${para}`)
     .then(item => {
+      
       dispatch({
         type: FETCH_ITEM,
-        itemRetrive: item.data,
-        user_id: item.data.user
+        itemRetrive: item.data[0],
+        userId: item.data[0].user,
+        images:item.data[0].images
       });
-      return item;
+      
+    }).catch((error)=>{
+      console.log(error)
     })
-    .then(item => {
-      // console.log(item);
-      axios.get(`/images/?id=${item.data.id}`).then(images => {
-        dispatch({
-          type: FETCH_IMAGES,
-          images: images.data
-        });
-      });
-    });
 };

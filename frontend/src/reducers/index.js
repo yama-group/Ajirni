@@ -1,6 +1,4 @@
-import {
-  combineReducers
-} from "redux";
+import { combineReducers } from "redux";
 import itemsReducer from "./itemsReducer";
 import userReducer from "./userReducer";
 import itemDetails from "./itemDetail";
@@ -9,15 +7,17 @@ import signin from "./signInReducer";
 import useritems from "./userItemsReducer";
 import user from "./userinfo";
 import likes from "./likesReducer";
+import errors from "./errors"
+
 export default combineReducers({
   itemsData: itemsReducer,
   item: itemReducer,
-  user: userReducer,
+  userSignUp: userReducer,
   signin: signin,
   userItemsReducer: useritems,
-  itemDetails: itemDetails,
   userItems: useritems,
   itemDetails: itemDetails,
-  userInfo:user,
+  userInfo: user,
+  errorMsg: errors,
   likes: likes
 });
