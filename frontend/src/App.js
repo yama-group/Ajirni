@@ -19,7 +19,8 @@ import ItemsList from "./components/itemsList";
 import CarsForm from "./components/carsForm";
 import Likes from "./components/likes";
 import ProtectedRoute from "./components/protect";
-
+import chat from "./components/chat";
+import chat2 from "./components/chat2";
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -49,6 +50,8 @@ class App extends React.Component {
             <Route path="/likes" exact component={Likes} />
             <Route path="/signin" exact component={SignIn} />
             <Route path="/tools" exact component={Tools} />
+            <Route path="/chat" exact component={chat} />
+            <Route path="/chat2" exact component={chat2} />
           </div>
           <Footer />
         </Router>

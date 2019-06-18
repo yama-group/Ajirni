@@ -190,8 +190,8 @@ class ItemsWithImages(generics.ListCreateAPIView):
 
 class UserLikesTest(generics.ListCreateAPIView):
     """This class defines the retrieve behavior of all instances."""
-    serializer_class = itemslikedSerializer
-    queryset = Likes.objects.all()
+    serializer_class = userlikesSerializer
+    queryset = Items.objects.all()
 
     # queryset = CustomUser.objects.filter(id=user_id)
     # return queryset
