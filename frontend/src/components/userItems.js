@@ -111,7 +111,7 @@ class UserItems extends Component {
                                 : item.category == 5
                                 ? "Industrial Tools"
                                 : item.category == 6
-                                ? "Event Tools"
+                                ? "Event Equipments"
                                 : item.category == 7
                                 ? "Others"
                                 : null}

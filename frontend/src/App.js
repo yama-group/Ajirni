@@ -19,6 +19,7 @@ import ItemsList from "./components/itemsList";
 import CarsForm from "./components/CarsForm";
 import Likes from "./components/likes";
 import  ProtectedRoute  from "./components/protect";
+import  Carousel  from "./components/categorySlides";
 
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
@@ -48,6 +49,7 @@ class App extends React.Component {
             <Route path="/userItems" exact component={UserItems} />
             <Route path="/likes" exact component={Likes} />
             <Route path="/signin" exact component={SignIn} />
+            {/* <Route path="/categorySlides" exact component={Carousel} /> */}
 
             {/* <Signup createUser={Signup} />
             <SignIn />
