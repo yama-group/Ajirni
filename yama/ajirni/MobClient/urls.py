@@ -17,6 +17,6 @@ urlpatterns = [
     path("userItems/", getUserItems.as_view(), name="userItems"),
     path("userInfo/", getUserInfo.as_view(), name="userInfo"),
     path("uu/", ItemsWithImages .as_view(), name="ItemsWithImages "),
-    # path("vv/", UserLikesTest.as_view(), name="UserLikesTest"),
+    path("vv/", UserLikesTest.as_view(), name="UserLikesTest"),
 
 ]

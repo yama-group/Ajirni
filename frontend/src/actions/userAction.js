@@ -5,7 +5,7 @@ export const createUser = user => dispatch => {
   console.log(user);
   axios
     .post("api/auth/register", user)
-      
+
     .then(response => {
       console.log(response);
       dispatch({
@@ -14,17 +14,16 @@ export const createUser = user => dispatch => {
       });
     })
     .catch(err => {
-      
+
       const errors = {
         msg: err.response.data,
         status: err.response.status
       }
-
       dispatch({
         type: GET_ERRORS,
         payload: errors
       });
     });
-  
+
 };
 

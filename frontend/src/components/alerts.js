@@ -5,9 +5,11 @@ import PropTypes from 'prop-types'
 
 export class Alerts extends Component {
 
+
   static propTypes = {
     error: PropTypes.object.isRequired
   };
+
 
   componentDidUpdate(prevProps) {
     const { error, alert } = this.props;
@@ -23,7 +25,12 @@ export class Alerts extends Component {
         alert.error(`password: ${error.msg.password.join()}`)
       }
       if (error.msg.username) {
+        console.log(error.msg)
         alert.error(`username: ${error.msg.username.join()}`)
+      }
+      if (error.msg.email) {
+        // console.log(error.msg.email.join())
+        alert.error(`email: ${error.msg.email.join()}`)
       }
     }
 
