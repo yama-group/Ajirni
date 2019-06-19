@@ -6,24 +6,25 @@ export const userSignIn = signIn_Info => dispatch => {
   axios
     .post("api/auth/login", signIn_Info)
     .then(response => {
-      window.localStorage.setItem("token",response.data.token)
-      window.localStorage.setItem("userId",response.data.user.id)
+      window.localStorage.setItem("token", response.data.token);
+      window.localStorage.setItem("userId", response.data.user.id);
+      window.localStorage.setItem("username", response.data.user.username);
       dispatch({
         type: SIGN_IN,
         payload: response.data.token,
-        userId:response.data.user.id,
-        visible:null
+        userId: response.data.user.id,
+        username: response.data.user.username,
+        visible: null
       });
-
     })
     .catch(error => {
       dispatch({
         type: SIGN_IN,
         error: "Incorrect username or password.",
         payload: null,
-        userId:null,
-        visible:true
-
+        userId: null,
+        username: null,
+        visible: true
       });
     });
 };

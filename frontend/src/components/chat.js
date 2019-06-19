@@ -1,12 +1,18 @@
 import { CometChat } from "@cometchat-pro/chat";
 import React, { Component } from "react";
-
-export default class chat extends Component {
+import { connect } from "react-redux";
+import { getUserInfo } from "../actions/UserItemsAction.js";
+import axios from "axios";
+class Chat extends Component {
   constructor(props) {
     super(props);
+    //UID sender Id
+    //RId reciver Id
     this.state = {
       messages: ["ok"],
-      message: ""
+      message: "",
+      UID: "eedddee",
+      RID: "SUPERHERO2"
     };
     this.onChange = this.onChange.bind(this);
     this.sendmsg = this.sendmsg.bind(this);
@@ -14,12 +20,33 @@ export default class chat extends Component {
   componentWillMount() {
     var appID = "4446a56d977929";
     var apiKey = "8a581b5950e68554c53f56bf8b083e543d4df5d1";
-    var UID1 = "SUPERHERO1";
+    // this.setState({ UID: this.props.username, RID: this.props.username });
+    var request = require("request");
+
+    var user = {
+      role: this.props.username,
+      name: this.props.username
+    };
+
     CometChat.init(appID).then(
       () => {
         console.log("Initialization completed successfully");
         // login function.
-        this.loginChat(UID1, apiKey);
+        // axios
+        //   .post("https://api.cometchat.com/v1.6/users", user, {
+        //     headers: {
+        //       apikey: "d444297f6c2cf9cab3f48ecba60eef1ebba9cbca",
+        //       appid: "4446a56d977929",
+        //       metadata: {},
+        //       "content-type": "application/json"
+        //     }
+        //   })
+        //   .then(res => {
+        //     return res.json();
+        //   })
+        //   .then(rees => console.log(rees));
+
+        this.loginChat(this.state.UID, apiKey);
       },
       error => {
         console.log("Initialization failed with error:", error);
@@ -43,7 +70,7 @@ export default class chat extends Component {
     });
   }
   sendmsg() {
-    var receiverID = "SUPERHERO2";
+    var receiverID = this.state.RID;
     var messageText = this.state.message;
     this.setState({
       message: ""
@@ -65,7 +92,7 @@ export default class chat extends Component {
           messages: [...temp, message.data.text]
         });
         console.log();
-        // console.log("Message sent successfully:", message);
+        console.log("Message sent successfully:", message);
       },
       error => {
         console.log("Message sending failed with error:", error);
@@ -96,12 +123,19 @@ export default class chat extends Component {
         <input type="button" name="bmsg" value="ok" onClick={this.sendmsg} />
         <div>
           {this.state.messages.map(msg => (
-            <div className={msg.al === "r" ? "testingr" : "testingl"}>
-              {msg.text}
-            </div>
+            <div className={msg === "r" ? "testingr" : "testingl"}>{msg}</div>
           ))}
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userId: state.itemDetails.item.user
+});
+
+export default connect(
+  mapStateToProps,
+  { getUserInfo }
+)(Chat);

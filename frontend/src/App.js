@@ -77,6 +77,14 @@ class App extends React.Component {
                 exact
                 component={Tools}
               />
+              <ProtectedRoute
+                token={this.props.token}
+                userId={this.props.user_id}
+                username={this.props.username}
+                path="/chat"
+                exact
+                component={chat}
+              />
               <Route path="/Category" component={ItemsList} />
               <Route path="/itemDetail" exact component={ItemDetail} />
               <Route path="/carsForm" exact component={CarsForm} />
@@ -87,8 +95,7 @@ class App extends React.Component {
               <Route path="/signin" exact component={SignIn} />
               {/* <Route path="/categorySlides" exact component={Carousel} /> */}
               <Route path="/tools" exact component={Tools} />
-              <Route path="/chat" exact component={chat} />
-              <Route path="/chat2" exact component={chat2} />
+              <Route path="/chat2" exact component={chat} />
               <Route path="/signup" exact component={Signup} />
             </div>
             <Footer />
@@ -101,7 +108,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   user_id: state.signin.userId,
-  token: state.signin.token
+  token: state.signin.token,
+  username: state.signin.username
 });
 
 export default connect(mapStateToProps)(App);
