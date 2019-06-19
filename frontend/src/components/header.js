@@ -14,9 +14,18 @@ class Header extends Component {
     this.state = {
       category_id: "",
       user_id: "",
-      query: ""
+      query: "",
+      className:"cur-lang-acc-activ",
+      wrapper:"wrapper"
     };
     this.onChanges = this.onChanges.bind(this);
+  }
+
+  changeClassName(){
+    this.setState({
+      className:"cur-lang-acc-activ inside",
+      wrapper:"wrapper overlay-active"
+    })
   }
 
   componentWillMount() {
@@ -46,7 +55,7 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <div className="wrapper">
+        <div className={this.state.wrapper}>
           <header className="pl-155 pr-155 intelligent-header">
             <div className="header-area header-area-2">
               <div className="container-fluid p-0">
@@ -68,7 +77,7 @@ class Header extends Component {
                             <Link to="/">home</Link>
                           </li>
                           <li>
-                            <Link to="/about">about us</Link>
+                            <Link to="/about">about </Link>
                           </li>
                           <li>
                             Category
@@ -158,7 +167,7 @@ class Header extends Component {
                       </div>
 
                       <div className="header-sidebar common-style">
-                        <button className="header-navbar-active">
+                        <button onClick={this.changeClassName.bind(this)} className="header-navbar-active">
                           <span className="ion-navicon" />
                         </button>
                       </div>
@@ -279,7 +288,55 @@ class Header extends Component {
               </div>
             </div>
           </header>
+
           <div className="header-space" />
+          <div class={this.state.className}>
+                <div class="wrap-sidebar">
+                    <div class="sidebar-nav-icon">
+                        <button onClick={this.changeClassName.bind(this)} class="op-sidebar-close"><span class="ion-android-close"></span></button>
+                    </div>
+                    <div class="cur-lang-acc-all">
+                        <div class="single-currency-language-account">
+                            <div class="cur-lang-acc-title">
+                                <h4>Currency: <span>USD </span></h4>
+                            </div>
+                            <div class="cur-lang-acc-dropdown">
+                                <ul>
+                                    <li><a href="#">EUR  Euro</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="single-currency-language-account">
+                            <div class="cur-lang-acc-title">
+                                <h4>Language: <span><img src="assets/img/icon-img/english.png" alt=""/> English </span></h4>
+                            </div>
+                            <div class="cur-lang-acc-dropdown">
+                                <ul>
+                                    <li><a href="#"><img src="assets/img/icon-img/english.png" alt=""/> English </a></li>
+                                    <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""/> spanish </a></li>
+                                    <li><a href="#"><img src="assets/img/icon-img/fr.png" alt=""/> french </a></li>
+                                    <li><a href="#"><img src="assets/img/icon-img/ge.png" alt=""/> german </a></li>
+                                    <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""/> spanish </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="single-currency-language-account">
+                            <div class="cur-lang-acc-title">
+                                <h4>My Account:</h4>
+                            </div>
+                            <div class="cur-lang-acc-dropdown">
+                                <ul>
+                                    <li><a href="#">Compare Products </a></li>
+                                    <li><a href="#">Default welcome msg!</a></li>
+                                    <li><a href="register.html">register</a></li>
+                                    <li><a href="wishlist.html">My Wish List</a></li>
+                                    <li><a href="login.html">Sign In </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     );

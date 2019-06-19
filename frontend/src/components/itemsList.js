@@ -4,6 +4,7 @@ import { getAllItems, itemId } from "../actions/itemsActions";
 import { search } from "../actions/itemAction";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class itemsList extends Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
   }
@@ -22,6 +23,7 @@ class itemsList extends Component {
   }
 
   render() {
+    console.log(this.state.itemsData)
     return (
       <div>
         <div className="blog-area pt-100 pb-100">
@@ -39,7 +41,7 @@ class itemsList extends Component {
                       <div className="single-blog mb-50">
                         <div className="blog-img">
                           <a>
-                            <img src={"assets/img/blog/2.jpg"} alt="" />
+                            <img src={item.images.length>0 ?item.images[0].img_url: "http://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg"} alt="" />
                           </a>
                         </div>
                         <div
@@ -47,11 +49,11 @@ class itemsList extends Component {
                           onClick={() => this.props.itemId(item.id)}
                         >
                           <Link to="/itemDetail">
-                            <h3>{item.name}</h3>
+                            <h4>{item.name}</h4>
                           </Link>
                           <div className="blog-meta">
                             <ul>
-                              <li>condition : {item.condition}</li>
+                              <li><span style={{color:"#B30000",fontSize:"14px"}}>${item.price}/day</span> </li>
                             </ul>
                           </div>
                           <p>{item.describtion}</p>

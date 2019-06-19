@@ -90,6 +90,25 @@
 .header-search {
   margin-top: 3px;
 }
+/* ==categories grid */
+.categories{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
+.category{
+  background-color: rgb(100, 96, 96);
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  /* font-size: 150%; */
+}
+/* == End categories grid */
+
+
+
 /* header cart */
 .sidebar-cart {
   background: #ffffff;

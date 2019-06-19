@@ -1,7 +1,8 @@
 import { NEW_USER } from "../actions/types";
 
 const initialState = {
-  Msg: ''
+  Msg: '',
+  done:null
 };
 
 export default function (state = initialState, actions) {
@@ -10,6 +11,7 @@ export default function (state = initialState, actions) {
       return {
         ...state,
         Msg: actions.payload,
+        done:actions.done
 
       };
     default:

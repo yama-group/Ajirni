@@ -272,8 +272,6 @@
             "index": "pypi",
             "version": "==1.4.4"
         },
-<<<<<<< HEAD
-=======
         "colorama": {
             "hashes": [
                 "sha256:05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d",
@@ -282,7 +280,6 @@
             "markers": "sys_platform == 'win32'",
             "version": "==0.4.1"
         },
->>>>>>> 471649feb2f68ad33739f34125852afd05b747fd
         "isort": {
             "hashes": [
                 "sha256:c40744b6bc5162bbb39c1257fe298b7a393861d50978b565f3ccd9cb9de0182a",

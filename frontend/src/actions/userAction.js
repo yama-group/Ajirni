@@ -10,7 +10,8 @@ export const createUser = user => dispatch => {
       console.log(response);
       dispatch({
         type: NEW_USER,
-        payload: "successfully sign up"
+        payload: "successfully sign up",
+        done:true
       });
     })
     .catch(err => {
