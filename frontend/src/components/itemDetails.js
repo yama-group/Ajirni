@@ -7,6 +7,9 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
 
+import $ from 'jquery';
+import { FacebookShareButton } from 'react-share';
+
 class ItemDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -62,6 +65,7 @@ class ItemDetail extends React.Component {
 
   render() {
     return (
+
       <div className="product-details ptb-100 pb-90">
         <div className="container">
           <div className="row">
@@ -167,8 +171,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.condition}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.car_make ? (
                     <div className="select-option-part">
                       <label>
@@ -177,8 +181,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.car_make}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.year_manufactured ? (
                     <div className="select-option-part">
                       <label>
@@ -187,8 +191,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.year_manufactured}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.no_killometers ? (
                     <div className="select-option-part">
                       <label>
@@ -197,8 +201,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.no_killometers}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.transmission ? (
                     <div className="select-option-part">
                       <label>
@@ -207,8 +211,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.transmission}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.no_rooms ? (
                     <div className="select-option-part">
                       <label>
@@ -217,8 +221,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.no_rooms}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.no_bathrooms ? (
                     <div className="select-option-part">
                       <label>
@@ -227,8 +231,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.no_bathrooms}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.surface_area ? (
                     <div className="select-option-part">
                       <label>
@@ -237,8 +241,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.surface_area}m</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.furnished ? (
                     <div className="select-option-part">
                       <label>
@@ -247,8 +251,8 @@ class ItemDetail extends React.Component {
                       <p>Yes</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.floor_no ? (
                     <div className="select-option-part">
                       <label>
@@ -257,8 +261,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.floor_no}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.location ? (
                     <div className="select-option-part">
                       <label>
@@ -267,8 +271,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.location}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.color ? (
                     <div className="select-option-part">
                       <label>
@@ -277,8 +281,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.color}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.quantity ? (
                     <div className="select-option-part">
                       <label>
@@ -287,8 +291,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.quantity}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.state.likeAlert ? (
                     <Alert
                       color="info"
@@ -298,8 +302,8 @@ class ItemDetail extends React.Component {
                       {this.state.likeMessage}
                     </Alert>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                 </div>
                 <div className="quickview-plus-minus">
                   <div className="quickview-btn-cart">
@@ -316,11 +320,83 @@ class ItemDetail extends React.Component {
                       <i className="ion-ios-heart-outline" />
                     </a>
                   </div>
+
                   <div className="quickview-btn-wishlist">
                     <NavLink to="/userItems" className="btn-hover">
                       <i className="ion-ios-contact" />
                     </NavLink>
                   </div>
+                  {/* -------*/}
+                  {/* <br />
+                  <div className="product-share">
+                    <ul>
+                      <li className="categories-title">Share :</li>
+                      <li>
+                        <a href="#">
+                          <i className="ion-social-facebook"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="ion-social-instagram-outline"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div> */}
+
+                  {/*------ */}
+                  <div id="fb-root"></div>
+                  {
+                    window.fbAsyncInit = function () {
+                      // window.FB.api(
+                      //   '/l214.animaux',
+                      //   { "fields": "fan_count" },
+                      //   function (response) {
+                      //     alert(response.fan_count);
+                      //   }
+                      // );
+                      window.FB.init({
+                        appId: '/itemDetail',
+                        xfbml: true,
+                        version: 'v2.3'
+                      });
+                    }}
+
+                  {function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) { return; }
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk')}
+
+
+
+
+                  <div class="fb-share-button "
+                    data-href="locallhost:3000/itemDetail"
+                    data-layout="button">
+                  </div>
+                  {
+                    $('#fb-share-button').click(function () {
+                      window.FB.ui({
+                        method: 'feed',
+                        link: "http://127.0.0.1:3000/itemDetail",
+                        picture: 'https://article.images.consumerreports.org/prod/content/dam/CRO%20Images%202019/Magazine/04April/CR-Cars-InlineHero-ComingSoon-Toyota-Supra-2-19',
+                        name: "anything",
+                        description: "The description who will be displayed"
+                      }, function (response) {
+                        console.log(response);
+                      }
+                      );
+                    })
+                  }
+
+                  {/* <a href="#">
+                    <i className="ion-social-facebook"></i>
+                  </a> */}
+
+
                 </div>
               </div>
             </div>
