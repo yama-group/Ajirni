@@ -48,7 +48,7 @@ class Items(models.Model):
 class Likes(models.Model):
     item = models.ForeignKey(
         Items, related_name="itemss", on_delete=models.CASCADE)
-    user = models.ForeignKey(
+    user = models.ForeignKey(   
         CustomUser, related_name="likes", on_delete=models.CASCADE)
 
 
@@ -61,3 +61,13 @@ class Images(models.Model):
         return self.img_url
 
 
+class Reviews(models.Model):
+    item = models.ForeignKey(
+        Items, related_name="items", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        CustomUser, related_name="likess", on_delete=models.CASCADE)
+    textReview = models.CharField(max_length=1000, blank=True)
+    starsReview = models.IntegerField(blank=True)
+
+    def __str__(self):
+        return self.textReview
