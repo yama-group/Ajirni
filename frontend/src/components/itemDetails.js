@@ -6,6 +6,7 @@ import { fetchItem } from "../actions/itemDetailsAction";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
+import Reviews from "./reviews"
 
 class ItemDetail extends React.Component {
   constructor(props) {
@@ -90,6 +91,7 @@ class ItemDetail extends React.Component {
                             id="pro-details1"
                             role="tabpanel"
                           >
+
                             <div className="easyzoom easyzoom--overlay">
                               <a href={image.img_url}>
                                 <img src={image.img_url} alt="" />
@@ -115,37 +117,37 @@ class ItemDetail extends React.Component {
                       }
                     })}
                   </div>
-
                   <div className="product-details-small nav mt-12 main-product-details">
                     {this.state.images.map((image, index) => {
                       if (index === 0) {
                         return (
                           <a
-                            key={index}
+                          key={index}
                             className="active mr-12"
                             href="#pro-details1"
                             data-toggle="tab"
                             role="tab"
                             aria-selected="true"
-                          >
+                            >
                             <img src={image.img_url} alt="" />
                           </a>
                         );
                       } else {
                         return (
                           <a
-                            key={index}
-                            className="mr-12"
-                            href={`#pro-details${1 + index}`}
-                            data-toggle="tab"
-                            role="tab"
-                            aria-selected="true"
+                          key={index}
+                          className="mr-12"
+                          href={`#pro-details${1 + index}`}
+                          data-toggle="tab"
+                          role="tab"
+                          aria-selected="true"
                           >
                             <img src={image.img_url} alt="" />
                           </a>
                         );
                       }
                     })}
+                    <Reviews />
                   </div>
                 </div>
               </div>
@@ -321,6 +323,7 @@ class ItemDetail extends React.Component {
                       <i className="ion-ios-contact" />
                     </NavLink>
                   </div>
+                  
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@ import {GET_REVIEWS} from "../actions/types"
 
 const initialState = {
   itemReviews: [],
-  itemId: 19
+  itemId: ""
 }
 
 export default function(state = initialState, action){
