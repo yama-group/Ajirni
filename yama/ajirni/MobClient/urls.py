@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import (CreateItem, Search, LikeItem, ItemsRud, ItemsList, RegisterAPI,
-                    LoginAPI, GetImages, getUserItems, getUserInfo, ItemsWithImages, UserLikesTest, Reviewss)
+                    LoginAPI, GetImages, getUserItems, getUserInfo, ItemsWithImages, UserLikesTest, Reviewss, ChatUser)
 
 urlpatterns = [
 
@@ -18,6 +18,7 @@ urlpatterns = [
     path("userInfo/", getUserInfo.as_view(), name="userInfo"),
     path("items/", ItemsWithImages.as_view(), name="ItemsWithImages "),
     path("reviews/", Reviewss.as_view(), name="review"),
-    # path("vv/", UserLikesTest.as_view(), name="UserLikesTest"),
+    path("chatuser/", ChatUser.as_view(), name="ChatUser"),
+    path("vv/", UserLikesTest.as_view(), name="UserLikesTest, ChatUser"),
 
 ]
