@@ -86,7 +86,7 @@ class App extends React.Component {
                 component={chat}
               />
               <Route path="/Category" component={ItemsList} />
-              <Route path="/itemDetail" exact component={ItemDetail} />
+              <Route path="/itemDetail" component={ItemDetail} />
               <Route path="/carsForm" exact component={CarsForm} />
               <Route path="/itemsList" exact component={ItemsList} />
               <Route path="/RealEstate" exact component={RealEstate} />

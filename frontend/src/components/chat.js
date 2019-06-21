@@ -52,7 +52,7 @@ class Chat extends Component {
         console.log("Initialization failed with error:", error);
       }
     );
-    this.recivemsg("SUPERHERO1SUPERHERO1SUPERHERO1");
+    this.recivemsg("SUPERHERO1SUPEaaRHERO1SUPERHERO1");
   }
   loginChat(UID, apiKey) {
     CometChat.login(UID, apiKey).then(
