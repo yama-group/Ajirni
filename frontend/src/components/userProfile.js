@@ -64,7 +64,7 @@ class UserProfile extends React.Component {
     var that = this;
     this.setState(
       {
-        itemSelected: this.state.items.slice(index, index + 1)[0]
+        itemSelected: this.state.items[index][0]
       },
       () => {
         if (that.state.itemSelected.category === 1) {

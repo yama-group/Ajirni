@@ -3,7 +3,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchItem } from "../actions/itemDetailsAction";
-import { NavLink } from "react-router-dom";
+import { NavLink ,Link} from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
 
@@ -303,9 +303,9 @@ class ItemDetail extends React.Component {
                 </div>
                 <div className="quickview-plus-minus">
                   <div className="quickview-btn-cart">
-                    <a className="btn-hover-black" href="#">
+                    <Link to="/chat">
                       Contact
-                    </a>
+                    </Link>
                   </div>
                   <div className="quickview-btn-wishlist">
                     <a
@@ -317,9 +317,9 @@ class ItemDetail extends React.Component {
                     </a>
                   </div>
                   <div className="quickview-btn-wishlist">
-                    <NavLink to="/userItems" className="btn-hover">
+                    <Link to="/userItems" className="btn-hover">
                       <i className="ion-ios-contact" />
-                    </NavLink>
+                    </Link>
                   </div>
                 </div>
               </div>

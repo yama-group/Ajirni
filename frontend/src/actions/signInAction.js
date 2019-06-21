@@ -9,6 +9,11 @@ export const userSignIn = signIn_Info => dispatch => {
       window.localStorage.setItem("token", response.data.token);
       window.localStorage.setItem("userId", response.data.user.id);
       window.localStorage.setItem("username", response.data.user.username);
+      
+
+
+
+
       dispatch({
         type: SIGN_IN,
         payload: response.data.token,

@@ -25,6 +25,7 @@ import chat2 from "./components/chat2";
 import ProtectedRoute from "./components/protect";
 // import  Carousel  from "./components/categorySlides";
 import Alerts from "./components/alerts";
+import Chat from "./components/Chatter"
 
 const alertOptions = {
   position: positions.UP_CENTER,
@@ -33,7 +34,9 @@ const alertOptions = {
   // you can also just use 'scale'
   transition: transitions.SCALE
 };
+ 
 
+ 
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -63,6 +66,13 @@ class App extends React.Component {
                 exact
                 component={CarsForm}
               />
+               <ProtectedRoute
+                token={this.props.token}
+                userId={this.props.user_id}
+                path="/chat"
+                exact
+                component={Chat}
+              />
               <ProtectedRoute
                 token={this.props.token}
                 userId={this.props.user_id}
@@ -77,14 +87,7 @@ class App extends React.Component {
                 exact
                 component={Tools}
               />
-              <ProtectedRoute
-                token={this.props.token}
-                userId={this.props.user_id}
-                username={this.props.username}
-                path="/chat"
-                exact
-                component={chat}
-              />
+              
               <Route path="/Category" component={ItemsList} />
               <Route path="/itemDetail" exact component={ItemDetail} />
               <Route path="/carsForm" exact component={CarsForm} />
@@ -95,7 +98,7 @@ class App extends React.Component {
               <Route path="/signin" exact component={SignIn} />
               {/* <Route path="/categorySlides" exact component={Carousel} /> */}
               <Route path="/tools" exact component={Tools} />
-              <Route path="/chat2" exact component={chat} />
+              
               <Route path="/signup" exact component={Signup} />
             </div>
             <Footer />

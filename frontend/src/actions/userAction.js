@@ -1,5 +1,7 @@
 import axios from "axios";
 import { NEW_USER, GET_ERRORS } from "./types";
+import request from "request"
+import {apiKey,appID} from "../components/config"
 
 export const createUser = user => dispatch => {
   console.log(user);
@@ -13,6 +15,32 @@ export const createUser = user => dispatch => {
         payload: "successfully sign up",
         done:true
       });
+
+
+      var options = {
+        method: 'POST',
+        url: 'https://api.cometchat.com/v1.6/users',
+        headers: {
+          apikey:apiKey,
+          appid: appID,
+          'content-type': 'application/json',
+        },
+        body: `{"uid":"${user.username}","name":"${user.first_name}","avatar":"${user.image_url}"}`
+      };
+      
+      request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+      
+        console.log(body,"done");
+
+    })
+
+
+
+
+
+
+      
     })
     .catch(err => {
       
