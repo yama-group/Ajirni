@@ -6,6 +6,9 @@ import { fetchItem } from "../actions/itemDetailsAction";
 import { NavLink ,Link} from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
+import {appID,apiKey,userId,username} from "./config";
+import request from "request"
+
 
 class ItemDetail extends React.Component {
   constructor(props) {
@@ -28,6 +31,27 @@ class ItemDetail extends React.Component {
   componentWillMount() {
     // this.setState({item_id:this.props.item_id})
     this.props.fetchItem(this.props.item_id);
+  }
+
+  makeFriend(){
+    const uid = window.localStorage.getItem("userId")
+    var options = {
+      method: 'POST',
+      url: `https://api.cometchat.com/v1.6/users/${uid}/friends`,
+      headers: {
+        apikey:apiKey,
+        appid: appID,
+        'content-type': 'application/json',
+      },
+      body:`{"accepted":["${this.props.item.user}"]}`
+    };
+    
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+    
+      console.log(body,"done");
+
+  })
   }
 
   componentWillReceiveProps(next) {
@@ -302,7 +326,7 @@ class ItemDetail extends React.Component {
                   )}
                 </div>
                 <div className="quickview-plus-minus">
-                  <div className="quickview-btn-cart">
+                  <div onClick={this.makeFriend.bind(this)} className="quickview-btn-cart">
                     <Link to="/chat">
                       Contact
                     </Link>

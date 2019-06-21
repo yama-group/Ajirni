@@ -76,7 +76,7 @@ class Signup extends React.Component {
 
   onsubmit(e) {
     const user = {
-      username: this.state.username,
+      username: this.state.username.toLocaleLowerCase(),
       first_name: this.state.firstname,
       last_name: this.state.lastname,
       email: this.state.email,

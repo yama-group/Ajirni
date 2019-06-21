@@ -16,7 +16,7 @@ export const createUser = user => dispatch => {
         done:true
       });
 
-
+        const uid =response.data.user.id
       var options = {
         method: 'POST',
         url: 'https://api.cometchat.com/v1.6/users',
@@ -25,7 +25,7 @@ export const createUser = user => dispatch => {
           appid: appID,
           'content-type': 'application/json',
         },
-        body: `{"uid":"${user.username}","name":"${user.first_name}","avatar":"${user.image_url}"}`
+        body: `{"uid":"${uid}","name":"${user.first_name}","avatar":"${user.image_url}"}`
       };
       
       request(options, function (error, response, body) {

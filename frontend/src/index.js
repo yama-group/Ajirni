@@ -5,6 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import store from "./store";
+import {appID,apiKey,userId,username} from "./components/config"
+
+import {CometChat} from '@cometchat-pro/chat';
+
+
+CometChat.init(appID);
+
 
 
 

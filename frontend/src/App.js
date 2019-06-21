@@ -14,7 +14,7 @@ import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserProfile from "./components/userProfile";
 import { connect } from "react-redux";
-
+import {NotificationContainer} from 'react-notifications';
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
@@ -25,7 +25,9 @@ import chat2 from "./components/chat2";
 import ProtectedRoute from "./components/protect";
 // import  Carousel  from "./components/categorySlides";
 import Alerts from "./components/alerts";
-import Chat from "./components/Chatter"
+import Chat from "./components/newChat"
+import 'bootstrap/dist/css/bootstrap.css';
+import 'react-notifications/lib/notifications.css';
 
 const alertOptions = {
   position: positions.UP_CENTER,
@@ -47,6 +49,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <NotificationContainer />
           <Router>
             <Header />
             <Alerts />

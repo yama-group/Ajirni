@@ -90,7 +90,7 @@ class Chat extends React.Component {
 
             //login to cometchat
 
-          CometChat.login("11",apiKey).then(
+          CometChat.login(username,apiKey).then(
             User => {
               NotificationManager.success('You are now logged in', 'Login Success');
               console.log('Login Successful:', {User});
@@ -99,7 +99,7 @@ class Chat extends React.Component {
               NotificationManager.error('Please try again', 'Login Failed');
               console.log('Login failed with exception:', {error});
             }
-          );
+          )
 
 
           //fetch users from cometchat
