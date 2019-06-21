@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import { connect } from 'react-redux'
 import { getReviews, postReviews } from '../actions/reviewsAction'
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import stars from '../images/stars.png'
+
 
 
 class Reviews extends Component {
@@ -20,29 +20,45 @@ class Reviews extends Component {
       this.props.getReviews(this.state.item_id)
     })
   }
-addReview(){}
+
+  onChange(e) {
+    this.setState({[e.target.name]:e.target.value})
+  }
+
   render() {
     return (
       <div>
-        <div className="quickview-btn-cart">
-                    <a className="btn-hover-black" href="#">
-                      add Review
-                    </a>
-                  </div>
+      <div id = "reviewScroll">
         {this.props.reviews.map( rev => {
           return(
             <div>
               <br />
-              <h4>{rev.starsReview}  <img src={stars} alt="" style= {{width:"100px"}}/></h4> 
-              {rev.textReview}
+              <table class="table table-hover">
+              <tbody>
+              <tr>
+                <td>
+                  <img src={'./images/' + rev.starsReview+ ".png"}  alt="" style= {{width:"100px"}}/>
+                </td>
+                <td>
+                  {rev.textReview}
+                </td>
+              </tr> 
+              </tbody>
+              </table>
             </div>
           )
         })}
+        <div className="quickview-btn-cart">
+         </div>
+          </div>
+          <button  className="btn-hover-black" >
+            add Review
+          </button>
       </div>
     )
-
   }
 }
+
 const mapStateToProps = state =>  ({
   reviews: state.review.itemReviews,
   item_id: state.itemsData.item_id

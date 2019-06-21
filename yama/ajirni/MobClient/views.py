@@ -9,11 +9,8 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
-import requests
 
 # Register API
-
-
 class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 

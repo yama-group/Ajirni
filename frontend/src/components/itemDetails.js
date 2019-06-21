@@ -147,10 +147,10 @@ class ItemDetail extends React.Component {
                         );
                       }
                     })}
-                    <Reviews />
                   </div>
                 </div>
               </div>
+                    <Reviews />
             </div>
             <div className="col-md-12 col-lg-5 col-12">
               <div className="product-details-content">
