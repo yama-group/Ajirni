@@ -16,7 +16,11 @@ pylint="==2.3.1"
 virtualenv="==16.6.0"
 django-rest-knox = "==4.1.0"
 django-rest-multiple-models = "*"
-drf-multiple-model = "*"
+numpy = "*"
+django-registration = "*"
+scikit-learn = "*"
+scipy = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"

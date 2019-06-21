@@ -4,11 +4,15 @@ from django.views.generic.detail import DetailView
 from .serializers import (ItemsImagesSerializer, ItemsSerializer, LikesSerializer,
                           itemslikedSerializer, UserSerializer, RegisterSerializer,
                           LoginSerializer, ImageSerializer, userlikesSerializer)
-from .models import Items, Likes, Images, CustomUser
+from .models import Items, Likes, Images, CustomUser, Reviews, Cluster
 from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
+from django.core.urlresolvers import reverse
+from .suggestions import update_clusters
+
+import datetime
 # import requests
 
 # Register API
@@ -199,16 +203,48 @@ class UserLikesTest(generics.ListCreateAPIView):
     # return queryset
 
 
-# class ChatUser():
-#     def get_queryset(self):
-#         username = self.request.data.get('username', None)
-#         url = "https://api.cometchat.com/v1.6/users"
-#         payload = "{\"uid\":\"" + username + \
-#             "\",\"name\":\"" + username + "\"}"
-#         headers = {
-#             'apikey': "d444297f6c2cf9cab3f48ecba60eef1ebba9cbca",
-#             'appid': "4446a56d977929",
-#             'content-type': "application/json"
-#         }
-#         response = requests.request("POST", url, data=payload, headers=headers)
-#         print(response.text)
+def add_review(request, item_id):
+    item = get_object_or_404(Items, pk=item_id)
+    starsReview = request.query_params.get('starsReview', None)
+    textReview = request.query_params.get('textReview', None)
+    user_name = request.user.username
+    review = Reviews()
+    review.item = item
+    review.user_name = user_name
+    review.starsReview = starsReview
+    review.textReview = textReview
+    review.pub_date = datetime.datetime.now()
+    review.save()
+    update_clusters()
+
+
+def user_recommendation_list(request):
+    user_reviews = Reviews.objects.filter(
+        user_name=request.user.username).prefetch_related('item')
+    user_reviews_item_ids = set(map(lambda x: x.item.id, user_reviews))
+    try:
+        user_cluster_name = \
+            CustomUser.objects.get(
+                username=request.user.username).cluster_set.first().name
+    except:
+        update_clusters()
+        user_cluster_name = \
+            CustomUser.objects.get(
+                username=request.user.username).cluster_set.first().name
+
+    user_cluster_other_members = \
+        Cluster.objects.get(name=user_cluster_name).users \
+        .exclude(username=request.user.username).all()
+    other_members_usernames = set(
+        map(lambda x: x.username, user_cluster_other_members))
+
+    other_users_reviews = \
+        Reviews.objects.filter(user_name__in=other_members_usernames) \
+        .exclude(item__id__in=user_reviews_item_ids)
+    other_users_reviews_item_ids = set(
+        map(lambda x: x.item.id, other_users_reviews))
+
+    item_list = sorted(
+        list(Items.objects.filter(id__in=other_users_reviews_item_ids)), key=lambda x: x.average_rating(), reverse=True)
+
+    return item_list
