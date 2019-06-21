@@ -25,6 +25,7 @@ import chat2 from "./components/chat2";
 import ProtectedRoute from "./components/protect";
 // import  Carousel  from "./components/categorySlides";
 import Alerts from "./components/alerts";
+import Reviews from "./components/reviews";
 
 const alertOptions = {
   position: positions.UP_CENTER,
@@ -97,6 +98,7 @@ class App extends React.Component {
               <Route path="/tools" exact component={Tools} />
               <Route path="/chat2" exact component={chat} />
               <Route path="/signup" exact component={Signup} />
+              <Route path="/reviews" exact component={Reviews} />
             </div>
             <Footer />
           </Router>
