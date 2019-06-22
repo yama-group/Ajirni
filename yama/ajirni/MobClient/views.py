@@ -9,10 +9,13 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
+<<<<<<< HEAD
+=======
 from django.urls import reverse
 from .suggestions import update_clusters
 
 import datetime
+>>>>>>> ef27a1a0b5298cdd72d73f70ef6ac4f2dba2b758
 # import requests
 
 # Register API
