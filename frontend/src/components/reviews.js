@@ -14,7 +14,8 @@ class Reviews extends Component {
       item_id: "",
       rating: "",
       username: window.localStorage.getItem("username"),
-      userId: window.localStorage.getItem("userId")
+      userId: window.localStorage.getItem("userId"),
+      review: ""
     }
   }
   componentWillMount() {
@@ -29,7 +30,15 @@ class Reviews extends Component {
   }
 
   postReview() {
-    
+   const addedReview = {
+     textReview: this.state.review,
+     starsReview: this.state.rating,
+     item_id: this.state.item_id,
+     user_id: this.state.userId,
+     user_name: this.state.username
+   }
+  //  console.log(addedReview)
+   this.props.postReviews(addedReview)
   }
 
   render() {
@@ -67,7 +76,7 @@ class Reviews extends Component {
           <input type="radio" name="rating" value="5" onChange = {this.onChange.bind(this)}/> Five Star  <br />
           <br /> <br />
           Enter Review here...
-          <textarea rows="4" cols="50" name="Review" >
+          <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
             </textarea>
         </div>
         <div className="quickview-btn-cart">
