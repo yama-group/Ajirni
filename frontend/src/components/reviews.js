@@ -11,10 +11,12 @@ class Reviews extends Component {
     super(props);
     this.state = {
       reviews: [],
-      item_id: ""
+      item_id: "",
+      rating: "",
+      username: window.localStorage.getItem("username"),
+      userId: window.localStorage.getItem("userId")
     }
   }
-
   componentWillMount() {
     this.setState({ item_id: this.props.item_id }, () =>{
       this.props.getReviews(this.state.item_id)
@@ -23,6 +25,11 @@ class Reviews extends Component {
 
   onChange(e) {
     this.setState({[e.target.name]:e.target.value})
+    console.log(e.target.value)
+  }
+
+  postReview() {
+    
   }
 
   render() {
@@ -37,7 +44,7 @@ class Reviews extends Component {
               <tbody>
               <tr>
                 <td>
-                  <img src={'./images/' + rev.starsReview+ ".png"}  alt="" style= {{width:"100px"}}/>
+                  <img src={'./images/' + rev.starsReview + ".png"}  alt="" style= {{width:"100px"}}/>
                 </td>
                 <td>
                   {rev.textReview}
@@ -48,12 +55,26 @@ class Reviews extends Component {
             </div>
           )
         })}
+        </div>
+        <div>
+          <br />
+          <br />
+        <p>Add your Rating Here:</p>
+          <input type="radio" name="rating" value="1" onChange = {this.onChange.bind(this)}/> One Star  
+          <input type="radio" name="rating" value="2" onChange = {this.onChange.bind(this)}/> Two Star  
+          <input type="radio" name="rating" value="3" onChange = {this.onChange.bind(this)}/> Three Star  
+          <input type="radio" name="rating" value="4" onChange = {this.onChange.bind(this)}/> Four Star  
+          <input type="radio" name="rating" value="5" onChange = {this.onChange.bind(this)}/> Five Star  <br />
+          <br /> <br />
+          Enter Review here...
+          <textarea rows="4" cols="50" name="Review" >
+            </textarea>
+        </div>
         <div className="quickview-btn-cart">
-         </div>
-          </div>
-          <button  className="btn-hover-black" >
+          <button  className="btn-hover-black" onClick = {this.postReview.bind(this)}>
             add Review
           </button>
+         </div>
       </div>
     )
   }
