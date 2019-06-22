@@ -221,6 +221,7 @@ class UserLikesTest(generics.ListCreateAPIView):
 def user_recommendation_list(request):
     user_reviews = Reviews.objects.filter(
         user_name=request.user.username).prefetch_related('item')
+        user_name=request.user.username).prefetch_related('item')
     user_reviews_item_ids = set(map(lambda x: x.item.id, user_reviews))
     try:
         user_cluster_name = \
