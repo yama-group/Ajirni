@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from .suggestions import update_clusters
 
 import datetime
@@ -203,19 +203,19 @@ class UserLikesTest(generics.ListCreateAPIView):
     # return queryset
 
 
-def add_review(request, item_id):
-    item = get_object_or_404(Items, pk=item_id)
-    starsReview = request.query_params.get('starsReview', None)
-    textReview = request.query_params.get('textReview', None)
-    user_name = request.user.username
-    review = Reviews()
-    review.item = item
-    review.user_name = user_name
-    review.starsReview = starsReview
-    review.textReview = textReview
-    review.pub_date = datetime.datetime.now()
-    review.save()
-    update_clusters()
+# def add_review(request, item_id):
+#     item = get_object_or_404(Items, pk=item_id)
+#     starsReview = request.query_params.get('starsReview', None)
+#     textReview = request.query_params.get('textReview', None)
+#     user_name = request.user.username
+#     review = Reviews()
+#     review.item = item
+#     review.user_name = user_name
+#     review.starsReview = starsReview
+#     review.textReview = textReview
+#     review.pub_date = datetime.datetime.now()
+#     review.save()
+#     update_clusters()
 
 
 def user_recommendation_list(request):

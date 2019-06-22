@@ -75,7 +75,7 @@ class Reviews(models.Model):
     )
     item = models.ForeignKey(Items, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=100)
+    # user_name = models.CharField(max_length=100)
     textReview = models.CharField(max_length=200)
     starsReview = models.IntegerField(choices=RATING_CHOICES)
 
