@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { search } from "../actions/itemAction";
 import { Alert } from "reactstrap";
-import car from "../images/cars.png"
-import Sports from "../images/Sports.png"
-import RealEstate from "../images/RealEstates.png"
-import HouseHolds from "../images/HouseHolds.png"
-import IndustrialTools from "../images/tools.png"
-import EventEquipments from "../images/events.png"
-import Others from "../images/otherThingsEdited.png"
-import kite from "../images/kite.jpg"
+import car from "./images/cars.png"
+import Sports from "./images/Sports.png"
+import RealEstate from "./images/RealEstates.png"
+import HouseHolds from "./images/HouseHolds.png"
+import IndustrialTools from "./images/tools.png"
+import EventEquipments from "./images/events.png"
+import Others from "./images/otherThingsEdited.png"
+import kite from "./images/kite.jpg"
 // import Carousel from "./categorySlides"
 // import Item from "./categorySlides"
 import {

@@ -44,6 +44,7 @@ class Chat extends Component {
       error => {
         console.log("Initialization failed with error:", error);
       }
+<<<<<<< HEAD
     ).then(()=>{
      
       var options = {
@@ -69,6 +70,10 @@ class Chat extends Component {
     });
 
     // this.recivemsg("SUPERHERO1SUPERHERO1SUPERHERO1");
+=======
+    );
+    this.recivemsg("SUPERHERO1SUPEaaRHERO1SUPERHERO1");
+>>>>>>> ef27a1a0b5298cdd72d73f70ef6ac4f2dba2b758
   }
 
   

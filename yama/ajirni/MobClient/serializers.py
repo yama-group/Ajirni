@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import SerializerMethodField
 
 # from django.contrib.auth.models import User
-from .models import Items, Likes, Images, CustomUser
+from .models import Items, Likes, Images, CustomUser, Reviews
 from django.contrib.auth import authenticate
 
 
@@ -76,7 +76,7 @@ class LikesSerializer(serializers.ModelSerializer):
 
 class ItemsImagesSerializer(serializers.ModelSerializer):
     images = serializers.SerializerMethodField()
-
+    reviews = serializers.SerializerMethodField()
     class Meta:
         model = Items
         fields = (
@@ -102,12 +102,17 @@ class ItemsImagesSerializer(serializers.ModelSerializer):
             'status',
             'confirmed',
             'user',
-            'images'
+            'images',
+            'reviews'
         )
 
     def get_images(self, obj):
-        print(obj)
+        # print(obj)
         return ImageSerializer(Images.objects.filter(item=obj.id), many=True).data
+
+    def get_reviews(self, obj):
+        # print(obj)
+        return ReviewsSerializer(Reviews.objects.filter(item=obj.id), many=True).data
 
 
 class itemslikedSerializer(serializers.ModelSerializer):
@@ -131,3 +136,12 @@ class userlikesSerializer(serializers.ModelSerializer):
 
     def get_likes(self, obj):
         return LikesSerializer(Likes.objects.filter(user_id=obj.id), many=True).data
+
+
+# Reviews Serializer
+class ReviewsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        """Meta class to map serializer's fields with the model fields."""
+        model = Reviews
+        fields = '__all__'

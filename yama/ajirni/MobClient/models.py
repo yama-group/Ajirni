@@ -41,6 +41,10 @@ class Items(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # images = models.TextField(blank=True)
 
+    def average_rating(self):
+        all_ratings = map(lambda x: x.starsReview, self.review_set.all())
+        return np.mean(list(all_ratings))
+
     def __str__(self):
         return self.name
 
@@ -61,3 +65,34 @@ class Images(models.Model):
         return self.img_url
 
 
+class Reviews(models.Model):
+    # RATING_CHOICES = (
+    #     (1, '1'),
+    #     (2, '2'),
+    #     (3, '3'),
+    #     (4, '4'),
+    #     (5, '5'),
+    # )
+    # item = models.ForeignKey(Items, on_delete=models.CASCADE)
+    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    # # user_name = models.CharField(max_length=100)
+    # textReview = models.CharField(max_length=200)
+    # starsReview = models.IntegerField(choices=RATING_CHOICES)
+    item = models.ForeignKey(
+        Items, related_name="items", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        CustomUser, related_name="likess", on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=100, blank=True)
+    textReview = models.CharField(max_length=1000, blank=True)
+    starsReview = models.IntegerField(blank=True)
+
+    def __str__(self):
+        return self.textReview
+
+
+class Cluster(models.Model):
+    name = models.CharField(max_length=100)
+    users = models.ManyToManyField(CustomUser)
+
+    def get_members(self):
+        return "\n".join([u.username for u in self.users.all()])

@@ -6,9 +6,13 @@ import { fetchItem } from "../actions/itemDetailsAction";
 import { NavLink ,Link} from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
+<<<<<<< HEAD
 import {appID,apiKey,userId,username} from "./config";
 import request from "request"
 
+=======
+import Reviews from "./reviews"
+>>>>>>> ef27a1a0b5298cdd72d73f70ef6ac4f2dba2b758
 
 class ItemDetail extends React.Component {
   constructor(props) {
@@ -114,6 +118,7 @@ class ItemDetail extends React.Component {
                             id="pro-details1"
                             role="tabpanel"
                           >
+
                             <div className="easyzoom easyzoom--overlay">
                               <a href={image.img_url}>
                                 <img src={image.img_url} alt="" />
@@ -139,31 +144,30 @@ class ItemDetail extends React.Component {
                       }
                     })}
                   </div>
-
                   <div className="product-details-small nav mt-12 main-product-details">
                     {this.state.images.map((image, index) => {
                       if (index === 0) {
                         return (
                           <a
-                            key={index}
+                          key={index}
                             className="active mr-12"
                             href="#pro-details1"
                             data-toggle="tab"
                             role="tab"
                             aria-selected="true"
-                          >
+                            >
                             <img src={image.img_url} alt="" />
                           </a>
                         );
                       } else {
                         return (
                           <a
-                            key={index}
-                            className="mr-12"
-                            href={`#pro-details${1 + index}`}
-                            data-toggle="tab"
-                            role="tab"
-                            aria-selected="true"
+                          key={index}
+                          className="mr-12"
+                          href={`#pro-details${1 + index}`}
+                          data-toggle="tab"
+                          role="tab"
+                          aria-selected="true"
                           >
                             <img src={image.img_url} alt="" />
                           </a>
@@ -173,6 +177,7 @@ class ItemDetail extends React.Component {
                   </div>
                 </div>
               </div>
+                    <Reviews />
             </div>
             <div className="col-md-12 col-lg-5 col-12">
               <div className="product-details-content">
@@ -345,6 +350,7 @@ class ItemDetail extends React.Component {
                       <i className="ion-ios-contact" />
                     </Link>
                   </div>
+                  
                 </div>
               </div>
             </div>

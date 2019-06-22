@@ -13,4 +13,5 @@ export const Item_id = "Item_id";
 export const SIGN_IN = "SIGN_IN";
 export const USER_INFO = "USER_INFO";
 export const LIKES_PAGE = "LIKES_PAGE";
-export const GET_ERRORS = "GET_ERRORS"
+export const GET_ERRORS = "GET_ERRORS";
+export const GET_REVIEWS = "GET_REVIEWS";
