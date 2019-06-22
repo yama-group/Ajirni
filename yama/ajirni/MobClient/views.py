@@ -9,13 +9,10 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
-<<<<<<< HEAD
-=======
 from django.urls import reverse
 from .suggestions import update_clusters
 
 import datetime
->>>>>>> ef27a1a0b5298cdd72d73f70ef6ac4f2dba2b758
 # import requests
 
 # Register API
@@ -210,18 +207,38 @@ class UserLikesTest(generics.ListCreateAPIView):
 
 class Reviewss(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
-    queryset = Reviews.objects.all()
+    # queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
 
-    def perform_create(self, serializer):
-        """Save the post data when creating a new review."""
-        serializer.save()
-        update_clusters()
+    # def perform_create(self, serializer):
+    #     """Save the post data when creating a new review."""
+    #     serializer.save()
+
 
     def get_queryset(self):
         item = self.request.query_params.get('item', None)
         queryset = Reviews.objects.filter(item__exact=item)
         return queryset
+
+
+    def perform_create(self, serializer):
+
+        # item_id = self.request.data.get("item_id", None)
+        # userId = self.request.data.get("userId", None)
+        # username = self.request.data.get("username", None)
+        # stars_Review = self.request.data.get("rating", None)
+        # text_Review = self.request.data.get("review", None)
+        # item = Items.objects.get(id=item_id)
+        # user = CustomUser.objects.get(id=userId)
+        print(self.request)
+        # review = Reviews(item = item,
+        #                  user = user, 
+        #                  user_name = username,
+        #                  starsReview = stars_Review,
+        #                  textReview = text_Review
+        #                  )
+        # review.save()
+        update_clusters()
 
 
 # def add_review(request, item_id):

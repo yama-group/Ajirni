@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { search } from "../actions/itemAction";
 import { Alert } from "reactstrap";
-import car from "./images/cars.png"
-import Sports from "./images/Sports.png"
-import RealEstate from "./images/RealEstates.png"
-import HouseHolds from "./images/HouseHolds.png"
-import IndustrialTools from "./images/tools.png"
-import EventEquipments from "./images/events.png"
-import Others from "./images/otherThingsEdited.png"
-import kite from "./images/kite.jpg"
+// import car from "../../public/images/cars.png"
+// import Sports from "../../public/images/Sports.png"
+// import RealEstate from "../../public/images/RealEstates.png"
+// import HouseHolds from "../../public/images/HouseHolds.png"
+// import IndustrialTools from "../../public/images/tools.png"
+// import EventEquipments from "../../public/images/events.png"
+// import Others from "../../public/images/otherThingsEdited.png"
+// import kite from "../../public/images/"
 // import Carousel from "./categorySlides"
 // import Item from "./categorySlides"
 import {
@@ -87,7 +87,7 @@ class Home extends Component {
         }}
         >
         <Link to = "/itemsList">
-        <img src={Sports} alt="" />
+        <img src= './images/Sports.png' alt="" />
         </Link>
         </div>
 
@@ -97,7 +97,7 @@ class Home extends Component {
         }}
         >
         <Link to = "/itemsList">
-        <img src={car} alt="" />
+        <img src='./images/cars.png' alt="" />
         </Link>
         </div>
 
@@ -107,7 +107,7 @@ class Home extends Component {
         }}
         >
         <Link to = "/itemsList">
-        <img src={RealEstate} alt="" />
+        <img src='./images/RealEstates.png' alt="" />
         </Link>
         </div>
 
@@ -117,7 +117,7 @@ class Home extends Component {
         }}
         >
         <Link to = "/itemsList">
-        <img src={HouseHolds} alt="" />
+        <img src='./images/HouseHolds.png' alt="" />
         </Link>
         </div>
 
@@ -127,7 +127,7 @@ class Home extends Component {
         }}
         >
         <Link to = "/itemsList">
-        <img src={IndustrialTools} alt="" />
+        <img src='./images/tools.png' alt="" />
         </Link>
         </div>
 
@@ -137,7 +137,7 @@ class Home extends Component {
         }}
         >
         <Link to = "/itemsList">
-        <img src={EventEquipments} alt="" />
+        <img src="./images/events.png" alt="" />
         </Link>
         </div>
 
@@ -147,7 +147,7 @@ class Home extends Component {
         }}
         >
         <Link to = "/itemsList">
-        <img src={Others} alt="" />
+        <img src="./images/otherThingsEdited.png" alt="" />
         </Link>
         </div>
 
