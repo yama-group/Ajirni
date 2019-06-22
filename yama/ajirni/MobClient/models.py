@@ -66,25 +66,25 @@ class Images(models.Model):
 
 
 class Reviews(models.Model):
-    RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-    )
+    # RATING_CHOICES = (
+    #     (1, '1'),
+    #     (2, '2'),
+    #     (3, '3'),
+    #     (4, '4'),
+    #     (5, '5'),
+    # )
     # item = models.ForeignKey(Items, on_delete=models.CASCADE)
     # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # # user_name = models.CharField(max_length=100)
     # textReview = models.CharField(max_length=200)
-    starsReview = models.IntegerField(choices=RATING_CHOICES)
+    # starsReview = models.IntegerField(choices=RATING_CHOICES)
     item = models.ForeignKey(
         Items, related_name="items", on_delete=models.CASCADE)
     user = models.ForeignKey(
         CustomUser, related_name="likess", on_delete=models.CASCADE)
     user_name = models.CharField(max_length=100, blank=True)
     textReview = models.CharField(max_length=1000, blank=True)
-    # starsReview = models.IntegerField(blank=True)
+    starsReview = models.IntegerField(blank=True)
 
     def __str__(self):
         return self.textReview

@@ -31,11 +31,11 @@ class Reviews extends Component {
 
   postReview() {
    const addedReview = {
-     textReview: this.state.review,
-     starsReview: this.state.rating,
+     review: this.state.review,
+     rating: parseInt(this.state.rating),
      item_id: this.state.item_id,
-     user_id: this.state.userId,
-     user_name: this.state.username
+     userId: parseInt(this.state.userId),
+     username: this.state.username
    }
   //  console.log(addedReview)
    this.props.postReviews(addedReview)
