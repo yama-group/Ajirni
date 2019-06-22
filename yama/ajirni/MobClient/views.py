@@ -3,7 +3,7 @@ from rest_framework import generics, permissions
 from django.views.generic.detail import DetailView
 from .serializers import (ItemsImagesSerializer, ItemsSerializer, LikesSerializer,
                           itemslikedSerializer, UserSerializer, RegisterSerializer,
-                          LoginSerializer, ImageSerializer, userlikesSerializer)
+                          LoginSerializer, ImageSerializer, userlikesSerializer, ReviewsSerializer)
 from .models import Items, Likes, Images, CustomUser, Reviews, Cluster
 from django.http import HttpResponse
 from rest_framework.response import Response
@@ -16,8 +16,6 @@ import datetime
 # import requests
 
 # Register API
-
-
 class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
@@ -201,6 +199,21 @@ class UserLikesTest(generics.ListCreateAPIView):
 
     # queryset = CustomUser.objects.filter(id=user_id)
     # return queryset
+
+#item create reviews api
+class Reviewss(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = Reviews.objects.all()
+    serializer_class = ReviewsSerializer
+
+    def perform_create(self, serializer):
+        """Save the post data when creating a new review."""
+        serializer.save()
+
+    def get_queryset(self):
+        item = self.request.query_params.get('item', None)
+        queryset = Reviews.objects.filter(item__exact=item)
+        return queryset
 
 
 # def add_review(request, item_id):

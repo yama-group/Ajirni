@@ -475,7 +475,7 @@ class UserProfile extends React.Component {
                     <img src={this.props.user.image_url} alt="" />
                     <div className="sidebar-img-content">
                       <h3>
-                        {this.props.user.username} {this.props.user.last_name}
+                        {this.props.user.first_name} {this.props.user.last_name}
                       </h3>
                       <p>{this.props.user.email}</p>
                       <p>{this.props.user.phone}</p>

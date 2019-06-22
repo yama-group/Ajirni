@@ -20,6 +20,8 @@ scikit-learn = "*"
 scipy = "*"
 matplotlib = "*"
 django-bootstrap3 = "*"
+drf-multiple-model = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

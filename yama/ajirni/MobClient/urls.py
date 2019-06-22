@@ -1,8 +1,12 @@
 from django.urls import path, include
 from .views import (CreateItem, Search, LikeItem, ItemsRud, ItemsList, RegisterAPI,
+<< << << < HEAD
                     LoginAPI, GetImages, getUserItems, getUserInfo, ItemsWithImages, UserLikesTest, user_recommendation_list)
+== == == =
+                    LoginAPI, GetImages, getUserItems, getUserInfo, ItemsWithImages, UserLikesTest, Reviewss, ChatUser)
+>> >>>> > 380dd1fcad5ab8fcf1b720fb91f8f785a6056d72
 
-urlpatterns = [
+urlpatterns=[
 
     path('api/auth', include('knox.urls')),
     path('api/auth/register', RegisterAPI.as_view()),
@@ -20,5 +24,6 @@ urlpatterns = [
     path("vv/", UserLikesTest.as_view(), name="UserLikesTest, ChatUser"),
     path("recommendation/",  user_recommendation_list,
          name="recommendation"),
+    path("reviews/", Reviewss.as_view(), name="review"),
 
 ]
