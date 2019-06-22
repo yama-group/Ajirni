@@ -10,7 +10,9 @@ import { Alert } from "reactstrap";
 import $ from 'jquery';
 import { FacebookShareButton } from 'react-share';
 
+
 class ItemDetail extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -18,12 +20,23 @@ class ItemDetail extends React.Component {
       visible: true,
       likeAlert: false,
       likeMessage: "",
-      images: [{ item_id: 1, img_url: "" }]
+      images: [{ item_id: 1, img_url: "" }],
+      showImg: false
     };
 
     this.onDismiss = this.onDismiss.bind(this);
+    // this.onmousemove = this.onmousemove.bind(this);
   }
 
+
+  // onmousemove(e) {
+  //   // const width = this.refs.ppp.clientWidth
+  //   // const height = this.refs.ppp.clientHeight
+  //   const ox = (e.nativeEvent.offsetX)
+  //   const oy = (e.nativeEvent.offsetY)
+  //   console.log(ox, oy)
+  //   //this.state.showImg = true
+  // }
   onDismiss() {
     this.setState({ visible: false });
   }
@@ -84,7 +97,8 @@ class ItemDetail extends React.Component {
             <div className="col-md-12 col-lg-7 col-12">
               <div className="product-details-img-content">
                 <div className="product-details-tab mr-70">
-                  <div className="product-details-large tab-content">
+                  <div className=" product-details-large tab-content"  >
+
                     {this.state.images.map((image, index) => {
                       if (index === 0) {
                         return (
@@ -94,14 +108,17 @@ class ItemDetail extends React.Component {
                             id="pro-details1"
                             role="tabpanel"
                           >
-                            <div className="easyzoom easyzoom--overlay">
+                            <div className="easyzoom easyzoom--overlay" >
                               <a href={image.img_url}>
                                 <img src={image.img_url} alt="" />
                               </a>
                             </div>
                           </div>
                         );
-                      } else {
+
+
+                      }
+                      else {
                         return (
                           <div
                             key={index}
@@ -114,13 +131,18 @@ class ItemDetail extends React.Component {
                                 <img src={image.img_url} alt="" />
                               </a>
                             </div>
+                            {/* {
+                              this.state.
+                            } */}
                           </div>
+
                         );
                       }
                     })}
                   </div>
 
                   <div className="product-details-small nav mt-12 main-product-details">
+
                     {this.state.images.map((image, index) => {
                       if (index === 0) {
                         return (
@@ -135,6 +157,7 @@ class ItemDetail extends React.Component {
                             <img src={image.img_url} alt="" />
                           </a>
                         );
+
                       } else {
                         return (
                           <a
@@ -327,12 +350,14 @@ class ItemDetail extends React.Component {
                     </NavLink>
                   </div>
                   {/* -------*/}
-                  {/* <br />
+                  <div id="fb-root"></div>
+                  <br />
+                  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
                   <div className="product-share">
                     <ul>
                       <li className="categories-title">Share :</li>
                       <li>
-                        <a href="#">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u= " target="_blank">
                           <i className="ion-social-facebook"></i>
                         </a>
                       </li>
@@ -342,10 +367,10 @@ class ItemDetail extends React.Component {
                         </a>
                       </li>
                     </ul>
-                  </div> */}
+                  </div>
 
                   {/*------ */}
-                  <div id="fb-root"></div>
+                  {/* <div id="fb-root"></div>
                   {
                     window.fbAsyncInit = function () {
                       // window.FB.api(
@@ -374,14 +399,14 @@ class ItemDetail extends React.Component {
 
 
                   <div class="fb-share-button "
-                    data-href="locallhost:3000/itemDetail"
+                    data-href="http://127.0.0.1:3000/itemDetail"
                     data-layout="button">
                   </div>
                   {
                     $('#fb-share-button').click(function () {
                       window.FB.ui({
                         method: 'feed',
-                        link: "http://127.0.0.1:3000/itemDetail",
+                        link: "/itemDetail",
                         picture: 'https://article.images.consumerreports.org/prod/content/dam/CRO%20Images%202019/Magazine/04April/CR-Cars-InlineHero-ComingSoon-Toyota-Supra-2-19',
                         name: "anything",
                         description: "The description who will be displayed"
@@ -390,7 +415,7 @@ class ItemDetail extends React.Component {
                       }
                       );
                     })
-                  }
+                  } */}
 
                   {/* <a href="#">
                     <i className="ion-social-facebook"></i>

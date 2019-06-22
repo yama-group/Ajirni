@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NEW_USER, GET_ERRORS } from "./types";
+import { NEW_USER, GET_ERRORS, FETCH_USERS } from "./types";
 
 export const createUser = user => dispatch => {
   console.log(user);
@@ -11,7 +11,7 @@ export const createUser = user => dispatch => {
       dispatch({
         type: NEW_USER,
         payload: "successfully sign up",
-        done:true
+        done: true
       });
     })
     .catch(err => {
@@ -27,4 +27,7 @@ export const createUser = user => dispatch => {
     });
 
 };
+
+
+
 

@@ -20,9 +20,10 @@ import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
 import CarsForm from "./components/CarsForm";
 import Likes from "./components/likes";
-import  ProtectedRoute  from "./components/protect";
+import ProtectedRoute from "./components/protect";
 // import  Carousel  from "./components/categorySlides";
 import Alerts from './components/alerts'
+import randomUsers from './components/randomUsers'
 
 
 const alertOptions = {
@@ -42,7 +43,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        
+
         <AlertProvider template={AlertTemplate} {...alertOptions} >
 
           <Router>
@@ -57,38 +58,39 @@ class App extends React.Component {
                 exact
                 component={UserProfile}
               />
-               <ProtectedRoute
-              token={this.props.token}
-              userId={this.props.user_id}
-              path="/addcar"
-              exact
-              component={CarsForm}
-            />
-            <ProtectedRoute
-              token={this.props.token}
-              userId={this.props.user_id}
-              path="/addrealestate"
-              exact
-              component={RealEstate}
-            />
-             <ProtectedRoute
-              token={this.props.token}
-              userId={this.props.user_id}
-              path="/others"
-              exact
-              component={Tools}
-            />
-            <Route path="/Category" component={ItemsList} />
-            <Route path="/itemDetail" exact component={ItemDetail} />
-            <Route path="/carsForm" exact component={CarsForm} />
-            <Route path="/itemsList" exact component={ItemsList} />
-            <Route path="/RealEstate" exact component={RealEstate} />
-            <Route path="/userItems" exact component={UserItems} />
-            <Route path="/likes" exact component={Likes} />
-            <Route path="/signin" exact component={SignIn} />
-            {/* <Route path="/categorySlides" exact component={Carousel} /> */}
-            <Route path="/tools" exact component={Tools} />
-            <Route path="/signup" exact component={Signup} />
+              <ProtectedRoute
+                token={this.props.token}
+                userId={this.props.user_id}
+                path="/addcar"
+                exact
+                component={CarsForm}
+              />
+              <ProtectedRoute
+                token={this.props.token}
+                userId={this.props.user_id}
+                path="/addrealestate"
+                exact
+                component={RealEstate}
+              />
+              <ProtectedRoute
+                token={this.props.token}
+                userId={this.props.user_id}
+                path="/others"
+                exact
+                component={Tools}
+              />
+              <Route path="/Category" component={ItemsList} />
+              <Route path="/itemDetail" exact component={ItemDetail} />
+              <Route path="/carsForm" exact component={CarsForm} />
+              <Route path="/itemsList" exact component={ItemsList} />
+              <Route path="/RealEstate" exact component={RealEstate} />
+              <Route path="/userItems" exact component={UserItems} />
+              <Route path="/likes" exact component={Likes} />
+              <Route path="/signin" exact component={SignIn} />
+              {/* <Route path="/categorySlides" exact component={Carousel} /> */}
+              <Route path="/tools" exact component={Tools} />
+              <Route path="/signup" exact component={Signup} />
+              <Route path="/allusers" exact component={randomUsers} />
             </div>
             <Footer />
           </Router>
