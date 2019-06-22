@@ -4,7 +4,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
 autopep8 = "*"
 
 [packages]
@@ -12,10 +11,15 @@ Django="==2.2.2"
 djangorestframework="==3.9.4"
 mysqlclient="==1.4.2.post1"
 pipenv="==2018.11.26"
-pylint="==2.3.1"
 virtualenv="==16.6.0"
 django-rest-knox = "==4.1.0"
 django-rest-multiple-models = "*"
+numpy = "*"
+django-registration = "*"
+scikit-learn = "*"
+scipy = "*"
+matplotlib = "*"
+django-bootstrap3 = "*"
 drf-multiple-model = "*"
 requests = "*"
 
