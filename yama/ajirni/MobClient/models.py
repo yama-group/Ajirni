@@ -42,7 +42,7 @@ class Items(models.Model):
     # images = models.TextField(blank=True)
 
     def average_rating(self):
-        all_ratings = map(lambda x: x.rating, self.review_set.all())
+        all_ratings = map(lambda x: x.starsReview, self.review_set.all())
         return np.mean(list(all_ratings))
 
     def __str__(self):
@@ -82,6 +82,7 @@ class Reviews(models.Model):
         Items, related_name="items", on_delete=models.CASCADE)
     user = models.ForeignKey(
         CustomUser, related_name="likess", on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=100, blank=True)
     textReview = models.CharField(max_length=1000, blank=True)
     starsReview = models.IntegerField(blank=True)
 
