@@ -13,36 +13,56 @@ class RandomUsers extends Component {
   };
 
   componentWillMount() {
-    this.props.getAllUsers();
     //this.setState({ users: this.props.users })
 
+    this.props.getAllUsers();
+    this.shuffle(this.props.users)
+    // console.log(this.props.users)
 
   }
 
+
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+
   render() {
+    console.log(this.shuffle(this.props.users))
+    this.shuffle(this.props.users)
     return (
-      <div>
+      < div >
 
         {
           // console.log(this.props.users)
-          this.props.users.map((user) =>
+          this.props.users.slice(0, 8).map((user) =>
             // <ul>
             //   <li key={user.id}> {user.username} </li>
             // </ul>
-            <table>
+            user.image_url ? <table>
               <tbody>
                 <tr>
                   <td key={user.id} class="product-thumbnail">
-                    <a href="#"><img src={user.image_url} width="50px" heigh="50px" alt="" /></a>
+                    <a href="#"><img src={user.image_url} width="80px" heigh="80px" alt="" /></a>
+                  </td>
+                  <td>
+                    
                   </td>
 
                 </tr>
               </tbody>
-            </table>
+            </table> : <h3>no photo</h3>
+
+
+
           )
         }
 
-      </div>
+      </div >
     )
   }
 }
