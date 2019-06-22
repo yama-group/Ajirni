@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { BrowserRouter as Router, Route, Link, Redirect, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { userSignIn } from "../actions/signInAction.js";
-import axios from "axios";
+// import axios from "axios";
 import { Alert } from "reactstrap";
 
 class SignIn extends Component {
