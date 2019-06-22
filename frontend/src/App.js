@@ -25,13 +25,10 @@ import chat2 from "./components/chat2";
 import ProtectedRoute from "./components/protect";
 // import  Carousel  from "./components/categorySlides";
 import Alerts from "./components/alerts";
-<<<<<<< HEAD
 import Chat from "./components/newChat"
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-notifications/lib/notifications.css';
-=======
 import Reviews from "./components/reviews";
->>>>>>> ef27a1a0b5298cdd72d73f70ef6ac4f2dba2b758
 
 const alertOptions = {
   position: positions.UP_CENTER,

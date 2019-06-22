@@ -6,13 +6,10 @@ import { fetchItem } from "../actions/itemDetailsAction";
 import { NavLink ,Link} from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
-<<<<<<< HEAD
 import {appID,apiKey,userId,username} from "./config";
 import request from "request"
 
-=======
 import Reviews from "./reviews"
->>>>>>> ef27a1a0b5298cdd72d73f70ef6ac4f2dba2b758
 
 class ItemDetail extends React.Component {
   constructor(props) {
