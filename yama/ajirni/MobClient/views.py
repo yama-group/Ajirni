@@ -269,26 +269,28 @@ class user_recommendation_list(generics.ListCreateAPIView):
     serializer_class = ItemsSerializer
 
     def get_queryset(self):
-        user_reviews = Reviews.objects.filter(
             # user_name=request.user.username).prefetch_related('item')
-            user_name='mohaaaaa').prefetch_related('item')
+        user_name = self.request.query_params.get('user_name', None)
+        user_reviews = Reviews.objects.filter(
+            user_name=user_name).prefetch_related('item')
         user_reviews_item_ids = set(map(lambda x: x.item.id, user_reviews))
         try:
+                    # username=request.user.username).cluster_set.first().name
             user_cluster_name = \
                 CustomUser.objects.get(
-                    # username=request.user.username).cluster_set.first().name
-                    username='mohaaaaa').cluster_set.first().name
+                    username=user_name).cluster_set.first().name
         except:
             update_clusters()
             # username=request.user.username).cluster_set.first().name
-            # user_cluster_name = \
-            #     CustomUser.objects.get(
-            #         username="mohaaaaa").cluster_set.first().name
-            user_cluster_name = "mohaaaaa"
-            # .exclude(username=request.user.username).all()
+            user_cluster_name = \
+                CustomUser.objects.get(
+                    username=user_name).cluster_set.first().name \
+                .exclude(username=user_name).all()
+
         user_cluster_other_members = \
-            Cluster.objects.get(name=user_cluster_name).users \
-            .exclude(username="mohaaaaa").all()
+            Cluster.objects.get(name=user_cluster_name).users.exclude(username=user_name).all()
+
+        print(user_cluster_other_members, "gggggggg")
         other_members_usernames = set(
             map(lambda x: x.username, user_cluster_other_members))
 
@@ -298,7 +300,8 @@ class user_recommendation_list(generics.ListCreateAPIView):
         other_users_reviews_item_ids = set(
             map(lambda x: x.item.id, other_users_reviews))
 
-        item_list = sorted(
-            list(Items.objects.filter(id__in=other_users_reviews_item_ids)), key=lambda x: x.average_rating(), reverse=True)
+        item_list = Items.objects.filter(id__in=other_users_reviews_item_ids)
+        # sorted(
+        #     list(Items.objects.filter(id__in=other_users_reviews_item_ids)), key=lambda x: x.average_rating(), reverse=True)
         print(item_list)
         return item_list
