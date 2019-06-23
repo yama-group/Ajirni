@@ -43,19 +43,21 @@ class RandomUsers extends Component {
             // <ul>
             //   <li key={user.id}> {user.username} </li>
             // </ul>
-            user.image_url ? <table>
+             <table>
               <tbody>
                 <tr>
+              { user.image_url ? 
                   <td key={user.id} class="product-thumbnail">
-                    <a href="#"><img src={user.image_url} width="80px" heigh="80px" alt="" /></a>
+                  <a href="#"><img src={user.image_url} width="80px" heigh="80px" alt="" /></a> 
                   </td>
+                  :
                   <td>
-                    
+                    <a href="#"><h3>no photo</h3></a>
                   </td>
-
+              }
                 </tr>
               </tbody>
-            </table> : <h3>no photo</h3>
+            </table>
 
 
 

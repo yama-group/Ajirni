@@ -23,7 +23,7 @@ import Likes from "./components/likes";
 import ProtectedRoute from "./components/protect";
 // import  Carousel  from "./components/categorySlides";
 import Alerts from './components/alerts'
-import randomUsers from './components/randomUsers'
+import RandomUsers from './components/randomUsers'
 
 
 const alertOptions = {
@@ -90,7 +90,7 @@ class App extends React.Component {
               {/* <Route path="/categorySlides" exact component={Carousel} /> */}
               <Route path="/tools" exact component={Tools} />
               <Route path="/signup" exact component={Signup} />
-              <Route path="/allusers" exact component={randomUsers} />
+              <Route path="/allusers" exact component={RandomUsers} />
             </div>
             <Footer />
           </Router>

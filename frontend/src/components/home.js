@@ -11,6 +11,7 @@ import IndustrialTools from "../images/tools.png"
 import EventEquipments from "../images/events.png"
 import Others from "../images/otherThingsEdited.png"
 import kite from "../images/kite.jpg"
+import RandomUsers from './randomUsers'
 // import Carousel from "./categorySlides"
 // import Item from "./categorySlides"
 import {
@@ -158,6 +159,7 @@ class Home extends Component {
         <br />
         <br />
         <br />
+        <RandomUsers />
       </div>
     );
   }
