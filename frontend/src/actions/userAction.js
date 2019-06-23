@@ -34,12 +34,6 @@ export const createUser = user => dispatch => {
         console.log(body,"done");
 
     })
-
-
-
-
-
-
       
     })
     .catch(err => {
