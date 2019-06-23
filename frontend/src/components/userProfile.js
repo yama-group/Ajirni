@@ -64,7 +64,7 @@ class UserProfile extends React.Component {
     var that = this;
     this.setState(
       {
-        itemSelected: this.state.items.slice(index, index + 1)[0]
+        itemSelected: this.state.items[index][0]
       },
       () => {
         if (that.state.itemSelected.category === 1) {
@@ -475,7 +475,7 @@ class UserProfile extends React.Component {
                     <img src={this.props.user.image_url} alt="" />
                     <div className="sidebar-img-content">
                       <h3>
-                        {this.props.user.username} {this.props.user.last_name}
+                        {this.props.user.first_name} {this.props.user.last_name}
                       </h3>
                       <p>{this.props.user.email}</p>
                       <p>{this.props.user.phone}</p>

@@ -3,9 +3,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchItem } from "../actions/itemDetailsAction";
-import { NavLink } from "react-router-dom";
+import { NavLink ,Link} from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
+import {appID,apiKey,userId,username} from "./config";
+import request from "request"
+
+import Reviews from "./reviews"
 
 import $ from 'jquery';
 import { FacebookShareButton } from 'react-share';
@@ -44,6 +48,27 @@ class ItemDetail extends React.Component {
   componentWillMount() {
     // this.setState({item_id:this.props.item_id})
     this.props.fetchItem(this.props.item_id);
+  }
+
+  makeFriend(){
+    const uid = window.localStorage.getItem("userId")
+    var options = {
+      method: 'POST',
+      url: `https://api.cometchat.com/v1.6/users/${uid}/friends`,
+      headers: {
+        apikey:apiKey,
+        appid: appID,
+        'content-type': 'application/json',
+      },
+      body:`{"accepted":["${this.props.item.user}"]}`
+    };
+    
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+    
+      console.log(body,"done");
+
+  })
   }
 
   componentWillReceiveProps(next) {
@@ -108,7 +133,8 @@ class ItemDetail extends React.Component {
                             id="pro-details1"
                             role="tabpanel"
                           >
-                            <div className="easyzoom easyzoom--overlay" >
+
+                            <div className="easyzoom easyzoom--overlay">
                               <a href={image.img_url}>
                                 <img src={image.img_url} alt="" />
                               </a>
@@ -140,20 +166,19 @@ class ItemDetail extends React.Component {
                       }
                     })}
                   </div>
-
                   <div className="product-details-small nav mt-12 main-product-details">
 
                     {this.state.images.map((image, index) => {
                       if (index === 0) {
                         return (
                           <a
-                            key={index}
+                          key={index}
                             className="active mr-12"
                             href="#pro-details1"
                             data-toggle="tab"
                             role="tab"
                             aria-selected="true"
-                          >
+                            >
                             <img src={image.img_url} alt="" />
                           </a>
                         );
@@ -161,12 +186,12 @@ class ItemDetail extends React.Component {
                       } else {
                         return (
                           <a
-                            key={index}
-                            className="mr-12"
-                            href={`#pro-details${1 + index}`}
-                            data-toggle="tab"
-                            role="tab"
-                            aria-selected="true"
+                          key={index}
+                          className="mr-12"
+                          href={`#pro-details${1 + index}`}
+                          data-toggle="tab"
+                          role="tab"
+                          aria-selected="true"
                           >
                             <img src={image.img_url} alt="" />
                           </a>
@@ -176,6 +201,7 @@ class ItemDetail extends React.Component {
                   </div>
                 </div>
               </div>
+                    <Reviews />
             </div>
             <div className="col-md-12 col-lg-5 col-12">
               <div className="product-details-content">
@@ -329,10 +355,10 @@ class ItemDetail extends React.Component {
                     )}
                 </div>
                 <div className="quickview-plus-minus">
-                  <div className="quickview-btn-cart">
-                    <a className="btn-hover-black" href="#">
+                  <div onClick={this.makeFriend.bind(this)} className="quickview-btn-cart">
+                    <Link to="/chat">
                       Contact
-                    </a>
+                    </Link>
                   </div>
                   <div className="quickview-btn-wishlist">
                     <a
@@ -345,83 +371,11 @@ class ItemDetail extends React.Component {
                   </div>
 
                   <div className="quickview-btn-wishlist">
-                    <NavLink to="/userItems" className="btn-hover">
+                    <Link to="/userItems" className="btn-hover">
                       <i className="ion-ios-contact" />
-                    </NavLink>
+                    </Link>
                   </div>
-                  {/* -------*/}
-                  <div id="fb-root"></div>
-                  <br />
-                  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
-                  <div className="product-share">
-                    <ul>
-                      <li className="categories-title">Share :</li>
-                      <li>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u= " target="_blank">
-                          <i className="ion-social-facebook"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="ion-social-instagram-outline"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/*------ */}
-                  {/* <div id="fb-root"></div>
-                  {
-                    window.fbAsyncInit = function () {
-                      // window.FB.api(
-                      //   '/l214.animaux',
-                      //   { "fields": "fan_count" },
-                      //   function (response) {
-                      //     alert(response.fan_count);
-                      //   }
-                      // );
-                      window.FB.init({
-                        appId: '/itemDetail',
-                        xfbml: true,
-                        version: 'v2.3'
-                      });
-                    }}
-
-                  {function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) { return; }
-                    js = d.createElement(s); js.id = id;
-                    js.src = "//connect.facebook.net/en_US/sdk.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                  }(document, 'script', 'facebook-jssdk')}
-
-
-
-
-                  <div class="fb-share-button "
-                    data-href="http://127.0.0.1:3000/itemDetail"
-                    data-layout="button">
-                  </div>
-                  {
-                    $('#fb-share-button').click(function () {
-                      window.FB.ui({
-                        method: 'feed',
-                        link: "/itemDetail",
-                        picture: 'https://article.images.consumerreports.org/prod/content/dam/CRO%20Images%202019/Magazine/04April/CR-Cars-InlineHero-ComingSoon-Toyota-Supra-2-19',
-                        name: "anything",
-                        description: "The description who will be displayed"
-                      }, function (response) {
-                        console.log(response);
-                      }
-                      );
-                    })
-                  } */}
-
-                  {/* <a href="#">
-                    <i className="ion-social-facebook"></i>
-                  </a> */}
-
-
+                  
                 </div>
               </div>
             </div>

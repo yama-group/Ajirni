@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { search } from "../actions/itemAction";
 import { Alert } from "reactstrap";
-import car from "../images/cars.png"
-import Sports from "../images/Sports.png"
-import RealEstate from "../images/RealEstates.png"
-import HouseHolds from "../images/HouseHolds.png"
-import IndustrialTools from "../images/tools.png"
-import EventEquipments from "../images/events.png"
-import Others from "../images/otherThingsEdited.png"
-import kite from "../images/kite.jpg"
+// import car from "../images/cars.png"
+// import Sports from "../images/Sports.png"
+// import RealEstate from "../images/RealEstates.png"
+// import HouseHolds from "../images/HouseHolds.png"
+// import IndustrialTools from "../images/tools.png"
+// import EventEquipments from "../images/events.png"
+// import Others from "../images/otherThingsEdited.png"
+// import kite from "../images/kite.jpg"
 import RandomUsers from './randomUsers'
 // import Carousel from "./categorySlides"
 // import Item from "./categorySlides"
@@ -42,7 +42,7 @@ class Home extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-  
+
   search(e, c) {
     e.preventDefault();
     // console.log(c);
@@ -58,7 +58,7 @@ class Home extends Component {
     // console.log(item);
     // this.props.postItem(item);
   }
-  
+
   render() {
     return (
       <div>
@@ -66,91 +66,91 @@ class Home extends Component {
           className="breadcrumb-area pt-205 pb-210"
           id="navnav" //   style={"background-image: url(assets/img/bg/breadcrumb.jpg)"}
           /> */}
-          <img src={'https://www.savannah-group.com/wp-content/uploads/2017/05/1920-x-500-image-7.jpg'} alt="" />
-        
+        <img src={'https://www.savannah-group.com/wp-content/uploads/2017/05/1920-x-500-image-7.jpg'} alt="" />
+
         <br />
         <br />
         <br />
         <br />
-        <div className = "h1">
+        <div className="h1">
           <h1>
             Categories
           </h1>
         </div>
         <br />
         <div className="container" />
-        <div className = "categories">
+        <div className="categories">
 
 
-        <div className = "category"
-         onClick={e => {
-          this.search(e, "1");
-        }}
-        >
-        <Link to = "/itemsList">
-        <img src={Sports} alt="" />
-        </Link>
-        </div>
+          <div className="category"
+            onClick={e => {
+              this.search(e, "1");
+            }}
+          >
+            <Link to="/itemsList">
+              <img src='./images/Sports.png' alt="" />
+            </Link>
+          </div>
 
-        <div className = "category" 
-        onClick={e => {
-          this.search(e, "2");
-        }}
-        >
-        <Link to = "/itemsList">
-        <img src={car} alt="" />
-        </Link>
-        </div>
+          <div className="category"
+            onClick={e => {
+              this.search(e, "2");
+            }}
+          >
+            <Link to="/itemsList">
+              <img src='./images/cars.png' alt="" />
+            </Link>
+          </div>
 
-        <div className = "category"
-         onClick={e => {
-          this.search(e, "3");
-        }}
-        >
-        <Link to = "/itemsList">
-        <img src={RealEstate} alt="" />
-        </Link>
-        </div>
+          <div className="category"
+            onClick={e => {
+              this.search(e, "3");
+            }}
+          >
+            <Link to="/itemsList">
+              <img src='./images/RealEstates.png' alt="" />
+            </Link>
+          </div>
 
-        <div className = "category"
-         onClick={e => {
-          this.search(e, "4");
-        }}
-        >
-        <Link to = "/itemsList">
-        <img src={HouseHolds} alt="" />
-        </Link>
-        </div>
+          <div className="category"
+            onClick={e => {
+              this.search(e, "4");
+            }}
+          >
+            <Link to="/itemsList">
+              <img src='./images/HouseHolds.png' alt="" />
+            </Link>
+          </div>
 
-        <div className = "category"
-         onClick={e => {
-          this.search(e, "5");
-        }}
-        >
-        <Link to = "/itemsList">
-        <img src={IndustrialTools} alt="" />
-        </Link>
-        </div>
+          <div className="category"
+            onClick={e => {
+              this.search(e, "5");
+            }}
+          >
+            <Link to="/itemsList">
+              <img src='./images/tools.png' alt="" />
+            </Link>
+          </div>
 
-        <div className = "category"
-         onClick={e => {
-          this.search(e, "6");
-        }}
-        >
-        <Link to = "/itemsList">
-        <img src={EventEquipments} alt="" />
-        </Link>
-        </div>
+          <div className="category"
+            onClick={e => {
+              this.search(e, "6");
+            }}
+          >
+            <Link to="/itemsList">
+              <img src="./images/events.png" alt="" />
+            </Link>
+          </div>
 
-        <div className = "category"
-         onClick={e => {
-          this.search(e, "7");
-        }}
-        >
-        <Link to = "/itemsList">
-        <img src={Others} alt="" />
-        </Link>
-        </div>
+          <div className="category"
+            onClick={e => {
+              this.search(e, "7");
+            }}
+          >
+            <Link to="/itemsList">
+              <img src="./images/otherThingsEdited.png" alt="" />
+            </Link>
+          </div>
 
 
         </div>

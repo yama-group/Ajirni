@@ -3,15 +3,21 @@ from rest_framework import generics, permissions
 from django.views.generic.detail import DetailView
 from .serializers import (ItemsImagesSerializer, ItemsSerializer, LikesSerializer,
                           itemslikedSerializer, UserSerializer, RegisterSerializer,
-                          LoginSerializer, ImageSerializer, userlikesSerializer)
-from .models import Items, Likes, Images, CustomUser
+                          LoginSerializer, ImageSerializer, userlikesSerializer, ReviewsSerializer)
+from .models import Items, Likes, Images, CustomUser, Reviews, Cluster
 from django.http import HttpResponse
 from rest_framework.response import Response
 from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
+from .suggestions import update_clusters
 
+import datetime
+# import requests
 
 # Register API
+
+
 class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
@@ -199,8 +205,100 @@ class ItemsWithImages(generics.ListCreateAPIView):
 
 class UserLikesTest(generics.ListCreateAPIView):
     """This class defines the retrieve behavior of all instances."""
-    serializer_class = itemslikedSerializer
-    queryset = Likes.objects.all()
+    serializer_class = userlikesSerializer
+    queryset = Items.objects.all()
 
     # queryset = CustomUser.objects.filter(id=user_id)
     # return queryset
+
+# item create reviews api
+
+
+class Reviewss(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    # queryset = Reviews.objects.all()
+    serializer_class = ReviewsSerializer
+
+    # def perform_create(self, serializer):
+    #     """Save the post data when creating a new review."""
+    #     serializer.save()
+
+
+    def get_queryset(self):
+        item = self.request.query_params.get('item', None)
+        queryset = Reviews.objects.filter(item__exact=item)
+        return queryset
+
+
+    def perform_create(self, serializer):
+
+        # item_id = self.request.data.get("item_id", None)
+        # userId = self.request.data.get("userId", None)
+        # username = self.request.data.get("username", None)
+        # stars_Review = self.request.data.get("rating", None)
+        # text_Review = self.request.data.get("review", None)
+        # item = Items.objects.get(id=item_id)
+        # user = CustomUser.objects.get(id=userId)
+        print(self.request)
+        # review = Reviews(item = item,
+        #                  user = user, 
+        #                  user_name = username,
+        #                  starsReview = stars_Review,
+        #                  textReview = text_Review
+        #                  )
+        # review.save()
+        update_clusters()
+
+
+# def add_review(request, item_id):
+#     item = get_object_or_404(Items, pk=item_id)
+#     starsReview = request.query_params.get('starsReview', None)
+#     textReview = request.query_params.get('textReview', None)
+#     user_name = request.user.username
+#     review = Reviews()
+#     review.item = item
+#     review.user_name = user_name
+#     review.starsReview = starsReview
+#     review.textReview = textReview
+#     review.pub_date = datetime.datetime.now()
+#     review.save()
+#     update_clusters()
+
+
+class user_recommendation_list(generics.ListCreateAPIView):
+    serializer_class = ItemsSerializer
+
+    def get_queryset(self):
+        user_reviews = Reviews.objects.filter(
+            # user_name=request.user.username).prefetch_related('item')
+            user_name='mohaaaaa').prefetch_related('item')
+        user_reviews_item_ids = set(map(lambda x: x.item.id, user_reviews))
+        try:
+            user_cluster_name = \
+                CustomUser.objects.get(
+                    # username=request.user.username).cluster_set.first().name
+                    username='mohaaaaa').cluster_set.first().name
+        except:
+            update_clusters()
+            # username=request.user.username).cluster_set.first().name
+            # user_cluster_name = \
+            #     CustomUser.objects.get(
+            #         username="mohaaaaa").cluster_set.first().name
+            user_cluster_name = "mohaaaaa"
+            # .exclude(username=request.user.username).all()
+        user_cluster_other_members = \
+            Cluster.objects.get(name=user_cluster_name).users \
+            .exclude(username="mohaaaaa").all()
+        other_members_usernames = set(
+            map(lambda x: x.username, user_cluster_other_members))
+
+        other_users_reviews = \
+            Reviews.objects.filter(user_name__in=other_members_usernames) \
+            .exclude(item__id__in=user_reviews_item_ids)
+        other_users_reviews_item_ids = set(
+            map(lambda x: x.item.id, other_users_reviews))
+
+        item_list = sorted(
+            list(Items.objects.filter(id__in=other_users_reviews_item_ids)), key=lambda x: x.average_rating(), reverse=True)
+        print(item_list)
+        return item_list

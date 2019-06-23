@@ -9,6 +9,7 @@ import user from "./userinfo";
 import likes from "./likesReducer";
 import errors from "./errors"
 import usersReducer from "./usersReducer"
+import reviews from "./reviewsReducer"
 
 export default combineReducers({
   itemsData: itemsReducer,
@@ -21,5 +22,6 @@ export default combineReducers({
   userInfo: user,
   errorMsg: errors,
   likes: likes,
-  usersReducer: usersReducer
+  usersReducer: usersReducer,
+  review: reviews
 });

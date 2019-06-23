@@ -1317,6 +1317,25 @@ input.cart-plus-minus-box {
   text-transform: uppercase;
   z-index: 5;
 }
+
+.quickview-btn-cart > button {
+  background-color: #ee3333;
+  color: #fff;
+  display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.08px;
+  line-height: 1;
+  padding: 17px 35px;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 5;
+}
+
+#reviewScroll {
+  overflow-y: scroll;
+  max-height: 200px;
+}
+
 .quickview-btn-wishlist > a {
   border: 1px solid #dcdcdc;
   color: #727272;
@@ -1325,6 +1344,7 @@ input.cart-plus-minus-box {
   padding: 7px 18px 6px;
   z-index: 9;
 }
+
 .quickview-btn-wishlist > a:hover {
   border: 1px solid transparent;
 }
