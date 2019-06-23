@@ -11,7 +11,12 @@ import request from "request"
 
 import Reviews from "./reviews"
 
+import $ from 'jquery';
+import { FacebookShareButton } from 'react-share';
+
+
 class ItemDetail extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -19,12 +24,23 @@ class ItemDetail extends React.Component {
       visible: true,
       likeAlert: false,
       likeMessage: "",
-      images: [{ item_id: 1, img_url: "" }]
+      images: [{ item_id: 1, img_url: "" }],
+      showImg: false
     };
 
     this.onDismiss = this.onDismiss.bind(this);
+    // this.onmousemove = this.onmousemove.bind(this);
   }
 
+
+  // onmousemove(e) {
+  //   // const width = this.refs.ppp.clientWidth
+  //   // const height = this.refs.ppp.clientHeight
+  //   const ox = (e.nativeEvent.offsetX)
+  //   const oy = (e.nativeEvent.offsetY)
+  //   console.log(ox, oy)
+  //   //this.state.showImg = true
+  // }
   onDismiss() {
     this.setState({ visible: false });
   }
@@ -87,6 +103,7 @@ class ItemDetail extends React.Component {
 
   render() {
     return (
+
       <div className="product-details ptb-100 pb-90">
         <div className="container">
           <div className="row">
@@ -105,7 +122,8 @@ class ItemDetail extends React.Component {
             <div className="col-md-12 col-lg-7 col-12">
               <div className="product-details-img-content">
                 <div className="product-details-tab mr-70">
-                  <div className="product-details-large tab-content">
+                  <div className=" product-details-large tab-content"  >
+
                     {this.state.images.map((image, index) => {
                       if (index === 0) {
                         return (
@@ -123,7 +141,10 @@ class ItemDetail extends React.Component {
                             </div>
                           </div>
                         );
-                      } else {
+
+
+                      }
+                      else {
                         return (
                           <div
                             key={index}
@@ -136,12 +157,17 @@ class ItemDetail extends React.Component {
                                 <img src={image.img_url} alt="" />
                               </a>
                             </div>
+                            {/* {
+                              this.state.
+                            } */}
                           </div>
+
                         );
                       }
                     })}
                   </div>
                   <div className="product-details-small nav mt-12 main-product-details">
+
                     {this.state.images.map((image, index) => {
                       if (index === 0) {
                         return (
@@ -156,6 +182,7 @@ class ItemDetail extends React.Component {
                             <img src={image.img_url} alt="" />
                           </a>
                         );
+
                       } else {
                         return (
                           <a
@@ -193,8 +220,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.condition}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.car_make ? (
                     <div className="select-option-part">
                       <label>
@@ -203,8 +230,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.car_make}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.year_manufactured ? (
                     <div className="select-option-part">
                       <label>
@@ -213,8 +240,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.year_manufactured}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.no_killometers ? (
                     <div className="select-option-part">
                       <label>
@@ -223,8 +250,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.no_killometers}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.transmission ? (
                     <div className="select-option-part">
                       <label>
@@ -233,8 +260,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.transmission}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.no_rooms ? (
                     <div className="select-option-part">
                       <label>
@@ -243,8 +270,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.no_rooms}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.no_bathrooms ? (
                     <div className="select-option-part">
                       <label>
@@ -253,8 +280,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.no_bathrooms}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.surface_area ? (
                     <div className="select-option-part">
                       <label>
@@ -263,8 +290,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.surface_area}m</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.furnished ? (
                     <div className="select-option-part">
                       <label>
@@ -273,8 +300,8 @@ class ItemDetail extends React.Component {
                       <p>Yes</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.floor_no ? (
                     <div className="select-option-part">
                       <label>
@@ -283,8 +310,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.floor_no}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.location ? (
                     <div className="select-option-part">
                       <label>
@@ -293,8 +320,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.location}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.color ? (
                     <div className="select-option-part">
                       <label>
@@ -303,8 +330,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.color}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.props.item.quantity ? (
                     <div className="select-option-part">
                       <label>
@@ -313,8 +340,8 @@ class ItemDetail extends React.Component {
                       <p>{this.props.item.quantity}</p>
                     </div>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                   {this.state.likeAlert ? (
                     <Alert
                       color="info"
@@ -324,8 +351,8 @@ class ItemDetail extends React.Component {
                       {this.state.likeMessage}
                     </Alert>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                 </div>
                 <div className="quickview-plus-minus">
                   <div onClick={this.makeFriend.bind(this)} className="quickview-btn-cart">
@@ -342,6 +369,7 @@ class ItemDetail extends React.Component {
                       <i className="ion-ios-heart-outline" />
                     </a>
                   </div>
+
                   <div className="quickview-btn-wishlist">
                     <Link to="/userItems" className="btn-hover">
                       <i className="ion-ios-contact" />
