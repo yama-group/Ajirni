@@ -14,7 +14,8 @@ class UserProfile extends React.Component {
     show1: false,
     show2: false,
     show3: false,
-    show4:false
+    show4:false,
+    updated:false
   };
 
   componentWillMount() {
@@ -37,12 +38,12 @@ class UserProfile extends React.Component {
     console.log(id);
     this.props.updateItem(this.state.itemSelected, id);
 
-    if (this.state.itemSelected.category === 1) {
-      this.setState({ show1: false });
+    if (this.state.itemSelected.category === 3) {
+      this.setState({ show3: false });
     } else if (this.state.itemSelected.category === 2) {
       this.setState({ show2: false });
     } else {
-      this.setState({ show3: false });
+      this.setState({ show1: false });
     }
   }
 
@@ -51,28 +52,29 @@ class UserProfile extends React.Component {
 
     this.props.deleteItem(id);
 
-    if (this.state.itemSelected.category === 1) {
-      this.setState({ show1: false });
+    if (this.state.itemSelected.category === 3) {
+      this.setState({ show3: false });
     } else if (this.state.itemSelected.category === 2) {
       this.setState({ show2: false });
     } else {
-      this.setState({ show3: false });
+      this.setState({ show1: false });
     }
   }
 
   handleShow(index) {
     var that = this;
+    console.log(this.state.items[index])
     this.setState(
       {
-        itemSelected: this.state.items[index][0]
+        itemSelected: this.state.items[index]
       },
       () => {
-        if (that.state.itemSelected.category === 1) {
-          that.setState({ show1: true });
+        if (that.state.itemSelected.category === 3) {
+          that.setState({ show3: true });
         } else if (that.state.itemSelected.category === 2) {
           that.setState({ show2: true });
         } else {
-          that.setState({ show3: true });
+          that.setState({ show1: true });
         }
       }
     );
@@ -101,9 +103,9 @@ class UserProfile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         <>
-          <Modal show={this.state.show3}>
+          <Modal style={{marginTop:"8%"}}  show={this.state.show1}>
             <Modal.Header>
               <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
             </Modal.Header>
@@ -195,7 +197,7 @@ class UserProfile extends React.Component {
           </Modal>
         </>
         <>
-          <Modal show={this.state.show2}>
+          <Modal style={{marginTop:"8%"}} show={this.state.show2}>
             <Modal.Header>
               <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
             </Modal.Header>
@@ -322,7 +324,7 @@ class UserProfile extends React.Component {
           </Modal>
         </>
         <>
-          <Modal show={this.state.show1}>
+          <Modal  style={{marginTop:"8%"}} show={this.state.show3}>
             <Modal.Header>
               <Modal.Title>{this.state.itemSelected.name}</Modal.Title>
             </Modal.Header>
@@ -447,7 +449,7 @@ class UserProfile extends React.Component {
             </Modal.Footer>
           </Modal>
         </>
-        <Modal show={this.state.show4}>
+        <Modal style={{marginTop:"8%"}} show={this.state.show4}>
             <Modal.Header>
               <Modal.Title>Choose Catagory:</Modal.Title>
             </Modal.Header>

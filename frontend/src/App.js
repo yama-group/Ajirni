@@ -55,7 +55,7 @@ class App extends React.Component {
           <Router>
             <Header />
             <Alerts />
-            <div className="maincontainer">
+            
               <Route path="/" exact component={Home} />
               <ProtectedRoute
                 token={this.props.token}
@@ -106,7 +106,7 @@ class App extends React.Component {
               <Route path="/signup" exact component={Signup} />
               <Route path="/allusers" exact component={RandomUsers} />
               <Route path="/reviews" exact component={Reviews} />
-            </div>
+            
             <Footer />
           </Router>
         </AlertProvider>

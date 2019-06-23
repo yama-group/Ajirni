@@ -56,7 +56,7 @@ class Header extends Component {
   
       if (["1", "2", "3", "4", "5", "6", "7"].includes(c)) {
         // console.log("e.target.name");
-        this.props.search("category_id=" + c);
+        this.props.search("category_id=" + c,c);
       } else {
         console.log("name");
         this.props.search("name=" + this.state.query);
@@ -191,7 +191,8 @@ class Header extends Component {
             </div>
           </header>
             <div className="header-space"></div>
-
+            
+            
             
            {this.state.active? <div  style={{borderStyle: "solid",
                                              borderWidth: "0px 0px 0px 1px",

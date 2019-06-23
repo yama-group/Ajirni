@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getAllItems, itemId } from "../actions/itemsActions";
 import { search } from "../actions/itemAction";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import axios from "axios";
 class itemsList extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -12,6 +13,21 @@ class itemsList extends Component {
     category: "",
     itemsData: []
   };
+
+  componentDidMount(){
+    const category_id= window.localStorage.getItem("category_id")
+    console.log(category_id)
+    axios
+    .get(`/search/?category_id=${category_id}`)
+    .then(response => {
+       this.setState({
+         itemsData:response.data
+       })
+    })
+    .catch(error => {
+      // console.log(error);
+    });
+  }
 
   componentWillReceiveProps(next) {
     // console.log(next);
@@ -65,27 +81,7 @@ class itemsList extends Component {
               )}
 
               <div className="col-md-12" />
-              {/* 
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="pagination-style text-center">
-                    <ul>
-                      <li className="active">
-                        <a>1</a>
-                      </li>
-                      <li>
-                        <a>2</a>
-                      </li>
-
-                      <li>
-                        <a>
-                          <i className="ion-chevron-right" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div> */}
+              
             </div>
           </div>
         </div>
@@ -96,10 +92,10 @@ class itemsList extends Component {
 
 const mapStateToProps = state => ({
   itemsData: state.itemsData.items,
-  category: state.item.category_id
+  category: state.itemsData.category_id
 });
 
 export default connect(
   mapStateToProps,
-  { getAllItems, itemId }
+  { getAllItems, itemId,search }
 )(itemsList);

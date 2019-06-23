@@ -1,5 +1,7 @@
 import { FETCH_USER, FETCH_USER_ITEMS, UPDATE_ITEM } from "./types";
 import axios from "axios";
+import {NotificationContainer,NotificationManager} from 'react-notifications';
+
 
 export const fetchUser = (para = 7) => dispatch => {
   axios
@@ -27,7 +29,8 @@ export const updateItem = (item, id) => dispatch => {
   axios
     .put(`/rud/${id}`, { ...item })
     .then(update => {
-      fetchUser(1);
+      console.log(update)
+      NotificationManager.success(`${update.data.name} updated.`)
     })
     .catch(err => {
       console.log(err);
