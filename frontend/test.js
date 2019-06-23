@@ -1,10 +1,17 @@
 import React from 'react';
-import Signup from './frontend/components/signup'
 import { shallow } from 'enzyme';
+import enzyme from 'enzyme'
+import EnzymeAdapter from 'enzyme-adapter-react-16'
+import Signup from './frontend/components/signup'
 
-test('should exist', () => {
+enzyme.configure({
+  adapter: new EnzymeAdapter(),
+  disableLifecycleMethods: true
+})
 
-  const div = shallow(<Signup />)
-  expect(div).toHaveLength(1)
-
+describe('<Signup />', () => {
+  it('render 1 <Signup /> ', () => {
+    const div = shallow(<Signup />)
+    expect(div).toHaveLength(1)
+  })
 })
