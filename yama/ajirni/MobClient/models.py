@@ -41,9 +41,9 @@ class Items(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # images = models.TextField(blank=True)
 
-    def average_rating(self):
-        all_ratings = map(lambda x: x.starsReview, self.review_set.all())
-        return np.mean(list(all_ratings))
+    # def average_rating(self):
+    #     all_ratings = map(lambda x: x.starsReview, self.reviews_set.all())
+    #     return np.mean(list(all_ratings))
 
     def __str__(self):
         return self.name
@@ -77,9 +77,9 @@ class Reviews(models.Model):
     # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # # user_name = models.CharField(max_length=100)
     # textReview = models.CharField(max_length=200)
-    # starsReview = models.IntegerField(choices=RATING_CHOICES)
+ # starsReview = models.IntegerField(choices=RATING_CHOICES)
     item = models.ForeignKey(
-        Items, related_name="items", on_delete=models.CASCADE)
+        Items, related_name="reviews", on_delete=models.CASCADE)
     user = models.ForeignKey(
         CustomUser, related_name="likess", on_delete=models.CASCADE)
     user_name = models.CharField(max_length=100, blank=True)
