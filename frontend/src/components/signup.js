@@ -108,63 +108,7 @@ class Signup extends React.Component {
 
     return (
       <div className="register-area ptb-100">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
-              <Alert
-                color="danger"
-                isOpen={this.state.alert}
-              >
-                {this.state.error}
-              </Alert>
-              <h2> Signup  </h2>
-              <div className="login">
-                <div className="login-form-container">
-                  <div className="login-form">
-                    <form  >
-                      <strong>Username</strong><input type="text" name="username" placeholder="user name" onChange={this.onchange} />
-                      <strong>First Name</strong><input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
-                      <strong>Last Name</strong><input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
-                      <strong>Email</strong><input type="email" name="email" placeholder="Email" onChange={this.onchange} />
-                      <strong>Password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
-                      <strong>Phone</strong><input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
-                      <input
-                        className="col-md-4"
-                        aria-describedby="btn"
-                        type="file"
-                        accept="image/*"
-                        data-max-size="5000"
-                        onChange={this.handleImgChange.bind(this)}
-                      />
-
-                      <div className="col-md-12" />
-                      <div role="tablist">
-
-                        <img
-                          role="tab"
-                          src={this.state.image_url}
-                          alt=""
-                          style={{
-                            width: "100px",
-                            height: "100px"
-                          }}
-                        />
-
-                      </div>
-                      {/* <strong>image</strong><input type="text" name="image" placeholder="image" onChange={this.onchange} /> */}
-                      <div className="button-box">
-                        <button type="submit" onClick={this.onsubmit} className="default-btn floatright">Sign Up</button>
-                      </div>
-                      {/* <div class="button-box">
-                        <button type="button" class="default-btn floatright" onClick={this.goSigninPage.bind(this)} >Sign In</button>
-                      </div> */}
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h1></h1>
       </div>
 
     );
