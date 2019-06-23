@@ -144,6 +144,15 @@ class ItemsList(generics.ListAPIView):
         return queryset
 
 
+class getUsers(generics.ListAPIView):
+    """This class defines the retrieve behavior of all instances."""
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        queryset = CustomUser.objects.all()
+        return queryset
+
+
 class GetImages(generics.ListCreateAPIView):
     serializer_class = ImageSerializer
 

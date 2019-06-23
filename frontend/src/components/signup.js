@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { storage } from "../firebase";
 import { createUser } from '../actions/userAction'
+import { Alert } from "reactstrap";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class Signup extends React.Component {
     phone: "",
     image: null,
     image_url: "",
-    alert: false
+    alert: false,
+    error: ""
   }
 
 
@@ -85,25 +87,36 @@ class Signup extends React.Component {
       image_url: this.state.image_url
     }
     e.preventDefault();
-    this.props.createUser(user)
+    if (user.username.length < 3 || user.first_name.length < 3 || user.last_name.length < 3 ||
+      user.email.length < 3 || user.password.length < 6 || user.phone.length < 6) {
+      this.setState({ error: <h3>"enter valid information"</h3>, alert: true })
+    } else {
+      this.props.createUser(user)
+    }
 
   }
 
-  componentWillReceiveProps(props){
-   if(props.done){
-     this.props.history.push("/signin")
-   }
+  componentWillReceiveProps(props) {
+    if (props.done) {
+      this.props.history.push("/signin")
+    }
   }
 
-  
+
 
   render() {
-   
+
     return (
       <div className="register-area ptb-100">
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+              <Alert
+                color="danger"
+                isOpen={this.state.alert}
+              >
+                {this.state.error}
+              </Alert>
               <h2> Signup  </h2>
               <div className="login">
                 <div className="login-form-container">
@@ -113,7 +126,7 @@ class Signup extends React.Component {
                       <strong>First Name</strong><input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
                       <strong>Last Name</strong><input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
                       <strong>Email</strong><input type="email" name="email" placeholder="Email" onChange={this.onchange} />
-                      <strong>Password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange}  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
+                      <strong>Password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
                       <strong>Phone</strong><input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
                       <input
                         className="col-md-4"
@@ -131,8 +144,10 @@ class Signup extends React.Component {
                           role="tab"
                           src={this.state.image_url}
                           alt=""
-                          style={{width:"100px",
-                        height:"100px"}}
+                          style={{
+                            width: "100px",
+                            height: "100px"
+                          }}
                         />
 
                       </div>
@@ -162,7 +177,7 @@ Signup.propTypes = {
 }
 const mapStateToProps = state => ({
   msg: state.userSignUp.Msg,
-  done:state.userSignUp.done
+  done: state.userSignUp.done
 
 })
 

@@ -29,6 +29,7 @@ import Chat from "./components/newChat"
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-notifications/lib/notifications.css';
 import Reviews from "./components/reviews";
+import RandomUsers from './components/randomUsers'
 
 const alertOptions = {
   position: positions.UP_CENTER,
@@ -102,8 +103,8 @@ class App extends React.Component {
               <Route path="/signin" exact component={SignIn} />
               {/* <Route path="/categorySlides" exact component={Carousel} /> */}
               <Route path="/tools" exact component={Tools} />
-              
               <Route path="/signup" exact component={Signup} />
+              <Route path="/allusers" exact component={RandomUsers} />
               <Route path="/reviews" exact component={Reviews} />
             </div>
             <Footer />
