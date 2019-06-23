@@ -5,6 +5,10 @@ import { userSignIn } from "../actions/signInAction.js";
 import axios from "axios";
 import { Alert } from "reactstrap";
 
+
+
+
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -22,13 +26,14 @@ class SignIn extends Component {
     e.preventDefault();
 
     const signIn_Info = {
-      username: this.state.username,
+      username: this.state.username.toLocaleLowerCase(),
       password: this.state.password
     };
     this.props.userSignIn(signIn_Info);
   }
 
   componentWillReceiveProps(next) {
+   
     if (next.token) {
       this.props.history.push("/user");
     }

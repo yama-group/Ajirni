@@ -1333,7 +1333,7 @@ input.cart-plus-minus-box {
 
 #reviewScroll {
   overflow-y: scroll;
-  max-height: 300px;
+  max-height: 200px;
 }
 
 .quickview-btn-wishlist > a {

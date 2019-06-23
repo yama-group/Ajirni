@@ -3,9 +3,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchItem } from "../actions/itemDetailsAction";
-import { NavLink } from "react-router-dom";
+import { NavLink ,Link} from "react-router-dom";
 import axios from "axios";
 import { Alert } from "reactstrap";
+import {appID,apiKey,userId,username} from "./config";
+import request from "request"
+
 import Reviews from "./reviews"
 
 class ItemDetail extends React.Component {
@@ -29,6 +32,27 @@ class ItemDetail extends React.Component {
   componentWillMount() {
     // this.setState({item_id:this.props.item_id})
     this.props.fetchItem(this.props.item_id);
+  }
+
+  makeFriend(){
+    const uid = window.localStorage.getItem("userId")
+    var options = {
+      method: 'POST',
+      url: `https://api.cometchat.com/v1.6/users/${uid}/friends`,
+      headers: {
+        apikey:apiKey,
+        appid: appID,
+        'content-type': 'application/json',
+      },
+      body:`{"accepted":["${this.props.item.user}"]}`
+    };
+    
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+    
+      console.log(body,"done");
+
+  })
   }
 
   componentWillReceiveProps(next) {
@@ -304,10 +328,10 @@ class ItemDetail extends React.Component {
                   )}
                 </div>
                 <div className="quickview-plus-minus">
-                  <div className="quickview-btn-cart">
-                    <a className="btn-hover-black" href="#">
+                  <div onClick={this.makeFriend.bind(this)} className="quickview-btn-cart">
+                    <Link to="/chat">
                       Contact
-                    </a>
+                    </Link>
                   </div>
                   <div className="quickview-btn-wishlist">
                     <a
@@ -319,9 +343,9 @@ class ItemDetail extends React.Component {
                     </a>
                   </div>
                   <div className="quickview-btn-wishlist">
-                    <NavLink to="/userItems" className="btn-hover">
+                    <Link to="/userItems" className="btn-hover">
                       <i className="ion-ios-contact" />
-                    </NavLink>
+                    </Link>
                   </div>
                   
                 </div>

@@ -18,6 +18,7 @@ urlpatterns = [
     path("userInfo/", getUserInfo.as_view(), name="userInfo"),
     path("items/", ItemsWithImages.as_view(), name="ItemsWithImages "),
     path("vv/", UserLikesTest.as_view(), name="UserLikesTest, ChatUser"),
+    # path("chatuser/", ChatUser.as_view(), name="ChatUser"),
     path("recommendation/",  user_recommendation_list.as_view(),
          name="recommendation"),
     path("reviews/", Reviewss.as_view(), name="review"),

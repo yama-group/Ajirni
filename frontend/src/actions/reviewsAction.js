@@ -10,12 +10,15 @@ export const getReviews = itemId => dispatch => {
   );
 };
 
-export const postReviews = dispatch => {
-  axios.post('reviews/').then(data => 
-    dispatch({
-      type: GET_REVIEWS,
-      payload: data.data
-    })
-  );
+export const postReviews = addedReview => dispatch => {
+  console.log(addedReview)
+  axios.post("/reviews/", addedReview)
+  
+  // .then(data => 
+  //   dispatch({
+  //     type: GET_REVIEWS,
+  //     payload: data.data
+  //   })
+  // );
 };
 

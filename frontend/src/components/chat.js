@@ -3,72 +3,98 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUserInfo } from "../actions/UserItemsAction.js";
 import axios from "axios";
+import request  from "request";
+import {apiKey,appID,userId,username} from "./config"
+
+
 class Chat extends Component {
   constructor(props) {
     super(props);
     //UID sender Id
     //RId reciver Id
     this.state = {
-      messages: ["ok"],
+      chat: ["ok"],
       message: "",
       UID: "eedddee",
-      RID: "SUPERHERO2"
+      RID: "SUPERHERO2",
+      owners:[]
     };
     this.onChange = this.onChange.bind(this);
     this.sendmsg = this.sendmsg.bind(this);
   }
   componentWillMount() {
-    var appID = "4446a56d977929";
-    var apiKey = "8a581b5950e68554c53f56bf8b083e543d4df5d1";
-    // this.setState({ UID: this.props.username, RID: this.props.username });
-    var request = require("request");
+    
 
-    var user = {
-      role: this.props.username,
-      name: this.props.username
-    };
+    this.setState({
+      RID:this.props.userId
+    })
+
+
 
     CometChat.init(appID).then(
       () => {
-        console.log("Initialization completed successfully");
-        // login function.
-        // axios
-        //   .post("https://api.cometchat.com/v1.6/users", user, {
-        //     headers: {
-        //       apikey: "d444297f6c2cf9cab3f48ecba60eef1ebba9cbca",
-        //       appid: "4446a56d977929",
-        //       metadata: {},
-        //       "content-type": "application/json"
-        //     }
-        //   })
-        //   .then(res => {
-        //     return res.json();
-        //   })
-        //   .then(rees => console.log(rees));
+        
+        
 
-        this.loginChat(this.state.UID, apiKey);
+
+        console.log("Initialization completed successfully");
+       
+        
       },
       error => {
         console.log("Initialization failed with error:", error);
       }
-    );
+    ).then(()=>{
+     
+      var options = {
+        method: 'POST',
+        url: 'https://api.cometchat.com/v1.6/users',
+        headers: {
+          apikey: 'd2b55cf8dc958dc80cfdd60bf8e3d2a5df8fe4cf',
+          appid: '44982b6860ce08',
+          'content-type': 'application/json',
+        },
+        body: `{"uid":"${userId}","name":"${username}"}`
+      };
+      
+      request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+      
+        console.log(body,"hiii");
+
+    }
+  )
+    }).then(()=>{
+      this.loginChat(userId, apiKey);
+    });
+
+    // this.recivemsg("SUPERHERO1SUPERHERO1SUPERHERO1");
     this.recivemsg("SUPERHERO1SUPEaaRHERO1SUPERHERO1");
   }
+
+  
   loginChat(UID, apiKey) {
-    CometChat.login(UID, apiKey).then(
+    CometChat.login(userId, apiKey).then(
       user => {
         console.log("Login Successful:", { user });
       },
       error => {
         console.log("Login failed with exception:", { error });
+      
+        
       }
+
     );
   }
+  
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
+
+
+
   sendmsg() {
     var receiverID = this.state.RID;
     var messageText = this.state.message;
@@ -86,29 +112,39 @@ class Chat extends Component {
     );
     CometChat.sendMessage(textMessage).then(
       message => {
-        console.log(this.state.messages);
-        var temp = this.state.messages;
-        this.setState({
-          messages: [...temp, message.data.text]
-        });
-        console.log();
+        
         console.log("Message sent successfully:", message);
+        
       },
       error => {
         console.log("Message sending failed with error:", error);
       }
-    );
+    ).then(()=>{
+      console.log("listen")
+      var listenerID = "18";
+      CometChat.addMessageListener(
+        listenerID,
+        new CometChat.MessageListener({
+          onTextMessageReceived: message => {
+            console.log(message)
+            this.setState({
+              chat: [...this.state.chat, message.data.text]
+            });
+          }
+        })
+      );
+    });
   }
-  recivemsg(listenerID) {
-    // var listenerID = "UNIQUE_LISTENER_ID";
+
+  recivemsg() {
+     var listenerID = "13";
     CometChat.addMessageListener(
       listenerID,
       new CometChat.MessageListener({
         onTextMessageReceived: message => {
           this.setState({
-            messages: [...this.state.messages, message.data.text]
+            chat: [...this.state.chat, message.data.text]
           });
-          //   console.log("Message received successfully:", message);
         }
       })
     );
@@ -122,7 +158,7 @@ class Chat extends Component {
         <input type="text" name="message" onChange={this.onChange} />
         <input type="button" name="bmsg" value="ok" onClick={this.sendmsg} />
         <div>
-          {this.state.messages.map(msg => (
+          {this.state.chat.map(msg => (
             <div className={msg === "r" ? "testingr" : "testingl"}>{msg}</div>
           ))}
         </div>
@@ -132,7 +168,7 @@ class Chat extends Component {
 }
 
 const mapStateToProps = state => ({
-  userId: state.itemDetails.item.user
+  userId: state.itemDetails.item.user 
 });
 
 export default connect(

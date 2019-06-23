@@ -30,6 +30,10 @@ class Chat extends Component {
 
     CometChat.init(appID).then(
       () => {
+        
+        
+
+
         console.log("Initialization completed successfully");
         // login function.
         // axios
@@ -54,6 +58,8 @@ class Chat extends Component {
     );
     this.recivemsg("SUPERHER2SUPERHER2SUPERHER2");
   }
+
+  
   loginChat(UID, apiKey) {
     CometChat.login(UID, apiKey).then(
       user => {
@@ -61,14 +67,21 @@ class Chat extends Component {
       },
       error => {
         console.log("Login failed with exception:", { error });
+      
+        
       }
+
     );
   }
+  
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
+
+
+
   sendmsg() {
     var receiverID = this.state.RID;
     var messageText = this.state.message;
@@ -113,6 +126,20 @@ class Chat extends Component {
       })
     );
   }
+
+  // recivemsg() {
+  //    var listenerID = "13";
+  //   CometChat.addMessageListener(
+  //     listenerID,
+  //     new CometChat.MessageListener({
+  //       onTextMessageReceived: message => {
+  //         this.setState({
+  //           chat: [...this.state.chat, message.data.text]
+  //         });
+  //       }
+  //     })
+  //   );
+  // }
   render() {
     return (
       <div>
