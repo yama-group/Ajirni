@@ -4,7 +4,8 @@ const initialState = {
   items: [],
   oneItem: {},
   category_id: window.localStorage.getItem("category_id") || 2,
-  user_id: 1
+  user_id: 1,
+  confirm:false
 };
 
 export default function(state = initialState, action) {

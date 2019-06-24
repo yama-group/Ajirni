@@ -47,6 +47,9 @@ class RealEstate extends Component {
 
   handleImgUpload() {
     // console.log("ffff");
+    this.setState({
+      alert:true
+    })
     const { image } = this.state;
     if (image !== null) {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -72,10 +75,7 @@ class RealEstate extends Component {
                 alert: false,
                 message: "uploaded"
               });
-              setTimeout(
-                () => this.setState({ alert: false, message: "" }),
-                3000
-              );
+             
             });
         }
       );

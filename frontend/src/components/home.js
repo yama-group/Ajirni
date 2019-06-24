@@ -3,17 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { search } from "../actions/itemAction";
 import { Alert } from "reactstrap";
-// import car from "../images/cars.png"
-// import Sports from "../images/Sports.png"
-// import RealEstate from "../images/RealEstates.png"
-// import HouseHolds from "../images/HouseHolds.png"
-// import IndustrialTools from "../images/tools.png"
-// import EventEquipments from "../images/events.png"
-// import Others from "../images/otherThingsEdited.png"
-// import kite from "../images/kite.jpg"
+import AliceCarousel from 'react-alice-carousel';
+import "./alice-carousel.css";
+import Slider from "./slider"
 import RandomUsers from './randomUsers'
-// import Carousel from "./categorySlides"
-// import Item from "./categorySlides"
+
 import {
   BrowserRouter as Router,
   Route,
@@ -48,7 +42,7 @@ class Home extends Component {
     // console.log(c);
     if (["1", "2", "3", "4", "5", "6", "7"].includes(c)) {
       // console.log("e.target.name");
-      this.props.search("category_id=" + c);
+      this.props.search("category_id=" + c,c);
     }
   }
 
@@ -59,6 +53,8 @@ class Home extends Component {
     // this.props.postItem(item);
   }
 
+ 
+
   render() {
     return (
       <div>
@@ -66,20 +62,27 @@ class Home extends Component {
           className="breadcrumb-area pt-205 pb-210"
           id="navnav" //   style={"background-image: url(assets/img/bg/breadcrumb.jpg)"}
           /> */}
-        <img src={'https://www.savannah-group.com/wp-content/uploads/2017/05/1920-x-500-image-7.jpg'} alt="" />
+        {/* <img style={{backgroundSize:"cover"}} src={'https://www.savannah-group.com/wp-content/uploads/2017/05/1920-x-500-image-7.jpg'} alt="" /> */}
 
         <br />
         <br />
         <br />
         <br />
-        <div className="h1">
-          <h1>
-            Categories
-          </h1>
-        </div>
+        <div className="logo">
+                      <Link to="/">
+                        <h3>
+                          <b>Categories</b>
+                        </h3>
+                      </Link>
+                    </div>
+          
+          
+      
         <br />
+        <Slider search={this.search.bind(this)}/>
         <div className="container" />
-        <div className="categories">
+
+        {/* <div className="categories">
 
 
           <div className="category"
@@ -153,7 +156,7 @@ class Home extends Component {
           </div>
 
 
-        </div>
+        </div> */}
         <br />
         <br />
         <br />

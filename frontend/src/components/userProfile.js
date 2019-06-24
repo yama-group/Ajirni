@@ -19,7 +19,8 @@ class UserProfile extends React.Component {
   };
 
   componentWillMount() {
-    this.props.fetchUser(this.props.userId);
+    const userId = window.localStorage.getItem("userId")
+    this.props.fetchUser(userId);
   }
 
   handleInputChange(event) {
@@ -34,10 +35,11 @@ class UserProfile extends React.Component {
 
   handleClose() {
     var id = this.state.itemSelected.id;
-    delete this.state.itemSelected.id;
+    var old = this.state.itemSelected
+    delete old.id;
     console.log(id);
-    this.props.updateItem(this.state.itemSelected, id);
-
+    this.props.updateItem(old, id);
+    
     if (this.state.itemSelected.category === 3) {
       this.setState({ show3: false });
     } else if (this.state.itemSelected.category === 2) {
@@ -80,6 +82,29 @@ class UserProfile extends React.Component {
     );
   }
 
+
+  handleCloseWo(index) {
+    var that = this;
+    console.log(this.state.items[index])
+    this.setState(
+      {
+        itemSelected: this.state.itemSelected
+      },
+      () => {
+        if (that.state.itemSelected.category === 3) {
+          that.setState({ show3: false });
+        } else if (that.state.itemSelected.category === 2) {
+          that.setState({ show2: false });
+        } else {
+          that.setState({ show1: false});
+        }
+      }
+    );
+  }
+
+
+  
+
   componentWillReceiveProps(next) {
     if (next.items.length > 0) {
       this.setState({
@@ -102,6 +127,10 @@ class UserProfile extends React.Component {
   }
 
   render() {
+    const years = ["Older than 1980"];
+    for (let i = 1980; i < 2021; i++) {
+      years.unshift(i);
+    }
     return (
       <div >
         <>
@@ -124,7 +153,7 @@ class UserProfile extends React.Component {
 
                 <div className="col-lg-4">
                   Description:{" "}
-                  <input
+                  <textarea
                     onChange={this.handleInputChange.bind(this)}
                     name="description"
                     value={this.state.itemSelected.description}
@@ -132,13 +161,15 @@ class UserProfile extends React.Component {
                   />
                 </div>
                 <div className="col-lg-4">
-                  Condition:{" "}
-                  <input
+                  Condition:
+                  <select
+                    name="condition"
                     value={this.state.itemSelected.condition}
                     onChange={this.handleInputChange.bind(this)}
-                    name="condition"
-                    type="text"
-                  />
+                  >
+                    <option value="New">New</option>
+                    <option value="Used">Used</option>
+                  </select>
                 </div>
                 <div className="col-lg-4">
                   Location:{" "}
@@ -168,20 +199,21 @@ class UserProfile extends React.Component {
                   />
                 </div>
                 <div className="col-lg-4">
+                  Status:
                   <select
+                    name="status"
                     value={this.state.itemSelected.status}
                     onChange={this.handleInputChange.bind(this)}
                   >
-                    <option value="grapefruit">Grapefruit</option>
-                    <option value="lime">Lime</option>
-                    <option value="coconut">Coconut</option>
-                    <option value="mango">Mango</option>
+                    <option value="available">Available</option>
+                    <option value="unavailable">Unavailable</option>
                   </select>
                 </div>
+                
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              <Button variant="secondary" onClick={this.handleCloseWo.bind(this)}>
                 Close
               </Button>
               <Button variant="primary" onClick={this.handleClose.bind(this)}>
@@ -215,7 +247,7 @@ class UserProfile extends React.Component {
                 </div>
                 <div className="col-lg-4">
                   Description:{" "}
-                  <input
+                  <textarea
                     onChange={this.handleInputChange.bind(this)}
                     name="description"
                     value={this.state.itemSelected.description}
@@ -223,13 +255,15 @@ class UserProfile extends React.Component {
                   />
                 </div>
                 <div className="col-lg-4">
-                  Condition:{" "}
-                  <input
-                    onChange={this.handleInputChange.bind(this)}
+                  Condition:
+                  <select
                     name="condition"
                     value={this.state.itemSelected.condition}
-                    type="text"
-                  />
+                    onChange={this.handleInputChange.bind(this)}
+                  >
+                    <option value="New">New</option>
+                    <option value="Used">Used</option>
+                  </select>
                 </div>
                 <div className="col-lg-4">
                   Car Make:{" "}
@@ -242,12 +276,17 @@ class UserProfile extends React.Component {
                 </div>
                 <div className="col-lg-4">
                   Year Manufactured:{" "}
-                  <input
-                    onChange={this.handleInputChange.bind(this)}
-                    name="year_manufactured"
-                    value={this.state.itemSelected.year_manufactured}
-                    type="text"
-                  />
+                  <select
+                  name="year_manufactured"
+                  value={this.state.itemSelected.year_manufactured}
+                  onChange={this.handleInputChange.bind(this)}
+                  >
+                  {years.map((year, i) => (
+                        <option key={i} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                  </select>
                 </div>
                 <div className="col-lg-4">
                   No.Killometers:{" "}
@@ -255,17 +294,21 @@ class UserProfile extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     name="no_killometers"
                     value={this.state.itemSelected.no_killometers}
-                    type="text"
+                    type="number"
                   />
                 </div>
                 <div className="col-lg-4">
-                  Transmission:{" "}
-                  <input
+                  Fuel:
+                  <select
+                    name="fuel"
+                    value={this.state.itemSelected.fuel}
                     onChange={this.handleInputChange.bind(this)}
-                    name="transmission"
-                    value={this.state.itemSelected.transmission}
-                    type="text"
-                  />
+                  >
+                   <option value="diesel">Diesel</option>
+                      <option value="gasoline">Gasoline</option>
+                      <option value="hybrid">Hybrid</option>
+                      <option value="electric">Electric</option>
+                  </select>
                 </div>
                 <div className="col-lg-4">
                   Location:{" "}
@@ -291,7 +334,7 @@ class UserProfile extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     name="quantity"
                     value={this.state.itemSelected.quantity}
-                    type="text"
+                    type="number"
                   />
                 </div>
                 <div className="col-lg-4">
@@ -308,7 +351,7 @@ class UserProfile extends React.Component {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              <Button variant="secondary" onClick={this.handleCloseWo.bind(this)}>
                 Close
               </Button>
               <Button variant="primary" onClick={this.handleClose.bind(this)}>
@@ -341,7 +384,7 @@ class UserProfile extends React.Component {
                 </div>
                 <div className="col-lg-4">
                   Description:{" "}
-                  <input
+                  <textarea
                     onChange={this.handleInputChange.bind(this)}
                     name="description"
                     value={this.state.itemSelected.description}
@@ -349,13 +392,15 @@ class UserProfile extends React.Component {
                   />
                 </div>
                 <div className="col-lg-4">
-                  Condition:{" "}
-                  <input
-                    onChange={this.handleInputChange.bind(this)}
+                  Condition:
+                  <select
                     name="condition"
                     value={this.state.itemSelected.condition}
-                    type="text"
-                  />
+                    onChange={this.handleInputChange.bind(this)}
+                  >
+                    <option value="New">New</option>
+                    <option value="Used">Used</option>
+                  </select>
                 </div>
                 <div className="col-lg-4">
                   No.Rooms:{" "}
@@ -363,7 +408,7 @@ class UserProfile extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     name="no_rooms"
                     value={this.state.itemSelected.no_rooms}
-                    type="text"
+                    type="number"
                   />
                 </div>
                 <div className="col-lg-4">
@@ -372,7 +417,7 @@ class UserProfile extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     name="no_bathrooms"
                     value={this.state.itemSelected.no_bathrooms}
-                    type="text"
+                    type="number"
                   />
                 </div>
                 <div className="col-lg-4">
@@ -381,17 +426,19 @@ class UserProfile extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     name="surface_area"
                     value={this.state.itemSelected.surface_area}
-                    type="text"
+                    type="number"
                   />
                 </div>
                 <div className="col-lg-4">
                   Furnished:{" "}
-                  <input
-                    onChange={this.handleInputChange.bind(this)}
+                  <select
                     name="furnished"
                     value={this.state.itemSelected.furnished}
-                    type="text"
-                  />
+                    onChange={this.handleInputChange.bind(this)}
+                  >
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
                 </div>
                 <div className="col-lg-4">
                   Floor.No:{" "}
@@ -399,7 +446,7 @@ class UserProfile extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     name="floor_no"
                     value={this.state.itemSelected.floor_no}
-                    type="text"
+                    type="number"
                   />
                 </div>
                 <div className="col-lg-4">
@@ -417,7 +464,7 @@ class UserProfile extends React.Component {
                     onChange={this.handleInputChange.bind(this)}
                     name="quantity"
                     value={this.state.itemSelected.quantity}
-                    type="text"
+                    type="number"
                   />
                 </div>
                 <div className="col-lg-4">
@@ -434,7 +481,7 @@ class UserProfile extends React.Component {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              <Button variant="secondary" onClick={this.handleCloseWo.bind(this)}>
                 Close
               </Button>
               <Button variant="primary" onClick={this.handleClose.bind(this)}>

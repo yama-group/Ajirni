@@ -31,8 +31,9 @@ class Tools extends Component {
   }
 
   componentWillMount() {
+    const userId= window.localStorage.getItem("userId")
     this.setState({
-      user_id: this.props.user_id
+      user_id: userId
     });
   }
   handleImgChange(e) {
@@ -116,6 +117,10 @@ class Tools extends Component {
     });
      console.log(item);
     this.props.postItem(item);
+    
+    setTimeout(()=>{
+      this.props.history.push("/user")
+    },500)
   }
   render() {
     return (

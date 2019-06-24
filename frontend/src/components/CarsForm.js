@@ -293,10 +293,10 @@ class CarsForm extends Component {
                       value={this.state.fuel}
                       required
                     >
-                      <option value="New">Diesel</option>
-                      <option value="Used">Gasoline</option>
-                      <option value="Used">Hybrid</option>
-                      <option value="Used">Electric</option>
+                      <option value="diesel">Diesel</option>
+                      <option value="gasoline">Gasoline</option>
+                      <option value="hybrid">Hybrid</option>
+                      <option value="electric">Electric</option>
                     </select>
                 
                 </div>

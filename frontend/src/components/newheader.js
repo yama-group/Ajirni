@@ -194,28 +194,26 @@ class Header extends Component {
             
             
             
-           {this.state.active? <div  style={{borderStyle: "solid",
-                                             borderWidth: "0px 0px 0px 1px",
-                                             borderColor:"red"}} 
-                    className="cur-lang-acc-active inside">
-                <div className="wrap-sidebar">
-                    <div className="sidebar-nav-icon">
+           {this.state.active? <div className="cur-lang-acc-active inside">
+                <div style={{backgroundImage:"url('./images/gabriela-rodriguez-660479-unsplash.jpg')",backgroundSize:"cover"}} className="wrap-sidebar">
+                    <div style={{marginTop:"-10%"}} className="sidebar-nav-icon">
                         <button onClick={this.changeClassName.bind(this)} className="op-sidebar-close"><span className="ion-android-close"></span></button>
                     </div>
-                    <div className="cur-lang-acc-all">
-                        <div className="single-currency-language-account">
-                            <div className="cur-lang-acc-title">
-                                <h4><span>My Account:</span></h4>
-                                <div class="cart-img">
-                                       {token? <a href="user"><img style={{width:"90px",height:"88px"}} src={this.props.user.image_url} alt=""/></a>:""}
+                    <div  className="cur-lang-acc-all">
+                        <div  >
+                            <div  className="cur-lang-acc-title">
+                                <h3 style={{color:"white"}}>AJIRNI.</h3>
+                                <div  class="cart-img">
+                                       {token? <a href="user"><img style={{width:"90px",height:"88px",borderRadius:"50px"}} src={this.props.user.image_url} alt=""/></a>:""}
                                     </div>
                             </div>
                             
+                            <div ><h3 style={{marginLeft:"-7%",color:"white",marginTop:"5%"}}>Welcome {this.props.user.first_name}</h3></div>
                             <div className="cur-lang-acc-dropdown">
                                 <ul>  
-                                    {!token ? <li><a href="/signup">register</a></li>:""}
-                                    {token ? <li><a onClick={this.logOut.bind(this)} href="/signin">Log Out</a></li>:""}
-                                   {!token ? <li><a href="/signin">Sign In </a></li>:<li><a href="/user">Profile</a></li>}
+                                    {!token ? <li><a style={{color:"white"}} href="/signup">Register</a></li>:""}
+                                    {token ? <li><a style={{color:"white"}} onClick={this.logOut.bind(this)} href="/signin">Log Out</a></li>:""}
+                                   {!token ? <li><a style={{color:"white"}} href="/signin">Sign In </a></li>:<li><a style={{color:"white"}} href="/user">Profile</a></li>}
                                 </ul>
                             </div>
                         </div>

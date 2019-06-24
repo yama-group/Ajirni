@@ -17,6 +17,7 @@ export const fetchUser = (para = 7) => dispatch => {
     })
     .then(user => {
       axios.get(`/userItems/?user_id=${user.id}`).then(items => {
+       
         dispatch({
           type: FETCH_USER_ITEMS,
           items: items.data
@@ -41,7 +42,7 @@ export const deleteItem = id => dispatch => {
   axios
     .delete(`/rud/${id}`)
     .then(deleted => {
-      fetchUser(1);
+      NotificationManager.error(`Item deleted.`)
     })
     .catch(err => {
       console.log(err);

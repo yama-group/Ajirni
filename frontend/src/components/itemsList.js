@@ -14,7 +14,7 @@ class itemsList extends Component {
     itemsData: []
   };
 
-  componentDidMount(){
+  componentWillMount(){
     const category_id= window.localStorage.getItem("category_id")
     console.log(category_id)
     axios

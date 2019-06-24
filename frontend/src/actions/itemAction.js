@@ -19,6 +19,7 @@ export const postItem = item => dispatch => {
       });
 
       NotificationManager.info("New Item added.");
+      
     })
     .catch(error => {
       console.log(error);

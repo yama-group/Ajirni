@@ -23,14 +23,14 @@ import Likes from "./components/likes";
 import chat from "./components/chat";
 import chat2 from "./components/chat2";
 import ProtectedRoute from "./components/protect";
-// import  Carousel  from "./components/categorySlides";
+import SimpleSlider from "./components/slider";
 import Alerts from "./components/alerts";
 import Chat from "./components/newChat"
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-notifications/lib/notifications.css';
 import Reviews from "./components/reviews";
 import RandomUsers from './components/randomUsers'
-
+var items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const alertOptions = {
   position: positions.UP_CENTER,
   timeout: 50000,
@@ -92,7 +92,7 @@ class App extends React.Component {
                 exact
                 component={Tools}
               />
-              
+              <Route path="/slider" component={SimpleSlider} />
               <Route path="/Category" component={ItemsList} />
               <Route path="/itemDetail" component={ItemDetail} />
               <Route path="/carsForm" exact component={CarsForm} />
