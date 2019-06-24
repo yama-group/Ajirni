@@ -1,6 +1,6 @@
 # Ajirni
 App for renting items, such as, cars, flats, tools, .....etc. 
-Click [here](_APPLICATION-FLOW.md) for more information about how to use the Ajirni Application.
+- Click [here](_APPLICATION-FLOW.md) for more information about how to use the Ajirni Application.
 
 ## Team
 
@@ -23,9 +23,9 @@ Click [here](_APPLICATION-FLOW.md) for more information about how to use the Aji
 
 ## Usage
 
-> [Fork](https://github.com/yama-group/Ajirni) the repo to your account 
-> Clone the repo to your computer
-> add the remote link https://github.com/yama-group/Ajirni
+- [Fork](https://github.com/yama-group/Ajirni) the repo to your account 
+- Clone the repo to your computer
+- add the remote link https://github.com/yama-group/Ajirni
 
 ## Requirements
 
