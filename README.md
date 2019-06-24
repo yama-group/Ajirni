@@ -70,7 +70,7 @@ npm start
 
 ## Contributing
 
-See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## More Details about the Project New Release
 
