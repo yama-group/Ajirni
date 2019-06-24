@@ -232,21 +232,21 @@ class Reviewss(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
 
-        # item_id = self.request.data.get("item_id", None)
-        # userId = self.request.data.get("userId", None)
-        # username = self.request.data.get("username", None)
-        # stars_Review = self.request.data.get("rating", None)
-        # text_Review = self.request.data.get("review", None)
-        # item = Items.objects.get(id=item_id)
-        # user = CustomUser.objects.get(id=userId)
+        text_Review = self.request.data.get("review", None)
+        stars_Review = self.request.data.get("rating", None)
+        item_id = self.request.data.get("item_id", None)
+        userId = self.request.data.get("userId", None)
+        username = self.request.data.get("username", None)
+        item = Items.objects.get(id=item_id)
+        user = CustomUser.objects.get(id=userId)
         print(self.request)
-        # review = Reviews(item = item,
-        #                  user = user, 
-        #                  user_name = username,
-        #                  starsReview = stars_Review,
-        #                  textReview = text_Review
-        #                  )
-        # review.save()
+        review = Reviews(textReview = text_Review,
+                         starsReview = stars_Review,
+                         item = item_id,
+                         user = userId, 
+                         user_name = username,
+                         )
+        review.save()
         update_clusters()
 
 
