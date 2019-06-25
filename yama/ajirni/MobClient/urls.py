@@ -4,8 +4,8 @@ from .views import (CreateItem, Search, LikeItem, ItemsRud, ItemsList, RegisterA
 
 urlpatterns = [
     path('api/auth', include('knox.urls')),
-    path('api/auth/register', RegisterAPI.as_view()),
-    path('api/auth/login', LoginAPI.as_view()),
+    path('api/auth/register', RegisterAPI.as_view(), name="register"),
+    path('api/auth/login', LoginAPI.as_view(), name="login"),
     path('additem/', CreateItem.as_view(), name="add"),
     path('rud/<int:pk>', ItemsRud.as_view(), name="rud"),
     # path('signUp/', signUp.as_view(), name="signUp"),
@@ -16,11 +16,10 @@ urlpatterns = [
     path("images/", GetImages.as_view(), name="images"),
     path("userItems/", getUserItems.as_view(), name="userItems"),
     path("userInfo/", getUserInfo.as_view(), name="userInfo"),
-    path("items/", ItemsWithImages.as_view(), name="ItemsWithImages "),
+    path("items/", ItemsWithImages.as_view(), name="ItemsWithImages"),
     path("vv/", UserLikesTest.as_view(), name="UserLikesTest, ChatUser"),
     # path("chatuser/", ChatUser.as_view(), name="ChatUser"),
     path("recommendation/",  user_recommendation_list.as_view(),
          name="recommendation"),
     path("reviews/", Reviewss.as_view(), name="review")
-
 ]

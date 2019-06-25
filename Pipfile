@@ -23,6 +23,11 @@ django-bootstrap3 = "*"
 drf-multiple-model = "*"
 requests = "*"
 sklearn = "*"
+pytest-django = "*"
+pytest-cov = "*"
+mixer = "*"
+pytest = "*"
+pytz = "*"
 
 [requires]
 python_version = "3.7"

@@ -16,8 +16,6 @@ import datetime
 # import requests
 
 # Register API
-
-
 class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
