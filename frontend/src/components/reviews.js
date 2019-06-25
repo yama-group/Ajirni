@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import { connect } from 'react-redux'
 import { getReviews, postReviews } from '../actions/reviewsAction'
 import { BrowserRouter as Router, Link } from "react-router-dom";
-
+import StarRatingComponent from 'react-star-rating-component';
 
 
 class Reviews extends Component {
@@ -15,8 +15,13 @@ class Reviews extends Component {
       rating: "",
       username: window.localStorage.getItem("username"),
       userId: window.localStorage.getItem("userId"),
-      review: ""
+      review: "",
+      rating: 1
     }
+  }
+
+  onStarClick(nextValue, prevValue, name) {
+    this.setState({rating: nextValue});
   }
   componentWillMount() {
     this.setState({ item_id: this.props.item_id }, () =>{
@@ -42,8 +47,10 @@ class Reviews extends Component {
   }
 
   render() {
+    const { rating } = this.state;
     return (
       <div>
+         
       <div id = "reviewScroll">
         {this.props.reviews.map( rev => {
           return(
@@ -68,13 +75,19 @@ class Reviews extends Component {
         <div>
           <br />
           <br />
-        <p>Add your Rating Here:</p>
-          <input type="radio" name="rating" value="1" onChange = {this.onChange.bind(this)}/> One Star  
-          <input type="radio" name="rating" value="2" onChange = {this.onChange.bind(this)}/> Two Star  
-          <input type="radio" name="rating" value="3" onChange = {this.onChange.bind(this)}/> Three Star  
-          <input type="radio" name="rating" value="4" onChange = {this.onChange.bind(this)}/> Four Star  
-          <input type="radio" name="rating" value="5" onChange = {this.onChange.bind(this)}/> Five Star  <br />
-          <br /> <br />
+          <div>
+        <h2>Rating from state: {rating}</h2>
+        <div style={{fontSize:"100px"}}>
+          <StarRatingComponent 
+        
+          name="rate1" 
+          starCount={5}
+          value={rating}
+          onStarClick={this.onStarClick.bind(this)}
+        
+        /></div>
+        
+      </div>
           Enter Review here...
           <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
             </textarea>
