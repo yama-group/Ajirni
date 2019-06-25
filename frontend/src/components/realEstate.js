@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { postItem } from "../actions/itemAction";
 import { storage } from "../firebase";
 import { Alert } from "reactstrap";
+import Loader from 'react-loader-spinner'
+
 class RealEstate extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +47,9 @@ class RealEstate extends Component {
 
   handleImgUpload() {
     // console.log("ffff");
+    this.setState({
+      alert:true
+    })
     const { image } = this.state;
     if (image !== null) {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -56,6 +61,9 @@ class RealEstate extends Component {
         },
         () => {
           // complete function ....
+          this.setState({
+            alert:true
+          })
           storage
             .ref("images")
             .child(image.name)
@@ -64,13 +72,10 @@ class RealEstate extends Component {
               // console.log("okk");
               this.setState({
                 imgUrl: [...this.state.imgUrl, imgUrl],
-                alert: true,
+                alert: false,
                 message: "uploaded"
               });
-              setTimeout(
-                () => this.setState({ alert: false, message: "" }),
-                3000
-              );
+             
             });
         }
       );
@@ -125,14 +130,17 @@ class RealEstate extends Component {
     });
     // console.log(item);
     this.props.postItem(item);
+    setTimeout(()=>{
+      this.props.history.push("/user")
+    },500)
   }
   render() {
     return (
-      <div>
-        <div className="col-lg-6 col-md-12 col-12">
+      <div  style={{marginLeft:"25%",marginBottom:"2%"}}  className="col-lg-6 col-sm-6 col-xs-12" >
+        <div  className="blog-area pt-100 pb-100">
           <form onSubmit={this.onSubmit}>
             <div className="checkbox-form">
-              <h3>Real Estate Form</h3>
+              <h3>Add Realestate </h3>
               <div className="row">
                 <div className="col-md-6">
                   <div className="checkout-form-list">
@@ -252,7 +260,7 @@ class RealEstate extends Component {
                 </div>
 
                 <div className="col-md-6">
-                  <div className="country-select">
+                  <div className="checkout-form-list">
                     <label>
                       Condition <span className="required">*</span>
                     </label>
@@ -269,7 +277,7 @@ class RealEstate extends Component {
                 </div>
 
                 <div className="col-md-6">
-                  <div className="country-select">
+                  <div className="checkout-form-list">
                     <label>
                       furnished <span className="required">*</span>
                     </label>
@@ -286,8 +294,8 @@ class RealEstate extends Component {
                 </div>
 
                 <div className="col-md-6">
-                  <div className="country-select">
-                    <label> Avilable Directly</label>
+                  <div className="checkout-form-list">
+                    <label> Availability</label>
                     <select
                       name="status"
                       value={this.state.status}
@@ -333,13 +341,12 @@ class RealEstate extends Component {
 
                 <div className="col-md-6">
                   {this.state.alert ? (
-                    <Alert
-                      color="info"
-                      isOpen={this.state.alert}
-                      toggle={() => console.log("ok")}
-                    >
-                      {this.state.message}
-                    </Alert>
+                     <Loader 
+                     type="Puff"
+                     color="#7A0400"
+                     height="65"	
+                     width="65"
+                  />
                   ) : (
                     ""
                   )}
