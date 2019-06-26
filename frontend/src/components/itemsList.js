@@ -4,6 +4,8 @@ import { getAllItems, itemId } from "../actions/itemsActions";
 import { search } from "../actions/itemAction";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
+import Loader from 'react-loader-spinner'
+import { Card,Button } from 'react-bootstrap'
 class itemsList extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -46,7 +48,14 @@ class itemsList extends Component {
           <div className="container">
             <div className="row">
               {this.state.itemsData.length === 0 ? (
-                <h3>No Items</h3>
+                <div style={{marginLeft:"45%"}}>
+                <Loader
+                type="ThreeDots"
+                color="#7A0400"
+                height="100"	
+                width="100"
+                
+                /></div>
               ) : (
                 this.state.itemsData.map(item => {
                   return (
@@ -56,14 +65,58 @@ class itemsList extends Component {
                     >
                       <div className="single-blog mb-50">
                         <div className="blog-img">
-                          <a>
-                            <img src={item.images.length>0 ?item.images[0].img_url: "http://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg"} alt="" />
-                          </a>
+                          
+                          <Card style={{ width: '18rem' }}>
+                          <Link onClick={() => this.props.itemId(item.id)} to="/itemDetail">
+                           <Card.Img style={{height:"200px"}} variant="top" src={item.images.length>0 ?item.images[0].img_url: "http://ppc.tools/wp-content/themes/ppctools/img/no-thumbnail.jpg"} />
+                           </Link>
+                            <Card.Body>
+                              <Card.Title>{item.name}</Card.Title>
+                                <Card.Text>
+                                  <p>{item.description.slice(0,50)+"..."}</p>
+                                 {item.category ===3? <div 
+                                 
+                                 >
+                                   
+                                    <img style={{width:"24px",height:"24px",paddingRight:"4px"}} src="https://liv.rent/static/media/Bath.119f2250.svg" /> 
+                                  
+                                  <b style={{paddingRight:"7%"}}>{item.no_bathrooms} Baths</b>
+                                  <img style={{width:"24px",height:"24px",paddingRight:"4px"}} src="https://liv.rent/static/media/Bed.cf820750.svg" />
+                                  <b>{item.no_rooms} Rooms</b>
+                                  <i class="im im-location"></i><b>{item.location}</b>
+                                  <hr></hr>
+                                  <strong style={{color:"#7A0400"}}>${item.price}/Month</strong>
+                                  
+                                  </div>:""}
+                                  {item.category === 2?
+                                  <div>
+                                    <i class="im im-calendar"></i><b style={{paddingRight:"7px"}}> {item.year_manufactured}</b>
+                                    <i class='fas fa-car-alt' style={{fontSize:"24px"}}></i> <b>{item.car_make}</b>
+                                    <i class="im im-location"></i><b>{item.location}</b>
+                                    <hr></hr>
+                                  <strong style={{color:"#7A0400"}}>${item.price}/Day</strong>
+                                    </div>:""
+
+                                  }
+
+                                  {
+                                    item.category !==2 && item.category !==3 ?<div>
+                                    <i class="im im-location"></i><b>{item.location}</b>
+                                    <hr></hr>
+                                  <strong style={{color:"#7A0400"}}>${item.price}/Day</strong>
+                                    </div> :""
+                                  }
+                                </Card.Text>
+                                {/* <Button variant="primary">Go somewhere</Button> */}
+                            </Card.Body>
+                        </Card>
+
                         </div>
-                        <div
+                        {/* <div
                           className="blog-info"
                           onClick={() => this.props.itemId(item.id)}
                         >
+                          
                           <Link to="/itemDetail">
                             <h4>{item.name}</h4>
                           </Link>
@@ -73,7 +126,7 @@ class itemsList extends Component {
                             </ul>
                           </div>
                           <p>{item.describtion}</p>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   );
