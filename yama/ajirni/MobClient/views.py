@@ -216,8 +216,14 @@ class UserLikesTest(generics.ListCreateAPIView):
 
 class Reviewss(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
-    queryset = Reviews.objects.all()
+    # queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
+
+
+    def get_queryset(self):
+        item_id = self.request.query_params.get('item_id', None)
+        queryset = Reviews.objects.filter(item=item_id)
+        return queryset
 
 
    

@@ -15,7 +15,7 @@ export const getAllItems = category => dispatch => {
 };
 
 export const itemId = id => dispatch => {
-  
+  window.localStorage.setItem("item_id",id)
   dispatch({
     type: Item_id,
     payload: id
