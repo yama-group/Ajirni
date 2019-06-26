@@ -1,3 +1,5 @@
+/* eslint-disable default-case */
+/* eslint-disable no-fallthrough */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {Component} from "react"
 import { connect } from 'react-redux'
@@ -56,6 +58,9 @@ class Reviews extends Component {
    }
    console.log(addedReview)
    this.props.postReviews(addedReview)
+   this.setState({
+     reviews:[...this.state.reviews,addedReview]
+   })
   }
   
 
@@ -63,51 +68,7 @@ class Reviews extends Component {
     const { rating } = this.state;
     const repeat =<i className="fa fa-star"></i>
     return (
-      // <div>
-         
-     
-      //   <div>
-          
-      //     <div>
-       
-      // </div>
-      //     Enter Review here...
-      //     <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
-      //       </textarea>
-      //   </div>
-      //   <div className="quickview-plus-minus">
-        
-      //     <StarRatingComponent 
-      //    style={{width:"250px"}}
-      //     name="rate1" 
-      //     starCount={5}
-      //     value={rating}
-      //     onStarClick={this.onStarClick.bind(this)}
-      //     editing={true}
-      //   />
-          
-      //   <br/>
-      //   <div className="quickview-btn-cart">
-      //               <Link to="/chat">
-      //                 Contact
-      //               </Link>
-      //             </div>
-          
-         
-      //    </div>
-         
-      //   {this.state.reviews.map( rev => {
-      //     return(
-      //       <div>
-      //         <p><strong>{rev.user_name.toUpperCase()}</strong></p>
-      //          <img src={'./images/' + rev.starsReview + ".png"}  alt="" style= {{width:"100px",marginTop:"-45px",}}/>
-      //         <p>{rev.textReview}
-      //         <br /></p> 
-      //       </div>
-      //     )
-      //   })}
-        
-      // </div>
+      
 
       <section className="write-review py-5 bg-light" id="write-review">
     <div className="container">
@@ -119,19 +80,24 @@ class Reviews extends Component {
 		<hr/>
     {this.state.reviews.map((review)=>{
       let stars = ""
+      console.log(review.starsReview)
       // eslint-disable-next-line no-lone-blocks
       {switch(review.starsReview){
        case 1:
         stars=<i className="fa fa-star"></i>;
+        break;
         case 2:
         stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        break;
         case 3:
         stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        break;
         case 4:
         stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        break;
         case 5:
         stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
-        
+        break;
       }}
       return(
         <div className="row">
@@ -150,12 +116,12 @@ class Reviews extends Component {
           
       )
     })}
-		    
-		   
-		   
-		  
-		    
-		   
+
+
+
+
+
+
         </div>
         <div className=" col-md-8 my-5 py-5">
             <h6>Write your idea about this item:</h6>
@@ -164,7 +130,7 @@ class Reviews extends Component {
             <div className="quickview-plus-minus">
               
               <div className="quickview-btn-wishlist">
-              <StarRatingComponent 
+        <StarRatingComponent 
          style={{width:"250px"}}
           name="rate1" 
           starCount={5}
@@ -173,7 +139,7 @@ class Reviews extends Component {
           editing={true}
         />
         <br/>
-                <a href="#btn-hover" onClick={this.postReview.bind(this)} className="btn-hover">Write Reviews</a>
+                <a href="#btn-hover" onClick={this.postReview.bind(this)} className="btn-hover">Add Review</a>
                 </div>
               
               </div>
