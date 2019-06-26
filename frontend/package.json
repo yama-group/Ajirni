@@ -1,11 +1,5 @@
 {
   "name": "frontend",
-  "jest": {
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    },
-    "verbose": true
-  },
   "version": "0.1.0",
   "proxy": "http://localhost:8000",
   "private": true,
@@ -13,7 +7,6 @@
     "@babel/core": "^7.4.5",
     "@cometchat-pro/chat": "^1.7.0",
     "axios": "^0.19.0",
-    "babel-jest": "^24.8.0",
     "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",
     "enzyme": "^3.10.0",
@@ -46,7 +39,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --no-cache ",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -65,7 +58,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "^24.7.1",
+    "babel-jest": "^24.8.0",
     "npm-run-all": "^4.1.5",
     "redux-devtools-extension": "^2.13.8"
   }

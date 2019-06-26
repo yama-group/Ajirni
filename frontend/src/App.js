@@ -14,7 +14,7 @@ import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserProfile from "./components/userProfile";
 import { connect } from "react-redux";
-import {NotificationContainer} from 'react-notifications';
+import { NotificationContainer } from 'react-notifications';
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
@@ -38,9 +38,9 @@ const alertOptions = {
   // you can also just use 'scale'
   transition: transitions.SCALE
 };
- 
 
- 
+
+
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -51,11 +51,11 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
-        <NotificationContainer />
+          <NotificationContainer />
           <Router>
             <Header />
             <Alerts />
-            <div className="maincontainer">
+            <div class="maincontainer">
               <Route path="/" exact component={Home} />
               <ProtectedRoute
                 token={this.props.token}
@@ -71,7 +71,7 @@ class App extends React.Component {
                 exact
                 component={CarsForm}
               />
-               <ProtectedRoute
+              <ProtectedRoute
                 token={this.props.token}
                 userId={this.props.user_id}
                 path="/chat"
@@ -92,7 +92,7 @@ class App extends React.Component {
                 exact
                 component={Tools}
               />
-              
+
               <Route path="/Category" component={ItemsList} />
               <Route path="/itemDetail" component={ItemDetail} />
               <Route path="/carsForm" exact component={CarsForm} />
