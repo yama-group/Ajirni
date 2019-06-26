@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {Component} from "react"
 import { connect } from 'react-redux'
 import { getReviews, postReviews } from '../actions/reviewsAction'
@@ -60,54 +61,128 @@ class Reviews extends Component {
 
   render() {
     const { rating } = this.state;
+    const repeat =<i className="fa fa-star"></i>
     return (
-      <div>
+      // <div>
          
      
-        <div>
+      //   <div>
           
-          <div>
-        <h2>Rating from state: {rating}</h2>
-        <StarRatingComponent 
-        style={{fontSize:"50px"}}
+      //     <div>
+       
+      // </div>
+      //     Enter Review here...
+      //     <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
+      //       </textarea>
+      //   </div>
+      //   <div className="quickview-plus-minus">
+        
+      //     <StarRatingComponent 
+      //    style={{width:"250px"}}
+      //     name="rate1" 
+      //     starCount={5}
+      //     value={rating}
+      //     onStarClick={this.onStarClick.bind(this)}
+      //     editing={true}
+      //   />
+          
+      //   <br/>
+      //   <div className="quickview-btn-cart">
+      //               <Link to="/chat">
+      //                 Contact
+      //               </Link>
+      //             </div>
+          
+         
+      //    </div>
+         
+      //   {this.state.reviews.map( rev => {
+      //     return(
+      //       <div>
+      //         <p><strong>{rev.user_name.toUpperCase()}</strong></p>
+      //          <img src={'./images/' + rev.starsReview + ".png"}  alt="" style= {{width:"100px",marginTop:"-45px",}}/>
+      //         <p>{rev.textReview}
+      //         <br /></p> 
+      //       </div>
+      //     )
+      //   })}
+        
+      // </div>
+
+      <section className="write-review py-5 bg-light" id="write-review">
+    <div className="container">
+    <div className="row">
+        <div className="col-md-4">
+            <div className="row">
+		    
+		</div>
+		<hr/>
+    {this.state.reviews.map((review)=>{
+      let stars = ""
+      // eslint-disable-next-line no-lone-blocks
+      {switch(review.starsReview){
+       case 1:
+        stars=<i className="fa fa-star"></i>;
+        case 2:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        case 3:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        case 4:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        case 5:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        
+      }}
+      return(
+        <div className="row">
+		        <div className="col-md-6">
+		            <p><b>{review.user_name.toUpperCase()}</b></p>
+		        </div>
+		        <div style={{marginTop:"-5%"}} className="col-md-8 text-warning">
+              {stars}
+		        
+		    </div>
+        <div className="col-md-8 ">
+              {review.textReview}
+		        <hr></hr>
+		    </div>
+		    </div>
+          
+      )
+    })}
+		    
+		   
+		   
+		  
+		    
+		   
+        </div>
+        <div className=" col-md-8 my-5 py-5">
+            <h6>Write your idea about this item:</h6>
+            <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
+            </textarea>
+            <div className="quickview-plus-minus">
+              
+              <div className="quickview-btn-wishlist">
+              <StarRatingComponent 
+         style={{width:"250px"}}
           name="rate1" 
           starCount={5}
           value={rating}
           onStarClick={this.onStarClick.bind(this)}
           editing={true}
         />
-      </div>
-          Enter Review here...
-          <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
-            </textarea>
+        <br/>
+                <a href="#btn-hover" onClick={this.postReview.bind(this)} className="btn-hover">Write Reviews</a>
+                </div>
+              
+              </div>
+            
+
         </div>
-        <div className="quickview-btn-cart">
-          <button  className="btn-hover-black" onClick = {this.postReview.bind(this)}>
-            add Review
-          </button>
-         </div>
-         <div id = "reviewScroll">
-        {this.state.reviews.map( rev => {
-          return(
-            <div>
-              <br />
-              <table class="table table-hover">
-              <tbody>
-              <tr>
-                <td>
-                  <img src={'./images/' + rev.starsReview + ".png"}  alt="" style= {{width:"100px"}}/>
-                </td>
-                <td>
-                  {rev.textReview}
-                </td>
-              </tr> 
-              </tbody>
-              </table>
-            </div>
-          )
-        })}
-        </div>
-      </div>
+    </div>
+</div>
+</section>
     )
   }
 }
