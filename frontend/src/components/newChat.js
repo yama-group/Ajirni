@@ -3,6 +3,8 @@ import {appID,apiKey,userId} from "./config"
 import {NotificationContainer,NotificationManager} from 'react-notifications';
 import MDSpinner from 'react-md-spinner';
 import {CometChat} from '@cometchat-pro/chat';
+import "./chat.css"
+import Loader from 'react-loader-spinner'
 
 import "./chat.css"
 
@@ -24,7 +26,7 @@ const Chat = ({user}) => {
 
     CometChat.login(uid,apiKey).then(
         User => {
-          NotificationManager.success('You are now logged in', 'Login Success');
+          // NotificationManager.success('You are now logged in', 'Login Success');
           console.log('Login Successful:', {User});
           window.localStorage.setItem("uid",User.uid)
 
@@ -66,6 +68,7 @@ const Chat = ({user}) => {
     // create new listener for incoming message
 
     if (selectedFriend) {
+      console.log(selectedFriend)
       let messagesRequest = new CometChat.MessagesRequestBuilder()
         .setUID(selectedFriend)
         .setLimit(limit)
@@ -123,6 +126,7 @@ const Chat = ({user}) => {
     setSelectedFriend(uid);
     setChat([]);
     setChatIsLoading(true);
+    
   };
 
   const scrollToBottom = () => {
@@ -131,6 +135,8 @@ const Chat = ({user}) => {
   };
 
   return (
+    <>
+    <br/>
     <div className='container-fluid'>
       <div className='row'>
         <div className='col-md-2' />
@@ -138,7 +144,7 @@ const Chat = ({user}) => {
           <div className='row'>
             <div className='col-lg-4 col-xs-12 bg-light' style={{height: 658}}>
               <div className='row p-3'>
-                <h2>Friend List</h2>
+                <h2 >Chat with:</h2>
               </div>
               <div
                 className='row ml-0 mr-0 h-75 bg-white border rounded'
@@ -152,8 +158,10 @@ const Chat = ({user}) => {
               </div>
             </div>
             <div className='col-lg-8 col-xs-12 bg-light' style={{height: 658}}>
-              <div className='row p-3 bg-white'>
-                <h2>Who you gonna chat with?</h2>
+              <div className='row p-3 bg-white' >
+                <h2
+                style={{borderBottom:"1px solid gray",width:"100%",paddingBottom:"5px"}}
+                >Messages:</h2>
               </div>
               <div
                 className='row pt-5 bg-white'
@@ -178,11 +186,12 @@ const Chat = ({user}) => {
                       placeholder='Type a message...'
                     />
                   </div>
-                  <div className='col-3 m-0 p-1'>
+                  <div  className='col-3 m-0 p-1'>
                     <button
-                      className='btn btn-outline-secondary rounded border w-100'
+                    
+                      className='btn btn-info'
                       title='Send'
-                      style={{paddingRight: 16}}>
+                      style={{color:"white",paddingBottom: 30,borderRadius:"50px",marginLeft:"15px"}}>
                       Send
                     </button>
                   </div>
@@ -193,6 +202,7 @@ const Chat = ({user}) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
@@ -229,7 +239,12 @@ const FriendList = props => {
   if (friendisLoading) {
     return (
       <div className='col-xl-12 my-auto text-center'>
-        <MDSpinner size='72' />
+        <Loader 
+                    type="Puff"
+                    color="#7A0400"
+                    height="65"	
+                    width="65"
+                 />
       </div>
     );
   } else {
@@ -237,12 +252,14 @@ const FriendList = props => {
       <ul className='list-group list-group-flush w-100'>
         {friends.map(friend => (
           <li
+            style={{opacity:"1"}}
             key={friend.uid}
             className={`list-group-item ${
               friend.uid === selectedFriend ? 'active' : ''
             }`}
             onClick={() => props.selectFriend(friend.uid)}>
-            {friend.name}
+            <b>{friend.name}</b>
+            
           </li>
         ))}
       </ul>

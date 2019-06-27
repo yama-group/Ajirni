@@ -149,7 +149,7 @@ class Header extends Component {
                           </li>
 
                           <li>
-                            <Link to="/contact">contact</Link>
+                            <Link to="/chat">Messenger</Link>
                           </li>
                         </ul>
                       </nav>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { storage } from "../firebase";
 import { createUser } from '../actions/userAction'
 import { Alert } from "reactstrap";
+import Loader from 'react-loader-spinner'
 
 class Signup extends React.Component {
   constructor(props) {
@@ -38,6 +39,9 @@ class Signup extends React.Component {
   }
 
   handleImgUpload() {
+    this.setState({
+      alert:true
+    })
     const { image } = this.state;
     console.log(image.name);
     if (image !== null) {
@@ -58,13 +62,10 @@ class Signup extends React.Component {
               console.log(imgUrl);
               this.setState({
                 image_url: imgUrl,
-                alert: true,
+                alert: false,
                 message: "uploaded"
               });
-              setTimeout(
-                () => this.setState({ alert: false, message: "" }),
-                3000
-              );
+              
             });
         }
       );
@@ -122,9 +123,9 @@ class Signup extends React.Component {
                 <div className="login-form-container">
                   <div className="login-form">
                     <form  >
-                      <strong>Username</strong><input type="text" name="username" placeholder="user name" onChange={this.onchange} />
-                      <strong>First Name</strong><input type="text" name="firstname" placeholder="first name" onChange={this.onchange} />
-                      <strong>Last Name</strong><input type="text" name="lastname" placeholder="last name" onChange={this.onchange} />
+                      <strong>Username</strong><input type="text" name="username" placeholder="username" onChange={this.onchange} />
+                      <strong>First Name</strong><input type="text" name="firstname" placeholder="First name" onChange={this.onchange} />
+                      <strong>Last Name</strong><input type="text" name="lastname" placeholder="Last name" onChange={this.onchange} />
                       <strong>Email</strong><input type="email" name="email" placeholder="Email" onChange={this.onchange} />
                       <strong>Password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
                       <strong>Phone</strong><input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
@@ -149,7 +150,12 @@ class Signup extends React.Component {
                             height: "100px"
                           }}
                         />
-
+                      {this.state.alert? <Loader 
+                    type="Puff"
+                    color="#7A0400"
+                    height="65"	
+                    width="65"
+                 />:""}
                       </div>
                       {/* <strong>image</strong><input type="text" name="image" placeholder="image" onChange={this.onchange} /> */}
                       <div className="button-box">
