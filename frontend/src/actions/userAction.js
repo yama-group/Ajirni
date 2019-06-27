@@ -30,9 +30,7 @@ export const createUser = user => dispatch => {
 
       request(options, function (error, response, body) {
         if (error) throw new Error(error);
-
         console.log(body, "done");
-
       })
     })
     .catch(err => {

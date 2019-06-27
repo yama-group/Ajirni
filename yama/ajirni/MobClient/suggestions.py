@@ -8,7 +8,7 @@ def update_clusters():
     num_reviews = Reviews.objects.count()
     update_step = ((num_reviews/100)+1) * 5
     if num_reviews % update_step == 0:
-
+        print("hi hi ")
         all_user_names = map(lambda x: x.username,
                              CustomUser.objects.only("username"))
         all_item_ids = set(
@@ -19,6 +19,7 @@ def update_clusters():
         for i in range(num_users):
             user_reviews = Reviews.objects.filter(user_name=all_user_names[i])
             for user_review in user_reviews:
+                print(user_review)
                 ratings_m[i, user_review.item.id] = user_review.starsReview
 
         # Perform kmeans clustering
@@ -30,6 +31,7 @@ def update_clusters():
         Cluster.objects.all().delete()
         new_clusters = {i: Cluster(name=i) for i in range(k)}
         for cluster in new_clusters.values():
+            print(cluster)
             cluster.save()
         for i, cluster_label in enumerate(clustering.labels_):
             new_clusters[cluster_label].users.add(

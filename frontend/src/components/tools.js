@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { postItem } from "../actions/itemAction";
 import { storage } from "../firebase";
 import { Alert } from "reactstrap";
+import Loader from 'react-loader-spinner'
+
 class Tools extends Component {
   constructor(props) {
     super(props);
@@ -21,15 +23,17 @@ class Tools extends Component {
       image: null,
       imgUrl: [],
       alert: false,
-      message: ""
+      message: "",
+      category:null
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillMount() {
+    const userId= window.localStorage.getItem("userId")
     this.setState({
-      user_id: this.props.user_id
+      user_id: userId
     });
   }
   handleImgChange(e) {
@@ -41,6 +45,9 @@ class Tools extends Component {
 
   handleImgUpload() {
     // console.log("ffff");
+    this.setState({
+      alert:true
+    })
     const { image } = this.state;
     if (image !== null) {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -60,13 +67,10 @@ class Tools extends Component {
               // console.log("okk");
               this.setState({
                 imgUrl: [...this.state.imgUrl, imgUrl],
-                alert: true,
+                alert: false,
                 message: "uploaded"
               });
-              setTimeout(
-                () => this.setState({ alert: false, message: "" }),
-                3000
-              );
+              
             });
         }
       );
@@ -74,7 +78,9 @@ class Tools extends Component {
   }
 
   onChange(e) {
+    
     this.setState({ [e.target.name]: e.target.value });
+  
   }
 
   onSubmit(e) {
@@ -85,7 +91,7 @@ class Tools extends Component {
         name: this.state.name,
         description: this.state.description,
         condition: this.state.condition,
-        category: this.state.category_id,
+        category: this.state.category,
         location: this.state.location,
         price: this.state.price,
         color: this.state.color,
@@ -109,13 +115,17 @@ class Tools extends Component {
       image: null,
       imgUrl: []
     });
-    // console.log(item);
+     console.log(item);
     this.props.postItem(item);
+    
+    setTimeout(()=>{
+      this.props.history.push("/user")
+    },500)
   }
   render() {
     return (
-      <div>
-        <div className="col-lg-6 col-md-12 col-12">
+      <div style={{marginLeft:"25%",marginBottom:"2%"}}  className="col-lg-6 col-sm-6 col-xs-12">
+        <div  className="blog-area pt-100 pb-100">
           <form onSubmit={this.onSubmit}>
             <div className="checkbox-form">
               <h3>Tools Form</h3>
@@ -135,7 +145,36 @@ class Tools extends Component {
                     />
                   </div>
                 </div>
-
+                <div className="col-md-6">
+                  <div className="checkout-form-list">
+                    <label>
+                      Color <span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="color"
+                      placeholder="Blue"
+                      onChange={this.onChange}
+                      value={this.state.color}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="checkout-form-list">
+                    <label>
+                      Location <span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="location"
+                      placeholder="Amman"
+                      onChange={this.onChange}
+                      value={this.state.location}
+                      required
+                    />
+                  </div>
+                </div>
                 <div className="col-md-6">
                   <div className="checkout-form-list">
                     <label>
@@ -153,20 +192,22 @@ class Tools extends Component {
                   </div>
                 </div>
 
+                
+                
                 <div className="col-md-6">
-                  <div className="checkout-form-list">
-                    <label>
-                      Location <span className="required">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="location"
-                      placeholder="Amman"
-                      onChange={this.onChange}
-                      value={this.state.location}
-                      required
-                    />
-                  </div>
+                  <label> Category</label>:
+                  <select
+                    name="category"
+                    value={this.state.category}
+                    onChange={this.onChange}
+                    required
+                  >
+                    <option value="1">Sport</option>
+                    <option value="4">Home Tools</option>
+                    <option value="5">Industrial Tools </option>
+                    <option value="6">Event Tools</option>
+                    <option value="7">Others</option>
+                  </select>
                 </div>
 
                 <div className="col-md-6">
@@ -186,24 +227,10 @@ class Tools extends Component {
                   </div>
                 </div>
 
-                <div className="col-md-6">
-                  <div className="checkout-form-list">
-                    <label>
-                      Color <span className="required">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="color"
-                      placeholder="Blue"
-                      onChange={this.onChange}
-                      value={this.state.color}
-                      required
-                    />
-                  </div>
-                </div>
+                
 
                 <div className="col-md-6">
-                  <div className="country-select">
+                  
                     <label>
                       Condition <span className="required">*</span>
                     </label>
@@ -216,11 +243,11 @@ class Tools extends Component {
                       <option value="New">New</option>
                       <option value="Used">Used</option>
                     </select>
-                  </div>
+                  
                 </div>
 
                 <div className="col-md-6">
-                  <label> Avilable Directly</label>:
+                  <label> Availability</label>:
                   <select
                     name="status"
                     value={this.state.status}
@@ -265,13 +292,12 @@ class Tools extends Component {
 
                 <div className="col-md-6">
                   {this.state.alert ? (
-                    <Alert
-                      color="info"
-                      isOpen={this.state.alert}
-                      toggle={() => console.log("ok")}
-                    >
-                      {this.state.message}
-                    </Alert>
+                     <Loader 
+                     type="Puff"
+                     color="#7A0400"
+                     height="65"	
+                     width="65"
+                  />
                   ) : (
                     ""
                   )}

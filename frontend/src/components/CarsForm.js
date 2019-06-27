@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { postItem } from "../actions/itemAction";
 import { storage } from "../firebase";
 import { Alert } from "reactstrap";
+import Loader from 'react-loader-spinner'
 class CarsForm extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +49,9 @@ class CarsForm extends Component {
 
   handleImgUpload() {
     // console.log("ffff");
+    this.setState({
+      alert:true
+    })
     const { image } = this.state;
     if (image !== null) {
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -67,13 +71,10 @@ class CarsForm extends Component {
               // console.log("okk");
               this.setState({
                 imgUrl: [...this.state.imgUrl, imgUrl],
-                alert: true,
+                alert: false,
                 message: "uploaded"
               });
-              setTimeout(
-                () => this.setState({ alert: false, message: "" }),
-                3000
-              );
+              
             });
         }
       );
@@ -128,6 +129,12 @@ class CarsForm extends Component {
     });
     // console.log(item);
     this.props.postItem(item);
+    setTimeout(()=>{
+      this.props.history.push("/user")
+    },500)
+
+    
+    
   }
   render() {
     const years = ["Older than 1980"];
@@ -135,11 +142,11 @@ class CarsForm extends Component {
       years.unshift(i);
     }
     return (
-      <div>
-        <div className="col-lg-6 col-md-12 col-12">
+      <div style={{marginLeft:"25%",marginBottom:"2%"}}  className="col-lg-6 col-sm-6 col-xs-12">   
+        <div className="blog-area pt-100 pb-100">
           <form onSubmit={this.onSubmit}>
             <div className="checkbox-form">
-              <h3>Cars Form</h3>
+              <h3>Add Car </h3>
               <div className="row">
                 <div className="col-md-6">
                   <div className="checkout-form-list">
@@ -149,7 +156,7 @@ class CarsForm extends Component {
                     <input
                       type="text"
                       name="name"
-                      placeholder="toytoa car"
+                      placeholder="Camry"
                       onChange={this.onChange}
                       value={this.state.name}
                       required
@@ -224,7 +231,7 @@ class CarsForm extends Component {
                 </div>
 
                 <div className="col-md-6">
-                  <div className="country-select">
+                  
                     <label>
                       Condition <span className="required">*</span>
                     </label>
@@ -237,7 +244,7 @@ class CarsForm extends Component {
                       <option value="New">New</option>
                       <option value="Used">Used</option>
                     </select>
-                  </div>
+                  
                 </div>
 
                 <div className="col-md-6">
@@ -276,7 +283,7 @@ class CarsForm extends Component {
                 </div>
 
                 <div className="col-md-6">
-                  <div className="country-select">
+                  
                     <label>
                       Type of Fuel <span className="required">*</span>
                     </label>
@@ -286,16 +293,16 @@ class CarsForm extends Component {
                       value={this.state.fuel}
                       required
                     >
-                      <option value="New">Diesel</option>
-                      <option value="Used">Gasoline</option>
-                      <option value="Used">Hybrid</option>
-                      <option value="Used">Electric</option>
+                      <option value="diesel">Diesel</option>
+                      <option value="gasoline">Gasoline</option>
+                      <option value="hybrid">Hybrid</option>
+                      <option value="electric">Electric</option>
                     </select>
-                  </div>
+                
                 </div>
 
                 <div className="col-md-6">
-                  <div className="country-select">
+                 
                     <label>
                       Transmission <span className="required">*</span>
                     </label>
@@ -309,11 +316,11 @@ class CarsForm extends Component {
                       <option value="Used">Manual</option>
                       <option value="Used">other</option>
                     </select>
-                  </div>
+                 
                 </div>
 
                 <div className="col-md-6">
-                  <div className="country-select">
+                  
                     <label>
                       
                       year of manufactured <span className="required">*</span>
@@ -330,10 +337,10 @@ class CarsForm extends Component {
                         </option>
                       ))}
                     </select>
-                  </div>
+                 
                 </div>
                 <div className="col-md-6">
-                  <label> Avilable Directly</label>:
+                  <label> Availability</label>:
                   <select
                     name="status"
                     value={this.state.status}
@@ -380,13 +387,12 @@ class CarsForm extends Component {
                 </button> */}
                 <div className="col-md-6">
                   {this.state.alert ? (
-                    <Alert
-                      color="info"
-                      isOpen={this.state.alert}
-                      toggle={() => console.log("ok")}
-                    >
-                      {this.state.message}
-                    </Alert>
+                    <Loader 
+                    type="Puff"
+                    color="#7A0400"
+                    height="65"	
+                    width="65"
+                 />
                   ) : (
                     ""
                   )}
