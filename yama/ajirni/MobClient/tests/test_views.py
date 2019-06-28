@@ -7,7 +7,7 @@
 
 
 # @pytest.mark.django_db
-# class TestViews: 
+# class TestViews:
 
 #     def test_user_registered(self):
 #       path = reverse('register')

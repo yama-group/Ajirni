@@ -81,17 +81,28 @@ WSGI_APPLICATION = 'ajirni.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'tSfCCLaIkh',
+#         'USER': 'tSfCCLaIkh',
+#         'PASSWORD': 'h3qbhJEq9c',
+#         'HOST': 'remotemysql.com',
+#         'PORT': '3306',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tSfCCLaIkh',
-        'USER': 'tSfCCLaIkh',
-        'PASSWORD': 'h3qbhJEq9c',
-        'HOST': 'remotemysql.com',
+        'NAME': 'thesisTesting',
+        'USER': 'root',
+        'PASSWORD': '1998',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

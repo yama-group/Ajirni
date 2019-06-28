@@ -28,6 +28,7 @@ pytest-cov = "*"
 mixer = "*"
 pytest = "*"
 pytz = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"

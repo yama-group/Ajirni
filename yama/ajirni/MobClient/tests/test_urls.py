@@ -62,4 +62,4 @@ class TestUrls:
 
     def test_review_url(self):
       path = reverse('review')
-      assert resolve(path).view_name == 'review'                                                        
+      assert resolve(path).view_name == 'review'
