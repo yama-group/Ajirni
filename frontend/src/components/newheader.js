@@ -93,7 +93,7 @@ class Header extends Component {
                             <Link to="/about">about </Link>
                           </li>
                           <li>
-                            Category
+                            <b>CATEGORY</b>
                             <ul className="dropdown">
                               <li
                                 onClick={e => {

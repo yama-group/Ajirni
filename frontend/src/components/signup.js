@@ -90,7 +90,7 @@ class Signup extends React.Component {
     e.preventDefault();
     if (user.username.length < 3 || user.first_name.length < 3 || user.last_name.length < 3 ||
       user.email.length < 3 || user.password.length < 6 || user.phone.length < 6) {
-      this.setState({ error: <h3>"enter valid information"</h3>, alert: true })
+      this.setState({ error: "invalid information." })
     } else {
       this.props.createUser(user)
     }
@@ -108,17 +108,18 @@ class Signup extends React.Component {
   render() {
 
     return (
-      <div className="register-area ptb-100">
-        <div className="container-fluid">
+     
+        <div className="container">
+          <div className="logo"><h1 style={{marginLeft:"41%"}}><b>SIGN UP</b></h1></div>
           <div className="row">
             <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
               <Alert
                 color="danger"
-                isOpen={this.state.alert}
+                isOpen={this.state.error}
               >
                 {this.state.error}
               </Alert>
-              <h2> Signup  </h2>
+              
               <div className="login">
                 <div className="login-form-container">
                   <div className="login-form">
@@ -129,7 +130,7 @@ class Signup extends React.Component {
                       <strong>Email</strong><input type="email" name="email" placeholder="Email" onChange={this.onchange} />
                       <strong>Password</strong><input type="password" name="password" placeholder="Password" onChange={this.onchange} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" />
                       <strong>Phone</strong><input type="text" name="phone" placeholder="Phone" onChange={this.onchange} />
-                      <input
+                      <strong>Photo </strong><input
                         className="col-md-4"
                         aria-describedby="btn"
                         type="file"
@@ -171,7 +172,7 @@ class Signup extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      
 
     );
   }

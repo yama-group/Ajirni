@@ -61,110 +61,22 @@ class Home extends Component {
         <div
           className="breadcrumb-area pt-205 pb-210"
           id="navnav" 
-            style={{backgroundImage: "url(https://cdn.pixabay.com/photo/2019/06/23/13/45/photomontage-4293777_1280.png)",backgroundPositionX:"right"}}
           />
-        {/* <img style={{backgroundSize:"cover"}} src={'https://cdn.pixabay.com/photo/2019/06/23/13/45/photomontage-4293777_1280.png'} alt="" /> */}
-
-        {/* <br />
-        <br />
-        <br />
-        <br /> */}
-
-        <div style={{marginLeft:"45%",marginTop:"7%"}} className="logo">
-                      <Link to="/">
+          <video></video>
+           <div style={{marginLeft:"43%",marginTop:"7%"}} className="logo">
+                      
                         <h3>
                           <b>CATEGORIES</b>
                         </h3>
-                      </Link>
                     </div>
-          
-          
-      
-        <br />
+                    <br />
         <Slider search={this.search.bind(this)}/>
-        <div className="container" />
-
-        {/* <div className="categories">
-
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "1");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/Sports.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "2");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/cars.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "3");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/RealEstates.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "4");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/HouseHolds.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "5");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/tools.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "6");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src="./images/events.png" alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "7");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src="./images/otherThingsEdited.png" alt="" />
-            </Link>
-          </div>
-
-
-        </div> */}
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <RandomUsers />
+        <div style={{marginLeft:"40%",marginTop:"3%"}} className="logo">
+                       <h3>
+                          <b>Profiles You'll Love</b>
+                        </h3>
+                    </div>
+         <RandomUsers />
       </div>
     );
   }
