@@ -7,6 +7,8 @@ import AliceCarousel from 'react-alice-carousel';
 import "./alice-carousel.css";
 import Slider from "./slider"
 import RandomUsers from './randomUsers'
+import "./jump.css"
+import Recommendations from "./recommendations"
 
 import {
   BrowserRouter as Router,
@@ -58,20 +60,47 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div
-          className="breadcrumb-area pt-205 pb-210"
-          id="navnav" 
-          />
-          <video></video>
-           <div style={{marginLeft:"43%",marginTop:"7%"}} className="logo">
+     <div class="jumbotron jumbotron-fluid">
+
+<video autoplay="true" muted loop >    
+    <source src="https://d1novo54w0hnhk.cloudfront.net/Vespa-Bokeh.mp4" type="video/mp4"/>
+    
+</video>
+
+  <div class="container text-white">
+
+    <h1  style={{marginBottom:"30px"}} className="display-4">Rent anything you want!</h1>
+     
+     {!window.localStorage.getItem("token")?<div  className="quickview-btn-cart">
+       <p  className="lead">Join The Sharing Economy.</p>
+                    <Link  to="/signin">
+                     Login
+                    </Link>
+                  </div>:<p  className="lead">Welcome Back.</p>} 
+
+    
+    
+
+  </div>
+  
+</div>
+<div style={{marginLeft:"35%",marginTop:"4%"}} className="logo">
+                      
+                      <h3>
+                        <b>Recommended for you</b>
+                      </h3>
+                  </div>
+      <Recommendations />
+
+           <div style={{marginLeft:"40%",marginTop:"7%"}} className="logo">
                       
                         <h3>
                           <b>CATEGORIES</b>
                         </h3>
                     </div>
-                    <br />
+                   
         <Slider search={this.search.bind(this)}/>
-        <div style={{marginLeft:"40%",marginTop:"3%"}} className="logo">
+        <div style={{marginLeft:"35%",marginTop:"3%"}} className="logo">
                        <h3>
                           <b>Profiles You'll Love</b>
                         </h3>

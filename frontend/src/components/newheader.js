@@ -69,7 +69,7 @@ class Header extends Component {
         return(
             <div className="wrapper">
             
-            <header className="pl-155 pr-155 intelligent-header">
+            <header style={{height:"90px"}} className="pl-155 pr-155 intelligent-header">
             <div className="header-area header-area-2">
               <div className="container-fluid p-0">
                 <div className="row no-gutters">
@@ -190,9 +190,7 @@ class Header extends Component {
               </div>
             </div>
           </header>
-            <div className="header-space"></div>
-            
-            
+            <div style={{height:"90px"}} className="header-space"></div>
             
            {this.state.active? <div className="cur-lang-acc-active inside">
                 <div style={{backgroundImage:"url('./images/gabriela-rodriguez-660479-unsplash.jpg')",backgroundSize:"cover"}} className="wrap-sidebar">
