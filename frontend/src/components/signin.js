@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { BrowserRouter as Router, Route, Link, Redirect, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { userSignIn } from "../actions/signInAction.js";
 import axios from "axios";
@@ -35,18 +35,24 @@ class SignIn extends Component {
   componentWillReceiveProps(next) {
    
     if (next.token) {
-      this.props.history.push("/user");
+      this.props.history.push("/");
     }
   }
 
   render() {
     return (
-      <div>
-        <div className="register-area ptb-100">
+      
+        
+        
           <div className="container">
-            <div className="row">
+            <div className="logo"><h1 style={{marginLeft:"45%"}}><b>Login</b></h1></div>
+              
+            <div className="row"> 
+         
               <div className="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+                
                 <div className="login">
+                
                   <Alert color="danger" isOpen={this.props.visible}>
                     {this.props.error}
                   </Alert>
@@ -74,7 +80,8 @@ class SignIn extends Component {
                           <div className="login-toggle-btn">
                             <input type="checkbox" />
                             <label>Remember me</label>
-                            <a href="#">Forgot Password?</a>
+                            
+                            <Link to="/signup">Don't have an account? Signup</Link>
                           </div>
                           <button
                             type="submit"
@@ -90,8 +97,8 @@ class SignIn extends Component {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        
+      
     );
   }
 }

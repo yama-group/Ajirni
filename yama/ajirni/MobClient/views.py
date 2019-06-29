@@ -11,7 +11,7 @@ from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from .suggestions import update_clusters
-
+from django.db.models import Avg
 import datetime
 # import requests
 from django.shortcuts import get_object_or_404
@@ -136,7 +136,7 @@ class ItemsRud(generics.RetrieveUpdateDestroyAPIView):
 
 class ItemsList(generics.ListAPIView):
     """This class defines the retrieve behavior of all instances."""
-    serializer_class = ItemsSerializer
+    serializer_class = ItemsImagesSerializer
 
     def get_queryset(self):
         queryset = Items.objects.all()
@@ -223,6 +223,8 @@ class Reviewss(generics.ListCreateAPIView):
     def get_queryset(self):
         item_id = self.request.query_params.get('item_id', None)
         queryset = Reviews.objects.filter(item=item_id)
+        average = Reviews.objects.all().aggregate(Avg('starsReview'))
+        print(average)
         return queryset
 
 

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Loader from 'react-loader-spinner'
 import { Card,Button } from 'react-bootstrap'
+import "./randousers.css"
 class itemsList extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -112,21 +113,7 @@ class itemsList extends Component {
                         </Card>
 
                         </div>
-                        {/* <div
-                          className="blog-info"
-                          onClick={() => this.props.itemId(item.id)}
-                        >
-                          
-                          <Link to="/itemDetail">
-                            <h4>{item.name}</h4>
-                          </Link>
-                          <div className="blog-meta">
-                            <ul>
-                              <li><span style={{color:"#B30000",fontSize:"14px"}}>${item.price}/day</span> </li>
-                            </ul>
-                          </div>
-                          <p>{item.describtion}</p>
-                        </div> */}
+                        
                       </div>
                     </div>
                   );

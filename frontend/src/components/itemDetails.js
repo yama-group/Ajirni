@@ -8,6 +8,8 @@ import axios from "axios";
 import { Alert } from "reactstrap";
 import {appID,apiKey,userId,username} from "./config";
 import request from "request"
+import {NotificationContainer,NotificationManager} from 'react-notifications';
+
 
 import Reviews from "./reviews"
 
@@ -51,7 +53,9 @@ class ItemDetail extends React.Component {
   }
 
   makeFriend(){
-    const uid = window.localStorage.getItem("userId")
+    if(window.localStorage.getItem("token")){
+
+      const uid = window.localStorage.getItem("userId")
     var options = {
       method: 'POST',
       url: `https://api.cometchat.com/v1.6/users/${uid}/friends`,
@@ -69,6 +73,10 @@ class ItemDetail extends React.Component {
       console.log(body,"done");
 
   })
+    }else{
+      NotificationManager.warning("Sorry!",'Please Login');
+    }
+    
   }
 
   componentWillReceiveProps(next) {
