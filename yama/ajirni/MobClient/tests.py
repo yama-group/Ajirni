@@ -98,20 +98,28 @@ class LikesTestCase(TestCase):
                             )
     
     Likes.objects.create (
-                            item= fItem,
-                            user= fUser,
+                            id = 1,
+                            item = fItem,
+                            user = fUser,
                           )
                                   
   def test_likes (self):
       """CustomUsers are correctly identified"""
 
-      fCategory = Categories.objects.create(
+      item = Likes.objects.get(id=1)
+      self.assertEqual(item.id,1)
+
+class ImagesTestCase(TestCase):
+
+    def setUp(self):
+
+      category = Categories.objects.create(
                                           name= 'car',
                                           description= 'cars for rent',
                                         )
 
-      fUser = CustomUser.objects.create(
-                                  username = 'ammar3',
+      user = CustomUser.objects.create(
+                                  username = 'ammar98',
                                   first_name = 'ammar',
                                   last_name = 'alk',
                                   email = 'ammar@gmail.com',
@@ -120,15 +128,25 @@ class LikesTestCase(TestCase):
                                   image_url = 'img2.png',
                                       )
 
-      item = Likes.objects.get(
-                            name = "toyota",
-                            condition = "new",
-                            category = fCategory,
-                            status = "Available",
-                            confirmed = "true",
-                            user = fUser,
-                            )
-      self.assertEqual(item.name,"toyota")
+      fItem = Items.objects.create (
+                                    name = "toyota",
+                                    condition = "new",
+                                    category = category,
+                                    status = "Available",
+                                    confirmed = "true",
+                                    user = user,
+                                    )
+
+      Images.objects.create (
+                                  item= fItem,
+                                  img_url= 'img.jpg',
+                                 )
+                                  
+    def test_Category(self):
+      """Images are correctly identified"""
+
+      img = Images.objects.get(img_url='img.jpg')
+      self.assertEqual(img.img_url,'img.jpg')
 
 if __name__ == '__main__':
     unittest.main()
