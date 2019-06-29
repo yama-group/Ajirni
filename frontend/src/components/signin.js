@@ -35,7 +35,7 @@ class SignIn extends Component {
   componentWillReceiveProps(next) {
    
     if (next.token) {
-      this.props.history.push("/user");
+      this.props.history.push("/");
     }
   }
 

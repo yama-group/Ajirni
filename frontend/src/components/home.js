@@ -84,6 +84,7 @@ class Home extends Component {
   </div>
   
 </div>
+<hr style={{borderBottom:"20px solid #f5f5f5"}}/>
 <div style={{marginLeft:"35%",marginTop:"4%"}} className="logo">
                       
                       <h3>
@@ -91,6 +92,7 @@ class Home extends Component {
                       </h3>
                   </div>
       <Recommendations />
+      <hr style={{borderBottom:"20px solid #f5f5f5"}}/>
 
            <div style={{marginLeft:"40%",marginTop:"7%"}} className="logo">
                       
@@ -100,6 +102,7 @@ class Home extends Component {
                     </div>
                    
         <Slider search={this.search.bind(this)}/>
+        <hr style={{borderBottom:"20px solid #f5f5f5"}}/>
         <div style={{marginLeft:"35%",marginTop:"3%"}} className="logo">
                        <h3>
                           <b>Profiles You'll Love</b>

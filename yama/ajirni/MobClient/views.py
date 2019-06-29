@@ -136,7 +136,7 @@ class ItemsRud(generics.RetrieveUpdateDestroyAPIView):
 
 class ItemsList(generics.ListAPIView):
     """This class defines the retrieve behavior of all instances."""
-    serializer_class = ItemsSerializer
+    serializer_class = ItemsImagesSerializer
 
     def get_queryset(self):
         queryset = Items.objects.all()

@@ -206,12 +206,12 @@ class Header extends Component {
                                     </div>
                             </div>
                             
-                            <div ><h3 style={{marginLeft:"-7%",color:"white",marginTop:"5%"}}>Welcome {this.props.user.first_name}</h3></div>
+                           {token? <div ><h3 style={{marginLeft:"-7%",color:"white",marginTop:"5%"}}>Welcome {this.props.user.first_name}</h3></div>:""}
                             <div className="cur-lang-acc-dropdown">
                                 <ul>  
-                                    {!token ? <li><a style={{color:"white"}} href="/signup">Register</a></li>:""}
-                                    {token ? <li><a style={{color:"white"}} onClick={this.logOut.bind(this)} href="/signin">Log Out</a></li>:""}
-                                   {!token ? <li><a style={{color:"white"}} href="/signin">Sign In </a></li>:<li><a style={{color:"white"}} href="/user">Profile</a></li>}
+                                    {!token ? <li><Link style={{color:"white"}} to="/signup">Register</Link></li>:""}
+                                    {token ? <li><a style={{color:"white"}} onClick={this.logOut.bind(this)} href="/">Log Out</a></li>:""}
+                                   {!token ? <li><Link style={{color:"white"}} to="/signin">Sign In </Link></li>:<li><Link style={{color:"white"}} to="/user">Profile</Link></li>}
                                 </ul>
                             </div>
                         </div>

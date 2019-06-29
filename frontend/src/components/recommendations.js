@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { getAllUsers } from "../actions/usersAct";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
+import { getAllItems, itemId } from "../actions/itemsActions";
+
 
 class Recommendations extends Component {
 
@@ -17,7 +19,8 @@ class Recommendations extends Component {
 
   componentWillMount() {
       var that=this
-    axios.get("/search/").then(data => {
+    axios.get("/all/").then(data => {
+        console.log(data.data)
         that.setState({
             items:data.data
         })
@@ -33,36 +36,49 @@ class Recommendations extends Component {
   render() {
     return (
          <div  className="container">
-        <div class="shop-filters-right">
-      <div class="shop-product-content tab-content">
-      <div id="grid-5-col1" class="tab-pane fade active show">
-          <div class="row custom-row">
-            {this.state.items.slice(0, 4).map((item)=>{
+        <div className="shop-filters-right">
+      <div className="shop-product-content tab-content">
+      <div id="grid-5-col1" className="tab-pane fade active show">
+          <div className="row custom-row">
+            {this.state.items.slice(11,15).map((item)=>{
               return(
-                <div class="custom-col-5 custom-col-style">
-                                        <div class="single-product mb-35">
-                                            <div class="product-img">
-                                                <a href="#"><img src="assets/img/shop/shop-grid-1/2.jpg" alt=""/></a>
-                                                <div class="product-action">
-                                                    <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
-                                                    <a title="Quick View" data-toggle="modal" data-target="#exampleModal" class="animate-right" href="#"><i class="ion-ios-eye-outline"></i></a>
+                <div className="custom-col-5 custom-col-style">
+                                        <div className="single-product mb-35">
+                                            <div className="product-img">
+                                                <a href="#"><img style={{height:"200px",width:"250px"}} src={item.images.length>0 ?item.images[0].img_url:""} alt=""/></a>
+                                                <div className="product-action">
+                                                    
+                                                <Link onClick={()=>{
+                                                  this.props.itemId(item.id)
+                                                }}  class="animate-right" to="/itemDetail"><i class="ion-ios-eye-outline"></i></Link>
                                                 </div>
                                             </div>
-                                            <div class="product-content">
-                                                <div class="product-title-price">
-                                                    <div class="product-title">
-                                                        <h4><a href="product-details-6.html">WOODEN FURNITURE</a></h4>
+                                            <div className="product-content">
+                                                <div className="product-title-price">
+                                                    <div className="product-title">
+                                                        <h4><a href="product-details-6.html">{item.name}</a></h4>
                                                     </div>
-                                                    <div class="product-price">
-                                                        <span>$110.00</span>
+                                                    <div className="product-price">
+                                                        <span>${item.price}</span>
                                                     </div>
                                                 </div>
-                                                <div class="product-cart-categori">
-                                                    <div class="product-cart">
-                                                        <span>Furniter</span>
-                                                    </div>
-                                                    <div class="product-categori">
-                                                        <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                                                <div className="product-cart-categori">
+                                                    <div className="product-cart">
+                                                        <span> {item.category == 1
+                                ? "Sports"
+                                : item.category == 2
+                                ? "Cars"
+                                : item.category == 3
+                                ? "Real Estate"
+                                : item.category == 4
+                                ? "Home Tools"
+                                : item.category == 5
+                                ? "Industrial Tools"
+                                : item.category == 6
+                                ? "Event Equipments"
+                                : item.category == 7
+                                ? "Others"
+                                : null}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,8 +102,12 @@ class Recommendations extends Component {
 }
 
 
-// const mapStateToProps = state => ({
-//   users: state.usersReducer.users
-// });
+const mapStateToProps = state => ({
+  users: state.usersReducer.users
+});
 
-export default Recommendations
+
+export default connect(
+  mapStateToProps,
+  {  itemId }
+)(Recommendations);

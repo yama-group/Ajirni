@@ -4,8 +4,10 @@
 import React, {Component} from "react"
 import { connect } from 'react-redux'
 import { getReviews, postReviews } from '../actions/reviewsAction'
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link,Redirect } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
+import {NotificationContainer,NotificationManager} from 'react-notifications';
+
 
 
 class Reviews extends Component {
@@ -19,7 +21,20 @@ class Reviews extends Component {
       username: window.localStorage.getItem("username"),
       userId: window.localStorage.getItem("userId"),
       review: "",
-      rating: 1
+      rating: 1,
+      redirect: false
+    }
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/signin' />
     }
   }
 
@@ -49,7 +64,8 @@ class Reviews extends Component {
   }
 
   postReview() {
-   const addedReview = {
+    if(window.localStorage.getItem("token")){
+      const addedReview = {
     textReview: this.state.review,
     starsReview:this.state.rating,
     item: this.state.item_id,
@@ -61,6 +77,11 @@ class Reviews extends Component {
    this.setState({
      reviews:[...this.state.reviews,addedReview]
    })
+    }else{
+      NotificationManager.warning("Sorry!",'Please Login');
+      this.setRedirect()
+    }
+   
   }
   
 
@@ -69,8 +90,9 @@ class Reviews extends Component {
     const repeat =<i className="fa fa-star"></i>
     return (
       
-
+        
       <section className="write-review py-5 bg-light" id="write-review">
+        {this.renderRedirect()}
     <div className="container">
     <div className="row">
         <div className="col-md-4">
