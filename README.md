@@ -23,9 +23,9 @@ App for renting items, such as, cars, flats, tools, .....etc.
 
 ## Usage
 
-- [Fork](https://github.com/yama-group/Ajirni) the repo to your account 
-- Clone the repo to your computer
-- add the remote link https://github.com/yama-group/Ajirni
+- [Fork](https://github.com/yama-group/Ajirni) the repo to your account.
+- Clone the repo to your computer.
+- add the remote link https://github.com/yama-group/Ajirni in your terminal.
 
 ## Requirements
 

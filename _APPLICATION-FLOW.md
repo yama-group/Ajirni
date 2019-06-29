@@ -1,6 +1,6 @@
 # Flow for Ajirni Application
 
-## Application Flow for not registered or not signed in users
+## Application Flow for not registered nor signed in users
 
 - Home page, where you can choose a category where the item you're looking for falls in.
 - You can search for a specific item that you are looking for to make things faster via the search engine in the navbar.
