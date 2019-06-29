@@ -3,7 +3,7 @@ import { FETCH_ITEMS, NEW_ITEM, Item_id } from "../actions/types";
 const initialState = {
   items: [],
   item: {},
-  item_id: "",
+  item_id: window.localStorage.getItem("item_id") || "",
   category_id:window.localStorage.getItem("category_id") || 2
 };
 

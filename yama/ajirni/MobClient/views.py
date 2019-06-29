@@ -14,7 +14,7 @@ from .suggestions import update_clusters
 
 import datetime
 # import requests
-
+from django.shortcuts import get_object_or_404
 # Register API
 class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
@@ -217,35 +217,35 @@ class Reviewss(generics.ListCreateAPIView):
     # queryset = Reviews.objects.all()
     serializer_class = ReviewsSerializer
 
-    # def perform_create(self, serializer):
-    #     """Save the post data when creating a new review."""
-    #     serializer.save()
-
 
     def get_queryset(self):
-        item = self.request.query_params.get('item', None)
-        queryset = Reviews.objects.filter(item__exact=item)
+        item_id = self.request.query_params.get('item_id', None)
+        queryset = Reviews.objects.filter(item=item_id)
         return queryset
 
 
+   
     def perform_create(self, serializer):
 
-        text_Review = self.request.data.get("review", None)
-        stars_Review = self.request.data.get("rating", None)
-        item_id = self.request.data.get("item_id", None)
-        userId = self.request.data.get("userId", None)
-        username = self.request.data.get("username", None)
+        text_Review = self.request.data.get("textReview", None)
+        stars_Review = self.request.data.get("starsReview", None)
+        item_id = self.request.data.get("item", None)
+        userId = self.request.data.get("user", None)
+        username = self.request.data.get("user_name", None)
         item = Items.objects.get(id=item_id)
         user = CustomUser.objects.get(id=userId)
         print(self.request)
         review = Reviews(textReview = text_Review,
                          starsReview = stars_Review,
-                         item = item_id,
-                         user = userId, 
+                         item = item,
+                         user = user, 
                          user_name = username,
                          )
         review.save()
         update_clusters()
+
+
+  
 
 
 # def add_review(request, item_id):

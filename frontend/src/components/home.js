@@ -58,20 +58,22 @@ class Home extends Component {
   render() {
     return (
       <div>
-        {/* <div
+        <div
           className="breadcrumb-area pt-205 pb-210"
-          id="navnav" //   style={"background-image: url(assets/img/bg/breadcrumb.jpg)"}
-          /> */}
-        {/* <img style={{backgroundSize:"cover"}} src={'https://www.savannah-group.com/wp-content/uploads/2017/05/1920-x-500-image-7.jpg'} alt="" /> */}
+          id="navnav" 
+            style={{backgroundImage: "url(https://cdn.pixabay.com/photo/2019/06/23/13/45/photomontage-4293777_1280.png)",backgroundPositionX:"right"}}
+          />
+        {/* <img style={{backgroundSize:"cover"}} src={'https://cdn.pixabay.com/photo/2019/06/23/13/45/photomontage-4293777_1280.png'} alt="" /> */}
 
+        {/* <br />
         <br />
         <br />
-        <br />
-        <br />
-        <div className="logo">
+        <br /> */}
+
+        <div style={{marginLeft:"45%",marginTop:"7%"}} className="logo">
                       <Link to="/">
                         <h3>
-                          <b>Categories</b>
+                          <b>CATEGORIES</b>
                         </h3>
                       </Link>
                     </div>
