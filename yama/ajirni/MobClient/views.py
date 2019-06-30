@@ -11,13 +11,15 @@ from knox.models import AuthToken
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from .suggestions import update_clusters
+import json
 from django.db.models import Avg
 import datetime
+
+
 # import requests
 from django.shortcuts import get_object_or_404
+
 # Register API
-
-
 class RegisterAPI(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 

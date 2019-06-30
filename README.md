@@ -1,6 +1,6 @@
 # Ajirni
 App for renting items, such as, cars, flats, tools, .....etc. 
-Click [here](_APPLICATION-FLOW.md) for more information about how to use the Ajirni Application.
+- Click [here](_APPLICATION-FLOW.md) for more information about how to use the Ajirni Application.
 
 ## Team
 
@@ -23,9 +23,9 @@ Click [here](_APPLICATION-FLOW.md) for more information about how to use the Aji
 
 ## Usage
 
-> [Fork](https://github.com/yama-group/Ajirni) the repo to your account 
-> Clone the repo to your computer
-> add the remote link https://github.com/yama-group/Ajirni
+- [Fork](https://github.com/yama-group/Ajirni) the repo to your account.
+- Clone the repo to your computer.
+- add the remote link https://github.com/yama-group/Ajirni in your terminal.
 
 ## Requirements
 
@@ -46,6 +46,7 @@ pipenv install
 cd frontend 
 npm install 
 ```
+
 ### Running the server
 
 ```bash
@@ -62,6 +63,32 @@ cd frontend
 npm start
 ```
 
+### Running the Back-End Test with unittest
+
+```bash
+cd yama
+cd ajirni
+./manage.py test
+```
+
+### Running the Back-End Test with pytest
+
+```bash
+cd yama
+cd ajirni
+pytest
+```
+
+### Making Migrations to database
+
+```bash
+pipenv shell
+cd yama
+cd ajirni
+python manage.py makemigrations
+python manage.py migrate
+```
+
 ## Stack
 
 1. react with react redux in the front-end
@@ -70,7 +97,7 @@ npm start
 
 ## Contributing
 
-See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## More Details about the Project New Release
 
