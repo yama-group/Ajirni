@@ -46,6 +46,7 @@ pipenv install
 cd frontend 
 npm install 
 ```
+
 ### Running the server
 
 ```bash
@@ -60,6 +61,32 @@ python manage.py runserver
 ```bash
 cd frontend
 npm start
+```
+
+### Running the Back-End Test with unittest
+
+```bash
+cd yama
+cd ajirni
+./manage.py test
+```
+
+### Running the Back-End Test with pytest
+
+```bash
+cd yama
+cd ajirni
+pytest
+```
+
+### Making Migrations to database
+
+```bash
+pipenv shell
+cd yama
+cd ajirni
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ## Stack

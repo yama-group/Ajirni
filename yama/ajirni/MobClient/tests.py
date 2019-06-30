@@ -306,6 +306,21 @@ class TestViews(TestCase):
     self.client = Client()
     self.register_url = reverse('register')
     self.login_url = reverse('login')
+    self.addItem_url = reverse('add')
+    self.fCategory = Categories.objects.create(
+                                name= 'car',
+                                description= 'cars for rent',
+                              )
+
+    self.fUser = CustomUser.objects.create(
+                                username = 'ammar223',
+                                first_name = 'ammar',
+                                last_name = 'alk',
+                                email = 'ammar@gmail.com',
+                                password = '1234',
+                                phone = '123456789',
+                                image_url = 'img2.png',
+                                    )
 
 
   def test_register_api_POST(self):
@@ -322,13 +337,31 @@ class TestViews(TestCase):
     self.assertEquals(response.status_code,200)
 
 
-  # def test_login_api_POST(self):
-  #   response = self.client.post(self.login_url,{
-  #                                 'username': 'ammar22',
-  #                                 'password': '1234',
-  #   })
+  def test_login_api_POST(self):
+    response = self.client.post(self.login_url,{
+                                  'username': 'ammar22',
+                                  'first_name': 'ammar',
+                                  'last_name': 'alk',
+                                  'email': 'ammar@gmail.com',
+                                  'password': '1234',
+                                  'phone': '123456789',
+                                  'image_url': 'img2.png',
+    })
 
-  #   self.assertEquals(response.status_code,200)
+    self.assertEquals(response.status_code,400)
+
+  def test_addItem_POST(self):
+    response = self.client.post(self.addItem_url,{
+                            'name': "toyota",
+                            'condition': "new",
+                            'category': self.fCategory,
+                            'status': "Available",
+                            'confirmed': "true",
+                            'user': self.fUser,
+    })
+
+    self.assertEquals(response.status_code,400)
+
 
 
 
