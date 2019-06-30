@@ -1,7 +1,10 @@
 from django.test import TestCase
+from django.test import SimpleTestCase
 import unittest
 from MobClient.models import CustomUser, Categories, Likes, Items, Images, Reviews, Cluster
 from django.urls import reverse, resolve
+import json
+from django.test import Client
 
 
 
@@ -216,6 +219,117 @@ class ReviewsTestCase(TestCase):
 #       """Images are correctly identified"""
 #       clusterName = Cluster.objects.get(name="fofo")
 #       self.assertEqual(clusterName.id,1)
+
+
+class UrlTesting(SimpleTestCase):
+
+  def test_register_url(self):
+    path = reverse('register')
+    self.assertEqual(resolve(path).view_name , 'register') 
+
+
+  def test_login_url(self):
+    path = reverse('login')
+    self.assertEqual(resolve(path).view_name , 'login')
+
+
+  def test_add_url(self):
+    path = reverse('add')
+    self.assertEqual(resolve(path).view_name , 'add')
+
+
+  def test_rud_url(self):
+    path = reverse('rud', kwargs={'pk':1})
+    self.assertEqual(resolve(path).view_name , 'rud') 
+
+
+  def test_list_url(self):
+    path = reverse('list')
+    self.assertEqual(resolve(path).view_name , 'list') 
+
+
+  def test_allusers_url(self):
+    path = reverse('allusers')
+    self.assertEqual(resolve(path).view_name , 'allusers') 
+
+
+  def test_search_url(self):
+    path = reverse('search')
+    self.assertEqual(resolve(path).view_name , 'search') 
+
+
+  def test_like_url(self):
+    path = reverse('like')
+    self.assertEqual(resolve(path).view_name , 'like') 
+
+
+  def test_images_url(self):
+    path = reverse('images')
+    self.assertEqual(resolve(path).view_name , 'images') 
+
+
+  def test_userItems_url(self):
+    path = reverse('userItems')
+    self.assertEqual(resolve(path).view_name , 'userItems') 
+
+
+  def test_userInfo_url(self):
+    path = reverse('userInfo')
+    self.assertEqual(resolve(path).view_name , 'userInfo') 
+
+
+  def test_ItemsWithImages_url(self):
+    path = reverse('ItemsWithImages')
+    self.assertEqual(resolve(path).view_name , 'ItemsWithImages') 
+
+
+  def test_UserLikesTest_ChatUser_url(self):
+    path = reverse('UserLikesTest, ChatUser')
+    self.assertEqual(resolve(path).view_name , 'UserLikesTest, ChatUser') 
+
+
+  def test_recommendation_url(self):
+    path = reverse('recommendation')
+    self.assertEqual(resolve(path).view_name , 'recommendation') 
+
+
+  def test_review_url(self):
+    path = reverse('review')
+    self.assertEqual(resolve(path).view_name , 'review') 
+
+
+
+class TestViews(TestCase):
+
+
+  def setUp(self):
+    self.client = Client()
+    self.register_url = reverse('register')
+    self.login_url = reverse('login')
+
+
+  def test_register_api_POST(self):
+    response = self.client.post(self.register_url,{
+                                  'username': 'ammar22',
+                                  'first_name': 'ammar',
+                                  'last_name': 'alk',
+                                  'email': 'ammar@gmail.com',
+                                  'password': '1234',
+                                  'phone': '123456789',
+                                  'image_url': 'img2.png',
+    })
+
+    self.assertEquals(response.status_code,200)
+
+
+  # def test_login_api_POST(self):
+  #   response = self.client.post(self.login_url,{
+  #                                 'username': 'ammar22',
+  #                                 'password': '1234',
+  #   })
+
+  #   self.assertEquals(response.status_code,200)
+
 
 
 if __name__ == '__main__':
