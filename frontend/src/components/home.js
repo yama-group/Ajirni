@@ -7,6 +7,8 @@ import AliceCarousel from 'react-alice-carousel';
 import "./alice-carousel.css";
 import Slider from "./slider"
 import RandomUsers from './randomUsers'
+import "./jump.css"
+import Recommendations from "./recommendations"
 
 import {
   BrowserRouter as Router,
@@ -58,113 +60,55 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div
-          className="breadcrumb-area pt-205 pb-210"
-          id="navnav" 
-            style={{backgroundImage: "url(https://cdn.pixabay.com/photo/2019/06/23/13/45/photomontage-4293777_1280.png)",backgroundPositionX:"right"}}
-          />
-        {/* <img style={{backgroundSize:"cover"}} src={'https://cdn.pixabay.com/photo/2019/06/23/13/45/photomontage-4293777_1280.png'} alt="" /> */}
+     <div class="jumbotron jumbotron-fluid">
 
-        {/* <br />
-        <br />
-        <br />
-        <br /> */}
+<video autoplay="true" muted loop >    
+    <source src="https://d1novo54w0hnhk.cloudfront.net/Vespa-Bokeh.mp4" type="video/mp4"/>
+    
+</video>
 
-        <div style={{marginLeft:"45%",marginTop:"7%"}} className="logo">
-                      <Link to="/">
+  <div class="container text-white">
+
+    <h1  style={{marginBottom:"30px"}} className="display-4">Rent anything you want!</h1>
+     
+     {!window.localStorage.getItem("token")?<div  className="quickview-btn-cart">
+       <p  className="lead">Join The Sharing Economy.</p>
+                    <Link  to="/signin">
+                     Login
+                    </Link>
+                  </div>:<p  className="lead">Welcome Back.</p>} 
+
+    
+    
+
+  </div>
+  
+</div>
+<hr style={{borderBottom:"20px solid #f5f5f5"}}/>
+<div style={{marginLeft:"35%",marginTop:"4%"}} className="logo">
+                      
+                      <h3>
+                        <b>Recommended for you</b>
+                      </h3>
+                  </div>
+      <Recommendations />
+      <hr style={{borderBottom:"20px solid #f5f5f5"}}/>
+
+           <div style={{marginLeft:"40%",marginTop:"7%"}} className="logo">
+                      
                         <h3>
                           <b>CATEGORIES</b>
                         </h3>
-                      </Link>
                     </div>
-          
-          
-      
-        <br />
+                   
         <Slider search={this.search.bind(this)}/>
-        <div className="container" />
-
-        {/* <div className="categories">
-
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "1");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/Sports.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "2");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/cars.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "3");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/RealEstates.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "4");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/HouseHolds.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "5");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src='./images/tools.png' alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "6");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src="./images/events.png" alt="" />
-            </Link>
-          </div>
-
-          <div className="category"
-            onClick={e => {
-              this.search(e, "7");
-            }}
-          >
-            <Link to="/itemsList">
-              <img src="./images/otherThingsEdited.png" alt="" />
-            </Link>
-          </div>
-
-
-        </div> */}
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <RandomUsers />
+        <hr style={{borderBottom:"20px solid #f5f5f5"}}/>
+        <div style={{marginLeft:"35%",marginTop:"3%"}} className="logo">
+                       <h3>
+                          <b>Profiles You'll Love</b>
+                        </h3>
+                    </div>
+         <RandomUsers />
       </div>
     );
   }

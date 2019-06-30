@@ -92,6 +92,7 @@ class App extends React.Component {
                 exact
                 component={Tools}
               />
+              
               <Route path="/slider" component={SimpleSlider} />
               <Route path="/Category" component={ItemsList} />
               <Route path="/itemDetail" component={ItemDetail} />

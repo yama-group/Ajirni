@@ -1,8 +1,13 @@
+/* eslint-disable default-case */
+/* eslint-disable no-fallthrough */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {Component} from "react"
 import { connect } from 'react-redux'
 import { getReviews, postReviews } from '../actions/reviewsAction'
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link,Redirect } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
+import {NotificationContainer,NotificationManager} from 'react-notifications';
+
 
 
 class Reviews extends Component {
@@ -16,7 +21,20 @@ class Reviews extends Component {
       username: window.localStorage.getItem("username"),
       userId: window.localStorage.getItem("userId"),
       review: "",
-      rating: 1
+      rating: 1,
+      redirect: false
+    }
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/signin' />
     }
   }
 
@@ -46,7 +64,8 @@ class Reviews extends Component {
   }
 
   postReview() {
-   const addedReview = {
+    if(window.localStorage.getItem("token")){
+      const addedReview = {
     textReview: this.state.review,
     starsReview:this.state.rating,
     item: this.state.item_id,
@@ -55,59 +74,103 @@ class Reviews extends Component {
    }
    console.log(addedReview)
    this.props.postReviews(addedReview)
+   this.setState({
+     reviews:[...this.state.reviews,addedReview]
+   })
+    }else{
+      NotificationManager.warning("Sorry!",'Please Login');
+      this.setRedirect()
+    }
+   
   }
   
 
   render() {
     const { rating } = this.state;
+    const repeat =<i className="fa fa-star"></i>
     return (
-      <div>
-         
-     
-        <div>
+      
+        
+      <section className="write-review py-5 bg-light" id="write-review">
+        {this.renderRedirect()}
+    <div className="container">
+    <div className="row">
+        <div className="col-md-4">
+            <div className="row">
+		    
+		</div>
+		<hr/>
+    {this.state.reviews.map((review)=>{
+      let stars = ""
+      console.log(review.starsReview)
+      // eslint-disable-next-line no-lone-blocks
+      {switch(review.starsReview){
+       case 1:
+        stars=<i className="fa fa-star"></i>;
+        break;
+        case 2:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        break;
+        case 3:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        break;
+        case 4:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        break;
+        case 5:
+        stars=<><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i><i className="fa fa-star"></i></>;
+        break;
+      }}
+      return(
+        <div className="row">
+		        <div className="col-md-6">
+		            <p><b>{review.user_name.toUpperCase()}</b></p>
+		        </div>
+		        <div style={{marginTop:"-5%"}} className="col-md-8 text-warning">
+              {stars}
+		        
+		    </div>
+        <div className="col-md-8 ">
+              {review.textReview}
+		        <hr></hr>
+		    </div>
+		    </div>
           
-          <div>
-        <h2>Rating from state: {rating}</h2>
+      )
+    })}
+
+
+
+
+
+
+        </div>
+        <div className=" col-md-8 my-5 py-5">
+            <h6>Write your idea about this item:</h6>
+            <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
+            </textarea>
+            <div className="quickview-plus-minus">
+              
+              <div className="quickview-btn-wishlist">
         <StarRatingComponent 
-        style={{fontSize:"50px"}}
+         style={{width:"250px"}}
           name="rate1" 
           starCount={5}
           value={rating}
           onStarClick={this.onStarClick.bind(this)}
           editing={true}
         />
-      </div>
-          Enter Review here...
-          <textarea rows="4" cols="50" name="review" onChange = {this.onChange.bind(this)}>
-            </textarea>
+        <br/>
+                <a href="#btn-hover" onClick={this.postReview.bind(this)} className="btn-hover">Add Review</a>
+                </div>
+              
+              </div>
+            
+
         </div>
-        <div className="quickview-btn-cart">
-          <button  className="btn-hover-black" onClick = {this.postReview.bind(this)}>
-            add Review
-          </button>
-         </div>
-         <div id = "reviewScroll">
-        {this.state.reviews.map( rev => {
-          return(
-            <div>
-              <br />
-              <table class="table table-hover">
-              <tbody>
-              <tr>
-                <td>
-                  <img src={'./images/' + rev.starsReview + ".png"}  alt="" style= {{width:"100px"}}/>
-                </td>
-                <td>
-                  {rev.textReview}
-                </td>
-              </tr> 
-              </tbody>
-              </table>
-            </div>
-          )
-        })}
-        </div>
-      </div>
+    </div>
+</div>
+</section>
     )
   }
 }

@@ -69,7 +69,7 @@ class Header extends Component {
         return(
             <div className="wrapper">
             
-            <header className="pl-155 pr-155 intelligent-header">
+            <header style={{height:"90px"}} className="pl-155 pr-155 intelligent-header">
             <div className="header-area header-area-2">
               <div className="container-fluid p-0">
                 <div className="row no-gutters">
@@ -93,7 +93,7 @@ class Header extends Component {
                             <Link to="/about">about </Link>
                           </li>
                           <li>
-                            Category
+                            <b>CATEGORY</b>
                             <ul className="dropdown">
                               <li
                                 onClick={e => {
@@ -149,7 +149,7 @@ class Header extends Component {
                           </li>
 
                           <li>
-                            <Link to="/contact">contact</Link>
+                            <Link to="/chat">Messenger</Link>
                           </li>
                         </ul>
                       </nav>
@@ -190,9 +190,7 @@ class Header extends Component {
               </div>
             </div>
           </header>
-            <div className="header-space"></div>
-            
-            
+            <div style={{height:"90px"}} className="header-space"></div>
             
            {this.state.active? <div className="cur-lang-acc-active inside">
                 <div style={{backgroundImage:"url('./images/gabriela-rodriguez-660479-unsplash.jpg')",backgroundSize:"cover"}} className="wrap-sidebar">
@@ -208,12 +206,12 @@ class Header extends Component {
                                     </div>
                             </div>
                             
-                            <div ><h3 style={{marginLeft:"-7%",color:"white",marginTop:"5%"}}>Welcome {this.props.user.first_name}</h3></div>
+                           {token? <div ><h3 style={{marginLeft:"-7%",color:"white",marginTop:"5%"}}>Welcome {this.props.user.first_name}</h3></div>:""}
                             <div className="cur-lang-acc-dropdown">
                                 <ul>  
-                                    {!token ? <li><a style={{color:"white"}} href="/signup">Register</a></li>:""}
-                                    {token ? <li><a style={{color:"white"}} onClick={this.logOut.bind(this)} href="/signin">Log Out</a></li>:""}
-                                   {!token ? <li><a style={{color:"white"}} href="/signin">Sign In </a></li>:<li><a style={{color:"white"}} href="/user">Profile</a></li>}
+                                    {!token ? <li><Link style={{color:"white"}} to="/signup">Register</Link></li>:""}
+                                    {token ? <li><a style={{color:"white"}} onClick={this.logOut.bind(this)} href="/">Log Out</a></li>:""}
+                                   {!token ? <li><Link style={{color:"white"}} to="/signin">Sign In </Link></li>:<li><Link style={{color:"white"}} to="/user">Profile</Link></li>}
                                 </ul>
                             </div>
                         </div>

@@ -40,13 +40,13 @@ class Footer extends Component {
   render() {
     return (
       <div>
-        <footer className="footer-area gray-bg pt-100 pb-95">
+        <footer style={{paddingTop:"5px",paddingBottom:"30px"}} className="footer-area gray-bg">
           <div className="container">
             <div className="row">
               <div className="col-lg-3 col-md-5 col-12">
                 <div className="footer-widget">
                   <div className="footer-widget-l-content">
-                    <h4> Years Experience</h4>
+                    <h4>20 Years Experience</h4>
                     <ul>
                       <li>
                         <i className="ion-social-twitter" />
