@@ -81,27 +81,27 @@ WSGI_APPLICATION = 'ajirni.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'heroku_30cf03e44ebf8a7',
-#        'USER': 'bfc91e342026ac',
-#        'PASSWORD': '4aeb2b6b',
-#        'HOST': 'eu-cdbr-west-02.cleardb.net',
-#        'PORT': '3306',
-#    }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'thesisTesting',
-        'USER': 'root',
-        'PASSWORD': '1998',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.mysql',
+       'NAME': 'heroku_30cf03e44ebf8a7',
+       'USER': 'bfc91e342026ac',
+       'PASSWORD': '4aeb2b6b',
+       'HOST': 'eu-cdbr-west-02.cleardb.net',
+       'PORT': '3306',
+   }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'thesisTesting',
+#         'USER': 'root',
+#         'PASSWORD': '1998',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
