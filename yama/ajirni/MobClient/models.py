@@ -13,9 +13,6 @@ class Categories(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
 
-    def __str__(self):
-        return self.name
-
 
 class Items(models.Model):
     name = models.CharField(max_length=50)
@@ -77,7 +74,7 @@ class Reviews(models.Model):
     # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     # # user_name = models.CharField(max_length=100)
     # textReview = models.CharField(max_length=200)
- # starsReview = models.IntegerField(choices=RATING_CHOICES)
+    # starsReview = models.IntegerField(choices=RATING_CHOICES)
     item = models.ForeignKey(
         Items, related_name="reviews", on_delete=models.CASCADE)
     user = models.ForeignKey(

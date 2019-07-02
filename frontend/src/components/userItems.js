@@ -23,22 +23,23 @@ class UserItems extends Component {
   }
 
   itemClicked(id) {
+    window.localStorage.setItem("item_id",id)
     this.props.setItemId(id);
   }
 
   render() {
-    const userInfo = (
-      <div>
-      {this.props.user.map(info => {
+    const userInfo = 
+      
+      this.props.user.map(info => {
         return (
-            <div>
-              <h3 className="h1">
-              {info.first_name}
-              </h3>
+            
+              
+              <div className="col-lg-4">
+              <div className="blog-sidebar">
               <div className="sidebar-widget mb-50">
-                <div className = "mt002">
-                <img src={info.image_url} alt="" style = {{width:"250px"}}/>
-                </div>
+                
+                <img src={info.image_url} alt=""/>
+               
                     <div className="sidebar-img-content">
                         <h3>{info.first_name} {info.last_name}</h3>
                         <p>{info.email}</p>
@@ -70,19 +71,19 @@ class UserItems extends Component {
                         </div>
                     </div>
                 </div>
-                <h1 class="h1">
-              {info.first_name}'s Items
-              </h1>
             </div>
+             </div>
+        
           )
-        })}
-        </div>
-    )
+        })
+       
+        
+    
     const userItems = (
-      <div className="cart-main-area pt-95 pb-100">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      
+       
+          
+            <div className="col-lg-8">
               <form action="#">
                 <div className="table-content table-responsive">
                   <table class="table table-hover"> 
@@ -144,17 +145,21 @@ class UserItems extends Component {
                 </div>
               </form>
             </div>
-          </div>
-        </div>
-      </div>
+          
+        
+      
     );
 
     // console.log(this.props.itemsData.length,"nvjjhjgjhg")
     return (
-      <div>
+      <div className="blog-area pt-100 pb-100">
+              <div className="container">
+               <div className="row">
         {userInfo}
         {userItems}
-      </div>
+        </div>
+        </div>
+        </div>
     );
   }
 }
@@ -162,7 +167,7 @@ class UserItems extends Component {
 const mapStateToProps = state => ({
   itemsData: state.userItemsReducer.userItems,
   user: state.userItemsReducer.userInfo,
-  userId: state.itemDetails.item.user
+  userId:window.localStorage.getItem("itemsUser")
 });
 
 export default connect(

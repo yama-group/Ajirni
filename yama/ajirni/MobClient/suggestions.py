@@ -7,6 +7,7 @@ import numpy as np
 def update_clusters():
     num_reviews = Reviews.objects.count()
     update_step = ((num_reviews/100)+1) * 5
+    print("hi hi ")
     if num_reviews % update_step == 0:
         print("hi hi ")
         all_user_names = map(lambda x: x.username,

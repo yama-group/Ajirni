@@ -1,5 +1,5 @@
 (function($) {
-  "use strict";
+  
 
   /*--------------------------
     2. Newsletter Popup
