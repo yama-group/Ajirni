@@ -85,14 +85,14 @@ class Home extends Component {
   
 </div>
 <hr style={{borderBottom:"20px solid #f5f5f5"}}/>
-<div style={{marginLeft:"35%",marginTop:"4%"}} className="logo">
+{window.localStorage.getItem("token")?<><div style={{marginLeft:"35%",marginTop:"4%"}} className="logo">
                       
                       <h3>
                         <b>Recommended for you</b>
                       </h3>
                   </div>
       <Recommendations />
-      <hr style={{borderBottom:"20px solid #f5f5f5"}}/>
+      <hr style={{borderBottom:"20px solid #f5f5f5"}}/></>:""}
 
            <div style={{marginLeft:"40%",marginTop:"7%"}} className="logo">
                       

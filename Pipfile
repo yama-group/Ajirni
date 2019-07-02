@@ -30,6 +30,7 @@ pytest = "*"
 pytz = "*"
 dj-database-url = "*"
 knox = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.7"

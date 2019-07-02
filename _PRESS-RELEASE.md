@@ -10,10 +10,10 @@
   > By using Ajirni application, you will always find the item you're looking for, for a reasonable price, much lower than buying it.
 
 ## Problem ##
-  > Now a days, so many things are bought that is only used for a short period of time, and ends up not being used and taking up space for nothing.
+  > Before, so many things are bought that is only used for a short period of time, and ends up not being used and taking up space for nothing.
 
 ## Solution ##
-  > Ajirni enables you to add any item that you've bought and not using to our application for other users that needs this item to rent it without the need to buy it for only a short period of time.
+  > Now Ajirni enables you to add any item that you've bought and not using to our application for other users that needs this item to rent it without the need to buy it for only a short period of time.
 
 ## Quote from Ajirni team member ##
   > "Why Buy When You Can Rent" -[Ammar](https://github.com/AmmarAlkhooly98).
