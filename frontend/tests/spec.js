@@ -21,14 +21,17 @@
 
 
 
-import moxios from 'moxios';
-import tstore from '../src/store'
-import { testStore } from '../Utils'
+// import moxios from 'moxios';
+// import tstore from '../src/store'
+// import testStore from '../Utils/index'
 import { getAllUsers } from '../src/actions/usersAct'
 import usersReducer from '../src/reducers/usersReducer'
 import itemsReducer from '../src/reducers/itemsReducer'
+import errorsReducer from "../src/reducers/errors";
+import likesReducer from "../src/reducers/likesReducer"
 //import * as actions from '../src/actions/usersAct'
 import * as types from '../src/actions/types'
+import configureStore from 'redux-mock-store'
 
 
 describe('users reducer', () => {
@@ -56,7 +59,8 @@ describe('items reducer', () => {
     const expectedAction = {
       items: [],
       item: {},
-      item_id: ""
+      item_id: "",
+      category_id: 2,
     }
     expect(itemsReducer(undefined, {})).toEqual(expectedAction)
   })
@@ -66,14 +70,55 @@ describe('items reducer', () => {
         type: types.FETCH_ITEMS,
         items: [],
         item: {},
-        item_id: ""
+        category_id: 2,
       })
-    ).toEqual({ items: undefined, item: undefined, item_id: undefined })
+    ).toEqual({ items: undefined, item: undefined, item_id: undefined, category_id: null })
   })
 
 })
 
 
+describe('errors reducer', () => {
+  it('should return the initial state', () => {
+    const expectedAction = {
+      msg: {},
+      status: null
+    }
+    expect(errorsReducer(undefined, {})).toEqual(expectedAction)
+  })
+
+})
+
+
+
+describe('likes reducer', () => {
+  it('should return the initial state', () => {
+    const expectedAction = {
+      userItems: [],
+      userId: 1
+    }
+    expect(likesReducer(undefined, {})).toEqual(expectedAction)
+  })
+
+  it('should handle likes', () => {
+    expect(
+      likesReducer([], {
+        type: types.LIKES_PAGE,
+        userItems: []
+      })
+    ).toEqual({ userItems: undefined })
+  })
+
+})
+
+
+// it('should call a fetchData function', done => {
+//   getAllUsers('/allusers/', {}).then(response => {
+//     expect(response).toEqual({
+//       data: {},
+//     });
+//   });
+// })
 
 
 
@@ -107,7 +152,6 @@ describe('fetches all users', () => {
       username: "exam"
     }]
     const store = testStore;
-
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
