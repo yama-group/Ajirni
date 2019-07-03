@@ -12,6 +12,7 @@ temp_command.txt
 package-lock.json
 # testing
 /coverage
+/test*
 
 # production
 /build

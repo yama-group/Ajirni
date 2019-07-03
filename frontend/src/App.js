@@ -14,7 +14,7 @@ import UserItems from "./components/userItems.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserProfile from "./components/userProfile";
 import { connect } from "react-redux";
-import {NotificationContainer} from 'react-notifications';
+import { NotificationContainer } from 'react-notifications';
 import Signup from "./components/signup";
 import SignIn from "./components/signin";
 import ItemsList from "./components/itemsList";
@@ -38,9 +38,9 @@ const alertOptions = {
   // you can also just use 'scale'
   transition: transitions.SCALE
 };
- 
 
- 
+
+
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(props) {
@@ -51,63 +51,63 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
-        <NotificationContainer />
+          <NotificationContainer />
           <Router>
             <Header />
             <Alerts />
-            
-              <Route path="/" exact component={Home} />
-              <ProtectedRoute
-                token={this.props.token}
-                userId={this.props.user_id}
-                path="/user"
-                exact
-                component={UserProfile}
-              />
-              <ProtectedRoute
-                token={this.props.token}
-                userId={this.props.user_id}
-                path="/addcar"
-                exact
-                component={CarsForm}
-              />
-               <ProtectedRoute
-                token={this.props.token}
-                userId={this.props.user_id}
-                path="/chat"
-                exact
-                component={Chat}
-              />
-              <ProtectedRoute
-                token={this.props.token}
-                userId={this.props.user_id}
-                path="/addrealestate"
-                exact
-                component={RealEstate}
-              />
-              <ProtectedRoute
-                token={this.props.token}
-                userId={this.props.user_id}
-                path="/others"
-                exact
-                component={Tools}
-              />
-              
-              <Route path="/slider" component={SimpleSlider} />
-              <Route path="/Category" component={ItemsList} />
-              <Route path="/itemDetail" component={ItemDetail} />
-              <Route path="/carsForm" exact component={CarsForm} />
-              <Route path="/itemsList" exact component={ItemsList} />
-              <Route path="/RealEstate" exact component={RealEstate} />
-              <Route path="/userItems" exact component={UserItems} />
-              <Route path="/likes" exact component={Likes} />
-              <Route path="/signin" exact component={SignIn} />
-              {/* <Route path="/categorySlides" exact component={Carousel} /> */}
-              <Route path="/tools" exact component={Tools} />
-              <Route path="/signup" exact component={Signup} />
-              <Route path="/allusers" exact component={RandomUsers} />
-              <Route path="/reviews" exact component={Reviews} />
-            
+
+            <Route path="/" exact component={Home} />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/user"
+              exact
+              component={UserProfile}
+            />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/addcar"
+              exact
+              component={CarsForm}
+            />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/chat"
+              exact
+              component={Chat}
+            />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/addrealestate"
+              exact
+              component={RealEstate}
+            />
+            <ProtectedRoute
+              token={this.props.token}
+              userId={this.props.user_id}
+              path="/others"
+              exact
+              component={Tools}
+            />
+
+            <Route path="/slider" component={SimpleSlider} />
+            <Route path="/Category" component={ItemsList} />
+            <Route path="/itemDetail" component={ItemDetail} />
+            <Route path="/carsForm" exact component={CarsForm} />
+            <Route path="/itemsList" exact component={ItemsList} />
+            <Route path="/RealEstate" exact component={RealEstate} />
+            <Route path="/userItems" exact component={UserItems} />
+            <Route path="/likes" exact component={Likes} />
+            <Route path="/signin" exact component={SignIn} />
+            {/* <Route path="/categorySlides" exact component={Carousel} /> */}
+            <Route path="/tools" exact component={Tools} />
+            <Route path="/signup" exact component={Signup} />
+            <Route path="/allusers" exact component={RandomUsers} />
+            <Route path="/reviews" exact component={Reviews} />
+
             <Footer />
           </Router>
         </AlertProvider>
