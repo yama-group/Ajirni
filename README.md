@@ -96,7 +96,7 @@ python manage.py migrate
 1. MySQL for the dataBase
 
 ## Demo
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=kwvpfTC8-go" target="_blank"><img src="http://img.youtube.com/vi/kwvpfTC8-go/1.jpg" 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=kwvpfTC8-go" target="_blank"><img src="http://img.youtube.com/vi/kwvpfTC8-go/2.jpg" 
 alt="IMAGE ALT TEXT HERE" width="600" height="450" border="10" /></a>
 
 ## Contributing
