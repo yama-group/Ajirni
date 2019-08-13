@@ -97,7 +97,7 @@ python manage.py migrate
 
 ## Demo
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=kwvpfTC8-go" target="_blank"><img src="http://img.youtube.com/vi/kwvpfTC8-go/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="727" height="409" border="5" /></a>
+alt="IMAGE" width="600" height="400" border="5" /></a>
 
 ## Contributing
 
