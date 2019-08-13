@@ -95,6 +95,10 @@ python manage.py migrate
 1. python/Django in the back-end
 1. MySQL for the dataBase
 
+## Demo
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=kwvpfTC8-go" target="_blank"><img src="http://img.youtube.com/vi/kwvpfTC8-go/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
